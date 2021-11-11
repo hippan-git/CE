@@ -1,0 +1,1512 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CheatTable CheatEngineTableVersion="26">
+  <CheatEntries>
+    <CheatEntry>
+      <ID>0</ID>
+      <Description>"товар"</Description>
+      <LastState/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>{ Game   : Tropico.EXE
+  Version: 
+  Date   : 2018-03-06
+  Author : Hipp
+
+  This script does blah blah blah
+}
+
+[ENABLE]
+
+aobscanmodule(resorce,Tropico.EXE,D9 5C BE 5A EB 07) // should be unique
+alloc(newmem,$1000)
+alloc(res,$4)
+
+label(code)
+label(return)
+
+newmem:
+  mov [res],(float)20
+
+  fadd dword ptr [res]
+  //fld dword ptr [res]
+
+code:
+  fstp dword ptr [esi+edi*4+5A]
+  jmp Tropico.EXE+16DD2
+  jmp return
+
+resorce:
+  jmp newmem
+  nop
+return:
+registersymbol(resorce)
+
+[DISABLE]
+
+resorce:
+  db D9 5C BE 5A EB 07
+
+unregistersymbol(resorce)
+dealloc(newmem)
+dealloc(res)
+
+{
+// ORIGINAL CODE - INJECTION POINT: "Tropico.EXE"+16DC5
+
+"Tropico.EXE"+16DAD: 3B C3                 -  cmp eax,ebx
+"Tropico.EXE"+16DAF: 74 0B                 -  je Tropico.EXE+16DBC
+"Tropico.EXE"+16DB1: 53                    -  push ebx
+"Tropico.EXE"+16DB2: 57                    -  push edi
+"Tropico.EXE"+16DB3: 6A 01                 -  push 01
+"Tropico.EXE"+16DB5: 8B CE                 -  mov ecx,esi
+"Tropico.EXE"+16DB7: E8 76 BB FE FF        -  call Tropico.EXE+2932
+"Tropico.EXE"+16DBC: 83 FF 1B              -  cmp edi,1B
+"Tropico.EXE"+16DBF: D9 44 24 18           -  fld dword ptr [esp+18]
+"Tropico.EXE"+16DC3: 7D 06                 -  jnl Tropico.EXE+16DCB
+// ---------- INJECTING HERE ----------
+"Tropico.EXE"+16DC5: D9 5C BE 5A           -  fstp dword ptr [esi+edi*4+5A]
+"Tropico.EXE"+16DC9: EB 07                 -  jmp Tropico.EXE+16DD2
+// ---------- DONE INJECTING  ----------
+"Tropico.EXE"+16DCB: D9 9C BE 3D 01 00 00  -  fstp dword ptr [esi+edi*4+0000013D]
+"Tropico.EXE"+16DD2: 8B 5C 24 1C           -  mov ebx,[esp+1C]
+"Tropico.EXE"+16DD6: 85 DB                 -  test ebx,ebx
+"Tropico.EXE"+16DD8: 0F 8E 96 00 00 00     -  jng Tropico.EXE+16E74
+"Tropico.EXE"+16DDE: 8B 06                 -  mov eax,[esi]
+"Tropico.EXE"+16DE0: 8B CE                 -  mov ecx,esi
+"Tropico.EXE"+16DE2: FF 10                 -  call dword ptr [eax]
+"Tropico.EXE"+16DE4: 66 3D 17 00           -  cmp ax,0017
+"Tropico.EXE"+16DE8: 75 12                 -  jne Tropico.EXE+16DFC
+"Tropico.EXE"+16DEA: DD 44 24 0C           -  fld qword ptr [esp+0C]
+}
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>30</ID>
+      <Description>"обнуление товара"</Description>
+      <LastState/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>{ Game   : Tropico.EXE
+  Version: 
+  Date   : 2019-08-26
+  Author : Hipp
+
+  This script does blah blah blah
+}
+
+[ENABLE]
+
+aobscanmodule(zero_prod,Tropico.exe,D9 81 1D FF FF FF EB 02 D9 01 40) // should be unique
+alloc(newmem,$1000)
+
+label(code)
+label(return)
+
+newmem:
+  mov dword ptr [ecx-000000E3],0
+code:
+  fld dword ptr [ecx-000000E3]
+  jmp return
+
+zero_prod:
+  jmp newmem
+  nop
+return:
+registersymbol(zero_prod)
+
+[DISABLE]
+
+zero_prod:
+  db D9 81 1D FF FF FF
+
+unregistersymbol(zero_prod)
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: "Tropico.exe"+18463
+
+"Tropico.exe"+1844B: 90                 -  nop 
+"Tropico.exe"+1844C: 90                 -  nop 
+"Tropico.exe"+1844D: 90                 -  nop 
+"Tropico.exe"+1844E: 90                 -  nop 
+"Tropico.exe"+1844F: 90                 -  nop 
+"Tropico.exe"+18450: D9 05 14 80 57 00  -  fld dword ptr [Tropico.exe+178014]
+"Tropico.exe"+18456: 33 C0              -  xor eax,eax
+"Tropico.exe"+18458: 81 C1 3D 01 00 00  -  add ecx,0000013D
+"Tropico.exe"+1845E: 83 F8 1B           -  cmp eax,1B
+"Tropico.exe"+18461: 7D 08              -  jnl Tropico.exe+1846B
+// ---------- INJECTING HERE ----------
+"Tropico.exe"+18463: D9 81 1D FF FF FF  -  fld dword ptr [ecx-000000E3]
+// ---------- DONE INJECTING  ----------
+"Tropico.exe"+18469: EB 02              -  jmp Tropico.exe+1846D
+"Tropico.exe"+1846B: D9 01              -  fld dword ptr [ecx]
+"Tropico.exe"+1846D: 40                 -  inc eax
+"Tropico.exe"+1846E: DE C1              -  faddp 
+"Tropico.exe"+18470: 83 C1 04           -  add ecx,04
+"Tropico.exe"+18473: 83 F8 20           -  cmp eax,20
+"Tropico.exe"+18476: 7C E6              -  jl Tropico.exe+1845E
+"Tropico.exe"+18478: C3                 -  ret 
+"Tropico.exe"+18479: 90                 -  nop 
+"Tropico.exe"+1847A: 90                 -  nop 
+}
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>9</ID>
+      <Description>"товар2"</Description>
+      <LastState/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>{ Game   : Tropico.EXE
+  Version: 
+  Date   : 2018-05-09
+  Author : Hipp
+
+  This script does blah blah blah
+}
+
+[ENABLE]
+
+aobscanmodule(resource2,Tropico.exe,D9 9C BE 3D 01 00 00) // should be unique
+alloc(newmem,$1000)
+alloc(res,$4)
+
+label(code)
+label(return)
+
+newmem:
+  mov [res],(float)20
+  fadd dword ptr [res]
+  //fld dword ptr [res]
+code:
+  fstp dword ptr [esi+edi*4+0000013D]
+  jmp return
+
+resource2:
+  jmp newmem
+  nop
+  nop
+return:
+registersymbol(resource2)
+
+[DISABLE]
+
+resource2:
+  db D9 9C BE 3D 01 00 00
+
+unregistersymbol(resource2)
+dealloc(newmem)
+dealloc(res)
+
+{
+// ORIGINAL CODE - INJECTION POINT: "Tropico.exe"+16DCB
+
+"Tropico.exe"+16DB1: 53                    -  push ebx
+"Tropico.exe"+16DB2: 57                    -  push edi
+"Tropico.exe"+16DB3: 6A 01                 -  push 01
+"Tropico.exe"+16DB5: 8B CE                 -  mov ecx,esi
+"Tropico.exe"+16DB7: E8 76 BB FE FF        -  call Tropico.exe+2932
+"Tropico.exe"+16DBC: 83 FF 1B              -  cmp edi,1B
+"Tropico.exe"+16DBF: D9 44 24 18           -  fld dword ptr [esp+18]
+"Tropico.exe"+16DC3: 7D 06                 -  jnl Tropico.exe+16DCB
+"Tropico.exe"+16DC5: D9 5C BE 5A           -  fstp dword ptr [esi+edi*4+5A]
+"Tropico.exe"+16DC9: EB 07                 -  jmp Tropico.exe+16DD2
+// ---------- INJECTING HERE ----------
+"Tropico.exe"+16DCB: D9 9C BE 3D 01 00 00  -  fstp dword ptr [esi+edi*4+0000013D]
+// ---------- DONE INJECTING  ----------
+"Tropico.exe"+16DD2: 8B 5C 24 1C           -  mov ebx,[esp+1C]
+"Tropico.exe"+16DD6: 85 DB                 -  test ebx,ebx
+"Tropico.exe"+16DD8: 0F 8E 96 00 00 00     -  jng Tropico.exe+16E74
+"Tropico.exe"+16DDE: 8B 06                 -  mov eax,[esi]
+"Tropico.exe"+16DE0: 8B CE                 -  mov ecx,esi
+"Tropico.exe"+16DE2: FF 10                 -  call dword ptr [eax]
+"Tropico.exe"+16DE4: 66 3D 17 00           -  cmp ax,0017
+"Tropico.exe"+16DE8: 75 12                 -  jne Tropico.exe+16DFC
+"Tropico.exe"+16DEA: DD 44 24 0C           -  fld qword ptr [esp+0C]
+"Tropico.exe"+16DEE: 51                    -  push ecx
+}
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>6</ID>
+      <Description>"сырье"</Description>
+      <LastState/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>{ Game   : Tropico.EXE
+  Version: 
+  Date   : 2018-05-08
+  Author : Hipp
+
+  This script does blah blah blah
+}
+
+[ENABLE]
+
+aobscanmodule(reserve,Tropico.EXE,D9 9C B7 C6 00 00 00) // should be unique
+alloc(newmem,$1000)
+alloc(var_res,$4)
+
+label(code)
+label(return)
+
+newmem:
+  mov [var_res],(float)20
+  fadd dword ptr [var_res]
+
+code:
+  fstp dword ptr [edi+esi*4+000000C6]
+  jmp return
+
+reserve:
+  jmp newmem
+  nop
+  nop
+return:
+registersymbol(reserve)
+
+[DISABLE]
+
+reserve:
+  db D9 9C B7 C6 00 00 00
+
+unregistersymbol(reserve)
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: "Tropico.EXE"+16D11
+
+"Tropico.EXE"+16CFA: 50                    -  push eax
+"Tropico.EXE"+16CFB: 56                    -  push esi
+"Tropico.EXE"+16CFC: 6A 00                 -  push 00
+"Tropico.EXE"+16CFE: 8B CF                 -  mov ecx,edi
+"Tropico.EXE"+16D00: E8 E5 AE FE FF        -  call Tropico.EXE+1BEA
+"Tropico.EXE"+16D05: D9 44 24 14           -  fld dword ptr [esp+14]
+"Tropico.EXE"+16D09: 8B E8                 -  mov ebp,eax
+"Tropico.EXE"+16D0B: 83 FE 1B              -  cmp esi,1B
+"Tropico.EXE"+16D0E: 5B                    -  pop ebx
+"Tropico.EXE"+16D0F: 7D 17                 -  jnl Tropico.EXE+16D28
+// ---------- INJECTING HERE ----------
+"Tropico.EXE"+16D11: D9 9C B7 C6 00 00 00  -  fstp dword ptr [edi+esi*4+000000C6]
+// ---------- DONE INJECTING  ----------
+"Tropico.EXE"+16D18: 8D 44 AD 00           -  lea eax,[ebp+ebp*4+00]
+"Tropico.EXE"+16D1C: 5E                    -  pop esi
+"Tropico.EXE"+16D1D: 8D 04 80              -  lea eax,[eax+eax*4]
+"Tropico.EXE"+16D20: 5D                    -  pop ebp
+"Tropico.EXE"+16D21: C1 E0 02              -  shl eax,02
+"Tropico.EXE"+16D24: 5F                    -  pop edi
+"Tropico.EXE"+16D25: C2 08 00              -  ret 0008
+"Tropico.EXE"+16D28: D9 9C B7 51 01 00 00  -  fstp dword ptr [edi+esi*4+00000151]
+"Tropico.EXE"+16D2F: 8D 44 AD 00           -  lea eax,[ebp+ebp*4+00]
+"Tropico.EXE"+16D33: 5E                    -  pop esi
+}
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>11</ID>
+      <Description>"bank"</Description>
+      <LastState/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>{ Game   : Tropico.EXE
+  Version: 
+  Date   : 2018-05-09
+  Author : Hipp
+
+  This script does blah blah blah
+}
+
+[ENABLE]
+
+aobscanmodule(bank,Tropico.exe,DC 81 1A 01 00 00) // should be unique
+alloc(newmem,$1000)
+
+label(v_bank)
+label(code)
+label(return)
+
+newmem:
+
+code:
+  //mov [v_bank],(float)2
+  fld dword ptr [v_bank]
+  fmul qword ptr [ecx+0000011A]
+  jmp return
+v_bank:
+  db 00 00 00 3f
+bank:
+  jmp newmem
+  nop
+return:
+registersymbol(bank)
+
+[DISABLE]
+
+bank:
+  db DC 81 1A 01 00 00
+
+unregistersymbol(bank)
+dealloc(newmem)
+
+
+{
+// ORIGINAL CODE - INJECTION POINT: "Tropico.exe"+8A824
+
+"Tropico.exe"+8A817: 90                    -  nop 
+"Tropico.exe"+8A818: 90                    -  nop 
+"Tropico.exe"+8A819: 90                    -  nop 
+"Tropico.exe"+8A81A: 90                    -  nop 
+"Tropico.exe"+8A81B: 90                    -  nop 
+"Tropico.exe"+8A81C: 90                    -  nop 
+"Tropico.exe"+8A81D: 90                    -  nop 
+"Tropico.exe"+8A81E: 90                    -  nop 
+"Tropico.exe"+8A81F: 90                    -  nop 
+"Tropico.exe"+8A820: DD 44 24 04           -  fld qword ptr [esp+04]
+// ---------- INJECTING HERE ----------
+"Tropico.exe"+8A824: DC 81 1A 01 00 00     -  fadd qword ptr [ecx+0000011A]
+// ---------- DONE INJECTING  ----------
+"Tropico.exe"+8A82A: DD 99 1A 01 00 00     -  fstp qword ptr [ecx+0000011A]
+"Tropico.exe"+8A830: C2 08 00              -  ret 0008
+"Tropico.exe"+8A833: 90                    -  nop 
+"Tropico.exe"+8A834: 90                    -  nop 
+"Tropico.exe"+8A835: 90                    -  nop 
+"Tropico.exe"+8A836: 90                    -  nop 
+"Tropico.exe"+8A837: 90                    -  nop 
+"Tropico.exe"+8A838: 90                    -  nop 
+"Tropico.exe"+8A839: 90                    -  nop 
+"Tropico.exe"+8A83A: 90                    -  nop 
+}
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>21</ID>
+      <Description>"Happynes"</Description>
+      <LastState/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>{ Game   : Tropico.EXE
+  Version: 
+  Date   : 2019-04-09
+  Author : Hipp
+
+  This script does blah blah blah
+}
+
+[ENABLE]
+
+aobscanmodule(contento,Tropico.exe,D8 7C 24 00 83 C4 10) // should be unique
+alloc(newmem,$1000)
+alloc(floatingVar,$4)
+label(code)
+label(return)
+
+newmem:
+  fstp [floatingVar]
+  mov [floatingVar],(float)1
+  mov [esp],(float)100
+  fld [floatingVar]
+code:
+  fdivr dword ptr [esp+00]
+  add esp,10
+  jmp return
+
+contento:
+  jmp newmem
+  nop
+  nop
+return:
+registersymbol(contento)
+
+[DISABLE]
+
+contento:
+  db D8 7C 24 00 83 C4 10
+
+unregistersymbol(contento)
+dealloc(newmem)
+dealloc(floatingVar)
+
+{
+// ORIGINAL CODE - INJECTION POINT: "Tropico.exe"+C4F9F
+
+"Tropico.exe"+C4F8A: 5F                 -  pop edi
+"Tropico.exe"+C4F8B: 5E                 -  pop esi
+"Tropico.exe"+C4F8C: 5D                 -  pop ebp
+"Tropico.exe"+C4F8D: 75 0B              -  jne Tropico.exe+C4F9A
+"Tropico.exe"+C4F8F: D9 44 24 24        -  fld dword ptr [esp+24]
+"Tropico.exe"+C4F93: 5B                 -  pop ebx
+"Tropico.exe"+C4F94: 83 C4 10           -  add esp,10
+"Tropico.exe"+C4F97: C2 10 00           -  ret 0010
+"Tropico.exe"+C4F9A: DB 44 24 08        -  fild dword ptr [esp+08]
+"Tropico.exe"+C4F9E: 5B                 -  pop ebx
+// ---------- INJECTING HERE ----------
+"Tropico.exe"+C4F9F: D8 7C 24 00        -  fdivr dword ptr [esp+00]
+"Tropico.exe"+C4FA3: 83 C4 10           -  add esp,10
+// ---------- DONE INJECTING  ----------
+"Tropico.exe"+C4FA6: C2 10 00           -  ret 0010
+"Tropico.exe"+C4FA9: 90                 -  nop 
+"Tropico.exe"+C4FAA: 90                 -  nop 
+"Tropico.exe"+C4FAB: 90                 -  nop 
+"Tropico.exe"+C4FAC: 90                 -  nop 
+"Tropico.exe"+C4FAD: 90                 -  nop 
+"Tropico.exe"+C4FAE: 90                 -  nop 
+"Tropico.exe"+C4FAF: 90                 -  nop 
+"Tropico.exe"+C4FB0: 83 EC 10           -  sub esp,10
+"Tropico.exe"+C4FB3: 53                 -  push ebx
+}
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>32</ID>
+      <Description>"Квалификация"</Description>
+      <LastState/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>{ Game   : Tropico.EXE
+  Version: 
+  Date   : 2019-08-26
+  Author : Hipp
+
+  00 - банкир
+  01 - фермер
+  02 - солдат
+  03 - врач
+  04 - лектор
+  05 - иятежник
+  06 - учтель
+  07 - рыбак
+  08 - шахтер
+  09 - лесоруб
+  0a - Рабочй
+  0b - Танцовщица
+  0c - Горничная
+  0d - Повар
+  0e - Грузчик
+  0f - турист
+  10 - Служитель
+  11 - Офицантка
+  12 - Строитель
+  13 - Носильщик
+  14 - спортсмен
+  15 - Священник
+  16 - Полицейский
+  17 - Продавец
+  18 - Курьер
+  19 - Крупье
+  1a - Служащая
+  1b - Генерал
+  1c - Инженер
+  1d - Епископ
+  1e - Жерналист
+  1f - ВИПтерист
+  20 -
+
+
+
+}
+
+[ENABLE]
+
+aobscanmodule(cvalify,Tropico.exe,8A 94 39 41 02 00 00) // should be unique
+alloc(newmem,$1000)
+
+label(code)
+label(var_cva)
+label(return)
+
+newmem:
+  cmp ecx,0    //сюда писать специальность
+  jne var_cva
+  mov byte ptr[ecx+edi+00000241],30
+
+code:
+
+  mov dl,[ecx+edi+00000241]
+  jmp return
+
+var_cva:
+  mov byte ptr[ecx+edi+00000241],01
+  jmp code
+cvalify:
+  jmp newmem
+  nop
+  nop
+return:
+registersymbol(cvalify)
+
+[DISABLE]
+
+cvalify:
+  db 8A 94 39 41 02 00 00
+
+unregistersymbol(cvalify)
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: "Tropico.exe"+CBA45
+
+"Tropico.exe"+CBA13: C7 44 24 10 01 00 00 00  -  mov [esp+10],00000001
+"Tropico.exe"+CBA1B: C7 44 24 14 00 00 00 00  -  mov [esp+14],00000000
+"Tropico.exe"+CBA23: 89 44 24 18              -  mov [esp+18],eax
+"Tropico.exe"+CBA27: 83 CB FF                 -  or ebx,-01
+"Tropico.exe"+CBA2A: C7 44 24 20 01 00 00 00  -  mov [esp+20],00000001
+"Tropico.exe"+CBA32: 33 C0                    -  xor eax,eax
+"Tropico.exe"+CBA34: 8B BC 24 F8 01 00 00     -  mov edi,[esp+000001F8]
+"Tropico.exe"+CBA3B: 8B C8                    -  mov ecx,eax
+"Tropico.exe"+CBA3D: 81 E1 FF 00 00 00        -  and ecx,000000FF
+"Tropico.exe"+CBA43: 33 D2                    -  xor edx,edx
+// ---------- INJECTING HERE ----------
+"Tropico.exe"+CBA45: 8A 94 39 41 02 00 00     -  mov dl,[ecx+edi+00000241]
+// ---------- DONE INJECTING  ----------
+"Tropico.exe"+CBA4C: 8B 7C 24 20              -  mov edi,[esp+20]
+"Tropico.exe"+CBA50: 8B CA                    -  mov ecx,edx
+"Tropico.exe"+CBA52: 3B CF                    -  cmp ecx,edi
+"Tropico.exe"+CBA54: 89 4C 24 1C              -  mov [esp+1C],ecx
+"Tropico.exe"+CBA58: 7E 48                    -  jle Tropico.exe+CBAA2
+"Tropico.exe"+CBA5A: 8A 4C 04 2C              -  mov cl,[esp+eax+2C]
+"Tropico.exe"+CBA5E: 84 C9                    -  test cl,cl
+"Tropico.exe"+CBA60: 75 40                    -  jne Tropico.exe+CBAA2
+"Tropico.exe"+CBA62: 8B 54 24 24              -  mov edx,[esp+24]
+"Tropico.exe"+CBA66: 33 C9                    -  xor ecx,ecx
+}
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>29</ID>
+      <Description>"характерстики"</Description>
+      <LastState/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>{ Game   : Tropico.EXE
+  Version: 
+  Date   : 2019-08-26
+  Author : Hipp
+
+  This script does blah blah blah
+}
+
+[ENABLE]
+
+aobscanmodule(character,Tropico.exe,8A 93 3C 02 00 00) // should be unique
+alloc(newmem,$1000)
+registersymbol(death)
+label(code)
+label(death)
+label(return)
+
+newmem:
+  push eax
+  push ecx
+  lea eax,[ebx+0000023C] //образование
+  mov byte ptr [eax],02
+  mov byte ptr [eax-09],10 //возраст
+      mov cl,[death]
+  mov byte ptr [eax-01],cl
+  pop ecx
+  pop eax
+
+code:
+  mov dl,[ebx+0000023C]
+  jmp return
+death:
+  db 00
+character:
+  jmp newmem
+  nop
+return:
+registersymbol(character)
+
+[DISABLE]
+
+character:
+  db 8A 93 3C 02 00 00
+
+unregistersymbol(character)
+unregistersymbol(death)
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: "Tropico.exe"+CB678
+
+"Tropico.exe"+CB657: 56                    -  push esi
+"Tropico.exe"+CB658: 55                    -  push ebp
+"Tropico.exe"+CB659: 8B CB                 -  mov ecx,ebx
+"Tropico.exe"+CB65B: E8 C2 69 F3 FF        -  call Tropico.exe+2022
+"Tropico.exe"+CB660: 8B 0D 20 A7 5E 00     -  mov ecx,[Tropico.exe+1EA720]
+"Tropico.exe"+CB666: 50                    -  push eax
+"Tropico.exe"+CB667: 68 28 97 60 00        -  push Tropico.exe+209728
+"Tropico.exe"+CB66C: E8 77 71 F3 FF        -  call Tropico.exe+27E8
+"Tropico.exe"+CB671: 68 FF 00 00 00        -  push 000000FF
+"Tropico.exe"+CB676: 6A 01                 -  push 01
+// ---------- INJECTING HERE ----------
+"Tropico.exe"+CB678: 8A 93 3C 02 00 00     -  mov dl,[ebx+0000023C]
+// ---------- DONE INJECTING  ----------
+"Tropico.exe"+CB67E: 6A FF                 -  push -01
+"Tropico.exe"+CB680: 6A FF                 -  push -01
+"Tropico.exe"+CB682: 6A FF                 -  push -01
+"Tropico.exe"+CB684: 6A FF                 -  push -01
+"Tropico.exe"+CB686: 6A 00                 -  push 00
+"Tropico.exe"+CB688: 6A 00                 -  push 00
+"Tropico.exe"+CB68A: 6A 03                 -  push 03
+"Tropico.exe"+CB68C: 6A 00                 -  push 00
+"Tropico.exe"+CB68E: 6A 46                 -  push 46
+"Tropico.exe"+CB690: 68 45 01 00 00        -  push 00000145
+}
+</AssemblerScript>
+      <CheatEntries>
+        <CheatEntry>
+          <ID>31</ID>
+          <Description>"смерть"</Description>
+          <VariableType>Byte</VariableType>
+          <Address>death</Address>
+        </CheatEntry>
+      </CheatEntries>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>7</ID>
+      <Description>"убыток"</Description>
+      <LastState/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>{ Game   : Tropico.EXE
+  Version: 
+  Date   : 2018-05-08
+  Author : Hipp
+
+  This script does blah blah blah
+}
+
+[ENABLE]
+
+aobscanmodule(damage,Tropico.exe,66 01 86 58 01 00 00) // should be unique
+alloc(newmem,$1000)
+
+label(code)
+label(return)
+
+newmem:
+  mov ax,0
+code:
+  add [esi+00000158],ax
+  jmp return
+
+damage:
+  jmp newmem
+  nop
+  nop
+return:
+registersymbol(damage)
+
+[DISABLE]
+
+damage:
+  db 66 01 86 58 01 00 00
+
+unregistersymbol(damage)
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: "Tropico.exe"+12AB8
+
+"Tropico.exe"+12A9F: 00 54 2A 41           -  add [edx+ebp+41],dl
+"Tropico.exe"+12AA3: 00 71 2A              -  add [ecx+2A],dh
+"Tropico.exe"+12AA6: 41                    -  inc ecx
+"Tropico.exe"+12AA7: 00 90 90 90 90 90     -  add [eax-6F6F6F70],dl
+"Tropico.exe"+12AAD: 90                    -  nop 
+"Tropico.exe"+12AAE: 90                    -  nop 
+"Tropico.exe"+12AAF: 90                    -  nop 
+"Tropico.exe"+12AB0: 66 8B 44 24 04        -  mov ax,[esp+04]
+"Tropico.exe"+12AB5: 56                    -  push esi
+"Tropico.exe"+12AB6: 8B F1                 -  mov esi,ecx
+// ---------- INJECTING HERE ----------
+"Tropico.exe"+12AB8: 66 01 86 58 01 00 00  -  add [esi+00000158],ax
+// ---------- DONE INJECTING  ----------
+"Tropico.exe"+12ABF: 33 C9                 -  xor ecx,ecx
+"Tropico.exe"+12AC1: 66 8B 4E 39           -  mov cx,[esi+39]
+"Tropico.exe"+12AC5: 51                    -  push ecx
+"Tropico.exe"+12AC6: 8B 0D B0 A7 5E 00     -  mov ecx,[Tropico.exe+1EA7B0]
+"Tropico.exe"+12ACC: E8 82 00 FF FF        -  call Tropico.exe+2B53
+"Tropico.exe"+12AD1: 66 39 86 58 01 00 00  -  cmp [esi+00000158],ax
+"Tropico.exe"+12AD8: 72 2B                 -  jb Tropico.exe+12B05
+"Tropico.exe"+12ADA: 6A 00                 -  push 00
+"Tropico.exe"+12ADC: BA A4 86 5A 00        -  mov edx,Tropico.exe+1A86A4
+"Tropico.exe"+12AE1: B9 20 00 00 00        -  mov ecx,00000020
+}
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>8</ID>
+      <Description>"abs"</Description>
+      <LastState/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>{ Game   : Tropico.EXE
+  Version: 
+  Date   : 2018-05-08
+  Author : Hipp
+
+  This script does blah blah blah
+}
+
+[ENABLE]
+
+aobscanmodule(only_plus,Tropico.exe,8B 4C 24 14 D9 C0) // should be unique
+alloc(newmem,$1000)
+
+label(code)
+label(return)
+
+newmem:
+
+code:
+  mov ecx,[esp+14]
+  fabs
+  fld st(0)
+  jmp return
+
+only_plus:
+  jmp newmem
+  nop
+return:
+registersymbol(only_plus)
+
+[DISABLE]
+
+only_plus:
+  db 8B 4C 24 14 D9 C0
+
+unregistersymbol(only_plus)
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: "Tropico.exe"+8A786
+
+"Tropico.exe"+8A76D: 90                    -  nop 
+"Tropico.exe"+8A76E: 90                    -  nop 
+"Tropico.exe"+8A76F: 90                    -  nop 
+"Tropico.exe"+8A770: 83 3D C4 A7 5E 00 12  -  cmp dword ptr [Tropico.exe+1EA7C4],12
+"Tropico.exe"+8A777: 56                    -  push esi
+"Tropico.exe"+8A778: 8B F1                 -  mov esi,ecx
+"Tropico.exe"+8A77A: 75 05                 -  jne Tropico.exe+8A781
+"Tropico.exe"+8A77C: E8 21 76 F7 FF        -  call Tropico.exe+1DA2
+"Tropico.exe"+8A781: DD 44 24 08           -  fld qword ptr [esp+08]
+"Tropico.exe"+8A785: 51                    -  push ecx
+// ---------- INJECTING HERE ----------
+"Tropico.exe"+8A786: 8B 4C 24 14           -  mov ecx,[esp+14]
+"Tropico.exe"+8A78A: D9 C0                 -  fld st(0)
+// ---------- DONE INJECTING  ----------
+"Tropico.exe"+8A78C: DC 86 22 01 00 00     -  fadd qword ptr [esi+00000122]
+"Tropico.exe"+8A792: DD 9E 22 01 00 00     -  fstp qword ptr [esi+00000122]
+"Tropico.exe"+8A798: D9 1C 24              -  fstp dword ptr [esp]
+"Tropico.exe"+8A79B: E8 75 80 F7 FF        -  call Tropico.exe+2815
+"Tropico.exe"+8A7A0: 5E                    -  pop esi
+"Tropico.exe"+8A7A1: C2 0C 00              -  ret 000C
+"Tropico.exe"+8A7A4: 90                    -  nop 
+"Tropico.exe"+8A7A5: 90                    -  nop 
+"Tropico.exe"+8A7A6: 90                    -  nop 
+"Tropico.exe"+8A7A7: 90                    -  nop 
+}
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>20</ID>
+      <Description>"build"</Description>
+      <LastState Activated="1"/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>[ENABLE]
+[Tropico.exe+002059F8]+ad:
+  dd 01
+ 
+ 
+[DISABLE]
+[Tropico.exe+002059F8]+ad:
+  dd 00
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>12</ID>
+      <Description>"speed"</Description>
+      <LastState Value="0" RealAddress="00578C00"/>
+      <VariableType>Float</VariableType>
+      <Address>00578C00</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>19</ID>
+      <Description>"Указатель"</Description>
+      <LastState Value="1" RealAddress="0211EDFF"/>
+      <VariableType>4 Bytes</VariableType>
+      <Address>"Tropico.exe"+002059F8</Address>
+      <Offsets>
+        <Offset>AD</Offset>
+      </Offsets>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>22</ID>
+      <Description>"число месяца"</Description>
+      <LastState Value="6" RealAddress="00603217"/>
+      <VariableType>Byte</VariableType>
+      <Address>Tropico.exe+203217</Address>
+    </CheatEntry>
+  </CheatEntries>
+  <UserdefinedSymbols/>
+  <Structures StructVersion="2">
+    <Structure Name="unit" AutoFill="0" AutoCreate="1" DefaultHex="0" AutoDestroy="0" DoNotSaveLocal="0" RLECompression="1" AutoCreateStructsize="4096">
+      <Elements>
+        <Element Offset="1" Vartype="Byte" Bytesize="1" RLECount="3" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="4" Vartype="4 Bytes" Bytesize="4" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="8" Vartype="2 Bytes" Bytesize="2" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="10" Vartype="Byte" Bytesize="1" RLECount="2" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="12" Vartype="2 Bytes" Bytesize="2" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="14" Vartype="Byte" Bytesize="1" RLECount="2" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="16" Vartype="2 Bytes" Bytesize="2" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="18" Vartype="Byte" Bytesize="1" RLECount="2" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="20" Vartype="2 Bytes" Bytesize="2" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="22" Vartype="Byte" Bytesize="1" RLECount="2" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="24" Vartype="2 Bytes" Bytesize="2" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="26" Vartype="Byte" Bytesize="1" RLECount="2" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="28" Vartype="2 Bytes" Bytesize="2" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="30" Vartype="Byte" Bytesize="1" RLECount="2" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="32" Vartype="2 Bytes" Bytesize="2" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="34" Vartype="Byte" Bytesize="1" RLECount="2" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="36" Vartype="2 Bytes" Bytesize="2" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="38" Vartype="Byte" Bytesize="1" RLECount="2" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="40" Vartype="2 Bytes" Bytesize="2" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="42" Vartype="Byte" Bytesize="1" RLECount="2" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="44" Vartype="2 Bytes" Bytesize="2" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="46" Vartype="Byte" Bytesize="1" RLECount="2" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="48" Vartype="2 Bytes" Bytesize="2" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="50" Vartype="Byte" Bytesize="1" RLECount="2" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="52" Vartype="2 Bytes" Bytesize="2" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="54" Vartype="Byte" Bytesize="1" RLECount="2" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="56" Vartype="2 Bytes" Bytesize="2" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="58" Vartype="Byte" Bytesize="1" RLECount="2" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="60" Vartype="2 Bytes" Bytesize="2" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="62" Vartype="Byte" Bytesize="1" RLECount="2" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="64" Vartype="2 Bytes" Bytesize="2" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="66" Vartype="Byte" Bytesize="1" RLECount="2" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="68" Vartype="2 Bytes" Bytesize="2" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="70" Vartype="Byte" Bytesize="1" RLECount="2" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="72" Vartype="2 Bytes" Bytesize="2" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="74" Vartype="Byte" Bytesize="1" RLECount="2" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="76" Vartype="2 Bytes" Bytesize="2" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="78" Vartype="Byte" Bytesize="1" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="79" Vartype="String" Bytesize="9" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="88" Vartype="2 Bytes" Bytesize="2" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="90" Vartype="Byte" Bytesize="1" RLECount="2" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="92" Vartype="2 Bytes" Bytesize="2" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="94" Vartype="Byte" Bytesize="1" RLECount="2" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="96" Vartype="2 Bytes" Bytesize="2" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="98" Vartype="Byte" Bytesize="1" RLECount="2" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="100" Vartype="2 Bytes" Bytesize="2" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="102" Vartype="Byte" Bytesize="1" RLECount="2" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="104" Vartype="2 Bytes" Bytesize="2" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="106" Vartype="Byte" Bytesize="1" RLECount="2" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="108" Vartype="2 Bytes" Bytesize="2" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="110" Vartype="Byte" Bytesize="1" RLECount="2" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="112" Vartype="2 Bytes" Bytesize="2" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="114" Vartype="Byte" Bytesize="1" RLECount="2" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="116" Vartype="2 Bytes" Bytesize="2" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="118" Vartype="Byte" Bytesize="1" RLECount="2" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="120" Vartype="2 Bytes" Bytesize="2" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="122" Vartype="Byte" Bytesize="1" RLECount="2" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="124" Vartype="2 Bytes" Bytesize="2" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="126" Vartype="Byte" Bytesize="1" RLECount="2" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="128" Vartype="2 Bytes" Bytesize="2" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="130" Vartype="Byte" Bytesize="1" RLECount="2" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="132" Vartype="2 Bytes" Bytesize="2" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="134" Vartype="Byte" Bytesize="1" RLECount="2" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="136" Vartype="2 Bytes" Bytesize="2" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="138" Vartype="Byte" Bytesize="1" RLECount="2" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="140" Vartype="2 Bytes" Bytesize="2" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="142" Vartype="Byte" Bytesize="1" RLECount="2" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="144" Vartype="2 Bytes" Bytesize="2" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="146" Vartype="Byte" Bytesize="1" RLECount="2" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="148" Vartype="2 Bytes" Bytesize="2" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="150" Vartype="Byte" Bytesize="1" RLECount="2" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="152" Vartype="2 Bytes" Bytesize="2" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="154" Vartype="Byte" Bytesize="1" RLECount="2" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="156" Vartype="2 Bytes" Bytesize="2" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="158" Vartype="Byte" Bytesize="1" RLECount="2" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="160" Vartype="2 Bytes" Bytesize="2" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="162" Vartype="Byte" Bytesize="1" RLECount="2" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="164" Vartype="2 Bytes" Bytesize="2" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="166" Vartype="Byte" Bytesize="1" RLECount="2" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="168" Vartype="2 Bytes" Bytesize="2" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="170" Vartype="Byte" Bytesize="1" RLECount="2" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="172" Vartype="4 Bytes" Bytesize="4" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="176" Vartype="Byte" Bytesize="1" RLECount="3" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="179" Vartype="2 Bytes" Bytesize="2" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="181" Vartype="Byte" Bytesize="1" RLECount="3" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="184" Vartype="2 Bytes" Bytesize="2" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="186" Vartype="Byte" Bytesize="1" RLECount="2" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="188" Vartype="2 Bytes" Bytesize="2" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="190" Vartype="Byte" Bytesize="1" RLECount="2" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="192" Vartype="2 Bytes" Bytesize="2" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="194" Vartype="Byte" Bytesize="1" RLECount="2" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="196" Vartype="2 Bytes" Bytesize="2" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="198" Vartype="Byte" Bytesize="1" RLECount="2" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="200" Vartype="2 Bytes" Bytesize="2" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="202" Vartype="Byte" Bytesize="1" RLECount="2" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="204" Vartype="2 Bytes" Bytesize="2" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="206" Vartype="Byte" Bytesize="1" RLECount="2" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="208" Vartype="2 Bytes" Bytesize="2" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="210" Vartype="Byte" Bytesize="1" RLECount="2" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="212" Vartype="2 Bytes" Bytesize="2" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="214" Vartype="Byte" Bytesize="1" RLECount="2" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="216" Vartype="2 Bytes" Bytesize="2" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="218" Vartype="Byte" Bytesize="1" RLECount="2" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="220" Vartype="2 Bytes" Bytesize="2" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="222" Vartype="Byte" Bytesize="1" RLECount="2" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="224" Vartype="2 Bytes" Bytesize="2" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="226" Vartype="Byte" Bytesize="1" RLECount="2" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="228" Vartype="2 Bytes" Bytesize="2" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="230" Vartype="Byte" Bytesize="1" RLECount="2" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="232" Vartype="2 Bytes" Bytesize="2" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="234" Vartype="Byte" Bytesize="1" RLECount="2" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="236" Vartype="2 Bytes" Bytesize="2" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="238" Vartype="Byte" Bytesize="1" RLECount="2" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="240" Vartype="2 Bytes" Bytesize="2" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="242" Vartype="Byte" Bytesize="1" RLECount="2" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="244" Vartype="2 Bytes" Bytesize="2" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="246" Vartype="Byte" Bytesize="1" RLECount="2" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="248" Vartype="2 Bytes" Bytesize="2" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="250" Vartype="Byte" Bytesize="1" RLECount="2" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="252" Vartype="2 Bytes" Bytesize="2" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="254" Vartype="Byte" Bytesize="1" RLECount="2" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="256" Vartype="2 Bytes" Bytesize="2" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="258" Vartype="Byte" Bytesize="1" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="259" Vartype="2 Bytes" Bytesize="2" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="261" Vartype="Byte" Bytesize="1" RLECount="3" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="264" Vartype="2 Bytes" Bytesize="2" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="266" Vartype="Byte" Bytesize="1" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="267" Vartype="2 Bytes" Bytesize="2" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="269" Vartype="Byte" Bytesize="1" RLECount="3" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="272" Vartype="2 Bytes" Bytesize="2" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="274" Vartype="Byte" Bytesize="1" RLECount="2" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="276" Vartype="2 Bytes" Bytesize="2" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="278" Vartype="Byte" Bytesize="1" RLECount="2" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="280" Vartype="2 Bytes" Bytesize="2" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="282" Vartype="Byte" Bytesize="1" RLECount="2" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="284" Vartype="2 Bytes" Bytesize="2" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="286" Vartype="Byte" Bytesize="1" RLECount="2" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="288" Vartype="2 Bytes" Bytesize="2" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="290" Vartype="Byte" Bytesize="1" RLECount="2" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="292" Vartype="2 Bytes" Bytesize="2" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="294" Vartype="Byte" Bytesize="1" RLECount="2" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="296" Vartype="2 Bytes" Bytesize="2" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="298" Vartype="Byte" Bytesize="1" RLECount="2" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="300" Vartype="2 Bytes" Bytesize="2" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="302" Vartype="Byte" Bytesize="1" RLECount="2" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="304" Vartype="2 Bytes" Bytesize="2" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="306" Vartype="Byte" Bytesize="1" RLECount="2" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="308" Vartype="2 Bytes" Bytesize="2" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="310" Vartype="Byte" Bytesize="1" RLECount="2" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="312" Vartype="2 Bytes" Bytesize="2" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="314" Vartype="Byte" Bytesize="1" RLECount="2" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="316" Vartype="2 Bytes" Bytesize="2" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="318" Vartype="Byte" Bytesize="1" RLECount="2" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="320" Vartype="2 Bytes" Bytesize="2" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="322" Vartype="Byte" Bytesize="1" RLECount="2" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="324" Vartype="2 Bytes" Bytesize="2" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="326" Vartype="Byte" Bytesize="1" RLECount="2" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="328" Vartype="2 Bytes" Bytesize="2" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="330" Vartype="Byte" Bytesize="1" RLECount="2" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="332" Vartype="2 Bytes" Bytesize="2" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="334" Vartype="Byte" Bytesize="1" RLECount="2" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="336" Vartype="2 Bytes" Bytesize="2" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="338" Vartype="Byte" Bytesize="1" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="339" Vartype="2 Bytes" Bytesize="2" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="341" Vartype="Byte" Bytesize="1" RLECount="3" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="344" Vartype="2 Bytes" Bytesize="2" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="346" Vartype="Byte" Bytesize="1" RLECount="2" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="348" Vartype="4 Bytes" Bytesize="4" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="352" Vartype="Byte" Bytesize="1" RLECount="4" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="356" Vartype="2 Bytes" Bytesize="2" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="358" Vartype="Byte" Bytesize="1" RLECount="2" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="360" Vartype="2 Bytes" Bytesize="2" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="362" Vartype="Byte" Bytesize="1" RLECount="2" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="364" Vartype="2 Bytes" Bytesize="2" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="366" Vartype="Byte" Bytesize="1" RLECount="2" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="368" Vartype="2 Bytes" Bytesize="2" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="370" Vartype="Byte" Bytesize="1" RLECount="2" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="372" Vartype="2 Bytes" Bytesize="2" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="374" Vartype="Byte" Bytesize="1" RLECount="2" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="376" Vartype="2 Bytes" Bytesize="2" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="378" Vartype="Byte" Bytesize="1" RLECount="2" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="380" Vartype="4 Bytes" Bytesize="4" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="384" Vartype="Byte" Bytesize="1" RLECount="4" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="388" Vartype="2 Bytes" Bytesize="2" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="390" Vartype="Byte" Bytesize="1" RLECount="2" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="392" Vartype="2 Bytes" Bytesize="2" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="394" Vartype="Byte" Bytesize="1" RLECount="2" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="396" Vartype="2 Bytes" Bytesize="2" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="398" Vartype="Byte" Bytesize="1" RLECount="2" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="400" Vartype="2 Bytes" Bytesize="2" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="402" Vartype="Byte" Bytesize="1" RLECount="2" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="404" Vartype="2 Bytes" Bytesize="2" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="406" Vartype="Byte" Bytesize="1" RLECount="2" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="408" Vartype="2 Bytes" Bytesize="2" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="410" Vartype="Byte" Bytesize="1" RLECount="2" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="412" Vartype="2 Bytes" Bytesize="2" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="414" Vartype="Byte" Bytesize="1" RLECount="2" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="416" Vartype="2 Bytes" Bytesize="2" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="418" Vartype="Byte" Bytesize="1" RLECount="2" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="420" Vartype="2 Bytes" Bytesize="2" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="422" Vartype="Byte" Bytesize="1" RLECount="2" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="424" Vartype="2 Bytes" Bytesize="2" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="426" Vartype="Byte" Bytesize="1" RLECount="2" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="428" Vartype="2 Bytes" Bytesize="2" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="430" Vartype="Byte" Bytesize="1" RLECount="2" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="432" Vartype="2 Bytes" Bytesize="2" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="434" Vartype="Byte" Bytesize="1" RLECount="2" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="436" Vartype="2 Bytes" Bytesize="2" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="438" Vartype="Byte" Bytesize="1" RLECount="2" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="440" Vartype="2 Bytes" Bytesize="2" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="442" Vartype="Byte" Bytesize="1" RLECount="2" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="444" Vartype="2 Bytes" Bytesize="2" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="446" Vartype="Byte" Bytesize="1" RLECount="2" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="448" Vartype="2 Bytes" Bytesize="2" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="450" Vartype="Byte" Bytesize="1" RLECount="2" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="452" Vartype="2 Bytes" Bytesize="2" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="454" Vartype="Byte" Bytesize="1" RLECount="2" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="456" Vartype="2 Bytes" Bytesize="2" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="458" Vartype="Byte" Bytesize="1" RLECount="2" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="460" Vartype="2 Bytes" Bytesize="2" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="462" Vartype="Byte" Bytesize="1" RLECount="2" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="464" Vartype="2 Bytes" Bytesize="2" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="466" Vartype="Byte" Bytesize="1" RLECount="2" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="468" Vartype="2 Bytes" Bytesize="2" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="470" Vartype="Byte" Bytesize="1" RLECount="2" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="472" Vartype="2 Bytes" Bytesize="2" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="474" Vartype="Byte" Bytesize="1" RLECount="2" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="476" Vartype="2 Bytes" Bytesize="2" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="478" Vartype="Byte" Bytesize="1" RLECount="2" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="480" Vartype="2 Bytes" Bytesize="2" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="482" Vartype="Byte" Bytesize="1" RLECount="2" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="484" Vartype="2 Bytes" Bytesize="2" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="486" Vartype="Byte" Bytesize="1" RLECount="2" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="488" Vartype="2 Bytes" Bytesize="2" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="490" Vartype="Byte" Bytesize="1" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="491" Vartype="2 Bytes" Bytesize="2" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="493" Vartype="Byte" Bytesize="1" RLECount="3" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="496" Vartype="2 Bytes" Bytesize="2" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="498" Vartype="Byte" Bytesize="1" RLECount="2" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="500" Vartype="2 Bytes" Bytesize="2" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="502" Vartype="Byte" Bytesize="1" RLECount="2" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="504" Vartype="2 Bytes" Bytesize="2" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="506" Vartype="Byte" Bytesize="1" RLECount="2" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="508" Vartype="2 Bytes" Bytesize="2" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="510" Vartype="Byte" Bytesize="1" RLECount="2" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="512" Vartype="2 Bytes" Bytesize="2" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="514" Vartype="Byte" Bytesize="1" RLECount="2" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="516" Vartype="2 Bytes" Bytesize="2" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="518" Vartype="Byte" Bytesize="1" RLECount="2" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="520" Vartype="2 Bytes" Bytesize="2" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="522" Vartype="Byte" Bytesize="1" RLECount="2" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="524" Vartype="2 Bytes" Bytesize="2" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="526" Vartype="Byte" Bytesize="1" RLECount="2" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="528" Vartype="2 Bytes" Bytesize="2" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="530" Vartype="Byte" Bytesize="1" RLECount="2" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="532" Vartype="2 Bytes" Bytesize="2" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="534" Vartype="Byte" Bytesize="1" RLECount="2" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="536" Vartype="2 Bytes" Bytesize="2" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="538" Vartype="Byte" Bytesize="1" RLECount="2" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="540" Vartype="2 Bytes" Bytesize="2" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="542" Vartype="Byte" Bytesize="1" RLECount="2" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="544" Vartype="2 Bytes" Bytesize="2" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="546" Vartype="Byte" Bytesize="1" RLECount="2" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="548" Vartype="2 Bytes" Bytesize="2" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="550" Vartype="Byte" Bytesize="1" RLECount="2" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="552" Vartype="2 Bytes" Bytesize="2" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="554" Vartype="Byte" Bytesize="1" RLECount="2" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="556" Vartype="2 Bytes" Bytesize="2" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="558" Vartype="Byte" Bytesize="1" RLECount="2" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="560" Vartype="2 Bytes" Bytesize="2" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="562" Vartype="Byte" Bytesize="1" RLECount="2" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="564" Vartype="2 Bytes" Bytesize="2" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="566" Vartype="Byte" Bytesize="1" RLECount="2" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="568" Vartype="2 Bytes" Bytesize="2" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="570" Vartype="Byte" Bytesize="1" RLECount="2" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="572" Vartype="2 Bytes" Bytesize="2" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="574" Vartype="Byte" Bytesize="1" RLECount="2" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="576" Vartype="2 Bytes" Bytesize="2" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="578" Vartype="Byte" Bytesize="1" RLECount="2" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="580" Vartype="2 Bytes" Bytesize="2" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="582" Vartype="Byte" Bytesize="1" RLECount="2" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="584" Vartype="2 Bytes" Bytesize="2" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="586" Vartype="Byte" Bytesize="1" RLECount="2" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="588" Vartype="2 Bytes" Bytesize="2" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="590" Vartype="Byte" Bytesize="1" RLECount="2" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="592" Vartype="2 Bytes" Bytesize="2" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="594" Vartype="Byte" Bytesize="1" RLECount="2" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="596" Vartype="2 Bytes" Bytesize="2" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="598" Vartype="Byte" Bytesize="1" RLECount="2" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="600" Vartype="2 Bytes" Bytesize="2" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="602" Vartype="Byte" Bytesize="1" RLECount="2" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="604" Vartype="2 Bytes" Bytesize="2" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="606" Vartype="Byte" Bytesize="1" RLECount="2" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="608" Vartype="2 Bytes" Bytesize="2" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="610" Vartype="Byte" Bytesize="1" RLECount="2" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="612" Vartype="2 Bytes" Bytesize="2" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="614" Vartype="Byte" Bytesize="1" RLECount="2" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="616" Vartype="2 Bytes" Bytesize="2" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="618" Vartype="Byte" Bytesize="1" RLECount="2" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="620" Vartype="2 Bytes" Bytesize="2" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="622" Vartype="Byte" Bytesize="1" RLECount="2" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="624" Vartype="2 Bytes" Bytesize="2" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="626" Vartype="Byte" Bytesize="1" RLECount="2" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="628" Vartype="2 Bytes" Bytesize="2" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="630" Vartype="Byte" Bytesize="1" RLECount="2" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="632" Vartype="2 Bytes" Bytesize="2" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="634" Vartype="Byte" Bytesize="1" RLECount="2" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="636" Vartype="2 Bytes" Bytesize="2" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="638" Vartype="Byte" Bytesize="1" RLECount="2" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="640" Vartype="2 Bytes" Bytesize="2" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="642" Vartype="Byte" Bytesize="1" RLECount="2" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="644" Vartype="2 Bytes" Bytesize="2" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="646" Vartype="Byte" Bytesize="1" RLECount="2" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="648" Vartype="2 Bytes" Bytesize="2" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="650" Vartype="Byte" Bytesize="1" RLECount="2" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="652" Vartype="2 Bytes" Bytesize="2" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="654" Vartype="Byte" Bytesize="1" RLECount="2" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="656" Vartype="2 Bytes" Bytesize="2" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="658" Vartype="Byte" Bytesize="1" RLECount="2" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="660" Vartype="2 Bytes" Bytesize="2" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="662" Vartype="Byte" Bytesize="1" RLECount="2" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="664" Vartype="2 Bytes" Bytesize="2" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="666" Vartype="Byte" Bytesize="1" RLECount="2" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="668" Vartype="Float" Bytesize="4" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="672" Vartype="2 Bytes" Bytesize="2" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="674" Vartype="Byte" Bytesize="1" RLECount="2" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="676" Vartype="2 Bytes" Bytesize="2" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="678" Vartype="Byte" Bytesize="1" RLECount="2" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="680" Vartype="2 Bytes" Bytesize="2" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="682" Vartype="Byte" Bytesize="1" RLECount="2" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="684" Vartype="2 Bytes" Bytesize="2" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="686" Vartype="Byte" Bytesize="1" RLECount="2" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="688" Vartype="2 Bytes" Bytesize="2" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="690" Vartype="Byte" Bytesize="1" RLECount="2" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="692" Vartype="2 Bytes" Bytesize="2" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="694" Vartype="Byte" Bytesize="1" RLECount="2" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="696" Vartype="2 Bytes" Bytesize="2" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="698" Vartype="Byte" Bytesize="1" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="699" Vartype="2 Bytes" Bytesize="2" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="701" Vartype="Byte" Bytesize="1" RLECount="3" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="704" Vartype="2 Bytes" Bytesize="2" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="706" Vartype="Byte" Bytesize="1" RLECount="2" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="708" Vartype="2 Bytes" Bytesize="2" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="710" Vartype="Byte" Bytesize="1" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="711" Vartype="2 Bytes" Bytesize="2" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="713" Vartype="Byte" Bytesize="1" RLECount="3" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="716" Vartype="2 Bytes" Bytesize="2" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="718" Vartype="Byte" Bytesize="1" RLECount="2" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="720" Vartype="2 Bytes" Bytesize="2" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="722" Vartype="Byte" Bytesize="1" RLECount="2" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="724" Vartype="2 Bytes" Bytesize="2" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="726" Vartype="Byte" Bytesize="1" RLECount="2" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="728" Vartype="2 Bytes" Bytesize="2" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="730" Vartype="Byte" Bytesize="1" RLECount="2" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="732" Vartype="2 Bytes" Bytesize="2" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="734" Vartype="Byte" Bytesize="1" RLECount="2" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="736" Vartype="Float" Bytesize="4" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="740" Vartype="2 Bytes" Bytesize="2" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="742" Vartype="Byte" Bytesize="1" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="743" Vartype="2 Bytes" Bytesize="2" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="745" Vartype="Byte" Bytesize="1" RLECount="3" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="748" Vartype="2 Bytes" Bytesize="2" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="750" Vartype="Byte" Bytesize="1" RLECount="2" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="752" Vartype="2 Bytes" Bytesize="2" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="754" Vartype="Byte" Bytesize="1" RLECount="2" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="756" Vartype="2 Bytes" Bytesize="2" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="758" Vartype="Byte" Bytesize="1" RLECount="2" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="760" Vartype="2 Bytes" Bytesize="2" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="762" Vartype="4 Bytes" Bytesize="4" RLECount="12" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="810" Vartype="Pointer" Bytesize="4" RLECount="2" PointerSize="4" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="818" Vartype="4 Bytes" Bytesize="4" RLECount="4" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="834" Vartype="Double" Bytesize="8" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="842" Vartype="4 Bytes" Bytesize="4" RLECount="13" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="894" Vartype="Pointer" Bytesize="4" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="898" Vartype="4 Bytes" Bytesize="4" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="902" Vartype="Pointer" Bytesize="4" RLECount="2" PointerSize="4" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="910" Vartype="4 Bytes" Bytesize="4" RLECount="7" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="938" Vartype="Pointer" Bytesize="4" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="942" Vartype="4 Bytes" Bytesize="4" RLECount="3" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="954" Vartype="Pointer" Bytesize="4" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="958" Vartype="4 Bytes" Bytesize="4" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="962" Vartype="Pointer" Bytesize="4" RLECount="3" PointerSize="4" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="974" Vartype="4 Bytes" Bytesize="4" RLECount="2" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="982" Vartype="Pointer" Bytesize="4" RLECount="4" PointerSize="4" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="998" Vartype="4 Bytes" Bytesize="4" RLECount="3" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="1010" Vartype="Pointer" Bytesize="4" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="1014" Vartype="4 Bytes" Bytesize="4" RLECount="4" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="1030" Vartype="Pointer" Bytesize="4" RLECount="3" PointerSize="4" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="1042" Vartype="4 Bytes" Bytesize="4" RLECount="3" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="1054" Vartype="Pointer" Bytesize="4" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="1058" Vartype="Float" Bytesize="4" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="1062" Vartype="4 Bytes" Bytesize="4" RLECount="3" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="1074" Vartype="String" Bytesize="13" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="1087" Vartype="Byte" Bytesize="1" RLECount="3" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="1090" Vartype="4 Bytes" Bytesize="4" RLECount="4" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="1106" Vartype="Pointer" Bytesize="4" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="1110" Vartype="4 Bytes" Bytesize="4" RLECount="7" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="1138" Vartype="Pointer" Bytesize="4" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="1142" Vartype="4 Bytes" Bytesize="4" RLECount="2" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="1150" Vartype="Pointer" Bytesize="4" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="1154" Vartype="4 Bytes" Bytesize="4" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="1158" Vartype="Pointer" Bytesize="4" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="1162" Vartype="4 Bytes" Bytesize="4" RLECount="13" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="1214" Vartype="Float" Bytesize="4" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="1218" Vartype="4 Bytes" Bytesize="4" RLECount="7" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="1246" Vartype="Pointer" Bytesize="4" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="1250" Vartype="4 Bytes" Bytesize="4" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="1254" Vartype="Float" Bytesize="4" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="1258" Vartype="4 Bytes" Bytesize="4" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="1262" Vartype="Float" Bytesize="4" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="1266" Vartype="4 Bytes" Bytesize="4" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="1270" Vartype="Pointer" Bytesize="4" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="1274" Vartype="4 Bytes" Bytesize="4" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="1278" Vartype="Pointer" Bytesize="4" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="1282" Vartype="4 Bytes" Bytesize="4" RLECount="45" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="1462" Vartype="Pointer" Bytesize="4" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="1466" Vartype="4 Bytes" Bytesize="4" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="1470" Vartype="Pointer" Bytesize="4" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="1474" Vartype="4 Bytes" Bytesize="4" RLECount="14" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="1530" Vartype="Pointer" Bytesize="4" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="1534" Vartype="4 Bytes" Bytesize="4" RLECount="6" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="1558" Vartype="Float" Bytesize="4" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="1562" Vartype="4 Bytes" Bytesize="4" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="1566" Vartype="Pointer" Bytesize="4" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="1570" Vartype="4 Bytes" Bytesize="4" RLECount="61" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="1814" Vartype="Pointer" Bytesize="4" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="1818" Vartype="4 Bytes" Bytesize="4" RLECount="7" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="1846" Vartype="Float" Bytesize="4" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="1850" Vartype="4 Bytes" Bytesize="4" RLECount="3" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="1862" Vartype="Pointer" Bytesize="4" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="1866" Vartype="4 Bytes" Bytesize="4" RLECount="6" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="1890" Vartype="Float" Bytesize="4" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="1894" Vartype="4 Bytes" Bytesize="4" RLECount="5" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="1914" Vartype="Pointer" Bytesize="4" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="1918" Vartype="4 Bytes" Bytesize="4" RLECount="17" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="1986" Vartype="Float" Bytesize="4" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="1990" Vartype="Byte" Bytesize="1" RLECount="4" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="1994" Vartype="4 Bytes" Bytesize="4" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="1998" Vartype="Pointer" Bytesize="4" RLECount="2" PointerSize="4" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="2006" Vartype="4 Bytes" Bytesize="4" RLECount="4" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="2022" Vartype="Float" Bytesize="4" RLECount="4" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="2038" Vartype="4 Bytes" Bytesize="4" RLECount="8" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="2070" Vartype="String" Bytesize="12" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="2082" Vartype="4 Bytes" Bytesize="4" RLECount="13" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="2134" Vartype="Pointer" Bytesize="4" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="2138" Vartype="4 Bytes" Bytesize="4" RLECount="5" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="2158" Vartype="Float" Bytesize="4" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="2162" Vartype="4 Bytes" Bytesize="4" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="2166" Vartype="Pointer" Bytesize="4" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="2170" Vartype="4 Bytes" Bytesize="4" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="2174" Vartype="Pointer" Bytesize="4" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="2178" Vartype="4 Bytes" Bytesize="4" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="2182" Vartype="Pointer" Bytesize="4" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="2186" Vartype="4 Bytes" Bytesize="4" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="2190" Vartype="Pointer" Bytesize="4" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="2194" Vartype="4 Bytes" Bytesize="4" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="2198" Vartype="Pointer" Bytesize="4" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="2202" Vartype="4 Bytes" Bytesize="4" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="2206" Vartype="Pointer" Bytesize="4" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="2210" Vartype="4 Bytes" Bytesize="4" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="2214" Vartype="Pointer" Bytesize="4" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="2218" Vartype="4 Bytes" Bytesize="4" RLECount="3" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="2230" Vartype="Pointer" Bytesize="4" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="2234" Vartype="4 Bytes" Bytesize="4" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="2238" Vartype="Pointer" Bytesize="4" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="2242" Vartype="4 Bytes" Bytesize="4" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="2246" Vartype="Pointer" Bytesize="4" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="2250" Vartype="4 Bytes" Bytesize="4" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="2254" Vartype="Pointer" Bytesize="4" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="2258" Vartype="4 Bytes" Bytesize="4" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="2262" Vartype="Pointer" Bytesize="4" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="2266" Vartype="4 Bytes" Bytesize="4" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="2270" Vartype="Pointer" Bytesize="4" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="2274" Vartype="Float" Bytesize="4" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="2278" Vartype="Pointer" Bytesize="4" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="2282" Vartype="4 Bytes" Bytesize="4" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="2286" Vartype="Pointer" Bytesize="4" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="2290" Vartype="4 Bytes" Bytesize="4" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="2294" Vartype="Pointer" Bytesize="4" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="2298" Vartype="4 Bytes" Bytesize="4" RLECount="3" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="2310" Vartype="Pointer" Bytesize="4" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="2314" Vartype="4 Bytes" Bytesize="4" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="2318" Vartype="Pointer" Bytesize="4" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="2322" Vartype="4 Bytes" Bytesize="4" RLECount="3" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="2334" Vartype="Pointer" Bytesize="4" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="2338" Vartype="Float" Bytesize="4" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="2342" Vartype="Pointer" Bytesize="4" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="2346" Vartype="4 Bytes" Bytesize="4" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="2350" Vartype="Pointer" Bytesize="4" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="2354" Vartype="Float" Bytesize="4" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="2358" Vartype="Pointer" Bytesize="4" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="2362" Vartype="4 Bytes" Bytesize="4" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="2366" Vartype="Pointer" Bytesize="4" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="2370" Vartype="4 Bytes" Bytesize="4" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="2374" Vartype="Pointer" Bytesize="4" RLECount="3" PointerSize="4" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="2386" Vartype="4 Bytes" Bytesize="4" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="2390" Vartype="Pointer" Bytesize="4" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="2394" Vartype="4 Bytes" Bytesize="4" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="2398" Vartype="Pointer" Bytesize="4" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="2402" Vartype="4 Bytes" Bytesize="4" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="2406" Vartype="Pointer" Bytesize="4" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="2410" Vartype="4 Bytes" Bytesize="4" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="2414" Vartype="Pointer" Bytesize="4" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="2418" Vartype="4 Bytes" Bytesize="4" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="2422" Vartype="Pointer" Bytesize="4" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="2426" Vartype="4 Bytes" Bytesize="4" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="2430" Vartype="Pointer" Bytesize="4" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="2434" Vartype="4 Bytes" Bytesize="4" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="2438" Vartype="Pointer" Bytesize="4" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="2442" Vartype="4 Bytes" Bytesize="4" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="2446" Vartype="Pointer" Bytesize="4" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="2450" Vartype="4 Bytes" Bytesize="4" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="2454" Vartype="Pointer" Bytesize="4" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="2458" Vartype="4 Bytes" Bytesize="4" RLECount="8" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="2490" Vartype="Pointer" Bytesize="4" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="2494" Vartype="4 Bytes" Bytesize="4" RLECount="16" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="2558" Vartype="Pointer" Bytesize="4" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="2562" Vartype="4 Bytes" Bytesize="4" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="2566" Vartype="Float" Bytesize="4" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="2570" Vartype="4 Bytes" Bytesize="4" RLECount="36" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="2714" Vartype="Pointer" Bytesize="4" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="2718" Vartype="4 Bytes" Bytesize="4" RLECount="5" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="2738" Vartype="Pointer" Bytesize="4" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="2742" Vartype="4 Bytes" Bytesize="4" RLECount="9" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="2778" Vartype="Pointer" Bytesize="4" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="2782" Vartype="4 Bytes" Bytesize="4" RLECount="6" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="2806" Vartype="Pointer" Bytesize="4" RLECount="2" PointerSize="4" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="2814" Vartype="4 Bytes" Bytesize="4" RLECount="11" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="2858" Vartype="Byte" Bytesize="1" RLECount="4" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="2862" Vartype="4 Bytes" Bytesize="4" RLECount="10" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="2902" Vartype="Pointer" Bytesize="4" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="2906" Vartype="4 Bytes" Bytesize="4" RLECount="2" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="2914" Vartype="Pointer" Bytesize="4" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="2918" Vartype="4 Bytes" Bytesize="4" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="2922" Vartype="Pointer" Bytesize="4" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="2926" Vartype="4 Bytes" Bytesize="4" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="2930" Vartype="Float" Bytesize="4" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="2934" Vartype="Pointer" Bytesize="4" RLECount="2" PointerSize="4" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="2942" Vartype="4 Bytes" Bytesize="4" RLECount="7" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="2970" Vartype="Pointer" Bytesize="4" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="2974" Vartype="4 Bytes" Bytesize="4" RLECount="4" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="2990" Vartype="Float" Bytesize="4" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="2994" Vartype="4 Bytes" Bytesize="4" RLECount="3" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="3006" Vartype="Pointer" Bytesize="4" RLECount="2" PointerSize="4" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="3014" Vartype="4 Bytes" Bytesize="4" RLECount="13" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="3066" Vartype="Byte" Bytesize="1" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="3067" Vartype="String" Bytesize="15" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="3082" Vartype="4 Bytes" Bytesize="4" RLECount="11" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="3126" Vartype="Float" Bytesize="4" RLECount="2" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="3134" Vartype="4 Bytes" Bytesize="4" RLECount="7" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="3162" Vartype="Float" Bytesize="4" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="3166" Vartype="4 Bytes" Bytesize="4" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="3170" Vartype="Float" Bytesize="4" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="3174" Vartype="4 Bytes" Bytesize="4" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="3178" Vartype="Float" Bytesize="4" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="3182" Vartype="4 Bytes" Bytesize="4" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="3186" Vartype="Float" Bytesize="4" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="3190" Vartype="4 Bytes" Bytesize="4" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="3194" Vartype="Float" Bytesize="4" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="3198" Vartype="4 Bytes" Bytesize="4" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="3202" Vartype="Float" Bytesize="4" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="3206" Vartype="4 Bytes" Bytesize="4" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="3210" Vartype="Float" Bytesize="4" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="3214" Vartype="4 Bytes" Bytesize="4" RLECount="3" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="3226" Vartype="Float" Bytesize="4" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="3230" Vartype="4 Bytes" Bytesize="4" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="3234" Vartype="Float" Bytesize="4" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="3238" Vartype="4 Bytes" Bytesize="4" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="3242" Vartype="String" Bytesize="5" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="3247" Vartype="Byte" Bytesize="1" RLECount="3" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="3250" Vartype="Float" Bytesize="4" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="3254" Vartype="4 Bytes" Bytesize="4" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="3258" Vartype="Float" Bytesize="4" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="3262" Vartype="4 Bytes" Bytesize="4" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="3266" Vartype="String" Bytesize="5" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="3271" Vartype="Byte" Bytesize="1" RLECount="3" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="3274" Vartype="Float" Bytesize="4" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="3278" Vartype="4 Bytes" Bytesize="4" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="3282" Vartype="Float" Bytesize="4" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="3286" Vartype="4 Bytes" Bytesize="4" RLECount="3" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="3298" Vartype="Float" Bytesize="4" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="3302" Vartype="4 Bytes" Bytesize="4" RLECount="3" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="3314" Vartype="Float" Bytesize="4" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="3318" Vartype="4 Bytes" Bytesize="4" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="3322" Vartype="Float" Bytesize="4" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="3326" Vartype="4 Bytes" Bytesize="4" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="3330" Vartype="Float" Bytesize="4" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="3334" Vartype="4 Bytes" Bytesize="4" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="3338" Vartype="Float" Bytesize="4" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="3342" Vartype="4 Bytes" Bytesize="4" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="3346" Vartype="String" Bytesize="5" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="3351" Vartype="Byte" Bytesize="1" RLECount="3" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="3354" Vartype="String" Bytesize="5" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="3359" Vartype="Byte" Bytesize="1" RLECount="3" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="3362" Vartype="Float" Bytesize="4" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="3366" Vartype="4 Bytes" Bytesize="4" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="3370" Vartype="String" Bytesize="5" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="3375" Vartype="Byte" Bytesize="1" RLECount="3" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="3378" Vartype="Float" Bytesize="4" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="3382" Vartype="4 Bytes" Bytesize="4" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="3386" Vartype="Float" Bytesize="4" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="3390" Vartype="4 Bytes" Bytesize="4" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="3394" Vartype="Float" Bytesize="4" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="3398" Vartype="4 Bytes" Bytesize="4" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="3402" Vartype="Float" Bytesize="4" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="3406" Vartype="4 Bytes" Bytesize="4" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="3410" Vartype="Float" Bytesize="4" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="3414" Vartype="4 Bytes" Bytesize="4" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="3418" Vartype="Float" Bytesize="4" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="3422" Vartype="4 Bytes" Bytesize="4" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="3426" Vartype="Float" Bytesize="4" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="3430" Vartype="4 Bytes" Bytesize="4" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="3434" Vartype="Float" Bytesize="4" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="3438" Vartype="Double" Bytesize="8" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="3446" Vartype="4 Bytes" Bytesize="4" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="3450" Vartype="Float" Bytesize="4" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="3454" Vartype="4 Bytes" Bytesize="4" RLECount="2" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="3462" Vartype="Float" Bytesize="4" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="3466" Vartype="4 Bytes" Bytesize="4" RLECount="15" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="3526" Vartype="Pointer" Bytesize="4" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="3530" Vartype="4 Bytes" Bytesize="4" RLECount="6" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="3554" Vartype="Byte" Bytesize="1" RLECount="4" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="3558" Vartype="4 Bytes" Bytesize="4" RLECount="16" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="3622" Vartype="Pointer" Bytesize="4" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="3626" Vartype="4 Bytes" Bytesize="4" RLECount="8" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="3658" Vartype="Pointer" Bytesize="4" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="3662" Vartype="4 Bytes" Bytesize="4" RLECount="14" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="3718" Vartype="Pointer" Bytesize="4" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="3722" Vartype="4 Bytes" Bytesize="4" RLECount="2" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="3730" Vartype="Pointer" Bytesize="4" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="3734" Vartype="4 Bytes" Bytesize="4" RLECount="9" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="3770" Vartype="Double" Bytesize="8" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="3778" Vartype="4 Bytes" Bytesize="4" RLECount="6" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="3802" Vartype="Pointer" Bytesize="4" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="3806" Vartype="4 Bytes" Bytesize="4" RLECount="3" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="3818" Vartype="Pointer" Bytesize="4" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="3822" Vartype="4 Bytes" Bytesize="4" RLECount="8" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="3854" Vartype="Byte" Bytesize="1" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="3855" Vartype="String" Bytesize="5" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="3860" Vartype="Byte" Bytesize="1" RLECount="2" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="3862" Vartype="4 Bytes" Bytesize="4" RLECount="8" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="3894" Vartype="Float" Bytesize="4" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="3898" Vartype="4 Bytes" Bytesize="4" RLECount="3" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="3910" Vartype="Float" Bytesize="4" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="3914" Vartype="4 Bytes" Bytesize="4" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="3918" Vartype="Pointer" Bytesize="4" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="3922" Vartype="4 Bytes" Bytesize="4" RLECount="3" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="3934" Vartype="Float" Bytesize="4" RLECount="2" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="3942" Vartype="4 Bytes" Bytesize="4" RLECount="9" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="3978" Vartype="Float" Bytesize="4" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="3982" Vartype="4 Bytes" Bytesize="4" RLECount="2" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="3990" Vartype="Pointer" Bytesize="4" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="3994" Vartype="4 Bytes" Bytesize="4" RLECount="2" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="4002" Vartype="Pointer" Bytesize="4" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="4006" Vartype="4 Bytes" Bytesize="4" RLECount="11" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="4050" Vartype="Pointer" Bytesize="4" RLECount="3" PointerSize="4" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="4062" Vartype="4 Bytes" Bytesize="4" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="4066" Vartype="String" Bytesize="15" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="4081" Vartype="Byte" Bytesize="1" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="4082" Vartype="4 Bytes" Bytesize="4" RLECount="3" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="4094" Vartype="Pointer" Bytesize="4" DisplayMethod="Шестнадцатеричный"/>
+      </Elements>
+    </Structure>
+  </Structures>
+  <Comments>Tropico.exe+18463 - fld dword ptr [ecx-000000E3]
+обращается на запас продукции при выборе здания
+</Comments>
+</CheatTable>

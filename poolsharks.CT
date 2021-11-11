@@ -1,0 +1,490 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CheatTable CheatEngineTableVersion="29">
+  <CheatEntries>
+    <CheatEntry>
+      <ID>8</ID>
+      <Description>"x pos"</Description>
+      <VariableType>Float</VariableType>
+      <Address>007ED5B8</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>0</ID>
+      <Description>"y pos"</Description>
+      <VariableType>Float</VariableType>
+      <Address>poolshark2.exe+3ED5BC</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>6</ID>
+      <Description>"cursor"</Description>
+      <LastState Activated="1"/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>{ Game   : poolshark2.exe
+  Version: 
+  Date   : 2019-10-30
+  Author : Hipp
+
+  This script does blah blah blah
+}
+
+[ENABLE]
+
+aobscanmodule(cursor,poolshark2.exe,89 86 34 01 00 00 DA) // should be unique
+alloc(newmem,$1000)
+
+label(code)
+label(return)
+
+newmem:
+  mov eax,#15
+code:
+  mov [esi+00000134],eax
+  jmp return
+
+cursor:
+  jmp newmem
+  nop
+return:
+registersymbol(cursor)
+
+[DISABLE]
+
+cursor:
+  db 89 86 34 01 00 00
+
+unregistersymbol(cursor)
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: "poolshark2.exe"+A6784
+
+"poolshark2.exe"+A674D: 8B 94 24 20 01 00 00  -  mov edx,[esp+00000120]
+"poolshark2.exe"+A6754: 89 41 04              -  mov [ecx+04],eax
+"poolshark2.exe"+A6757: 8B 84 24 24 01 00 00  -  mov eax,[esp+00000124]
+"poolshark2.exe"+A675E: 89 51 08              -  mov [ecx+08],edx
+"poolshark2.exe"+A6761: 89 41 0C              -  mov [ecx+0C],eax
+"poolshark2.exe"+A6764: 8B 8C 24 28 01 00 00  -  mov ecx,[esp+00000128]
+"poolshark2.exe"+A676B: 8B 84 24 64 01 00 00  -  mov eax,[esp+00000164]
+"poolshark2.exe"+A6772: E8 29 D2 FF FF        -  call poolshark2.exe+A39A0
+"poolshark2.exe"+A6777: D9 05 84 2B 67 00     -  fld dword ptr [poolshark2.exe+272B84]
+"poolshark2.exe"+A677D: D9 84 24 90 00 00 00  -  fld dword ptr [esp+00000090]
+// ---------- INJECTING HERE ----------
+"poolshark2.exe"+A6784: 89 86 34 01 00 00     -  mov [esi+00000134],eax
+// ---------- DONE INJECTING  ----------
+"poolshark2.exe"+A678A: DA E9                 -  fucompp 
+"poolshark2.exe"+A678C: 89 BE 3C 01 00 00     -  mov [esi+0000013C],edi
+"poolshark2.exe"+A6792: 89 AE 44 01 00 00     -  mov [esi+00000144],ebp
+"poolshark2.exe"+A6798: DF E0                 -  fnstsw ax
+"poolshark2.exe"+A679A: F6 C4 44              -  test ah,44
+"poolshark2.exe"+A679D: 7A 37                 -  jp poolshark2.exe+A67D6
+"poolshark2.exe"+A679F: D9 05 84 2B 67 00     -  fld dword ptr [poolshark2.exe+272B84]
+"poolshark2.exe"+A67A5: D9 84 24 94 00 00 00  -  fld dword ptr [esp+00000094]
+"poolshark2.exe"+A67AC: DA E9                 -  fucompp 
+"poolshark2.exe"+A67AE: DF E0                 -  fnstsw ax
+}
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>1</ID>
+      <Description>"hand play"</Description>
+      <VariableType>4 Bytes</VariableType>
+      <Address>poolshark2.exe+3ED36C</Address>
+      <Hotkeys>
+        <Hotkey>
+          <Action>Set Value</Action>
+          <Keys>
+            <Key>219</Key>
+          </Keys>
+          <Value>130</Value>
+          <ID>0</ID>
+        </Hotkey>
+      </Hotkeys>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>7</ID>
+      <Description>"Miss"</Description>
+      <LastState/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>{ Game   : poolshark2.exe
+  Version: 
+  Date   : 2019-10-30
+  Author : Hipp
+
+  This script does blah blah blah
+}
+
+[ENABLE]
+
+aobscanmodule(miss,poolshark2.exe,8B 56 F4 8D 46 10 50 8B 46 F0 51 52 50 8B D6 8B CF E8 46) // should be unique
+alloc(newmem,$1000)
+
+label(code)
+label(return)
+
+newmem:
+
+
+code:
+  mov edx,[esi-0C]
+    mov edx,1
+  lea eax,[esi+10]
+  jmp return
+
+miss:
+  jmp newmem
+  nop
+return:
+registersymbol(miss)
+
+[DISABLE]
+
+miss:
+  db 8B 56 F4 8D 46 10
+
+unregistersymbol(miss)
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: "poolshark2.exe"+A81C4
+
+"poolshark2.exe"+A81B1: F7 D9              -  neg ecx
+"poolshark2.exe"+A81B3: 1B C9              -  sbb ecx,ecx
+"poolshark2.exe"+A81B5: 23 D0              -  and edx,eax
+"poolshark2.exe"+A81B7: F7 D9              -  neg ecx
+"poolshark2.exe"+A81B9: F7 DA              -  neg edx
+"poolshark2.exe"+A81BB: 51                 -  push ecx
+"poolshark2.exe"+A81BC: 8B 4E F8           -  mov ecx,[esi-08]
+"poolshark2.exe"+A81BF: 1B D2              -  sbb edx,edx
+"poolshark2.exe"+A81C1: F7 DA              -  neg edx
+"poolshark2.exe"+A81C3: 52                 -  push edx
+// ---------- INJECTING HERE ----------
+"poolshark2.exe"+A81C4: 8B 56 F4           -  mov edx,[esi-0C]
+"poolshark2.exe"+A81C7: 8D 46 10           -  lea eax,[esi+10]
+// ---------- DONE INJECTING  ----------
+"poolshark2.exe"+A81CA: 50                 -  push eax
+"poolshark2.exe"+A81CB: 8B 46 F0           -  mov eax,[esi-10]
+"poolshark2.exe"+A81CE: 51                 -  push ecx
+"poolshark2.exe"+A81CF: 52                 -  push edx
+"poolshark2.exe"+A81D0: 50                 -  push eax
+"poolshark2.exe"+A81D1: 8B D6              -  mov edx,esi
+"poolshark2.exe"+A81D3: 8B CF              -  mov ecx,edi
+"poolshark2.exe"+A81D5: E8 46 C7 19 00     -  call poolshark2.exe+244920
+"poolshark2.exe"+A81DA: 47                 -  inc edi
+"poolshark2.exe"+A81DB: 83 C6 30           -  add esi,30
+}
+</AssemblerScript>
+      <Hotkeys>
+        <Hotkey>
+          <Action>Toggle Activation</Action>
+          <Keys>
+            <Key>16</Key>
+            <Key>219</Key>
+          </Keys>
+          <ID>0</ID>
+          <ActivateSound>Activate</ActivateSound>
+          <DeactivateSound>Deactivate</DeactivateSound>
+        </Hotkey>
+      </Hotkeys>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>10</ID>
+      <Description>"X 9ball"</Description>
+      <VariableType>Float</VariableType>
+      <Address>007ED768</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>9</ID>
+      <Description>"Y 9ball"</Description>
+      <VariableType>Float</VariableType>
+      <Address>007ED76C</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>11</ID>
+      <Description>"Скрипт автоассемблера"</Description>
+      <LastState/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>{ Game   : poolshark2.exe
+  Version: 
+  Date   : 2019-10-30
+  Author : Hipp
+
+  This script does blah blah blah
+}
+
+[ENABLE]
+
+aobscanmodule(ball9,poolshark2.exe,89 28 8B 6E 04) // should be unique
+alloc(newmem,$1000)
+
+label(code)
+label(return)
+
+newmem:
+  mov [eax],(float)-50
+  mov [eax+4],(float)-25
+code:
+  //mov [eax],ebp
+  mov ebp,[esi+04]
+  jmp return
+
+ball9:
+  jmp newmem
+return:
+registersymbol(ball9)
+
+[DISABLE]
+
+ball9:
+  db 89 28 8B 6E 04
+
+unregistersymbol(ball9)
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: "poolshark2.exe"+2440D8
+
+"poolshark2.exe"+2440B4: 89 47 1C           -  mov [edi+1C],eax
+"poolshark2.exe"+2440B7: 8B 46 48           -  mov eax,[esi+48]
+"poolshark2.exe"+2440BA: 89 47 20           -  mov [edi+20],eax
+"poolshark2.exe"+2440BD: 8B 46 4C           -  mov eax,[esi+4C]
+"poolshark2.exe"+2440C0: 89 47 24           -  mov [edi+24],eax
+"poolshark2.exe"+2440C3: 8B 83 5C 98 90 00  -  mov eax,[ebx+poolshark2.exe+50985C]
+"poolshark2.exe"+2440C9: 89 6C 24 14        -  mov [esp+14],ebp
+"poolshark2.exe"+2440CD: 83 C0 D0           -  add eax,-30
+"poolshark2.exe"+2440D0: 89 83 5C 98 90 00  -  mov [ebx+poolshark2.exe+50985C],eax
+"poolshark2.exe"+2440D6: 8B 2E              -  mov ebp,[esi]
+// ---------- INJECTING HERE ----------
+"poolshark2.exe"+2440D8: 89 28              -  mov [eax],ebp
+"poolshark2.exe"+2440DA: 8B 6E 04           -  mov ebp,[esi+04]
+// ---------- DONE INJECTING  ----------
+"poolshark2.exe"+2440DD: 89 68 04           -  mov [eax+04],ebp
+"poolshark2.exe"+2440E0: 8B 6E 08           -  mov ebp,[esi+08]
+"poolshark2.exe"+2440E3: 89 68 08           -  mov [eax+08],ebp
+"poolshark2.exe"+2440E6: 8B 6E 0C           -  mov ebp,[esi+0C]
+"poolshark2.exe"+2440E9: 89 68 0C           -  mov [eax+0C],ebp
+"poolshark2.exe"+2440EC: 8B 83 5C 98 90 00  -  mov eax,[ebx+poolshark2.exe+50985C]
+"poolshark2.exe"+2440F2: 8B 6E 30           -  mov ebp,[esi+30]
+"poolshark2.exe"+2440F5: 89 68 10           -  mov [eax+10],ebp
+"poolshark2.exe"+2440F8: 8B 6E 34           -  mov ebp,[esi+34]
+"poolshark2.exe"+2440FB: 89 68 14           -  mov [eax+14],ebp
+}
+</AssemblerScript>
+    </CheatEntry>
+  </CheatEntries>
+  <CheatCodes>
+    <CodeEntry>
+      <Description>Изменение mov [007ED5BC],edx</Description>
+      <AddressString>poolshark2.exe+833B4</AddressString>
+      <Before>
+        <Byte>7E</Byte>
+        <Byte>00</Byte>
+        <Byte>8B</Byte>
+        <Byte>51</Byte>
+        <Byte>04</Byte>
+      </Before>
+      <Actual>
+        <Byte>89</Byte>
+        <Byte>15</Byte>
+        <Byte>BC</Byte>
+        <Byte>D5</Byte>
+        <Byte>7E</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>8B</Byte>
+        <Byte>51</Byte>
+        <Byte>08</Byte>
+        <Byte>8B</Byte>
+        <Byte>49</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry>
+      <Description>Изменение mov eax,[eax+14]</Description>
+      <AddressString>poolshark2.exe+90F8A</AddressString>
+      <Before>
+        <Byte>89</Byte>
+        <Byte>41</Byte>
+        <Byte>10</Byte>
+        <Byte>8B</Byte>
+        <Byte>02</Byte>
+      </Before>
+      <Actual>
+        <Byte>8B</Byte>
+        <Byte>40</Byte>
+        <Byte>14</Byte>
+      </Actual>
+      <After>
+        <Byte>89</Byte>
+        <Byte>41</Byte>
+        <Byte>14</Byte>
+        <Byte>D9</Byte>
+        <Byte>42</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry>
+      <Description>Изменение fsub dword ptr [007ED5BC]</Description>
+      <AddressString>poolshark2.exe+A934A</AddressString>
+      <Before>
+        <Byte>80</Byte>
+        <Byte>BC</Byte>
+        <Byte>D5</Byte>
+        <Byte>7E</Byte>
+        <Byte>00</Byte>
+      </Before>
+      <Actual>
+        <Byte>D8</Byte>
+        <Byte>25</Byte>
+        <Byte>BC</Byte>
+        <Byte>D5</Byte>
+        <Byte>7E</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>D9</Byte>
+        <Byte>5C</Byte>
+        <Byte>24</Byte>
+        <Byte>04</Byte>
+        <Byte>D9</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry>
+      <Description>Изменение mov edx,[eax+14]</Description>
+      <AddressString>poolshark2.exe+A913D</AddressString>
+      <Before>
+        <Byte>48</Byte>
+        <Byte>10</Byte>
+        <Byte>89</Byte>
+        <Byte>4F</Byte>
+        <Byte>30</Byte>
+      </Before>
+      <Actual>
+        <Byte>8B</Byte>
+        <Byte>50</Byte>
+        <Byte>14</Byte>
+      </Actual>
+      <After>
+        <Byte>89</Byte>
+        <Byte>57</Byte>
+        <Byte>34</Byte>
+        <Byte>89</Byte>
+        <Byte>6F</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry>
+      <Description>Изменение mov edx,[ebx+14]</Description>
+      <AddressString>poolshark2.exe+E375A</AddressString>
+      <Before>
+        <Byte>83</Byte>
+        <Byte>C0</Byte>
+        <Byte>30</Byte>
+        <Byte>89</Byte>
+        <Byte>08</Byte>
+      </Before>
+      <Actual>
+        <Byte>8B</Byte>
+        <Byte>53</Byte>
+        <Byte>14</Byte>
+      </Actual>
+      <After>
+        <Byte>89</Byte>
+        <Byte>50</Byte>
+        <Byte>04</Byte>
+        <Byte>8B</Byte>
+        <Byte>4C</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry>
+      <Description>Изменение mov edx,[esi-0C]</Description>
+      <AddressString>poolshark2.exe+A81C4</AddressString>
+      <Before>
+        <Byte>1B</Byte>
+        <Byte>D2</Byte>
+        <Byte>F7</Byte>
+        <Byte>DA</Byte>
+        <Byte>52</Byte>
+      </Before>
+      <Actual>
+        <Byte>8B</Byte>
+        <Byte>56</Byte>
+        <Byte>F4</Byte>
+      </Actual>
+      <After>
+        <Byte>8D</Byte>
+        <Byte>46</Byte>
+        <Byte>10</Byte>
+        <Byte>50</Byte>
+        <Byte>8B</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry>
+      <Description>Изменение mov edx,[eax+ecx+14]</Description>
+      <AddressString>poolshark2.exe+A88ED</AddressString>
+      <Before>
+        <Byte>04</Byte>
+        <Byte>D9</Byte>
+        <Byte>44</Byte>
+        <Byte>08</Byte>
+        <Byte>18</Byte>
+      </Before>
+      <Actual>
+        <Byte>8B</Byte>
+        <Byte>54</Byte>
+        <Byte>08</Byte>
+        <Byte>14</Byte>
+      </Actual>
+      <After>
+        <Byte>8D</Byte>
+        <Byte>3C</Byte>
+        <Byte>08</Byte>
+        <Byte>D9</Byte>
+        <Byte>E0</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry>
+      <Description>Изменение fsub dword ptr [edi+04]</Description>
+      <AddressString>poolshark2.exe+A84E6</AddressString>
+      <Before>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+        <Byte>D9</Byte>
+        <Byte>43</Byte>
+        <Byte>FC</Byte>
+      </Before>
+      <Actual>
+        <Byte>D8</Byte>
+        <Byte>67</Byte>
+        <Byte>04</Byte>
+      </Actual>
+      <After>
+        <Byte>D9</Byte>
+        <Byte>03</Byte>
+        <Byte>D8</Byte>
+        <Byte>67</Byte>
+        <Byte>08</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry>
+      <Description>Изменение fadd dword ptr [edx-04]</Description>
+      <AddressString>poolshark2.exe+6D56D</AddressString>
+      <Before>
+        <Byte>F8</Byte>
+        <Byte>D9</Byte>
+        <Byte>CA</Byte>
+        <Byte>D9</Byte>
+        <Byte>C9</Byte>
+      </Before>
+      <Actual>
+        <Byte>D8</Byte>
+        <Byte>42</Byte>
+        <Byte>FC</Byte>
+      </Actual>
+      <After>
+        <Byte>D9</Byte>
+        <Byte>C9</Byte>
+        <Byte>D8</Byte>
+        <Byte>02</Byte>
+        <Byte>8D</Byte>
+      </After>
+    </CodeEntry>
+  </CheatCodes>
+  <UserdefinedSymbols/>
+</CheatTable>

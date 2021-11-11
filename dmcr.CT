@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CheatTable CheatEngineTableVersion="29">
+  <CheatEntries>
+    <CheatEntry>
+      <ID>0</ID>
+      <Description>"дрова"</Description>
+      <VariableType>4 Bytes</VariableType>
+      <Address>dmcr.exe+107F858</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>1</ID>
+      <Description>"золото"</Description>
+      <VariableType>4 Bytes</VariableType>
+      <Address>0147F85C</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>2</ID>
+      <Description>"камень"</Description>
+      <VariableType>4 Bytes</VariableType>
+      <Address>0147F860</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>3</ID>
+      <Description>"еда"</Description>
+      <VariableType>4 Bytes</VariableType>
+      <Address>0147F864</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>4</ID>
+      <Description>"железо"</Description>
+      <VariableType>4 Bytes</VariableType>
+      <Address>0147F868</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>5</ID>
+      <Description>"уголь"</Description>
+      <VariableType>4 Bytes</VariableType>
+      <Address>0147F86C</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>6</ID>
+      <Description>"Нет описания"</Description>
+      <VariableType>2 Bytes</VariableType>
+      <Address>dmcr.exe+E558B2</Address>
+    </CheatEntry>
+  </CheatEntries>
+  <UserdefinedSymbols/>
+  <Comments>dmcr.exe+461A9 - mov [ecx+edx*4+dmcr.exe+107F858],eax
+пишет в ресурсы</Comments>
+</CheatTable>

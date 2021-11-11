@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CheatTable CheatEngineTableVersion="29">
+  <CheatEntries>
+    <CheatEntry>
+      <ID>0</ID>
+      <Description>"Деньги"</Description>
+      <VariableType>4 Bytes</VariableType>
+      <Address>Enchanted.exe+128E278</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>4</ID>
+      <Description>"ОР"</Description>
+      <VariableType>Double</VariableType>
+      <Address>Enchanted.exe+128E310</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>5</ID>
+      <Description>"ИО"</Description>
+      <VariableType>4 Bytes</VariableType>
+      <Address>0168E2C8</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>1</ID>
+      <Description>"Нет описания"</Description>
+      <VariableType>4 Bytes</VariableType>
+      <Address>0386B464</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>2</ID>
+      <Description>"Кубик"</Description>
+      <VariableType>4 Bytes</VariableType>
+      <Address>0168DC34</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>3</ID>
+      <Description>"Нет описания"</Description>
+      <VariableType>4 Bytes</VariableType>
+      <Address>0580C6EC</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>6</ID>
+      <Description>"Нет описания"</Description>
+      <VariableType>4 Bytes</VariableType>
+      <Address>0168DE54</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>7</ID>
+      <Description>"Нет описания"</Description>
+      <VariableType>4 Bytes</VariableType>
+      <Address>0168DE58</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>8</ID>
+      <Description>"Скрипт автоассемблера"</Description>
+      <LastState/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>{ Game   : Enchanted.exe
+  Version: 
+  Date   : 2021-01-12
+  Author : Hipp
+
+  This script does blah blah blah
+}
+
+[ENABLE]
+
+aobscanmodule(dice,Enchanted.exe,FF 04 C5 44 DE 68 01 A1 74) // should be unique
+alloc(newmem,$1000)
+
+label(code)
+label(return)
+
+newmem:
+  add [eax*8+Enchanted.exe+128DE44],#13
+code:
+  inc [eax*8+Enchanted.exe+128DE44]
+  jmp return
+
+dice:
+  jmp newmem
+  nop 2
+return:
+registersymbol(dice)
+
+[DISABLE]
+
+dice:
+  db FF 04 C5 44 DE 68 01
+
+unregistersymbol(dice)
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: "Enchanted.exe"+8A4B0B
+
+"Enchanted.exe"+8A4ADE: 0F 84 66 1A 00 00              -  je Enchanted.exe+8A654A
+"Enchanted.exe"+8A4AE4: A1 AC 0D E0 00                 -  mov eax,[Enchanted.exe+A00DAC]
+"Enchanted.exe"+8A4AE9: 8B 00                          -  mov eax,[eax]
+"Enchanted.exe"+8A4AEB: 03 05 48 DC 68 01              -  add eax,[Enchanted.exe+128DC48]
+"Enchanted.exe"+8A4AF1: E8 7A 0E FB FF                 -  call Enchanted.exe+855970
+"Enchanted.exe"+8A4AF6: 3B 05 34 DC 68 01              -  cmp eax,[Enchanted.exe+128DC34]
+"Enchanted.exe"+8A4AFC: 0F 8F 43 1A 00 00              -  jg Enchanted.exe+8A6545
+"Enchanted.exe"+8A4B02: A1 68 0E E0 00                 -  mov eax,[Enchanted.exe+A00E68]
+"Enchanted.exe"+8A4B07: 8B 00                          -  mov eax,[eax]
+"Enchanted.exe"+8A4B09: 03 C0                          -  add eax,eax
+// ---------- INJECTING HERE ----------
+"Enchanted.exe"+8A4B0B: FF 04 C5 44 DE 68 01           -  inc [eax*8+Enchanted.exe+128DE44]
+// ---------- DONE INJECTING  ----------
+"Enchanted.exe"+8A4B12: A1 74 0D E0 00                 -  mov eax,[Enchanted.exe+A00D74]
+"Enchanted.exe"+8A4B17: 8B 00                          -  mov eax,[eax]
+"Enchanted.exe"+8A4B19: 80 B8 59 04 00 00 00           -  cmp byte ptr [eax+00000459],00
+"Enchanted.exe"+8A4B20: 74 16                          -  je Enchanted.exe+8A4B38
+"Enchanted.exe"+8A4B22: A1 74 0D E0 00                 -  mov eax,[Enchanted.exe+A00D74]
+"Enchanted.exe"+8A4B27: 8B 00                          -  mov eax,[eax]
+"Enchanted.exe"+8A4B29: 83 B8 54 04 00 00 02           -  cmp dword ptr [eax+00000454],02
+"Enchanted.exe"+8A4B30: 75 06                          -  jne Enchanted.exe+8A4B38
+"Enchanted.exe"+8A4B32: FF 05 3C DC 68 01              -  inc [Enchanted.exe+128DC3C]
+"Enchanted.exe"+8A4B38: A1 40 17 E0 00                 -  mov eax,[Enchanted.exe+A01740]
+}
+</AssemblerScript>
+    </CheatEntry>
+  </CheatEntries>
+  <UserdefinedSymbols/>
+</CheatTable>

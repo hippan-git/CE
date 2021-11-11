@@ -1,0 +1,1070 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CheatTable CheatEngineTableVersion="29">
+  <CheatEntries>
+    <CheatEntry>
+      <ID>0</ID>
+      <Description>"timer"</Description>
+      <LastState/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>{ Game   : FarmFrenzy3_Arctica.wrp.exe
+  Version: 
+  Date   : 2020-01-27
+  Author : Hipp
+
+  This script does blah blah blah
+}
+
+[ENABLE]
+
+aobscanmodule(timer,FarmFrenzy3_Arctica.wrp.exe,D8 87 64 04 00 00 8B) // should be unique
+alloc(newmem,$1000)
+
+label(code)
+label(return)
+
+newmem:
+  //fcomp
+  //fld dword ptr [var]
+  frndint
+code:
+  fadd dword ptr [edi+00000464]
+  jmp return
+var:
+  dd (float)0.5
+
+timer:
+  jmp newmem
+  nop
+return:
+registersymbol(timer)
+
+[DISABLE]
+
+timer:
+  db D8 87 64 04 00 00
+
+unregistersymbol(timer)
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: "FarmFrenzy3_Arctica.wrp.exe"+4A0F2
+
+"FarmFrenzy3_Arctica.wrp.exe"+4A0B8: 8B BD 38 E9 FF FF              -  mov edi,[ebp-000016C8]
+"FarmFrenzy3_Arctica.wrp.exe"+4A0BE: C7 05 58 72 87 00 00 00 00 00  -  mov [FarmFrenzy3_Arctica.wrp.exe+477258],00000000
+"FarmFrenzy3_Arctica.wrp.exe"+4A0C8: 8B 0D AC 6C 87 00              -  mov ecx,[FarmFrenzy3_Arctica.wrp.exe+476CAC]
+"FarmFrenzy3_Arctica.wrp.exe"+4A0CE: 8B 01                          -  mov eax,[ecx]
+"FarmFrenzy3_Arctica.wrp.exe"+4A0D0: C7 45 FC 01 00 00 00           -  mov [ebp-04],00000001
+"FarmFrenzy3_Arctica.wrp.exe"+4A0D7: FF 50 0C                       -  call dword ptr [eax+0C]
+"FarmFrenzy3_Arctica.wrp.exe"+4A0DA: D9 9D 38 E9 FF FF              -  fstp dword ptr [ebp-000016C8]
+"FarmFrenzy3_Arctica.wrp.exe"+4A0E0: 8B 8D 38 E9 FF FF              -  mov ecx,[ebp-000016C8]
+"FarmFrenzy3_Arctica.wrp.exe"+4A0E6: 89 8D 40 E9 FF FF              -  mov [ebp-000016C0],ecx
+"FarmFrenzy3_Arctica.wrp.exe"+4A0EC: D9 85 40 E9 FF FF              -  fld dword ptr [ebp-000016C0]
+// ---------- INJECTING HERE ----------
+"FarmFrenzy3_Arctica.wrp.exe"+4A0F2: D8 87 64 04 00 00              -  fadd dword ptr [edi+00000464]
+// ---------- DONE INJECTING  ----------
+"FarmFrenzy3_Arctica.wrp.exe"+4A0F8: 8B CF                          -  mov ecx,edi
+"FarmFrenzy3_Arctica.wrp.exe"+4A0FA: D9 9F 64 04 00 00              -  fstp dword ptr [edi+00000464]
+"FarmFrenzy3_Arctica.wrp.exe"+4A100: D9 85 40 E9 FF FF              -  fld dword ptr [ebp-000016C0]
+"FarmFrenzy3_Arctica.wrp.exe"+4A106: D8 87 D0 08 00 00              -  fadd dword ptr [edi+000008D0]
+"FarmFrenzy3_Arctica.wrp.exe"+4A10C: D9 9F D0 08 00 00              -  fstp dword ptr [edi+000008D0]
+"FarmFrenzy3_Arctica.wrp.exe"+4A112: D9 85 40 E9 FF FF              -  fld dword ptr [ebp-000016C0]
+"FarmFrenzy3_Arctica.wrp.exe"+4A118: D8 87 D4 08 00 00              -  fadd dword ptr [edi+000008D4]
+"FarmFrenzy3_Arctica.wrp.exe"+4A11E: D9 9F D4 08 00 00              -  fstp dword ptr [edi+000008D4]
+"FarmFrenzy3_Arctica.wrp.exe"+4A124: E8 A7 EF FD FF                 -  call FarmFrenzy3_Arctica.wrp.exe+290D0
+"FarmFrenzy3_Arctica.wrp.exe"+4A129: 8B 35 9C 6F 87 00              -  mov esi,[FarmFrenzy3_Arctica.wrp.exe+476F9C]
+}
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>1</ID>
+      <Description>"fastAnimal"</Description>
+      <LastState Activated="1"/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>{ Game   : FarmFrenzy3_Arctica.wrp.exe
+  Version: 
+  Date   : 2020-01-27
+  Author : Hipp
+
+  This script does blah blah blah
+}
+
+[ENABLE]
+
+aobscanmodule(animal,FarmFrenzy3_Arctica.wrp.exe,D8 86 28 04 00 00) // should be unique
+alloc(newmem,$1000)
+
+label(code)
+label(return)
+
+newmem:
+  fcomp
+  fld dword ptr [var]
+code:
+  fadd dword ptr [esi+00000428]
+  jmp return
+var:
+  dd (float)0.07
+animal:
+  jmp newmem
+  nop
+return:
+registersymbol(animal)
+
+[DISABLE]
+
+animal:
+  db D8 86 28 04 00 00
+
+unregistersymbol(animal)
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: "FarmFrenzy3_Arctica.wrp.exe"+11C077
+
+"FarmFrenzy3_Arctica.wrp.exe"+11C051: FF 52 08                       -  call dword ptr [edx+08]
+"FarmFrenzy3_Arctica.wrp.exe"+11C054: 8D 8E F0 04 00 00              -  lea ecx,[esi+000004F0]
+"FarmFrenzy3_Arctica.wrp.exe"+11C05A: 8B F8                          -  mov edi,eax
+"FarmFrenzy3_Arctica.wrp.exe"+11C05C: 8B 01                          -  mov eax,[ecx]
+"FarmFrenzy3_Arctica.wrp.exe"+11C05E: FF 50 08                       -  call dword ptr [eax+08]
+"FarmFrenzy3_Arctica.wrp.exe"+11C061: 3B F8                          -  cmp edi,eax
+"FarmFrenzy3_Arctica.wrp.exe"+11C063: 0F 84 F6 00 00 00              -  je FarmFrenzy3_Arctica.wrp.exe+11C15F
+"FarmFrenzy3_Arctica.wrp.exe"+11C069: D9 85 40 E9 FF FF              -  fld dword ptr [ebp-000016C0]
+"FarmFrenzy3_Arctica.wrp.exe"+11C06F: 8B 86 9C 04 00 00              -  mov eax,[esi+0000049C]
+"FarmFrenzy3_Arctica.wrp.exe"+11C075: 85 C0                          -  test eax,eax
+// ---------- INJECTING HERE ----------
+"FarmFrenzy3_Arctica.wrp.exe"+11C077: D8 86 28 04 00 00              -  fadd dword ptr [esi+00000428]
+// ---------- DONE INJECTING  ----------
+"FarmFrenzy3_Arctica.wrp.exe"+11C07D: D9 9E 28 04 00 00              -  fstp dword ptr [esi+00000428]
+"FarmFrenzy3_Arctica.wrp.exe"+11C083: D9 85 40 E9 FF FF              -  fld dword ptr [ebp-000016C0]
+"FarmFrenzy3_Arctica.wrp.exe"+11C089: D8 86 40 04 00 00              -  fadd dword ptr [esi+00000440]
+"FarmFrenzy3_Arctica.wrp.exe"+11C08F: D9 96 40 04 00 00              -  fst dword ptr [esi+00000440]
+"FarmFrenzy3_Arctica.wrp.exe"+11C095: 0F 85 C2 00 00 00              -  jne FarmFrenzy3_Arctica.wrp.exe+11C15D
+"FarmFrenzy3_Arctica.wrp.exe"+11C09B: D8 9E 44 04 00 00              -  fcomp dword ptr [esi+00000444]
+"FarmFrenzy3_Arctica.wrp.exe"+11C0A1: DF E0                          -  fnstsw ax
+"FarmFrenzy3_Arctica.wrp.exe"+11C0A3: F6 C4 41                       -  test ah,41
+"FarmFrenzy3_Arctica.wrp.exe"+11C0A6: 0F 85 B3 00 00 00              -  jne FarmFrenzy3_Arctica.wrp.exe+11C15F
+"FarmFrenzy3_Arctica.wrp.exe"+11C0AC: D9 86 18 04 00 00              -  fld dword ptr [esi+00000418]
+}
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>7</ID>
+      <Description>"mamont"</Description>
+      <LastState Activated="1"/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>{ Game   : FarmFrenzy3_Arctica.wrp.exe
+  Version: 
+  Date   : 2020-01-27
+  Author : Hipp
+
+  This script does blah blah blah
+}
+
+[ENABLE]
+
+aobscanmodule(mamont,FarmFrenzy3_Arctica.wrp.exe,D8 83 28 04 00 00) // should be unique
+alloc(newmem,$1000)
+
+label(code)
+label(return)
+
+newmem:
+  fadd dword ptr [var]
+code:
+  fadd dword ptr [ebx+00000428]
+  jmp return
+var:
+  dd (float)0.07
+mamont:
+  jmp newmem
+  nop
+return:
+registersymbol(mamont)
+
+[DISABLE]
+
+mamont:
+  db D8 83 28 04 00 00
+
+unregistersymbol(mamont)
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: "FarmFrenzy3_Arctica.wrp.exe"+103F53
+
+"FarmFrenzy3_Arctica.wrp.exe"+103F2A: FF 90 08 01 00 00     -  call dword ptr [eax+00000108]
+"FarmFrenzy3_Arctica.wrp.exe"+103F30: 8A 83 14 04 00 00     -  mov al,[ebx+00000414]
+"FarmFrenzy3_Arctica.wrp.exe"+103F36: 84 C0                 -  test al,al
+"FarmFrenzy3_Arctica.wrp.exe"+103F38: 0F 85 74 FF FF FF     -  jne FarmFrenzy3_Arctica.wrp.exe+103EB2
+"FarmFrenzy3_Arctica.wrp.exe"+103F3E: 8B 83 9C 04 00 00     -  mov eax,[ebx+0000049C]
+"FarmFrenzy3_Arctica.wrp.exe"+103F44: 3B C7                 -  cmp eax,edi
+"FarmFrenzy3_Arctica.wrp.exe"+103F46: 74 05                 -  je FarmFrenzy3_Arctica.wrp.exe+103F4D
+"FarmFrenzy3_Arctica.wrp.exe"+103F48: 83 F8 02              -  cmp eax,02
+"FarmFrenzy3_Arctica.wrp.exe"+103F4B: 75 12                 -  jne FarmFrenzy3_Arctica.wrp.exe+103F5F
+"FarmFrenzy3_Arctica.wrp.exe"+103F4D: D9 85 40 E9 FF FF     -  fld dword ptr [ebp-000016C0]
+// ---------- INJECTING HERE ----------
+"FarmFrenzy3_Arctica.wrp.exe"+103F53: D8 83 28 04 00 00     -  fadd dword ptr [ebx+00000428]
+// ---------- DONE INJECTING  ----------
+"FarmFrenzy3_Arctica.wrp.exe"+103F59: D9 9B 28 04 00 00     -  fstp dword ptr [ebx+00000428]
+"FarmFrenzy3_Arctica.wrp.exe"+103F5F: 8B 43 2C              -  mov eax,[ebx+2C]
+"FarmFrenzy3_Arctica.wrp.exe"+103F62: 8D 4B 2C              -  lea ecx,[ebx+2C]
+"FarmFrenzy3_Arctica.wrp.exe"+103F65: FF 50 08              -  call dword ptr [eax+08]
+"FarmFrenzy3_Arctica.wrp.exe"+103F68: 8B 93 F0 04 00 00     -  mov edx,[ebx+000004F0]
+"FarmFrenzy3_Arctica.wrp.exe"+103F6E: 8D 8B F0 04 00 00     -  lea ecx,[ebx+000004F0]
+"FarmFrenzy3_Arctica.wrp.exe"+103F74: 8B F0                 -  mov esi,eax
+"FarmFrenzy3_Arctica.wrp.exe"+103F76: FF 52 08              -  call dword ptr [edx+08]
+"FarmFrenzy3_Arctica.wrp.exe"+103F79: 3B F0                 -  cmp esi,eax
+"FarmFrenzy3_Arctica.wrp.exe"+103F7B: 0F 84 31 FF FF FF     -  je FarmFrenzy3_Arctica.wrp.exe+103EB2
+}
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>3</ID>
+      <Description>"infTruck"</Description>
+      <LastState Activated="1"/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>[ENABLE]
+FarmFrenzy3_Arctica.wrp.exe+87792:
+ jmp FarmFrenzy3_Arctica.wrp.exe+877A7
+
+ 
+ 
+[DISABLE]
+FarmFrenzy3_Arctica.wrp.exe+87792:
+ jb FarmFrenzy3_Arctica.wrp.exe+877A7
+
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>2</ID>
+      <Description>"Нет описания"</Description>
+      <LastState Value="Nan" RealAddress="287F6508"/>
+      <VariableType>Float</VariableType>
+      <Address>287F6508</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>4</ID>
+      <Description>"infSclad"</Description>
+      <LastState Activated="1"/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>[ENABLE]
+FarmFrenzy3_Arctica.wrp.exe+1548EB:
+ db 90 90
+FarmFrenzy3_Arctica.wrp.exe+15492F:
+ db 90 90
+
+ 
+ 
+[DISABLE]
+FarmFrenzy3_Arctica.wrp.exe+1548EB:
+ je FarmFrenzy3_Arctica.wrp.exe+1548F3
+FarmFrenzy3_Arctica.wrp.exe+15492F:
+ jne FarmFrenzy3_Arctica.wrp.exe+154938
+
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>5</ID>
+      <Description>"product"</Description>
+      <LastState Activated="1"/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>{ Game   : FarmFrenzy3_Arctica.wrp.exe
+  Version: 
+  Date   : 2020-01-27
+  Author : Hipp
+
+  This script does blah blah blah
+}
+
+[ENABLE]
+
+aobscanmodule(product,FarmFrenzy3_Arctica.wrp.exe,89 8C 86 CC 03 00 00) // should be unique
+alloc(newmem,$1000)
+
+label(code)
+label(return)
+label(returnhere)
+label(originalcode)
+label(exit)
+label(newmem2)
+
+newmem:
+  add ecx,4
+code:
+  mov [esi+eax*4+000003CC],ecx
+  jmp return
+
+newmem2:
+  add ecx,4
+
+originalcode:
+mov [ebx+eax*4+000008D8],ecx
+
+exit:
+jmp returnhere
+
+product:
+  jmp newmem
+  nop 2
+return:
+registersymbol(product)
+
+"FarmFrenzy3_Arctica.wrp.exe"+16A0AD:
+jmp newmem2
+nop 2
+returnhere:
+
+[DISABLE]
+
+product:
+  db 89 8C 86 CC 03 00 00
+
+"FarmFrenzy3_Arctica.wrp.exe"+16A0AD:
+mov [ebx+eax*4+000008D8],ecx
+
+unregistersymbol(product)
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: "FarmFrenzy3_Arctica.wrp.exe"+154255
+
+"FarmFrenzy3_Arctica.wrp.exe"+154220: 8D 95 34 E9 FF FF              -  lea edx,[ebp-000016CC]
+"FarmFrenzy3_Arctica.wrp.exe"+154226: 52                             -  push edx
+"FarmFrenzy3_Arctica.wrp.exe"+154227: C7 85 34 E9 FF FF 57 86 7A 00  -  mov [ebp-000016CC],FarmFrenzy3_Arctica.wrp.exe+3A8657
+"FarmFrenzy3_Arctica.wrp.exe"+154231: E8 D0 26 1C 00                 -  call FarmFrenzy3_Arctica.wrp.exe+316906
+"FarmFrenzy3_Arctica.wrp.exe"+154236: 8B B5 38 E9 FF FF              -  mov esi,[ebp-000016C8]
+"FarmFrenzy3_Arctica.wrp.exe"+15423C: C7 05 58 7D 87 00 00 00 00 00  -  mov [FarmFrenzy3_Arctica.wrp.exe+477D58],00000000
+"FarmFrenzy3_Arctica.wrp.exe"+154246: 8B 45 08                       -  mov eax,[ebp+08]
+"FarmFrenzy3_Arctica.wrp.exe"+154249: 8B 8C 86 CC 03 00 00           -  mov ecx,[esi+eax*4+000003CC]
+"FarmFrenzy3_Arctica.wrp.exe"+154250: 8B 55 0C                       -  mov edx,[ebp+0C]
+"FarmFrenzy3_Arctica.wrp.exe"+154253: 03 CA                          -  add ecx,edx
+// ---------- INJECTING HERE ----------
+"FarmFrenzy3_Arctica.wrp.exe"+154255: 89 8C 86 CC 03 00 00           -  mov [esi+eax*4+000003CC],ecx
+// ---------- DONE INJECTING  ----------
+"FarmFrenzy3_Arctica.wrp.exe"+15425C: 8B 8E 20 03 00 00              -  mov ecx,[esi+00000320]
+"FarmFrenzy3_Arctica.wrp.exe"+154262: 8A 99 88 02 00 00              -  mov bl,[ecx+00000288]
+"FarmFrenzy3_Arctica.wrp.exe"+154268: D9 81 74 02 00 00              -  fld dword ptr [ecx+00000274]
+"FarmFrenzy3_Arctica.wrp.exe"+15426E: 84 DB                          -  test bl,bl
+"FarmFrenzy3_Arctica.wrp.exe"+154270: C7 45 FC 01 00 00 00           -  mov [ebp-04],00000001
+"FarmFrenzy3_Arctica.wrp.exe"+154277: 74 06                          -  je FarmFrenzy3_Arctica.wrp.exe+15427F
+"FarmFrenzy3_Arctica.wrp.exe"+154279: D8 A9 70 02 00 00              -  fsubr dword ptr [ecx+00000270]
+"FarmFrenzy3_Arctica.wrp.exe"+15427F: 85 D2                          -  test edx,edx
+"FarmFrenzy3_Arctica.wrp.exe"+154281: 89 55 08                       -  mov [ebp+08],edx
+"FarmFrenzy3_Arctica.wrp.exe"+154284: DB 45 08                       -  fild dword ptr [ebp+08]
+}
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>6</ID>
+      <Description>"process"</Description>
+      <LastState Activated="1"/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>{ Game   : FarmFrenzy3_Arctica.wrp.exe
+  Version: 
+  Date   : 2020-01-27
+  Author : Hipp
+
+  This script does blah blah blah
+}
+
+[ENABLE]
+
+aobscanmodule(process,FarmFrenzy3_Arctica.wrp.exe,D8 86 54 03 00 00 D9) // should be unique
+alloc(newmem,$1000)
+
+label(code)
+label(return)
+
+newmem:
+  fadd dword ptr [var]
+code:
+  fadd dword ptr [esi+00000354]
+  jmp return
+var:
+  dd (float)0.09
+process:
+  jmp newmem
+  nop
+return:
+registersymbol(process)
+
+[DISABLE]
+
+process:
+  db D8 86 54 03 00 00
+
+unregistersymbol(process)
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: "FarmFrenzy3_Arctica.wrp.exe"+145D9D
+
+"FarmFrenzy3_Arctica.wrp.exe"+145D69: D8 86 D8 01 00 00              -  fadd dword ptr [esi+000001D8]
+"FarmFrenzy3_Arctica.wrp.exe"+145D6F: D9 9E D8 01 00 00              -  fstp dword ptr [esi+000001D8]
+"FarmFrenzy3_Arctica.wrp.exe"+145D75: EB 46                          -  jmp FarmFrenzy3_Arctica.wrp.exe+145DBD
+"FarmFrenzy3_Arctica.wrp.exe"+145D77: D9 85 38 E9 FF FF              -  fld dword ptr [ebp-000016C8]
+"FarmFrenzy3_Arctica.wrp.exe"+145D7D: 8B 8E 3C 03 00 00              -  mov ecx,[esi+0000033C]
+"FarmFrenzy3_Arctica.wrp.exe"+145D83: D8 86 D8 01 00 00              -  fadd dword ptr [esi+000001D8]
+"FarmFrenzy3_Arctica.wrp.exe"+145D89: C6 86 DC 01 00 00 01           -  mov byte ptr [esi+000001DC],01
+"FarmFrenzy3_Arctica.wrp.exe"+145D90: 51                             -  push ecx
+"FarmFrenzy3_Arctica.wrp.exe"+145D91: D9 9E D8 01 00 00              -  fstp dword ptr [esi+000001D8]
+"FarmFrenzy3_Arctica.wrp.exe"+145D97: D9 85 30 E9 FF FF              -  fld dword ptr [ebp-000016D0]
+// ---------- INJECTING HERE ----------
+"FarmFrenzy3_Arctica.wrp.exe"+145D9D: D8 86 54 03 00 00              -  fadd dword ptr [esi+00000354]
+// ---------- DONE INJECTING  ----------
+"FarmFrenzy3_Arctica.wrp.exe"+145DA3: D9 96 54 03 00 00              -  fst dword ptr [esi+00000354]
+"FarmFrenzy3_Arctica.wrp.exe"+145DA9: D9 81 70 02 00 00              -  fld dword ptr [ecx+00000270]
+"FarmFrenzy3_Arctica.wrp.exe"+145DAF: D8 37                          -  fdiv dword ptr [edi]
+"FarmFrenzy3_Arctica.wrp.exe"+145DB1: D8 C9                          -  fmul st(0),st(1)
+"FarmFrenzy3_Arctica.wrp.exe"+145DB3: D9 1C 24                       -  fstp dword ptr [esp]
+"FarmFrenzy3_Arctica.wrp.exe"+145DB6: DD D8                          -  fstp st(0)
+"FarmFrenzy3_Arctica.wrp.exe"+145DB8: E8 D3 59 ED FF                 -  call FarmFrenzy3_Arctica.wrp.exe+1B790
+"FarmFrenzy3_Arctica.wrp.exe"+145DBD: D9 86 54 03 00 00              -  fld dword ptr [esi+00000354]
+"FarmFrenzy3_Arctica.wrp.exe"+145DC3: D8 1F                          -  fcomp dword ptr [edi]
+"FarmFrenzy3_Arctica.wrp.exe"+145DC5: DF E0                          -  fnstsw ax
+}
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>8</ID>
+      <Description>"stars in shop"</Description>
+      <LastState/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>{ Game   : FarmFrenzy3_Arctica.wrp.exe
+  Version: 
+  Date   : 2021-06-10
+  Author : Hipp
+
+  This script does blah blah blah
+}
+
+[ENABLE]
+
+aobscanmodule(stars,FarmFrenzy3_Arctica.wrp.exe,8b 00 50 8D 8D D4 E7 FF FF) // should be unique
+alloc(newmem,$1000)
+
+label(code)
+label(return)
+registersymbol(v_stars)
+
+newmem:
+  push ebx
+  mov ebx,[v_stars]
+  add [eax],ebx
+  pop ebx
+code:
+  mov eax,[eax]
+  push eax
+  lea ecx,[ebp-0000182C]
+  jmp return
+
+v_stars:
+  dd #90000
+stars:
+  jmp newmem
+  nop 4
+return:
+registersymbol(stars)
+
+[DISABLE]
+
+stars:
+  db 8b 00 50 8D 8D D4 E7 FF FF
+
+unregistersymbol(stars)
+unregistersymbol(v_stars)
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: "FarmFrenzy3_Arctica.wrp.exe"+1C440B
+
+"FarmFrenzy3_Arctica.wrp.exe"+1C43E3: C6 45 FC 02                    -  mov byte ptr [ebp-04],02
+"FarmFrenzy3_Arctica.wrp.exe"+1C43E7: C7 45 E8 0F 00 00 00           -  mov [ebp-18],0000000F
+"FarmFrenzy3_Arctica.wrp.exe"+1C43EE: 89 5D E4                       -  mov [ebp-1C],ebx
+"FarmFrenzy3_Arctica.wrp.exe"+1C43F1: 88 5D D4                       -  mov [ebp-2C],bl
+"FarmFrenzy3_Arctica.wrp.exe"+1C43F4: E8 87 09 E4 FF                 -  call FarmFrenzy3_Arctica.wrp.exe+4D80
+"FarmFrenzy3_Arctica.wrp.exe"+1C43F9: 8D 4D D0                       -  lea ecx,[ebp-30]
+"FarmFrenzy3_Arctica.wrp.exe"+1C43FC: 51                             -  push ecx
+"FarmFrenzy3_Arctica.wrp.exe"+1C43FD: B9 58 6C 87 00                 -  mov ecx,FarmFrenzy3_Arctica.wrp.exe+476C58
+"FarmFrenzy3_Arctica.wrp.exe"+1C4402: C6 45 FC 03                    -  mov byte ptr [ebp-04],03
+"FarmFrenzy3_Arctica.wrp.exe"+1C4406: E8 D5 EA E4 FF                 -  call FarmFrenzy3_Arctica.wrp.exe+12EE0
+// ---------- INJECTING HERE ----------
+"FarmFrenzy3_Arctica.wrp.exe"+1C440B: 8B 00                          -  mov eax,[eax]
+"FarmFrenzy3_Arctica.wrp.exe"+1C440D: 50                             -  push eax
+"FarmFrenzy3_Arctica.wrp.exe"+1C440E: 8D 8D D4 E7 FF FF              -  lea ecx,[ebp-0000182C]
+// ---------- DONE INJECTING  ----------
+"FarmFrenzy3_Arctica.wrp.exe"+1C4414: E8 57 03 E4 FF                 -  call FarmFrenzy3_Arctica.wrp.exe+4770
+"FarmFrenzy3_Arctica.wrp.exe"+1C4419: 83 7D E8 10                    -  cmp dword ptr [ebp-18],10
+"FarmFrenzy3_Arctica.wrp.exe"+1C441D: C6 45 FC 02                    -  mov byte ptr [ebp-04],02
+"FarmFrenzy3_Arctica.wrp.exe"+1C4421: 72 0C                          -  jb FarmFrenzy3_Arctica.wrp.exe+1C442F
+"FarmFrenzy3_Arctica.wrp.exe"+1C4423: 8B 55 D4                       -  mov edx,[ebp-2C]
+"FarmFrenzy3_Arctica.wrp.exe"+1C4426: 52                             -  push edx
+"FarmFrenzy3_Arctica.wrp.exe"+1C4427: E8 67 24 15 00                 -  call FarmFrenzy3_Arctica.wrp.exe+316893
+"FarmFrenzy3_Arctica.wrp.exe"+1C442C: 83 C4 04                       -  add esp,04
+"FarmFrenzy3_Arctica.wrp.exe"+1C442F: 8D 45 B4                       -  lea eax,[ebp-4C]
+"FarmFrenzy3_Arctica.wrp.exe"+1C4432: 50                             -  push eax
+}
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>9</ID>
+      <Description>"star in game"</Description>
+      <Options moHideChildren="1"/>
+      <LastState Activated="1"/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>{ Game   : FarmFrenzy3_Arctica.wrp.exe
+  Version: 
+  Date   : 2021-06-10
+  Author : Hipp
+
+  This script does blah blah blah
+}
+
+[ENABLE]
+
+aobscanmodule(star_in_game,FarmFrenzy3_Arctica.wrp.exe,89 B0 D0 09 00 00) // should be unique
+alloc(newmem,$1000)
+registersymbol(star_in_game_v)
+label(code)
+label(return)
+
+newmem:
+  mov [star_in_game_v],eax
+code:
+  mov [eax+000009D0],esi
+  jmp return
+star_in_game_v:
+  dd 00
+star_in_game:
+  jmp newmem
+  nop
+return:
+registersymbol(star_in_game)
+
+[DISABLE]
+
+star_in_game:
+  db 89 B0 D0 09 00 00
+unregistersymbol(star_in_game_v)
+unregistersymbol(star_in_game)
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: "FarmFrenzy3_Arctica.wrp.exe"+3D4E9
+
+"FarmFrenzy3_Arctica.wrp.exe"+3D4B7: 85 C0                          -  test eax,eax
+"FarmFrenzy3_Arctica.wrp.exe"+3D4B9: 75 1B                          -  jne FarmFrenzy3_Arctica.wrp.exe+3D4D6
+"FarmFrenzy3_Arctica.wrp.exe"+3D4BB: 68 30 53 7F 00                 -  push FarmFrenzy3_Arctica.wrp.exe+3F5330
+"FarmFrenzy3_Arctica.wrp.exe"+3D4C0: 8D 95 38 E9 FF FF              -  lea edx,[ebp-000016C8]
+"FarmFrenzy3_Arctica.wrp.exe"+3D4C6: 52                             -  push edx
+"FarmFrenzy3_Arctica.wrp.exe"+3D4C7: C7 85 38 E9 FF FF 57 86 7A 00  -  mov [ebp-000016C8],FarmFrenzy3_Arctica.wrp.exe+3A8657
+"FarmFrenzy3_Arctica.wrp.exe"+3D4D1: E8 30 94 2D 00                 -  call FarmFrenzy3_Arctica.wrp.exe+316906
+"FarmFrenzy3_Arctica.wrp.exe"+3D4D6: C7 05 F0 71 87 00 00 00 00 00  -  mov [FarmFrenzy3_Arctica.wrp.exe+4771F0],00000000
+"FarmFrenzy3_Arctica.wrp.exe"+3D4E0: 8B 85 34 E9 FF FF              -  mov eax,[ebp-000016CC]
+"FarmFrenzy3_Arctica.wrp.exe"+3D4E6: 8B 75 08                       -  mov esi,[ebp+08]
+// ---------- INJECTING HERE ----------
+"FarmFrenzy3_Arctica.wrp.exe"+3D4E9: 89 B0 D0 09 00 00              -  mov [eax+000009D0],esi
+// ---------- DONE INJECTING  ----------
+"FarmFrenzy3_Arctica.wrp.exe"+3D4EF: 8B 0D F0 6C 87 00              -  mov ecx,[FarmFrenzy3_Arctica.wrp.exe+476CF0]
+"FarmFrenzy3_Arctica.wrp.exe"+3D4F5: C7 45 FC 01 00 00 00           -  mov [ebp-04],00000001
+"FarmFrenzy3_Arctica.wrp.exe"+3D4FC: E8 0F A1 07 00                 -  call FarmFrenzy3_Arctica.wrp.exe+B7610
+"FarmFrenzy3_Arctica.wrp.exe"+3D501: 6A 05                          -  push 05
+"FarmFrenzy3_Arctica.wrp.exe"+3D503: 68 34 A7 7A 00                 -  push FarmFrenzy3_Arctica.wrp.exe+3AA734
+"FarmFrenzy3_Arctica.wrp.exe"+3D508: 8D 4D D0                       -  lea ecx,[ebp-30]
+"FarmFrenzy3_Arctica.wrp.exe"+3D50B: C7 45 E8 0F 00 00 00           -  mov [ebp-18],0000000F
+"FarmFrenzy3_Arctica.wrp.exe"+3D512: C7 45 E4 00 00 00 00           -  mov [ebp-1C],00000000
+"FarmFrenzy3_Arctica.wrp.exe"+3D519: C6 45 D4 00                    -  mov byte ptr [ebp-2C],00
+"FarmFrenzy3_Arctica.wrp.exe"+3D51D: E8 5E 78 FC FF                 -  call FarmFrenzy3_Arctica.wrp.exe+4D80
+}
+</AssemblerScript>
+      <CheatEntries>
+        <CheatEntry>
+          <ID>10</ID>
+          <Description>"Нет описания"</Description>
+          <LastState Value="1403385" RealAddress="28C4DAF8"/>
+          <VariableType>4 Bytes</VariableType>
+          <Address>star_in_game_v</Address>
+          <Offsets>
+            <Offset>9d0</Offset>
+          </Offsets>
+        </CheatEntry>
+      </CheatEntries>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>12</ID>
+      <Description>"hungry"</Description>
+      <LastState Activated="1"/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>{ Game   : FarmFrenzy3_Arctica.wrp.exe
+  Version: 
+  Date   : 2021-06-11
+  Author : Hipp
+
+  This script does blah blah blah
+}
+
+[ENABLE]
+
+aobscanmodule(hungry,FarmFrenzy3_Arctica.wrp.exe,D9 9E 18 04 00 00 D9 86) // should be unique
+alloc(newmem,$1000)
+
+label(code)
+label(return)
+
+newmem:
+  fcomp
+  fld dword ptr [v_hung]
+code:
+  fstp dword ptr [esi+00000418]
+  jmp return
+v_hung:
+  dd (float)200
+hungry:
+  jmp newmem
+  nop
+return:
+registersymbol(hungry)
+
+[DISABLE]
+
+hungry:
+  db D9 9E 18 04 00 00
+
+unregistersymbol(hungry)
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: "FarmFrenzy3_Arctica.wrp.exe"+11C418
+
+"FarmFrenzy3_Arctica.wrp.exe"+11C3E9: 8B 01                 -  mov eax,[ecx]
+"FarmFrenzy3_Arctica.wrp.exe"+11C3EB: 52                    -  push edx
+"FarmFrenzy3_Arctica.wrp.exe"+11C3EC: FF 90 90 00 00 00     -  call dword ptr [eax+00000090]
+"FarmFrenzy3_Arctica.wrp.exe"+11C3F2: A1 C4 6C 87 00        -  mov eax,[FarmFrenzy3_Arctica.wrp.exe+476CC4]
+"FarmFrenzy3_Arctica.wrp.exe"+11C3F7: FF 80 C0 08 00 00     -  inc [eax+000008C0]
+"FarmFrenzy3_Arctica.wrp.exe"+11C3FD: 83 BE 9C 04 00 00 02  -  cmp dword ptr [esi+0000049C],02
+"FarmFrenzy3_Arctica.wrp.exe"+11C404: 74 18                 -  je FarmFrenzy3_Arctica.wrp.exe+11C41E
+"FarmFrenzy3_Arctica.wrp.exe"+11C406: D9 85 40 E9 FF FF     -  fld dword ptr [ebp-000016C0]
+"FarmFrenzy3_Arctica.wrp.exe"+11C40C: D8 8E 20 04 00 00     -  fmul dword ptr [esi+00000420]
+"FarmFrenzy3_Arctica.wrp.exe"+11C412: D8 AE 18 04 00 00     -  fsubr dword ptr [esi+00000418]
+// ---------- INJECTING HERE ----------
+"FarmFrenzy3_Arctica.wrp.exe"+11C418: D9 9E 18 04 00 00     -  fstp dword ptr [esi+00000418]
+// ---------- DONE INJECTING  ----------
+"FarmFrenzy3_Arctica.wrp.exe"+11C41E: D9 86 18 04 00 00     -  fld dword ptr [esi+00000418]
+"FarmFrenzy3_Arctica.wrp.exe"+11C424: 8B 8E 94 04 00 00     -  mov ecx,[esi+00000494]
+"FarmFrenzy3_Arctica.wrp.exe"+11C42A: D9 99 74 02 00 00     -  fstp dword ptr [ecx+00000274]
+"FarmFrenzy3_Arctica.wrp.exe"+11C430: E8 9B B3 0F 00        -  call FarmFrenzy3_Arctica.wrp.exe+2177D0
+"FarmFrenzy3_Arctica.wrp.exe"+11C435: D9 86 60 02 00 00     -  fld dword ptr [esi+00000260]
+"FarmFrenzy3_Arctica.wrp.exe"+11C43B: 8B 8E 94 04 00 00     -  mov ecx,[esi+00000494]
+"FarmFrenzy3_Arctica.wrp.exe"+11C441: D8 05 2C F7 7A 00     -  fadd dword ptr [FarmFrenzy3_Arctica.wrp.exe+3AF72C]
+"FarmFrenzy3_Arctica.wrp.exe"+11C447: 8D 95 3C E9 FF FF     -  lea edx,[ebp-000016C4]
+"FarmFrenzy3_Arctica.wrp.exe"+11C44D: 52                    -  push edx
+"FarmFrenzy3_Arctica.wrp.exe"+11C44E: D9 9D 3C E9 FF FF     -  fstp dword ptr [ebp-000016C4]
+}
+</AssemblerScript>
+    </CheatEntry>
+  </CheatEntries>
+  <CheatCodes>
+    <CodeEntry>
+      <Description>Изменение jb FarmFrenzy3_Arctica.wrp.exe+12322B</Description>
+      <AddressString>FarmFrenzy3_Arctica.wrp.exe+1231EB</AddressString>
+      <Before>
+        <Byte>00</Byte>
+        <Byte>76</Byte>
+        <Byte>42</Byte>
+        <Byte>3B</Byte>
+        <Byte>D7</Byte>
+      </Before>
+      <Actual>
+        <Byte>72</Byte>
+        <Byte>3E</Byte>
+      </Actual>
+      <After>
+        <Byte>8D</Byte>
+        <Byte>0C</Byte>
+        <Byte>81</Byte>
+        <Byte>03</Byte>
+        <Byte>C8</Byte>
+      </After>
+    </CodeEntry>
+  </CheatCodes>
+  <UserdefinedSymbols/>
+  <Structures StructVersion="2">
+    <Structure Name="безымянная структура" AutoFill="0" AutoCreate="1" DefaultHex="0" AutoDestroy="0" DoNotSaveLocal="0" RLECompression="1" AutoCreateStructsize="4096">
+      <Elements>
+        <Element Offset="0" Vartype="Pointer" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="4" Vartype="Double" Bytesize="8" DisplayMethod="Целое без знака"/>
+        <Element Offset="12" Vartype="String" Bytesize="5" DisplayMethod="Целое без знака"/>
+        <Element Offset="17" Vartype="Byte" Bytesize="1" RLECount="3" DisplayMethod="Целое без знака"/>
+        <Element Offset="20" Vartype="Pointer" Bytesize="4" RLECount="2" DisplayMethod="Целое без знака"/>
+        <Element Offset="28" Vartype="4 Bytes" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="32" Vartype="Pointer" Bytesize="4" RLECount="2" DisplayMethod="Целое без знака"/>
+        <Element Offset="40" Vartype="4 Bytes" Bytesize="4" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="44" Vartype="Pointer" Bytesize="4" RLECount="2" DisplayMethod="Целое без знака"/>
+        <Element Offset="52" Vartype="Double" Bytesize="8" DisplayMethod="Целое без знака"/>
+        <Element Offset="60" Vartype="Byte" Bytesize="1" RLECount="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="64" Vartype="4 Bytes" Bytesize="4" RLECount="2" DisplayMethod="Целое без знака"/>
+        <Element Offset="72" Vartype="Byte" Bytesize="1" RLECount="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="76" Vartype="4 Bytes" Bytesize="4" RLECount="3" DisplayMethod="Целое без знака"/>
+        <Element Offset="88" Vartype="Pointer" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="92" Vartype="Float" Bytesize="4" RLECount="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="108" Vartype="4 Bytes" Bytesize="4" RLECount="3" DisplayMethod="Целое без знака"/>
+        <Element Offset="120" Vartype="Float" Bytesize="4" RLECount="2" DisplayMethod="Целое без знака"/>
+        <Element Offset="128" Vartype="4 Bytes" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="132" Vartype="Float" Bytesize="4" RLECount="2" DisplayMethod="Целое без знака"/>
+        <Element Offset="140" Vartype="4 Bytes" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="144" Vartype="Float" Bytesize="4" RLECount="2" DisplayMethod="Целое без знака"/>
+        <Element Offset="152" Vartype="4 Bytes" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="156" Vartype="Float" Bytesize="4" RLECount="2" DisplayMethod="Целое без знака"/>
+        <Element Offset="164" Vartype="4 Bytes" Bytesize="4" RLECount="2" DisplayMethod="Целое без знака"/>
+        <Element Offset="172" Vartype="Double" Bytesize="8" DisplayMethod="Целое без знака"/>
+        <Element Offset="180" Vartype="String" Bytesize="5" DisplayMethod="Целое без знака"/>
+        <Element Offset="185" Vartype="Byte" Bytesize="1" RLECount="3" DisplayMethod="Целое без знака"/>
+        <Element Offset="188" Vartype="Float" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="192" Vartype="4 Bytes" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="196" Vartype="4 Bytes" Bytesize="4" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="200" Vartype="4 Bytes" Bytesize="4" RLECount="18" DisplayMethod="Целое без знака"/>
+        <Element Offset="272" Vartype="Double" Bytesize="8" DisplayMethod="Целое без знака"/>
+        <Element Offset="280" Vartype="Float" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="284" Vartype="4 Bytes" Bytesize="4" RLECount="6" DisplayMethod="Целое без знака"/>
+        <Element Offset="308" Vartype="4 Bytes" Bytesize="4" RLECount="3" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="320" Vartype="Pointer" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="324" Vartype="4 Bytes" Bytesize="4" RLECount="2" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="332" Vartype="Float" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="336" Vartype="4 Bytes" Bytesize="4" RLECount="2" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="344" Vartype="Float" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="348" Vartype="4 Bytes" Bytesize="4" RLECount="3" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="360" Vartype="Byte" Bytesize="1" RLECount="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="364" Vartype="Float" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="368" Vartype="4 Bytes" Bytesize="4" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="372" Vartype="4 Bytes" Bytesize="4" RLECount="18" DisplayMethod="Целое без знака"/>
+        <Element Offset="444" Vartype="Byte" Bytesize="1" RLECount="2" DisplayMethod="Целое без знака"/>
+        <Element Offset="446" Vartype="2 Bytes" Bytesize="2" DisplayMethod="Целое без знака"/>
+        <Element Offset="448" Vartype="4 Bytes" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="452" Vartype="4 Bytes" Bytesize="4" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="456" Vartype="4 Bytes" Bytesize="4" RLECount="3" DisplayMethod="Целое без знака"/>
+        <Element Offset="468" Vartype="Double" Bytesize="8" DisplayMethod="Целое без знака"/>
+        <Element Offset="476" Vartype="4 Bytes" Bytesize="4" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="480" Vartype="4 Bytes" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="484" Vartype="4 Bytes" Bytesize="4" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="488" Vartype="Pointer" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="492" Vartype="4 Bytes" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="496" Vartype="Double" Bytesize="8" DisplayMethod="Целое без знака"/>
+        <Element Offset="504" Vartype="Float" Bytesize="4" RLECount="2" DisplayMethod="Целое без знака"/>
+        <Element Offset="512" Vartype="4 Bytes" Bytesize="4" RLECount="2" DisplayMethod="Целое без знака"/>
+        <Element Offset="520" Vartype="Float" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="524" Vartype="Double" Bytesize="8" DisplayMethod="Целое без знака"/>
+        <Element Offset="532" Vartype="Float" Bytesize="4" RLECount="11" DisplayMethod="Целое без знака"/>
+        <Element Offset="576" Vartype="Double" Bytesize="8" DisplayMethod="Целое без знака"/>
+        <Element Offset="584" Vartype="Float" Bytesize="4" RLECount="3" DisplayMethod="Целое без знака"/>
+        <Element Offset="596" Vartype="4 Bytes" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="600" Vartype="Float" Bytesize="4" RLECount="3" DisplayMethod="Целое без знака"/>
+        <Element Offset="612" Vartype="4 Bytes" Bytesize="4" RLECount="3" DisplayMethod="Целое без знака"/>
+        <Element Offset="624" Vartype="Float" Bytesize="4" RLECount="3" DisplayMethod="Целое без знака"/>
+        <Element Offset="636" Vartype="Pointer" Bytesize="4" RLECount="2" DisplayMethod="Целое без знака"/>
+        <Element Offset="644" Vartype="Float" Bytesize="4" RLECount="2" DisplayMethod="Целое без знака"/>
+        <Element Offset="652" Vartype="4 Bytes" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="656" Vartype="Float" Bytesize="4" RLECount="3" DisplayMethod="Целое без знака"/>
+        <Element Offset="668" Vartype="4 Bytes" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="672" Vartype="Float" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="676" Vartype="Pointer" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="680" Vartype="Float" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="684" Vartype="4 Bytes" Bytesize="4" RLECount="2" DisplayMethod="Целое без знака"/>
+        <Element Offset="692" Vartype="Pointer" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="696" Vartype="4 Bytes" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="700" Vartype="Pointer" Bytesize="4" RLECount="3" DisplayMethod="Целое без знака"/>
+        <Element Offset="712" Vartype="Double" Bytesize="8" DisplayMethod="Целое без знака"/>
+        <Element Offset="720" Vartype="4 Bytes" Bytesize="4" RLECount="6" DisplayMethod="Целое без знака"/>
+        <Element Offset="744" Vartype="Float" Bytesize="4" RLECount="2" DisplayMethod="Целое без знака"/>
+        <Element Offset="752" Vartype="Pointer" Bytesize="4" RLECount="2" DisplayMethod="Целое без знака"/>
+        <Element Offset="760" Vartype="Double" Bytesize="8" DisplayMethod="Целое без знака"/>
+        <Element Offset="768" Vartype="4 Bytes" Bytesize="4" RLECount="3" DisplayMethod="Целое без знака"/>
+        <Element Offset="780" Vartype="Float" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="784" Vartype="4 Bytes" Bytesize="4" RLECount="2" DisplayMethod="Целое без знака"/>
+        <Element Offset="792" Vartype="Pointer" Bytesize="4" RLECount="2" DisplayMethod="Целое без знака"/>
+        <Element Offset="800" Vartype="Double" Bytesize="8" DisplayMethod="Целое без знака"/>
+        <Element Offset="808" Vartype="4 Bytes" Bytesize="4" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="812" Vartype="4 Bytes" Bytesize="4" RLECount="2" DisplayMethod="Целое без знака"/>
+        <Element Offset="820" Vartype="4 Bytes" Bytesize="4" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="824" Vartype="4 Bytes" Bytesize="4" RLECount="2" DisplayMethod="Целое без знака"/>
+        <Element Offset="832" Vartype="Pointer" Bytesize="4" RLECount="2" DisplayMethod="Целое без знака"/>
+        <Element Offset="840" Vartype="Double" Bytesize="8" DisplayMethod="Целое без знака"/>
+        <Element Offset="848" Vartype="4 Bytes" Bytesize="4" RLECount="6" DisplayMethod="Целое без знака"/>
+        <Element Offset="872" Vartype="Pointer" Bytesize="4" RLECount="2" DisplayMethod="Целое без знака"/>
+        <Element Offset="880" Vartype="Double" Bytesize="8" DisplayMethod="Целое без знака"/>
+        <Element Offset="888" Vartype="4 Bytes" Bytesize="4" RLECount="6" DisplayMethod="Целое без знака"/>
+        <Element Offset="912" Vartype="Pointer" Bytesize="4" RLECount="2" DisplayMethod="Целое без знака"/>
+        <Element Offset="920" Vartype="Double" Bytesize="8" DisplayMethod="Целое без знака"/>
+        <Element Offset="928" Vartype="4 Bytes" Bytesize="4" RLECount="6" DisplayMethod="Целое без знака"/>
+        <Element Offset="952" Vartype="Float" Bytesize="4" RLECount="10" DisplayMethod="Целое без знака"/>
+        <Element Offset="992" Vartype="Double" Bytesize="8" DisplayMethod="Целое без знака"/>
+        <Element Offset="1000" Vartype="Float" Bytesize="4" RLECount="8" DisplayMethod="Целое без знака"/>
+        <Element Offset="1032" Vartype="4 Bytes" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="1036" Vartype="Pointer" Bytesize="4" RLECount="2" DisplayMethod="Целое без знака"/>
+        <Element Offset="1044" Vartype="4 Bytes" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="1048" Vartype="Float" Bytesize="4" RLECount="7" DisplayMethod="Целое без знака"/>
+        <Element Offset="1076" Vartype="4 Bytes" Bytesize="4" RLECount="2" DisplayMethod="Целое без знака"/>
+        <Element Offset="1084" Vartype="Double" Bytesize="8" DisplayMethod="Целое без знака"/>
+        <Element Offset="1092" Vartype="Float" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="1096" Vartype="Double" Bytesize="8" DisplayMethod="Целое без знака"/>
+        <Element Offset="1104" Vartype="Float" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="1108" Vartype="4 Bytes" Bytesize="4" RLECount="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="1124" Vartype="Float" Bytesize="4" RLECount="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="1140" Vartype="4 Bytes" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="1144" Vartype="Float" Bytesize="4" RLECount="2" DisplayMethod="Целое без знака"/>
+        <Element Offset="1152" Vartype="4 Bytes" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="1156" Vartype="Pointer" Bytesize="4" RLECount="2" DisplayMethod="Целое без знака"/>
+        <Element Offset="1164" Vartype="4 Bytes" Bytesize="4" RLECount="2" DisplayMethod="Целое без знака"/>
+        <Element Offset="1172" Vartype="Double" Bytesize="8" DisplayMethod="Целое без знака"/>
+        <Element Offset="1180" Vartype="4 Bytes" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="1184" Vartype="Pointer" Bytesize="4" RLECount="2" DisplayMethod="Целое без знака"/>
+        <Element Offset="1192" Vartype="Double" Bytesize="8" DisplayMethod="Целое без знака"/>
+        <Element Offset="1200" Vartype="Float" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="1204" Vartype="4 Bytes" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="1208" Vartype="Double" Bytesize="8" DisplayMethod="Целое без знака"/>
+        <Element Offset="1216" Vartype="4 Bytes" Bytesize="4" RLECount="2" DisplayMethod="Целое без знака"/>
+        <Element Offset="1224" Vartype="Pointer" Bytesize="4" RLECount="2" DisplayMethod="Целое без знака"/>
+        <Element Offset="1232" Vartype="Double" Bytesize="8" DisplayMethod="Целое без знака"/>
+        <Element Offset="1240" Vartype="Float" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="1244" Vartype="4 Bytes" Bytesize="4" RLECount="5" DisplayMethod="Целое без знака"/>
+        <Element Offset="1264" Vartype="Pointer" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="1268" Vartype="4 Bytes" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="1272" Vartype="Double" Bytesize="8" DisplayMethod="Целое без знака"/>
+        <Element Offset="1280" Vartype="Float" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="1284" Vartype="4 Bytes" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="1288" Vartype="Double" Bytesize="8" DisplayMethod="Целое без знака"/>
+        <Element Offset="1296" Vartype="4 Bytes" Bytesize="4" RLECount="2" DisplayMethod="Целое без знака"/>
+        <Element Offset="1304" Vartype="Pointer" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="1308" Vartype="4 Bytes" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="1312" Vartype="Double" Bytesize="8" DisplayMethod="Целое без знака"/>
+        <Element Offset="1320" Vartype="4 Bytes" Bytesize="4" RLECount="2" DisplayMethod="Целое без знака"/>
+        <Element Offset="1328" Vartype="Double" Bytesize="8" DisplayMethod="Целое без знака"/>
+        <Element Offset="1336" Vartype="4 Bytes" Bytesize="4" RLECount="2" DisplayMethod="Целое без знака"/>
+        <Element Offset="1344" Vartype="Float" Bytesize="4" RLECount="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="1360" Vartype="4 Bytes" Bytesize="4" RLECount="3" DisplayMethod="Целое без знака"/>
+        <Element Offset="1372" Vartype="Double" Bytesize="8" DisplayMethod="Целое без знака"/>
+        <Element Offset="1380" Vartype="Float" Bytesize="4" RLECount="3" DisplayMethod="Целое без знака"/>
+        <Element Offset="1392" Vartype="4 Bytes" Bytesize="4" RLECount="7" DisplayMethod="Целое без знака"/>
+        <Element Offset="1420" Vartype="Pointer" Bytesize="4" RLECount="5" DisplayMethod="Целое без знака"/>
+        <Element Offset="1440" Vartype="Double" Bytesize="8" DisplayMethod="Целое без знака"/>
+        <Element Offset="1448" Vartype="Pointer" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="1452" Vartype="4 Bytes" Bytesize="4" RLECount="2" DisplayMethod="Целое без знака"/>
+        <Element Offset="1460" Vartype="Pointer" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="1464" Vartype="4 Bytes" Bytesize="4" RLECount="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="1480" Vartype="Pointer" Bytesize="4" RLECount="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="1496" Vartype="4 Bytes" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="1500" Vartype="Pointer" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="1504" Vartype="4 Bytes" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="1508" Vartype="Pointer" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="1512" Vartype="4 Bytes" Bytesize="4" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="1516" Vartype="Pointer" Bytesize="4" RLECount="3" DisplayMethod="Целое без знака"/>
+        <Element Offset="1528" Vartype="4 Bytes" Bytesize="4" RLECount="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="1544" Vartype="Pointer" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="1548" Vartype="4 Bytes" Bytesize="4" RLECount="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="1564" Vartype="Pointer" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="1568" Vartype="4 Bytes" Bytesize="4" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="1572" Vartype="Pointer" Bytesize="4" RLECount="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="1588" Vartype="4 Bytes" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="1592" Vartype="4 Bytes" Bytesize="4" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="1596" Vartype="Pointer" Bytesize="4" RLECount="3" DisplayMethod="Целое без знака"/>
+        <Element Offset="1608" Vartype="Double" Bytesize="8" DisplayMethod="Целое без знака"/>
+        <Element Offset="1616" Vartype="4 Bytes" Bytesize="4" RLECount="7" DisplayMethod="Целое без знака"/>
+        <Element Offset="1644" Vartype="Pointer" Bytesize="4" RLECount="2" DisplayMethod="Целое без знака"/>
+        <Element Offset="1652" Vartype="Double" Bytesize="8" DisplayMethod="Целое без знака"/>
+        <Element Offset="1660" Vartype="4 Bytes" Bytesize="4" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="1664" Vartype="4 Bytes" Bytesize="4" RLECount="2" DisplayMethod="Целое без знака"/>
+        <Element Offset="1672" Vartype="Pointer" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="1676" Vartype="4 Bytes" Bytesize="4" RLECount="3" DisplayMethod="Целое без знака"/>
+        <Element Offset="1688" Vartype="Pointer" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="1692" Vartype="4 Bytes" Bytesize="4" RLECount="2" DisplayMethod="Целое без знака"/>
+        <Element Offset="1700" Vartype="Float" Bytesize="4" RLECount="2" DisplayMethod="Целое без знака"/>
+        <Element Offset="1708" Vartype="4 Bytes" Bytesize="4" RLECount="18" DisplayMethod="Целое без знака"/>
+        <Element Offset="1780" Vartype="Double" Bytesize="8" DisplayMethod="Целое без знака"/>
+        <Element Offset="1788" Vartype="Float" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="1792" Vartype="4 Bytes" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="1796" Vartype="4 Bytes" Bytesize="4" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="1800" Vartype="4 Bytes" Bytesize="4" RLECount="18" DisplayMethod="Целое без знака"/>
+        <Element Offset="1872" Vartype="Double" Bytesize="8" DisplayMethod="Целое без знака"/>
+        <Element Offset="1880" Vartype="Float" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="1884" Vartype="4 Bytes" Bytesize="4" RLECount="5" DisplayMethod="Целое без знака"/>
+        <Element Offset="1904" Vartype="Double" Bytesize="8" DisplayMethod="Целое без знака"/>
+        <Element Offset="1912" Vartype="4 Bytes" Bytesize="4" RLECount="2" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="1920" Vartype="Byte" Bytesize="1" DisplayMethod="Целое без знака"/>
+        <Element Offset="1921" Vartype="String" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="1925" Vartype="Byte" Bytesize="1" RLECount="3" DisplayMethod="Целое без знака"/>
+        <Element Offset="1928" Vartype="4 Bytes" Bytesize="4" RLECount="2" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="1936" Vartype="Byte" Bytesize="1" RLECount="3" DisplayMethod="Целое без знака"/>
+        <Element Offset="1939" Vartype="2 Bytes" Bytesize="2" DisplayMethod="Целое без знака"/>
+        <Element Offset="1941" Vartype="Byte" Bytesize="1" RLECount="3" DisplayMethod="Целое без знака"/>
+        <Element Offset="1944" Vartype="4 Bytes" Bytesize="4" RLECount="7" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="1972" Vartype="4 Bytes" Bytesize="4" RLECount="18" DisplayMethod="Целое без знака"/>
+        <Element Offset="2044" Vartype="4 Bytes" Bytesize="4" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="2048" Vartype="4 Bytes" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="2052" Vartype="4 Bytes" Bytesize="4" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="2056" Vartype="4 Bytes" Bytesize="4" RLECount="5" DisplayMethod="Целое без знака"/>
+        <Element Offset="2076" Vartype="4 Bytes" Bytesize="4" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="2080" Vartype="4 Bytes" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="2084" Vartype="4 Bytes" Bytesize="4" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="2088" Vartype="4 Bytes" Bytesize="4" RLECount="2" DisplayMethod="Целое без знака"/>
+        <Element Offset="2096" Vartype="Double" Bytesize="8" DisplayMethod="Целое без знака"/>
+        <Element Offset="2104" Vartype="Float" Bytesize="4" RLECount="2" DisplayMethod="Целое без знака"/>
+        <Element Offset="2112" Vartype="4 Bytes" Bytesize="4" RLECount="2" DisplayMethod="Целое без знака"/>
+        <Element Offset="2120" Vartype="Float" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="2124" Vartype="Double" Bytesize="8" DisplayMethod="Целое без знака"/>
+        <Element Offset="2132" Vartype="Float" Bytesize="4" RLECount="11" DisplayMethod="Целое без знака"/>
+        <Element Offset="2176" Vartype="Double" Bytesize="8" DisplayMethod="Целое без знака"/>
+        <Element Offset="2184" Vartype="Float" Bytesize="4" RLECount="3" DisplayMethod="Целое без знака"/>
+        <Element Offset="2196" Vartype="4 Bytes" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="2200" Vartype="Float" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="2204" Vartype="4 Bytes" Bytesize="4" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="2208" Vartype="Float" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="2212" Vartype="4 Bytes" Bytesize="4" RLECount="3" DisplayMethod="Целое без знака"/>
+        <Element Offset="2224" Vartype="Pointer" Bytesize="4" RLECount="6" DisplayMethod="Целое без знака"/>
+        <Element Offset="2248" Vartype="4 Bytes" Bytesize="4" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="2252" Vartype="Pointer" Bytesize="4" RLECount="5" DisplayMethod="Целое без знака"/>
+        <Element Offset="2272" Vartype="4 Bytes" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="2276" Vartype="Pointer" Bytesize="4" RLECount="7" DisplayMethod="Целое без знака"/>
+        <Element Offset="2304" Vartype="4 Bytes" Bytesize="4" RLECount="3" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="2316" Vartype="Pointer" Bytesize="4" RLECount="7" DisplayMethod="Целое без знака"/>
+        <Element Offset="2344" Vartype="String" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="2348" Vartype="Pointer" Bytesize="4" RLECount="5" DisplayMethod="Целое без знака"/>
+        <Element Offset="2368" Vartype="4 Bytes" Bytesize="4" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="2372" Vartype="Pointer" Bytesize="4" RLECount="5" DisplayMethod="Целое без знака"/>
+        <Element Offset="2392" Vartype="4 Bytes" Bytesize="4" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="2396" Vartype="Pointer" Bytesize="4" RLECount="7" DisplayMethod="Целое без знака"/>
+        <Element Offset="2424" Vartype="4 Bytes" Bytesize="4" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="2428" Vartype="Pointer" Bytesize="4" RLECount="27" DisplayMethod="Целое без знака"/>
+        <Element Offset="2536" Vartype="4 Bytes" Bytesize="4" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="2540" Vartype="Pointer" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="2544" Vartype="4 Bytes" Bytesize="4" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="2548" Vartype="Pointer" Bytesize="4" RLECount="5" DisplayMethod="Целое без знака"/>
+        <Element Offset="2568" Vartype="4 Bytes" Bytesize="4" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="2572" Vartype="Pointer" Bytesize="4" RLECount="21" DisplayMethod="Целое без знака"/>
+        <Element Offset="2656" Vartype="4 Bytes" Bytesize="4" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="2660" Vartype="Pointer" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="2664" Vartype="4 Bytes" Bytesize="4" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="2668" Vartype="Pointer" Bytesize="4" RLECount="11" DisplayMethod="Целое без знака"/>
+        <Element Offset="2712" Vartype="4 Bytes" Bytesize="4" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="2716" Vartype="Pointer" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="2720" Vartype="4 Bytes" Bytesize="4" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="2724" Vartype="Pointer" Bytesize="4" RLECount="29" DisplayMethod="Целое без знака"/>
+        <Element Offset="2840" Vartype="4 Bytes" Bytesize="4" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="2844" Vartype="Pointer" Bytesize="4" RLECount="2" DisplayMethod="Целое без знака"/>
+        <Element Offset="2852" Vartype="Byte" Bytesize="1" RLECount="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="2856" Vartype="Pointer" Bytesize="4" RLECount="2" DisplayMethod="Целое без знака"/>
+        <Element Offset="2864" Vartype="4 Bytes" Bytesize="4" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="2868" Vartype="Pointer" Bytesize="4" RLECount="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="2884" Vartype="Byte" Bytesize="1" RLECount="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="2888" Vartype="Pointer" Bytesize="4" RLECount="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="2904" Vartype="4 Bytes" Bytesize="4" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="2908" Vartype="Pointer" Bytesize="4" RLECount="11" DisplayMethod="Целое без знака"/>
+        <Element Offset="2952" Vartype="4 Bytes" Bytesize="4" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="2956" Vartype="Pointer" Bytesize="4" RLECount="13" DisplayMethod="Целое без знака"/>
+        <Element Offset="3008" Vartype="Byte" Bytesize="1" RLECount="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="3012" Vartype="Pointer" Bytesize="4" RLECount="3" DisplayMethod="Целое без знака"/>
+        <Element Offset="3024" Vartype="4 Bytes" Bytesize="4" RLECount="2" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="3032" Vartype="Pointer" Bytesize="4" RLECount="5" DisplayMethod="Целое без знака"/>
+        <Element Offset="3052" Vartype="Byte" Bytesize="1" RLECount="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="3056" Vartype="Pointer" Bytesize="4" RLECount="2" DisplayMethod="Целое без знака"/>
+        <Element Offset="3064" Vartype="4 Bytes" Bytesize="4" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="3068" Vartype="Pointer" Bytesize="4" RLECount="8" DisplayMethod="Целое без знака"/>
+        <Element Offset="3100" Vartype="4 Bytes" Bytesize="4" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="3104" Vartype="Pointer" Bytesize="4" RLECount="2" DisplayMethod="Целое без знака"/>
+        <Element Offset="3112" Vartype="4 Bytes" Bytesize="4" RLECount="2" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="3120" Vartype="Float" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="3124" Vartype="Pointer" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="3128" Vartype="4 Bytes" Bytesize="4" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="3132" Vartype="Pointer" Bytesize="4" RLECount="3" DisplayMethod="Целое без знака"/>
+        <Element Offset="3144" Vartype="4 Bytes" Bytesize="4" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="3148" Vartype="Pointer" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="3152" Vartype="4 Bytes" Bytesize="4" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="3156" Vartype="Pointer" Bytesize="4" RLECount="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="3172" Vartype="Byte" Bytesize="1" RLECount="2" DisplayMethod="Целое без знака"/>
+        <Element Offset="3174" Vartype="2 Bytes" Bytesize="2" DisplayMethod="Целое без знака"/>
+        <Element Offset="3176" Vartype="4 Bytes" Bytesize="4" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="3180" Vartype="Pointer" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="3184" Vartype="4 Bytes" Bytesize="4" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="3188" Vartype="Pointer" Bytesize="4" RLECount="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="3204" Vartype="Byte" Bytesize="1" RLECount="2" DisplayMethod="Целое без знака"/>
+        <Element Offset="3206" Vartype="2 Bytes" Bytesize="2" DisplayMethod="Целое без знака"/>
+        <Element Offset="3208" Vartype="Pointer" Bytesize="4" RLECount="9" DisplayMethod="Целое без знака"/>
+        <Element Offset="3244" Vartype="4 Bytes" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="3248" Vartype="Pointer" Bytesize="4" RLECount="6" DisplayMethod="Целое без знака"/>
+        <Element Offset="3272" Vartype="4 Bytes" Bytesize="4" RLECount="3" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="3284" Vartype="Pointer" Bytesize="4" RLECount="2" DisplayMethod="Целое без знака"/>
+        <Element Offset="3292" Vartype="4 Bytes" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="3296" Vartype="Double" Bytesize="8" DisplayMethod="Целое без знака"/>
+        <Element Offset="3304" Vartype="4 Bytes" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="3308" Vartype="Pointer" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="3312" Vartype="4 Bytes" Bytesize="4" RLECount="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="3328" Vartype="4 Bytes" Bytesize="4" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="3332" Vartype="Pointer" Bytesize="4" RLECount="2" DisplayMethod="Целое без знака"/>
+        <Element Offset="3340" Vartype="Double" Bytesize="8" DisplayMethod="Целое без знака"/>
+        <Element Offset="3348" Vartype="Pointer" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="3352" Vartype="4 Bytes" Bytesize="4" RLECount="2" DisplayMethod="Целое без знака"/>
+        <Element Offset="3360" Vartype="Pointer" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="3364" Vartype="4 Bytes" Bytesize="4" RLECount="3" DisplayMethod="Целое без знака"/>
+        <Element Offset="3376" Vartype="Pointer" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="3380" Vartype="4 Bytes" Bytesize="4" RLECount="2" DisplayMethod="Целое без знака"/>
+        <Element Offset="3388" Vartype="Float" Bytesize="4" RLECount="2" DisplayMethod="Целое без знака"/>
+        <Element Offset="3396" Vartype="4 Bytes" Bytesize="4" RLECount="18" DisplayMethod="Целое без знака"/>
+        <Element Offset="3468" Vartype="Double" Bytesize="8" DisplayMethod="Целое без знака"/>
+        <Element Offset="3476" Vartype="Float" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="3480" Vartype="4 Bytes" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="3484" Vartype="Pointer" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="3488" Vartype="4 Bytes" Bytesize="4" RLECount="18" DisplayMethod="Целое без знака"/>
+        <Element Offset="3560" Vartype="Double" Bytesize="8" DisplayMethod="Целое без знака"/>
+        <Element Offset="3568" Vartype="Float" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="3572" Vartype="4 Bytes" Bytesize="4" RLECount="6" DisplayMethod="Целое без знака"/>
+        <Element Offset="3596" Vartype="Pointer" Bytesize="4" RLECount="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="3612" Vartype="Byte" Bytesize="1" RLECount="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="3616" Vartype="4 Bytes" Bytesize="4" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="3620" Vartype="Pointer" Bytesize="4" RLECount="5" DisplayMethod="Целое без знака"/>
+        <Element Offset="3640" Vartype="4 Bytes" Bytesize="4" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="3644" Vartype="Pointer" Bytesize="4" RLECount="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="3660" Vartype="4 Bytes" Bytesize="4" RLECount="18" DisplayMethod="Целое без знака"/>
+        <Element Offset="3732" Vartype="Pointer" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="3736" Vartype="4 Bytes" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="3740" Vartype="Pointer" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="3744" Vartype="4 Bytes" Bytesize="4" RLECount="5" DisplayMethod="Целое без знака"/>
+        <Element Offset="3764" Vartype="Pointer" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="3768" Vartype="4 Bytes" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="3772" Vartype="Pointer" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="3776" Vartype="4 Bytes" Bytesize="4" RLECount="2" DisplayMethod="Целое без знака"/>
+        <Element Offset="3784" Vartype="Double" Bytesize="8" DisplayMethod="Целое без знака"/>
+        <Element Offset="3792" Vartype="Float" Bytesize="4" RLECount="2" DisplayMethod="Целое без знака"/>
+        <Element Offset="3800" Vartype="4 Bytes" Bytesize="4" RLECount="2" DisplayMethod="Целое без знака"/>
+        <Element Offset="3808" Vartype="4 Bytes" Bytesize="4" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="3812" Vartype="Double" Bytesize="8" DisplayMethod="Целое без знака"/>
+        <Element Offset="3820" Vartype="Float" Bytesize="4" RLECount="11" DisplayMethod="Целое без знака"/>
+        <Element Offset="3864" Vartype="Double" Bytesize="8" DisplayMethod="Целое без знака"/>
+        <Element Offset="3872" Vartype="Float" Bytesize="4" RLECount="3" DisplayMethod="Целое без знака"/>
+        <Element Offset="3884" Vartype="4 Bytes" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="3888" Vartype="Float" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="3892" Vartype="Pointer" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="3896" Vartype="Float" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="3900" Vartype="4 Bytes" Bytesize="4" RLECount="3" DisplayMethod="Целое без знака"/>
+        <Element Offset="3912" Vartype="Pointer" Bytesize="4" RLECount="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="3928" Vartype="Float" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="3932" Vartype="Pointer" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="3936" Vartype="4 Bytes" Bytesize="4" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="3940" Vartype="Pointer" Bytesize="4" RLECount="2" DisplayMethod="Целое без знака"/>
+        <Element Offset="3948" Vartype="4 Bytes" Bytesize="4" RLECount="2" DisplayMethod="Целое без знака"/>
+        <Element Offset="3956" Vartype="Pointer" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="3960" Vartype="4 Bytes" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="3964" Vartype="Pointer" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="3968" Vartype="4 Bytes" Bytesize="4" RLECount="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="3984" Vartype="4 Bytes" Bytesize="4" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="3988" Vartype="Pointer" Bytesize="4" RLECount="2" DisplayMethod="Целое без знака"/>
+        <Element Offset="3996" Vartype="Double" Bytesize="8" DisplayMethod="Целое без знака"/>
+        <Element Offset="4004" Vartype="Pointer" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="4008" Vartype="4 Bytes" Bytesize="4" RLECount="2" DisplayMethod="Целое без знака"/>
+        <Element Offset="4016" Vartype="Pointer" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="4020" Vartype="4 Bytes" Bytesize="4" RLECount="3" DisplayMethod="Целое без знака"/>
+        <Element Offset="4032" Vartype="Pointer" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="4036" Vartype="4 Bytes" Bytesize="4" RLECount="2" DisplayMethod="Целое без знака"/>
+        <Element Offset="4044" Vartype="Float" Bytesize="4" RLECount="2" DisplayMethod="Целое без знака"/>
+        <Element Offset="4052" Vartype="4 Bytes" Bytesize="4" RLECount="11" DisplayMethod="Целое без знака"/>
+      </Elements>
+    </Structure>
+  </Structures>
+</CheatTable>

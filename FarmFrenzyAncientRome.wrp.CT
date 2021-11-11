@@ -1,0 +1,490 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CheatTable CheatEngineTableVersion="29">
+  <CheatEntries>
+    <CheatEntry>
+      <ID>0</ID>
+      <Description>"timer"</Description>
+      <LastState Activated="1"/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>{ Game   : FarmFrenzyAncientRome.wrp.exe
+  Version: 
+  Date   : 2020-10-03
+  Author : Hipp
+
+  This script does blah blah blah
+}
+
+[ENABLE]
+
+aobscanmodule(timer,FarmFrenzyAncientRome.wrp.exe,D9 45 C8 D9 C0 DE C2) // should be unique
+alloc(newmem,$1000)
+
+label(code)
+label(return)
+registersymbol(var_timer)
+newmem:
+  mov [temp_var],ebx
+  mov ebx,[var_timer]
+  mov [ebp-38],ebx
+  mov ebx,[temp_var]
+code:
+  fld dword ptr [ebp-38]
+  fld st(0)
+  jmp return
+
+var_timer:
+  dd 0
+temp_var:
+  dd 0
+timer:
+  jmp newmem
+return:
+registersymbol(timer)
+
+[DISABLE]
+
+timer:
+  db D9 45 C8 D9 C0
+unregistersymbol(var_timer)
+unregistersymbol(timer)
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: "FarmFrenzyAncientRome.wrp.exe"+3AF51
+
+"FarmFrenzyAncientRome.wrp.exe"+3AF33: 8B F1                 -  mov esi,ecx
+"FarmFrenzyAncientRome.wrp.exe"+3AF35: 33 DB                 -  xor ebx,ebx
+"FarmFrenzyAncientRome.wrp.exe"+3AF37: 89 5D FC              -  mov [ebp-04],ebx
+"FarmFrenzyAncientRome.wrp.exe"+3AF3A: 9B                    -  wait 
+"FarmFrenzyAncientRome.wrp.exe"+3AF3B: 8B 0D BC 2D 7F 00     -  mov ecx,[FarmFrenzyAncientRome.wrp.exe+3F2DBC]
+"FarmFrenzyAncientRome.wrp.exe"+3AF41: 8B 01                 -  mov eax,[ecx]
+"FarmFrenzyAncientRome.wrp.exe"+3AF43: 8B 50 0C              -  mov edx,[eax+0C]
+"FarmFrenzyAncientRome.wrp.exe"+3AF46: FF D2                 -  call edx
+"FarmFrenzyAncientRome.wrp.exe"+3AF48: D9 5D C8              -  fstp dword ptr [ebp-38]
+"FarmFrenzyAncientRome.wrp.exe"+3AF4B: D9 86 A8 04 00 00     -  fld dword ptr [esi+000004A8]
+// ---------- INJECTING HERE ----------
+"FarmFrenzyAncientRome.wrp.exe"+3AF51: D9 45 C8              -  fld dword ptr [ebp-38]
+"FarmFrenzyAncientRome.wrp.exe"+3AF54: D9 C0                 -  fld st(0)
+// ---------- DONE INJECTING  ----------
+"FarmFrenzyAncientRome.wrp.exe"+3AF56: DE C2                 -  faddp st(2),st(0)
+"FarmFrenzyAncientRome.wrp.exe"+3AF58: D9 C9                 -  fxch st(1)
+"FarmFrenzyAncientRome.wrp.exe"+3AF5A: D9 9E A8 04 00 00     -  fstp dword ptr [esi+000004A8]
+"FarmFrenzyAncientRome.wrp.exe"+3AF60: D9 C0                 -  fld st(0)
+"FarmFrenzyAncientRome.wrp.exe"+3AF62: D8 86 90 0E 00 00     -  fadd dword ptr [esi+00000E90]
+"FarmFrenzyAncientRome.wrp.exe"+3AF68: D9 9E 90 0E 00 00     -  fstp dword ptr [esi+00000E90]
+"FarmFrenzyAncientRome.wrp.exe"+3AF6E: D8 86 94 0E 00 00     -  fadd dword ptr [esi+00000E94]
+"FarmFrenzyAncientRome.wrp.exe"+3AF74: D9 9E 94 0E 00 00     -  fstp dword ptr [esi+00000E94]
+"FarmFrenzyAncientRome.wrp.exe"+3AF7A: 8B CE                 -  mov ecx,esi
+"FarmFrenzyAncientRome.wrp.exe"+3AF7C: E8 6F 18 FE FF        -  call FarmFrenzyAncientRome.wrp.exe+1C7F0
+}
+</AssemblerScript>
+      <CheatEntries>
+        <CheatEntry>
+          <ID>1</ID>
+          <Description>"Нет описания"</Description>
+          <LastState Value="0" RealAddress="0347001F"/>
+          <VariableType>Float</VariableType>
+          <Address>var_timer</Address>
+        </CheatEntry>
+      </CheatEntries>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>4</ID>
+      <Description>"fast animal"</Description>
+      <LastState Activated="1"/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>{ Game   : FarmFrenzyAncientRome.wrp.exe
+  Version: 
+  Date   : 2020-10-03
+  Author : Hipp
+
+  This script does blah blah blah
+}
+
+[ENABLE]
+
+aobscanmodule(fast_animal,FarmFrenzyAncientRome.wrp.exe,DE C2 D9 C9 D9 9E F0 04 00 00) // should be unique
+alloc(newmem,$1000)
+
+label(code)
+label(return)
+
+newmem:
+  fcomp
+  fld dword ptr[temp_var]
+code:
+  faddp st(2),st(0)
+  fxch st(1)
+  fstp dword ptr [esi+000004F0]
+  jmp return
+temp_var:
+  dd (float)0.09
+fast_animal:
+  jmp newmem
+  nop 5
+return:
+registersymbol(fast_animal)
+
+[DISABLE]
+
+fast_animal:
+  db DE C2 D9 C9 D9 9E F0 04 00 00
+
+unregistersymbol(fast_animal)
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: "FarmFrenzyAncientRome.wrp.exe"+CB137
+
+"FarmFrenzyAncientRome.wrp.exe"+CB117: 8B CB                 -  mov ecx,ebx
+"FarmFrenzyAncientRome.wrp.exe"+CB119: 8B 52 08              -  mov edx,[edx+08]
+"FarmFrenzyAncientRome.wrp.exe"+CB11C: 89 45 D0              -  mov [ebp-30],eax
+"FarmFrenzyAncientRome.wrp.exe"+CB11F: FF D2                 -  call edx
+"FarmFrenzyAncientRome.wrp.exe"+CB121: 8B 4D D0              -  mov ecx,[ebp-30]
+"FarmFrenzyAncientRome.wrp.exe"+CB124: 3B C8                 -  cmp ecx,eax
+"FarmFrenzyAncientRome.wrp.exe"+CB126: 0F 84 F2 00 00 00     -  je FarmFrenzyAncientRome.wrp.exe+CB21E
+"FarmFrenzyAncientRome.wrp.exe"+CB12C: D9 86 F0 04 00 00     -  fld dword ptr [esi+000004F0]
+"FarmFrenzyAncientRome.wrp.exe"+CB132: D9 45 CC              -  fld dword ptr [ebp-34]
+"FarmFrenzyAncientRome.wrp.exe"+CB135: D9 C0                 -  fld st(0)
+// ---------- INJECTING HERE ----------
+"FarmFrenzyAncientRome.wrp.exe"+CB137: DE C2                 -  faddp st(2),st(0)
+"FarmFrenzyAncientRome.wrp.exe"+CB139: D9 C9                 -  fxch st(1)
+"FarmFrenzyAncientRome.wrp.exe"+CB13B: D9 9E F0 04 00 00     -  fstp dword ptr [esi+000004F0]
+// ---------- DONE INJECTING  ----------
+"FarmFrenzyAncientRome.wrp.exe"+CB141: D8 86 08 05 00 00     -  fadd dword ptr [esi+00000508]
+"FarmFrenzyAncientRome.wrp.exe"+CB147: D9 5D D0              -  fstp dword ptr [ebp-30]
+"FarmFrenzyAncientRome.wrp.exe"+CB14A: D9 45 D0              -  fld dword ptr [ebp-30]
+"FarmFrenzyAncientRome.wrp.exe"+CB14D: D9 96 08 05 00 00     -  fst dword ptr [esi+00000508]
+"FarmFrenzyAncientRome.wrp.exe"+CB153: 83 BE 20 08 00 00 00  -  cmp dword ptr [esi+00000820],00
+"FarmFrenzyAncientRome.wrp.exe"+CB15A: 0F 85 BC 00 00 00     -  jne FarmFrenzyAncientRome.wrp.exe+CB21C
+"FarmFrenzyAncientRome.wrp.exe"+CB160: D9 86 0C 05 00 00     -  fld dword ptr [esi+0000050C]
+"FarmFrenzyAncientRome.wrp.exe"+CB166: DE D9                 -  fcompp 
+"FarmFrenzyAncientRome.wrp.exe"+CB168: DF E0                 -  fnstsw ax
+"FarmFrenzyAncientRome.wrp.exe"+CB16A: F6 C4 05              -  test ah,05
+}
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>6</ID>
+      <Description>"sklad"</Description>
+      <LastState Activated="1"/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>[ENABLE]
+FarmFrenzyAncientRome.wrp.exe+F3C7D:
+ db 90 90
+
+ 
+ 
+[DISABLE]
+FarmFrenzyAncientRome.wrp.exe+F3C7D:
+ jne FarmFrenzyAncientRome.wrp.exe+F3C86
+
+
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>9</ID>
+      <Description>"transport"</Description>
+      <LastState Activated="1"/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>[ENABLE]
+FarmFrenzyAncientRome.wrp.exe+66AC6:
+ jmp FarmFrenzyAncientRome.wrp.exe+66AD4
+ 
+ 
+[DISABLE]
+FarmFrenzyAncientRome.wrp.exe+66AC6:
+ jb FarmFrenzyAncientRome.wrp.exe+66AD4
+
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>10</ID>
+      <Description>"progress"</Description>
+      <LastState Activated="1"/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>{ Game   : FarmFrenzyAncientRome.wrp.exe
+  Version: 
+  Date   : 2020-10-03
+  Author : Hipp
+
+  This script does blah blah blah
+}
+
+[ENABLE]
+
+aobscanmodule(progress,FarmFrenzyAncientRome.wrp.exe,D9 96 BC 19 00 00 D9 86 0C 0C 00 00 D9 5D D0 D8 4D D0 D8 33) // should be unique
+alloc(newmem,$1000)
+
+label(code)
+label(return)
+
+newmem:
+  fadd dword ptr[var_progress]
+code:
+  fst dword ptr [esi+000019BC]
+  jmp return
+
+var_progress:
+  dd (float)0.05
+
+progress:
+  jmp newmem
+  nop
+return:
+registersymbol(progress)
+
+[DISABLE]
+
+progress:
+  db D9 96 BC 19 00 00
+
+unregistersymbol(progress)
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: "FarmFrenzyAncientRome.wrp.exe"+E536C
+
+"FarmFrenzyAncientRome.wrp.exe"+E533B: D9 9E 0C 02 00 00     -  fstp dword ptr [esi+0000020C]
+"FarmFrenzyAncientRome.wrp.exe"+E5341: C6 86 34 02 00 00 01  -  mov byte ptr [esi+00000234],01
+"FarmFrenzyAncientRome.wrp.exe"+E5348: EB 4B                 -  jmp FarmFrenzyAncientRome.wrp.exe+E5395
+"FarmFrenzyAncientRome.wrp.exe"+E534A: D9 45 C8              -  fld dword ptr [ebp-38]
+"FarmFrenzyAncientRome.wrp.exe"+E534D: D8 86 0C 02 00 00     -  fadd dword ptr [esi+0000020C]
+"FarmFrenzyAncientRome.wrp.exe"+E5353: D9 9E 0C 02 00 00     -  fstp dword ptr [esi+0000020C]
+"FarmFrenzyAncientRome.wrp.exe"+E5359: C6 86 34 02 00 00 01  -  mov byte ptr [esi+00000234],01
+"FarmFrenzyAncientRome.wrp.exe"+E5360: D8 86 BC 19 00 00     -  fadd dword ptr [esi+000019BC]
+"FarmFrenzyAncientRome.wrp.exe"+E5366: D9 5D D0              -  fstp dword ptr [ebp-30]
+"FarmFrenzyAncientRome.wrp.exe"+E5369: D9 45 D0              -  fld dword ptr [ebp-30]
+// ---------- INJECTING HERE ----------
+"FarmFrenzyAncientRome.wrp.exe"+E536C: D9 96 BC 19 00 00     -  fst dword ptr [esi+000019BC]
+// ---------- DONE INJECTING  ----------
+"FarmFrenzyAncientRome.wrp.exe"+E5372: D9 86 0C 0C 00 00     -  fld dword ptr [esi+00000C0C]
+"FarmFrenzyAncientRome.wrp.exe"+E5378: D9 5D D0              -  fstp dword ptr [ebp-30]
+"FarmFrenzyAncientRome.wrp.exe"+E537B: D8 4D D0              -  fmul dword ptr [ebp-30]
+"FarmFrenzyAncientRome.wrp.exe"+E537E: D8 33                 -  fdiv dword ptr [ebx]
+"FarmFrenzyAncientRome.wrp.exe"+E5380: D9 5D D0              -  fstp dword ptr [ebp-30]
+"FarmFrenzyAncientRome.wrp.exe"+E5383: D9 45 D0              -  fld dword ptr [ebp-30]
+"FarmFrenzyAncientRome.wrp.exe"+E5386: 51                    -  push ecx
+"FarmFrenzyAncientRome.wrp.exe"+E5387: D9 1C 24              -  fstp dword ptr [esp]
+"FarmFrenzyAncientRome.wrp.exe"+E538A: 8D 8E 5C 09 00 00     -  lea ecx,[esi+0000095C]
+"FarmFrenzyAncientRome.wrp.exe"+E5390: E8 FB 9D FF FF        -  call FarmFrenzyAncientRome.wrp.exe+DF190
+}
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>11</ID>
+      <Description>"product"</Description>
+      <LastState Activated="1"/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>{ Game   : FarmFrenzyAncientRome.wrp.exe
+  Version: 
+  Date   : 2020-10-03
+  Author : Hipp
+
+  This script does blah blah blah
+}
+
+[ENABLE]
+
+aobscanmodule(product,FarmFrenzyAncientRome.wrp.exe,01 9C B7 AC 16 00 00) // should be unique
+alloc(newmem,$1000)
+
+label(code)
+label(return)
+
+newmem:
+  add ebx,4
+code:
+  add [edi+esi*4+000016AC],ebx
+  jmp return
+
+product:
+  jmp newmem
+  nop 2
+return:
+registersymbol(product)
+
+[DISABLE]
+
+product:
+  db 01 9C B7 AC 16 00 00
+
+unregistersymbol(product)
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: "FarmFrenzyAncientRome.wrp.exe"+F37B9
+
+"FarmFrenzyAncientRome.wrp.exe"+F3795: 57                    -  push edi
+"FarmFrenzyAncientRome.wrp.exe"+F3796: 50                    -  push eax
+"FarmFrenzyAncientRome.wrp.exe"+F3797: 8D 45 F4              -  lea eax,[ebp-0C]
+"FarmFrenzyAncientRome.wrp.exe"+F379A: 64 A3 00 00 00 00     -  mov fs:[00000000],eax
+"FarmFrenzyAncientRome.wrp.exe"+F37A0: 89 65 F0              -  mov [ebp-10],esp
+"FarmFrenzyAncientRome.wrp.exe"+F37A3: 8B F9                 -  mov edi,ecx
+"FarmFrenzyAncientRome.wrp.exe"+F37A5: C7 45 FC 00 00 00 00  -  mov [ebp-04],00000000
+"FarmFrenzyAncientRome.wrp.exe"+F37AC: 9B                    -  wait 
+"FarmFrenzyAncientRome.wrp.exe"+F37AD: 8B B5 2C 10 00 00     -  mov esi,[ebp+0000102C]
+"FarmFrenzyAncientRome.wrp.exe"+F37B3: 8B 9D 30 10 00 00     -  mov ebx,[ebp+00001030]
+// ---------- INJECTING HERE ----------
+"FarmFrenzyAncientRome.wrp.exe"+F37B9: 01 9C B7 AC 16 00 00  -  add [edi+esi*4+000016AC],ebx
+// ---------- DONE INJECTING  ----------
+"FarmFrenzyAncientRome.wrp.exe"+F37C0: 8D 8F 3C 09 00 00     -  lea ecx,[edi+0000093C]
+"FarmFrenzyAncientRome.wrp.exe"+F37C6: E8 B5 4F F2 FF        -  call FarmFrenzyAncientRome.wrp.exe+18780
+"FarmFrenzyAncientRome.wrp.exe"+F37CB: 8D 04 76              -  lea eax,[esi+esi*2]
+"FarmFrenzyAncientRome.wrp.exe"+F37CE: D9 04 85 E8 36 7F 00  -  fld dword ptr [eax*4+FarmFrenzyAncientRome.wrp.exe+3F36E8]
+"FarmFrenzyAncientRome.wrp.exe"+F37D5: 8B CB                 -  mov ecx,ebx
+"FarmFrenzyAncientRome.wrp.exe"+F37D7: 89 4D D0              -  mov [ebp-30],ecx
+"FarmFrenzyAncientRome.wrp.exe"+F37DA: DB 45 D0              -  fild dword ptr [ebp-30]
+"FarmFrenzyAncientRome.wrp.exe"+F37DD: 85 C9                 -  test ecx,ecx
+"FarmFrenzyAncientRome.wrp.exe"+F37DF: 7D 06                 -  jnl FarmFrenzyAncientRome.wrp.exe+F37E7
+"FarmFrenzyAncientRome.wrp.exe"+F37E1: D8 05 20 0B 71 00     -  fadd dword ptr [FarmFrenzyAncientRome.wrp.exe+310B20]
+}
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>12</ID>
+      <Description>"all product"</Description>
+      <LastState/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>{ Game   : FarmFrenzyAncientRome.wrp.exe
+  Version: 
+  Date   : 2020-10-03
+  Author : Hipp
+
+  This script does blah blah blah
+}
+
+[ENABLE]
+
+aobscanmodule(all_product,FarmFrenzyAncientRome.wrp.exe,8B 84 81 AC 16 00 00 50) // should be unique
+alloc(newmem,$1000)
+
+label(code)
+label(return)
+
+newmem:
+  cmp eax,c
+  jl code
+  cmp eax,e
+  jg code
+  mov [ecx+eax*4+000016AC],#100
+code:
+  mov eax,[ecx+eax*4+000016AC]
+  jmp return
+
+all_product:
+  jmp newmem
+  nop 2
+return:
+registersymbol(all_product)
+
+[DISABLE]
+
+all_product:
+  db 8B 84 81 AC 16 00 00
+
+unregistersymbol(all_product)
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: "FarmFrenzyAncientRome.wrp.exe"+5FDDE
+
+"FarmFrenzyAncientRome.wrp.exe"+5FDB3: 8B F1                 -  mov esi,ecx
+"FarmFrenzyAncientRome.wrp.exe"+5FDB5: C7 45 FC 00 00 00 00  -  mov [ebp-04],00000000
+"FarmFrenzyAncientRome.wrp.exe"+5FDBC: BB 01 00 00 00        -  mov ebx,00000001
+"FarmFrenzyAncientRome.wrp.exe"+5FDC1: 53                    -  push ebx
+"FarmFrenzyAncientRome.wrp.exe"+5FDC2: 6A 03                 -  push 03
+"FarmFrenzyAncientRome.wrp.exe"+5FDC4: 8D 8D 30 FE FF FF     -  lea ecx,[ebp-000001D0]
+"FarmFrenzyAncientRome.wrp.exe"+5FDCA: E8 11 C3 FA FF        -  call FarmFrenzyAncientRome.wrp.exe+C0E0
+"FarmFrenzyAncientRome.wrp.exe"+5FDCF: 88 5D FC              -  mov [ebp-04],bl
+"FarmFrenzyAncientRome.wrp.exe"+5FDD2: 8B 86 94 00 00 00     -  mov eax,[esi+00000094]
+"FarmFrenzyAncientRome.wrp.exe"+5FDD8: 8B 0D 3C 2E 7F 00     -  mov ecx,[FarmFrenzyAncientRome.wrp.exe+3F2E3C]
+// ---------- INJECTING HERE ----------
+"FarmFrenzyAncientRome.wrp.exe"+5FDDE: 8B 84 81 AC 16 00 00  -  mov eax,[ecx+eax*4+000016AC]
+// ---------- DONE INJECTING  ----------
+"FarmFrenzyAncientRome.wrp.exe"+5FDE5: 50                    -  push eax
+"FarmFrenzyAncientRome.wrp.exe"+5FDE6: 8D 8D 38 FE FF FF     -  lea ecx,[ebp-000001C8]
+"FarmFrenzyAncientRome.wrp.exe"+5FDEC: E8 AF 0F FB FF        -  call FarmFrenzyAncientRome.wrp.exe+10DA0
+"FarmFrenzyAncientRome.wrp.exe"+5FDF1: 8D 55 9C              -  lea edx,[ebp-64]
+"FarmFrenzyAncientRome.wrp.exe"+5FDF4: 52                    -  push edx
+"FarmFrenzyAncientRome.wrp.exe"+5FDF5: 8D 8D 30 FE FF FF     -  lea ecx,[ebp-000001D0]
+"FarmFrenzyAncientRome.wrp.exe"+5FDFB: E8 10 7C FA FF        -  call FarmFrenzyAncientRome.wrp.exe+7A10
+"FarmFrenzyAncientRome.wrp.exe"+5FE00: C6 45 FC 02           -  mov byte ptr [ebp-04],02
+"FarmFrenzyAncientRome.wrp.exe"+5FE04: 50                    -  push eax
+"FarmFrenzyAncientRome.wrp.exe"+5FE05: 8D 4D B8              -  lea ecx,[ebp-48]
+}
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>13</ID>
+      <Description>"fast victory"</Description>
+      <LastState Activated="1"/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>{ Game   : FarmFrenzyAncientRome.wrp.exe
+  Version: 
+  Date   : 2020-10-04
+  Author : Hipp
+
+  This script does blah blah blah
+}
+
+[ENABLE]
+
+aobscanmodule(for_victory,FarmFrenzyAncientRome.wrp.exe,89 8C 87 98 0E 00 00) // should be unique
+alloc(newmem,$1000)
+
+label(code)
+label(return)
+
+newmem:
+  add ecx,#25
+code:
+  mov [edi+eax*4+00000E98],ecx
+  jmp return
+
+for_victory:
+  jmp newmem
+  nop 2
+return:
+registersymbol(for_victory)
+
+[DISABLE]
+
+for_victory:
+  db 89 8C 87 98 0E 00 00
+
+unregistersymbol(for_victory)
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: "FarmFrenzyAncientRome.wrp.exe"+104943
+
+"FarmFrenzyAncientRome.wrp.exe"+10491D: 83 C4 08              -  add esp,08
+"FarmFrenzyAncientRome.wrp.exe"+104920: 80 BE B0 0B 00 00 00  -  cmp byte ptr [esi+00000BB0],00
+"FarmFrenzyAncientRome.wrp.exe"+104927: 74 0C                 -  je FarmFrenzyAncientRome.wrp.exe+104935
+"FarmFrenzyAncientRome.wrp.exe"+104929: 6A 01                 -  push 01
+"FarmFrenzyAncientRome.wrp.exe"+10492B: 6A 11                 -  push 11
+"FarmFrenzyAncientRome.wrp.exe"+10492D: E8 AE 57 F3 FF        -  call FarmFrenzyAncientRome.wrp.exe+3A0E0
+"FarmFrenzyAncientRome.wrp.exe"+104932: 83 C4 08              -  add esp,08
+"FarmFrenzyAncientRome.wrp.exe"+104935: 8B 86 F0 05 00 00     -  mov eax,[esi+000005F0]
+"FarmFrenzyAncientRome.wrp.exe"+10493B: 8B 8C 87 98 0E 00 00  -  mov ecx,[edi+eax*4+00000E98]
+"FarmFrenzyAncientRome.wrp.exe"+104942: 41                    -  inc ecx
+// ---------- INJECTING HERE ----------
+"FarmFrenzyAncientRome.wrp.exe"+104943: 89 8C 87 98 0E 00 00  -  mov [edi+eax*4+00000E98],ecx
+// ---------- DONE INJECTING  ----------
+"FarmFrenzyAncientRome.wrp.exe"+10494A: 8B 3D 3C 2E 7F 00     -  mov edi,[FarmFrenzyAncientRome.wrp.exe+3F2E3C]
+"FarmFrenzyAncientRome.wrp.exe"+104950: 6A 01                 -  push 01
+"FarmFrenzyAncientRome.wrp.exe"+104952: 8B 86 F0 05 00 00     -  mov eax,[esi+000005F0]
+"FarmFrenzyAncientRome.wrp.exe"+104958: 50                    -  push eax
+"FarmFrenzyAncientRome.wrp.exe"+104959: 8B CF                 -  mov ecx,edi
+"FarmFrenzyAncientRome.wrp.exe"+10495B: E8 00 EE FE FF        -  call FarmFrenzyAncientRome.wrp.exe+F3760
+"FarmFrenzyAncientRome.wrp.exe"+104960: 8B 0D E0 2D 7F 00     -  mov ecx,[FarmFrenzyAncientRome.wrp.exe+3F2DE0]
+"FarmFrenzyAncientRome.wrp.exe"+104966: E8 F5 10 F8 FF        -  call FarmFrenzyAncientRome.wrp.exe+85A60
+"FarmFrenzyAncientRome.wrp.exe"+10496B: D9 E8                 -  fld1 
+"FarmFrenzyAncientRome.wrp.exe"+10496D: D9 5D D0              -  fstp dword ptr [ebp-30]
+}
+</AssemblerScript>
+    </CheatEntry>
+  </CheatEntries>
+  <UserdefinedSymbols/>
+</CheatTable>

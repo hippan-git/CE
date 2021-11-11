@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CheatTable CheatEngineTableVersion="26">
+  <CheatEntries>
+    <CheatEntry>
+      <ID>0</ID>
+      <Description>"жизнь"</Description>
+      <VariableType>4 Bytes</VariableType>
+      <Address>"Engine.dll"+0060F970</Address>
+      <Offsets>
+        <Offset>2DC</Offset>
+        <Offset>54</Offset>
+        <Offset>74</Offset>
+        <Offset>C</Offset>
+        <Offset>294</Offset>
+      </Offsets>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>1</ID>
+      <Description>"Скрипт автоассемблера"</Description>
+      <LastState/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>{ Game   : POSTAL2.EXE
+  Version: 
+  Date   : 2018-08-10
+  Author : Hipp
+
+  This script does blah blah blah
+}
+
+[ENABLE]
+
+aobscanmodule(life,Core.dll,03 C2 89 03 8B D8 8B 44 24 14) // should be unique
+alloc(newmem,$1000)
+
+label(code)
+label(return)
+
+newmem:
+  push ecx
+  mov ecx,[Engine.dll+0060F970]
+  mov ecx,[ecx+294]
+  mov ecx,[ecx+c]
+  mov ecx,[ecx+74]
+  mov ecx,[ecx+54]
+  lea ecx,[ecx+2dc]
+  cmp ecx,ebx
+  pop ecx
+  jne code
+  mov eax,#300
+
+code:
+  mov [ebx],eax
+  mov ebx,eax
+  mov eax,[esp+14]
+  jmp return
+
+life+02:
+  jmp newmem
+  nop
+  nop
+  nop
+return:
+registersymbol(life)
+
+[DISABLE]
+
+life+02:
+  db 89 03 8B D8 8B 44 24 14
+
+unregistersymbol(life)
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: "Core.dll"+3EC5E
+
+"Core.dll"+3EC44: 75 10                          -  jne Core.dll+3EC56
+"Core.dll"+3EC46: 8B 4E 08                       -  mov ecx,[esi+08]
+"Core.dll"+3EC49: 6A 00                          -  push 00
+"Core.dll"+3EC4B: 40                             -  inc eax
+"Core.dll"+3EC4C: 56                             -  push esi
+"Core.dll"+3EC4D: 89 46 0C                       -  mov [esi+0C],eax
+"Core.dll"+3EC50: FF 15 E0 04 21 10              -  call dword ptr [Core.dll+1104E0]
+"Core.dll"+3EC56: 8B 03                          -  mov eax,[ebx]
+"Core.dll"+3EC58: 8B 54 24 10                    -  mov edx,[esp+10]
+"Core.dll"+3EC5C: 03 C2                          -  add eax,edx
+// ---------- INJECTING HERE ----------
+"Core.dll"+3EC5E: 89 03                          -  mov [ebx],eax
+"Core.dll"+3EC60: 8B D8                          -  mov ebx,eax
+"Core.dll"+3EC62: 8B 44 24 14                    -  mov eax,[esp+14]
+// ---------- DONE INJECTING  ----------
+"Core.dll"+3EC66: 5E                             -  pop esi
+"Core.dll"+3EC67: 89 18                          -  mov [eax],ebx
+"Core.dll"+3EC69: 5B                             -  pop ebx
+"Core.dll"+3EC6A: 59                             -  pop ecx
+"Core.dll"+3EC6B: C2 08 00                       -  ret 0008
+"Core.dll"+3EC6E: 90                             -  nop 
+"Core.dll"+3EC6F: 90                             -  nop 
+"Core.dll"+3EC70: 8B 0D 98 48 21 10              -  mov ecx,[Core.dll+114898]
+"Core.dll"+3EC76: 33 D2                          -  xor edx,edx
+"Core.dll"+3EC78: 3B CA                          -  cmp ecx,edx
+}
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>2</ID>
+      <Description>"Скрипт автоассемблера"</Description>
+      <LastState Activated="1"/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>{ Game   : POSTAL2.EXE
+  Version: 
+  Date   : 2018-08-10
+  Author : Hipp
+
+  This script does blah blah blah
+}
+
+[ENABLE]
+
+aobscanmodule(health,Core.dll,2B D0 8B 44 24 10 89 10) // should be unique
+alloc(newmem,$1000)
+alloc(temp1,4)
+
+label(code)
+label(return)
+
+
+newmem:
+  mov [temp1], ecx
+  mov ecx,[Engine.dll+0060F970]
+  mov ecx,[ecx+294]
+  mov ecx,[ecx+c]
+  mov ecx,[ecx+74]
+  mov ecx,[ecx+54]
+  lea ecx,[ecx+2dc]
+  mov eax,[esp+10]
+  cmp ecx,eax
+  mov ecx,[temp1]
+  jne code
+  mov [eax],#400
+  jmp return
+
+
+
+
+code:
+  //mov eax,[esp+10]
+  mov [eax],edx
+  jmp return
+
+health+02:
+  jmp newmem
+  nop
+return:
+registersymbol(health)
+
+[DISABLE]
+
+health+02:
+  db 8B 44 24 10 89 10
+
+unregistersymbol(health)
+dealloc(newmem)
+dealloc(temp1)
+
+{
+// ORIGINAL CODE - INJECTION POINT: "Core.dll"+3DF02
+
+"Core.dll"+3DEE6: 75 10                          -  jne Core.dll+3DEF8
+"Core.dll"+3DEE8: 8B 4E 08                       -  mov ecx,[esi+08]
+"Core.dll"+3DEEB: 6A 00                          -  push 00
+"Core.dll"+3DEED: 40                             -  inc eax
+"Core.dll"+3DEEE: 56                             -  push esi
+"Core.dll"+3DEEF: 89 46 0C                       -  mov [esi+0C],eax
+"Core.dll"+3DEF2: FF 15 E0 04 21 10              -  call dword ptr [Core.dll+1104E0]
+"Core.dll"+3DEF8: 8B 44 24 0C                    -  mov eax,[esp+0C]
+"Core.dll"+3DEFC: 8B 54 24 04                    -  mov edx,[esp+04]
+"Core.dll"+3DF00: 2B D0                          -  sub edx,eax
+// ---------- INJECTING HERE ----------
+"Core.dll"+3DF02: 8B 44 24 10                    -  mov eax,[esp+10]
+"Core.dll"+3DF06: 89 10                          -  mov [eax],edx
+// ---------- DONE INJECTING  ----------
+"Core.dll"+3DF08: 5E                             -  pop esi
+"Core.dll"+3DF09: 59                             -  pop ecx
+"Core.dll"+3DF0A: C2 08 00                       -  ret 0008
+"Core.dll"+3DF0D: 90                             -  nop 
+"Core.dll"+3DF0E: 90                             -  nop 
+"Core.dll"+3DF0F: 90                             -  nop 
+"Core.dll"+3DF10: 8B 0D 98 48 21 10              -  mov ecx,[Core.dll+114898]
+"Core.dll"+3DF16: 33 D2                          -  xor edx,edx
+"Core.dll"+3DF18: 3B CA                          -  cmp ecx,edx
+"Core.dll"+3DF1A: B8 63 20 10 10                 -  mov eax,Core.dll+2063
+}
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>3</ID>
+      <Description>"Нет описания"</Description>
+      <VariableType>4 Bytes</VariableType>
+      <Address>0869CADC</Address>
+    </CheatEntry>
+  </CheatEntries>
+  <UserdefinedSymbols/>
+  <Comments>Информация об этой таблице:
+</Comments>
+</CheatTable>

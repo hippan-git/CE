@@ -1,0 +1,726 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CheatTable CheatEngineTableVersion="29">
+  <CheatEntries>
+    <CheatEntry>
+      <ID>1</ID>
+      <Description>"move"</Description>
+      <Options moHideChildren="1"/>
+      <LastState/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>{ Game   : Might &amp; Magic Heroes VI.exe
+  Version: 
+  Date   : 2021-04-12
+  Author : Hipp
+
+  This script does blah blah blah
+}
+
+[ENABLE]
+
+aobscanmodule(move,Might &amp; Magic Heroes VI.exe,F3 0F 10 40 0C F3 0F 11 45 E0 EB) // should be unique
+alloc(newmem,$1000)
+registersymbol(v_move)
+label(code)
+label(return)
+
+newmem:
+  push ebx
+  mov ebx,[v_move]
+  mov [eax+0c],ebx
+  pop ebx
+code:
+  movss xmm0,[eax+0C]
+  jmp return
+v_move:
+dd (float)100
+move:
+  jmp newmem
+return:
+registersymbol(move)
+
+[DISABLE]
+
+move:
+  db F3 0F 10 40 0C
+unregistersymbol(v_move)
+unregistersymbol(move)
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: "Might &amp; Magic Heroes VI.exe"+677C6A
+
+"Might &amp; Magic Heroes VI.exe"+677C4D: 8B 45 FC                 -  mov eax,[ebp-04]
+"Might &amp; Magic Heroes VI.exe"+677C50: 8B 88 28 01 00 00        -  mov ecx,[eax+00000128]
+"Might &amp; Magic Heroes VI.exe"+677C56: 89 4D EC                 -  mov [ebp-14],ecx
+"Might &amp; Magic Heroes VI.exe"+677C59: 8B 55 EC                 -  mov edx,[ebp-14]
+"Might &amp; Magic Heroes VI.exe"+677C5C: D9 EE                    -  fldz 
+"Might &amp; Magic Heroes VI.exe"+677C5E: D9 42 0C                 -  fld dword ptr [edx+0C]
+"Might &amp; Magic Heroes VI.exe"+677C61: DF F1                    -  fcomip st(0),st(1)
+"Might &amp; Magic Heroes VI.exe"+677C63: DD D8                    -  fstp st(0)
+"Might &amp; Magic Heroes VI.exe"+677C65: 72 0F                    -  jb "Might &amp; Magic Heroes VI.exe"+677C76
+"Might &amp; Magic Heroes VI.exe"+677C67: 8B 45 EC                 -  mov eax,[ebp-14]
+// ---------- INJECTING HERE ----------
+"Might &amp; Magic Heroes VI.exe"+677C6A: F3 0F 10 40 0C           -  movss xmm0,[eax+0C]
+// ---------- DONE INJECTING  ----------
+"Might &amp; Magic Heroes VI.exe"+677C6F: F3 0F 11 45 E0           -  movss [ebp-20],xmm0
+"Might &amp; Magic Heroes VI.exe"+677C74: EB 0D                    -  jmp "Might &amp; Magic Heroes VI.exe"+677C83
+"Might &amp; Magic Heroes VI.exe"+677C76: F3 0F 10 05 7C C3 EC 01  -  movss xmm0,["Might &amp; Magic Heroes VI.exe"+1ACC37C]
+"Might &amp; Magic Heroes VI.exe"+677C7E: F3 0F 11 45 E0           -  movss [ebp-20],xmm0
+"Might &amp; Magic Heroes VI.exe"+677C83: 51                       -  push ecx
+"Might &amp; Magic Heroes VI.exe"+677C84: D9 45 E0                 -  fld dword ptr [ebp-20]
+"Might &amp; Magic Heroes VI.exe"+677C87: D9 1C 24                 -  fstp dword ptr [esp]
+"Might &amp; Magic Heroes VI.exe"+677C8A: 6A 00                    -  push 00
+"Might &amp; Magic Heroes VI.exe"+677C8C: 8B 4D E4                 -  mov ecx,[ebp-1C]
+"Might &amp; Magic Heroes VI.exe"+677C8F: 8B 89 AC 00 00 00        -  mov ecx,[ecx+000000AC]
+}
+</AssemblerScript>
+      <CheatEntries>
+        <CheatEntry>
+          <ID>27</ID>
+          <Description>"Нет описания"</Description>
+          <VariableType>Float</VariableType>
+          <Address>v_move</Address>
+        </CheatEntry>
+      </CheatEntries>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>4</ID>
+      <Description>"resource"</Description>
+      <LastState/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>[ENABLE]
+//code from here to '[DISABLE]' will be used to enable the cheat
+alloc(newmem,2048)
+label(returnhere)
+label(originalcode)
+label(exit)
+
+newmem: //this is allocated memory, you have read,write,execute access
+push ebx
+mov ebx,#1000000
+xor ebx,[eax+8]
+mov [eax+4],ebx
+mov ebx,#100
+xor ebx,[eax+8]
+mov [eax+c],ebx
+mov [eax+14],ebx
+mov [eax+1c],ebx
+pop ebx
+
+originalcode:
+mov ecx,00000008
+
+exit:
+jmp returnhere
+
+"Might &amp; Magic Heroes VI.exe"+4F94F:
+jmp newmem
+returnhere:
+
+
+ 
+ 
+[DISABLE]
+//code from here till the end of the code will be used to disable the cheat
+dealloc(newmem)
+"Might &amp; Magic Heroes VI.exe"+4F94F:
+mov ecx,00000008
+//Alt: db B9 08 00 00 00
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>13</ID>
+      <Description>"inf magic in battle"</Description>
+      <Options moHideChildren="1" moActivateChildrenAsWell="1" moDeactivateChildrenAsWell="1"/>
+      <LastState/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>[ENABLE]
+//Might &amp; Magic Heroes VI.exe+4E6954:
+// or byte ptr [edx+01000000],-75 { 139 }
+
+Might &amp; Magic Heroes VI.exe+3959BD:
+ jl "Might &amp; Magic Heroes VI.exe"+3959C8
+
+8e6959:
+  db 01
+ 
+[DISABLE]
+//Might &amp; Magic Heroes VI.exe+4E6954:
+// or byte ptr [edx+00000000],-75 { 139 }
+
+Might &amp; Magic Heroes VI.exe+3959BD:
+ jg "Might &amp; Magic Heroes VI.exe"+3959C8
+
+8e6959:
+  db 00
+</AssemblerScript>
+      <CheatEntries>
+        <CheatEntry>
+          <ID>28</ID>
+          <Description>"mana"</Description>
+          <LastState/>
+          <VariableType>Auto Assembler Script</VariableType>
+          <AssemblerScript>{ Game   : Might &amp; Magic Heroes VI.exe
+  Version: 
+  Date   : 2021-10-27
+  Author : Hipp
+
+  This script does blah blah blah
+}
+
+define(address,"Might &amp; Magic Heroes VI.exe"+1349531)
+define(bytes,F3 0F 11 80 D8 00 00 00)
+
+[ENABLE]
+
+assert(address,bytes)
+alloc(newmem,$1000)
+
+label(code)
+label(return)
+
+newmem:
+  movss xmm0,[eax+000000D8]
+code:
+  movss [eax+000000D8],xmm0
+  jmp return
+
+address:
+  jmp newmem
+  nop 3
+return:
+
+[DISABLE]
+
+address:
+  db bytes
+  // movss [eax+000000D8],xmm0
+
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: "Might &amp; Magic Heroes VI.exe"+1349531
+
+"Might &amp; Magic Heroes VI.exe"+134951C: CC                       -  int 3 
+"Might &amp; Magic Heroes VI.exe"+134951D: CC                       -  int 3 
+"Might &amp; Magic Heroes VI.exe"+134951E: CC                       -  int 3 
+"Might &amp; Magic Heroes VI.exe"+134951F: CC                       -  int 3 
+"Might &amp; Magic Heroes VI.exe"+1349520: 55                       -  push ebp
+"Might &amp; Magic Heroes VI.exe"+1349521: 8B EC                    -  mov ebp,esp
+"Might &amp; Magic Heroes VI.exe"+1349523: 83 EC 10                 -  sub esp,10
+"Might &amp; Magic Heroes VI.exe"+1349526: 89 4D F4                 -  mov [ebp-0C],ecx
+"Might &amp; Magic Heroes VI.exe"+1349529: 8B 45 F4                 -  mov eax,[ebp-0C]
+"Might &amp; Magic Heroes VI.exe"+134952C: F3 0F 10 45 08           -  movss xmm0,[ebp+08]
+// ---------- INJECTING HERE ----------
+"Might &amp; Magic Heroes VI.exe"+1349531: F3 0F 11 80 D8 00 00 00  -  movss [eax+000000D8],xmm0
+// ---------- DONE INJECTING  ----------
+"Might &amp; Magic Heroes VI.exe"+1349539: 8B 4D F4                 -  mov ecx,[ebp-0C]
+"Might &amp; Magic Heroes VI.exe"+134953C: D9 81 D8 00 00 00        -  fld dword ptr [ecx+000000D8]
+"Might &amp; Magic Heroes VI.exe"+1349542: D9 EE                    -  fldz 
+"Might &amp; Magic Heroes VI.exe"+1349544: DF F1                    -  fcomip st(0),st(1)
+"Might &amp; Magic Heroes VI.exe"+1349546: DD D8                    -  fstp st(0)
+"Might &amp; Magic Heroes VI.exe"+1349548: 76 15                    -  jna "Might &amp; Magic Heroes VI.exe"+134955F
+"Might &amp; Magic Heroes VI.exe"+134954A: 8B 55 F4                 -  mov edx,[ebp-0C]
+"Might &amp; Magic Heroes VI.exe"+134954D: F3 0F 10 05 7C C3 EC 01  -  movss xmm0,["Might &amp; Magic Heroes VI.exe"+1ACC37C]
+"Might &amp; Magic Heroes VI.exe"+1349555: F3 0F 11 82 D8 00 00 00  -  movss [edx+000000D8],xmm0
+"Might &amp; Magic Heroes VI.exe"+134955D: EB 57                    -  jmp "Might &amp; Magic Heroes VI.exe"+13495B6
+}
+</AssemblerScript>
+        </CheatEntry>
+      </CheatEntries>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>15</ID>
+      <Description>"OHK"</Description>
+      <Options moHideChildren="1"/>
+      <LastState/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>{ Game   : Might &amp; Magic Heroes VI.exe
+  Version: 
+  Date   : 2021-04-15
+  Author : Hipp
+
+  This script does blah blah blah
+}
+
+[ENABLE]
+
+aobscanmodule(OHK,Might &amp; Magic Heroes VI.exe,8B 48 44 8B 55 F8 03) // should be unique
+alloc(newmem,$1000)
+
+label(code)
+label(return)
+label(f_OHK)
+registersymbol(f_OHK)
+
+newmem:
+  mov ecx,[f_OHK]
+  test ecx,ecx
+  jne plus
+  mov ecx,[f_OHK]
+write_val:
+  mov dword ptr[eax+44],ecx
+code:
+  mov ecx,[eax+44]
+  mov edx,[ebp-08]
+  jmp return
+plus:
+  mov ecx,[eax+44]
+  add ecx,[f_OHK]
+  jmp write_val
+
+f_OHK:
+  dd 0
+OHK:
+  jmp newmem
+  nop
+return:
+registersymbol(OHK)
+
+[DISABLE]
+
+OHK:
+  db 8B 48 44 8B 55 F8
+
+unregistersymbol(OHK)
+unregistersymbol(f_OHK)
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: "Might &amp; Magic Heroes VI.exe"+39A51C
+
+"Might &amp; Magic Heroes VI.exe"+39A50B: CC                 -  int 3 
+"Might &amp; Magic Heroes VI.exe"+39A50C: CC                 -  int 3 
+"Might &amp; Magic Heroes VI.exe"+39A50D: CC                 -  int 3 
+"Might &amp; Magic Heroes VI.exe"+39A50E: CC                 -  int 3 
+"Might &amp; Magic Heroes VI.exe"+39A50F: CC                 -  int 3 
+"Might &amp; Magic Heroes VI.exe"+39A510: 55                 -  push ebp
+"Might &amp; Magic Heroes VI.exe"+39A511: 8B EC              -  mov ebp,esp
+"Might &amp; Magic Heroes VI.exe"+39A513: 83 EC 08           -  sub esp,08
+"Might &amp; Magic Heroes VI.exe"+39A516: 89 4D F8           -  mov [ebp-08],ecx
+"Might &amp; Magic Heroes VI.exe"+39A519: 8B 45 F8           -  mov eax,[ebp-08]
+// ---------- INJECTING HERE ----------
+"Might &amp; Magic Heroes VI.exe"+39A51C: 8B 48 44           -  mov ecx,[eax+44]
+"Might &amp; Magic Heroes VI.exe"+39A51F: 8B 55 F8           -  mov edx,[ebp-08]
+// ---------- DONE INJECTING  ----------
+"Might &amp; Magic Heroes VI.exe"+39A522: 03 8A 90 09 00 00  -  add ecx,[edx+00000990]
+"Might &amp; Magic Heroes VI.exe"+39A528: 8B 45 F8           -  mov eax,[ebp-08]
+"Might &amp; Magic Heroes VI.exe"+39A52B: 2B 88 94 09 00 00  -  sub ecx,[eax+00000994]
+"Might &amp; Magic Heroes VI.exe"+39A531: 8B 55 F8           -  mov edx,[ebp-08]
+"Might &amp; Magic Heroes VI.exe"+39A534: 89 4A 40           -  mov [edx+40],ecx
+"Might &amp; Magic Heroes VI.exe"+39A537: 8B 45 F8           -  mov eax,[ebp-08]
+"Might &amp; Magic Heroes VI.exe"+39A53A: 83 78 18 00        -  cmp dword ptr [eax+18],00
+"Might &amp; Magic Heroes VI.exe"+39A53E: 74 3F              -  je "Might &amp; Magic Heroes VI.exe"+39A57F
+"Might &amp; Magic Heroes VI.exe"+39A540: 8B 4D F8           -  mov ecx,[ebp-08]
+"Might &amp; Magic Heroes VI.exe"+39A543: 8B 51 18           -  mov edx,[ecx+18]
+}
+</AssemblerScript>
+      <Hotkeys>
+        <Hotkey>
+          <Action>Toggle Activation</Action>
+          <Keys>
+            <Key>79</Key>
+          </Keys>
+          <ID>0</ID>
+        </Hotkey>
+      </Hotkeys>
+      <CheatEntries>
+        <CheatEntry>
+          <ID>18</ID>
+          <Description>"Нет описания"</Description>
+          <LastState Value="1074181384" RealAddress="06D2002D"/>
+          <VariableType>4 Bytes</VariableType>
+          <Address>f_OHK</Address>
+        </CheatEntry>
+      </CheatEntries>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>5</ID>
+      <Description>"build"</Description>
+      <LastState/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>[ENABLE]
+Might &amp; Magic Heroes VI.exe+132A5A0:
+ jmp "Might &amp; Magic Heroes VI.exe"+132A5BA
+Might &amp; Magic Heroes VI.exe+10A61A:
+ jmp "Might &amp; Magic Heroes VI.exe"+10A63B
+
+
+ 
+ 
+[DISABLE]
+Might &amp; Magic Heroes VI.exe+132A5A0:
+ je "Might &amp; Magic Heroes VI.exe"+132A5BA
+
+Might &amp; Magic Heroes VI.exe+10A61A:
+ je "Might &amp; Magic Heroes VI.exe"+10A63B
+
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>6</ID>
+      <Description>"monster in town"</Description>
+      <Options moHideChildren="1"/>
+      <LastState/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>{ Game   : Might &amp; Magic Heroes VI.exe
+  Version: 
+  Date   : 2021-04-13
+  Author : Hipp
+
+  This script does blah blah blah
+}
+
+[ENABLE]
+
+aobscanmodule(monster_town,Might &amp; Magic Heroes VI.exe,8B 48 74 89 8D 30 F9 FF FF) // should be unique
+alloc(newmem,$1000)
+
+label(code)
+label(return)
+registersymbol(m_town)
+
+newmem:
+  push ebx
+  mov ebx,[m_town]
+  add [eax+74],ebx
+  pop ebx
+code:
+  mov ecx,[eax+74]
+  mov [ebp-000006D0],ecx
+  jmp return
+
+m_town:
+  dd #100
+
+monster_town:
+  jmp newmem
+  nop 4
+return:
+registersymbol(monster_town)
+
+[DISABLE]
+
+monster_town:
+  db 8B 48 74 89 8D 30 F9 FF FF
+
+unregistersymbol(monster_town)
+unregistersymbol(m_town)
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: "Might &amp; Magic Heroes VI.exe"+101879
+
+"Might &amp; Magic Heroes VI.exe"+101845: 8B C8                          -  mov ecx,eax
+"Might &amp; Magic Heroes VI.exe"+101847: E8 B4 44 BB 00                 -  call "Might &amp; Magic Heroes VI.exe"+CB5D00
+"Might &amp; Magic Heroes VI.exe"+10184C: C6 45 FC 5C                    -  mov byte ptr [ebp-04],5C
+"Might &amp; Magic Heroes VI.exe"+101850: 8B 95 04 F6 FF FF              -  mov edx,[ebp-000009FC]
+"Might &amp; Magic Heroes VI.exe"+101856: 52                             -  push edx
+"Might &amp; Magic Heroes VI.exe"+101857: E8 24 C5 F0 FF                 -  call "Might &amp; Magic Heroes VI.exe"+DD80
+"Might &amp; Magic Heroes VI.exe"+10185C: 83 C4 04                       -  add esp,04
+"Might &amp; Magic Heroes VI.exe"+10185F: C7 85 04 F6 FF FF 00 00 00 00  -  mov [ebp-000009FC],00000000
+"Might &amp; Magic Heroes VI.exe"+101869: C7 85 38 F9 FF FF 00 00 00 00  -  mov [ebp-000006C8],00000000
+"Might &amp; Magic Heroes VI.exe"+101873: 8B 85 24 F9 FF FF              -  mov eax,[ebp-000006DC]
+// ---------- INJECTING HERE ----------
+"Might &amp; Magic Heroes VI.exe"+101879: 8B 48 74                       -  mov ecx,[eax+74]
+"Might &amp; Magic Heroes VI.exe"+10187C: 89 8D 30 F9 FF FF              -  mov [ebp-000006D0],ecx
+// ---------- DONE INJECTING  ----------
+"Might &amp; Magic Heroes VI.exe"+101882: 0F B6 55 D7                    -  movzx edx,byte ptr [ebp-29]
+"Might &amp; Magic Heroes VI.exe"+101886: 85 D2                          -  test edx,edx
+"Might &amp; Magic Heroes VI.exe"+101888: 74 6D                          -  je "Might &amp; Magic Heroes VI.exe"+1018F7
+"Might &amp; Magic Heroes VI.exe"+10188A: 83 3D 20 DC 0F 02 FF           -  cmp dword ptr ["Might &amp; Magic Heroes VI.exe"+1CFDC20],-01
+"Might &amp; Magic Heroes VI.exe"+101891: 75 4E                          -  jne "Might &amp; Magic Heroes VI.exe"+1018E1
+"Might &amp; Magic Heroes VI.exe"+101893: C7 85 30 F9 FF FF 00 00 00 00  -  mov [ebp-000006D0],00000000
+"Might &amp; Magic Heroes VI.exe"+10189D: C7 85 EC F8 FF FF 00 00 00 00  -  mov [ebp-00000714],00000000
+"Might &amp; Magic Heroes VI.exe"+1018A7: EB 0F                          -  jmp "Might &amp; Magic Heroes VI.exe"+1018B8
+"Might &amp; Magic Heroes VI.exe"+1018A9: 8B 85 EC F8 FF FF              -  mov eax,[ebp-00000714]
+"Might &amp; Magic Heroes VI.exe"+1018AF: 83 C0 01                       -  add eax,01
+}
+</AssemblerScript>
+      <CheatEntries>
+        <CheatEntry>
+          <ID>21</ID>
+          <Description>"Нет описания"</Description>
+          <VariableType>4 Bytes</VariableType>
+          <Address>m_town</Address>
+        </CheatEntry>
+      </CheatEntries>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>25</ID>
+      <Description>"artefact"</Description>
+      <Options moHideChildren="1"/>
+      <LastState/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>{ Game   : Might &amp; Magic Heroes VI.exe
+  Version: 
+  Date   : 2021-05-12
+  Author : Hipp
+
+  This script does blah blah blah
+}
+
+[ENABLE]
+
+aobscanmodule(artefact,Might &amp; Magic Heroes VI.exe,8B 04 91 89 45 F0 83 7D F0 00 74 16) // should be unique
+
+alloc(newmem,$1000,artefact)
+
+label(var_artefact)
+label(code)
+label(return)
+registersymbol(var_artefact)
+
+newmem:
+  mov eax,[ecx+edx*4]
+  mov [var_artefact],eax
+code:
+  mov [ebp-10],eax
+  jmp return
+var_artefact:
+  dd 0
+
+
+artefact:
+  jmp newmem
+  nop
+return:
+registersymbol(artefact)
+
+
+[DISABLE]
+
+artefact:
+  db 8B 04 91 89 45 F0
+
+
+unregistersymbol(var_artefact)
+unregistersymbol(artefact)
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: "Might &amp; Magic Heroes VI.exe"+134D414
+
+"Might &amp; Magic Heroes VI.exe"+134D3F7: 89 55 F4              -  mov [ebp-0C],edx
+"Might &amp; Magic Heroes VI.exe"+134D3FA: 8B 45 DC              -  mov eax,[ebp-24]
+"Might &amp; Magic Heroes VI.exe"+134D3FD: 8B 48 18              -  mov ecx,[eax+18]
+"Might &amp; Magic Heroes VI.exe"+134D400: 89 4D E4              -  mov [ebp-1C],ecx
+"Might &amp; Magic Heroes VI.exe"+134D403: 8B 55 F4              -  mov edx,[ebp-0C]
+"Might &amp; Magic Heroes VI.exe"+134D406: 3B 55 E4              -  cmp edx,[ebp-1C]
+"Might &amp; Magic Heroes VI.exe"+134D409: 7D 2D                 -  jnl "Might &amp; Magic Heroes VI.exe"+134D438
+"Might &amp; Magic Heroes VI.exe"+134D40B: 8B 45 DC              -  mov eax,[ebp-24]
+"Might &amp; Magic Heroes VI.exe"+134D40E: 8B 48 10              -  mov ecx,[eax+10]
+"Might &amp; Magic Heroes VI.exe"+134D411: 8B 55 F4              -  mov edx,[ebp-0C]
+// ---------- INJECTING HERE ----------
+"Might &amp; Magic Heroes VI.exe"+134D414: 8B 04 91              -  mov eax,[ecx+edx*4]
+"Might &amp; Magic Heroes VI.exe"+134D417: 89 45 F0              -  mov [ebp-10],eax
+// ---------- DONE INJECTING  ----------
+"Might &amp; Magic Heroes VI.exe"+134D41A: 83 7D F0 00           -  cmp dword ptr [ebp-10],00
+"Might &amp; Magic Heroes VI.exe"+134D41E: 74 16                 -  je "Might &amp; Magic Heroes VI.exe"+134D436
+"Might &amp; Magic Heroes VI.exe"+134D420: 8B 4D F0              -  mov ecx,[ebp-10]
+"Might &amp; Magic Heroes VI.exe"+134D423: 8B 51 10              -  mov edx,[ecx+10]
+"Might &amp; Magic Heroes VI.exe"+134D426: 89 55 E0              -  mov [ebp-20],edx
+"Might &amp; Magic Heroes VI.exe"+134D429: 8B 45 E0              -  mov eax,[ebp-20]
+"Might &amp; Magic Heroes VI.exe"+134D42C: 3B 45 08              -  cmp eax,[ebp+08]
+"Might &amp; Magic Heroes VI.exe"+134D42F: 75 05                 -  jne "Might &amp; Magic Heroes VI.exe"+134D436
+"Might &amp; Magic Heroes VI.exe"+134D431: 8B 45 F0              -  mov eax,[ebp-10]
+"Might &amp; Magic Heroes VI.exe"+134D434: EB 04                 -  jmp "Might &amp; Magic Heroes VI.exe"+134D43A
+}
+</AssemblerScript>
+      <CheatEntries>
+        <CheatEntry>
+          <ID>26</ID>
+          <Description>"Нет описания"</Description>
+          <VariableType>4 Bytes</VariableType>
+          <Address>var_artefact</Address>
+          <Offsets>
+            <Offset>0</Offset>
+          </Offsets>
+          <Hotkeys>
+            <Hotkey>
+              <Action>Decrease Value</Action>
+              <Keys>
+                <Key>76</Key>
+              </Keys>
+              <Value>1</Value>
+              <ID>0</ID>
+            </Hotkey>
+            <Hotkey>
+              <Action>Increase Value</Action>
+              <Keys>
+                <Key>16</Key>
+                <Key>76</Key>
+              </Keys>
+              <Value>1</Value>
+              <ID>1</ID>
+            </Hotkey>
+          </Hotkeys>
+        </CheatEntry>
+      </CheatEntries>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>10</ID>
+      <Description>"edu_point"</Description>
+      <Options moHideChildren="1"/>
+      <LastState/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>[ENABLE]
+alloc(newmem,2048)
+label(returnhere)
+label(originalcode)
+label(exit)
+label(edu)
+registersymbol(edu)
+newmem:
+mov ecx,[edu]
+
+originalcode:
+mov [edx+18],ecx
+mov ecx,[ebp-0C]
+
+exit:
+jmp returnhere
+edu:
+  dd #100
+"Might &amp; Magic Heroes VI.exe"+1342736:
+jmp newmem
+nop
+returnhere:
+
+
+
+
+ 
+ 
+[DISABLE]
+//code from here till the end of the code will be used to disable the cheat
+unregistersymbol(edu)
+dealloc(newmem)
+"Might &amp; Magic Heroes VI.exe"+1342736:
+mov [edx+18],ecx
+mov ecx,[ebp-0C]
+//Alt: db 89 4A 18 8B 4D F4
+</AssemblerScript>
+      <CheatEntries>
+        <CheatEntry>
+          <ID>22</ID>
+          <Description>"Нет описания"</Description>
+          <VariableType>4 Bytes</VariableType>
+          <Address>edu</Address>
+        </CheatEntry>
+      </CheatEntries>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>16</ID>
+      <Description>"day"</Description>
+      <LastState/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>{ Game   : Might &amp; Magic Heroes VI.exe
+  Version: 
+  Date   : 2021-04-15
+  Author : Hipp
+
+  This script does blah blah blah
+}
+
+[ENABLE]
+
+aobscanmodule(day,Might &amp; Magic Heroes VI.exe,8B 88 B0 00 00 00 51 8B 95 FC) // should be unique
+alloc(newmem,$1000)
+registersymbol(v_day)
+
+label(code)
+label(return)
+
+newmem:
+  mov [v_day],eax
+code:
+  mov ecx,[eax+000000B0]
+  jmp return
+v_day:
+  dd 6
+day:
+  jmp newmem
+  nop
+return:
+registersymbol(day)
+
+[DISABLE]
+
+day:
+  db 8B 88 B0 00 00 00
+
+unregistersymbol(day)
+unregistersymbol(v_day)
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: "Might &amp; Magic Heroes VI.exe"+12FA188
+
+"Might &amp; Magic Heroes VI.exe"+12FA156: 8B 15 E4 79 17 02              -  mov edx,["Might &amp; Magic Heroes VI.exe"+1D779E4]
+"Might &amp; Magic Heroes VI.exe"+12FA15C: 8B 82 D0 00 00 00              -  mov eax,[edx+000000D0]
+"Might &amp; Magic Heroes VI.exe"+12FA162: 8B 88 B8 00 00 00              -  mov ecx,[eax+000000B8]
+"Might &amp; Magic Heroes VI.exe"+12FA168: 51                             -  push ecx
+"Might &amp; Magic Heroes VI.exe"+12FA169: 8B 15 E4 79 17 02              -  mov edx,["Might &amp; Magic Heroes VI.exe"+1D779E4]
+"Might &amp; Magic Heroes VI.exe"+12FA16F: 8B 82 D0 00 00 00              -  mov eax,[edx+000000D0]
+"Might &amp; Magic Heroes VI.exe"+12FA175: 8B 88 B4 00 00 00              -  mov ecx,[eax+000000B4]
+"Might &amp; Magic Heroes VI.exe"+12FA17B: 51                             -  push ecx
+"Might &amp; Magic Heroes VI.exe"+12FA17C: 8B 15 E4 79 17 02              -  mov edx,["Might &amp; Magic Heroes VI.exe"+1D779E4]
+"Might &amp; Magic Heroes VI.exe"+12FA182: 8B 82 D0 00 00 00              -  mov eax,[edx+000000D0]
+// ---------- INJECTING HERE ----------
+"Might &amp; Magic Heroes VI.exe"+12FA188: 8B 88 B0 00 00 00              -  mov ecx,[eax+000000B0]
+// ---------- DONE INJECTING  ----------
+"Might &amp; Magic Heroes VI.exe"+12FA18E: 51                             -  push ecx
+"Might &amp; Magic Heroes VI.exe"+12FA18F: 8B 95 FC FD FF FF              -  mov edx,[ebp-00000204]
+"Might &amp; Magic Heroes VI.exe"+12FA195: 52                             -  push edx
+"Might &amp; Magic Heroes VI.exe"+12FA196: 68 10 31 EA 01                 -  push "Might &amp; Magic Heroes VI.exe"+1AA3110
+"Might &amp; Magic Heroes VI.exe"+12FA19B: 6A 00                          -  push 00
+"Might &amp; Magic Heroes VI.exe"+12FA19D: A1 18 78 22 02                 -  mov eax,["Might &amp; Magic Heroes VI.exe"+1E27818]
+"Might &amp; Magic Heroes VI.exe"+12FA1A2: 50                             -  push eax
+"Might &amp; Magic Heroes VI.exe"+12FA1A3: E8 28 A3 AA FF                 -  call "Might &amp; Magic Heroes VI.exe"+DA44D0
+"Might &amp; Magic Heroes VI.exe"+12FA1A8: 83 C4 1C                       -  add esp,1C
+"Might &amp; Magic Heroes VI.exe"+12FA1AB: 8B 8D C8 FC FF FF              -  mov ecx,[ebp-00000338]
+}
+</AssemblerScript>
+      <CheatEntries>
+        <CheatEntry>
+          <ID>17</ID>
+          <Description>"Нет описания"</Description>
+          <VariableType>4 Bytes</VariableType>
+          <Address>v_day</Address>
+          <Offsets>
+            <Offset>+b0</Offset>
+          </Offsets>
+        </CheatEntry>
+      </CheatEntries>
+    </CheatEntry>
+  </CheatEntries>
+  <UserdefinedSymbols>
+    <SymbolEntry>
+      <Name>pRes</Name>
+      <Address>04BD0000</Address>
+    </SymbolEntry>
+  </UserdefinedSymbols>
+  <Structures StructVersion="2">
+    <Structure Name="безымянная структура" AutoFill="0" AutoCreate="1" DefaultHex="0" AutoDestroy="0" DoNotSaveLocal="0" RLECompression="1" AutoCreateStructsize="4096">
+      <Elements>
+        <Element Offset="0" Vartype="4 Bytes" Bytesize="4" RLECount="1024" DisplayMethod="Целое без знака"/>
+      </Elements>
+    </Structure>
+  </Structures>
+  <Comments>Might &amp; Magic Heroes VI.exe+13BD52D - mov eax,[eax] - обращение к опыту один раз при движении, след адрес ключ XOR затем уровень
+Might &amp; Magic Heroes VI.exe+1339197: - fstp dword ptr [eax+edx+00000140] запись характеристик
+Might &amp; Magic Heroes VI.exe+1320F0C - fld dword ptr [eax]
+читает хар-ки
+Might &amp; Magic Heroes VI.exe+134D414 - mov eax,[ecx+edx*4]
+читает указатель на артефакт наведенной ячейки в рюкзаке
+Might &amp; Magic Heroes VI.exe+13495CA - обращение к мане в бою
+Might &amp; Magic Heroes VI.exe+1324920 - обращение к крови..слезам рядом</Comments>
+  <DisassemblerComments>
+    <DisassemblerComment>
+      <Address>"Might &amp; Magic Heroes VI.exe"+1349531</Address>
+      <Comment>write magic
+</Comment>
+    </DisassemblerComment>
+  </DisassemblerComments>
+</CheatTable>
