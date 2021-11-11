@@ -1,0 +1,870 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CheatTable CheatEngineTableVersion="26">
+  <CheatEntries>
+    <CheatEntry>
+      <ID>0</ID>
+      <Description>"ammo"</Description>
+      <Options moManualExpandCollapse="1" moActivateChildrenAsWell="1" moDeactivateChildrenAsWell="1"/>
+      <LastState Activated="1"/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>{ Game   : hl2.exe
+  Version: 
+  Date   : 2019-06-05
+  Author : Hipp
+
+  This script does blah blah blah
+}
+
+[ENABLE]
+
+aobscanmodule(ammo,server.dll,89 9E C4 04 00 00 EB) // should be unique
+alloc(newmem,$1000)
+
+label(code)
+label(return)
+
+newmem:
+  inc ebx
+code:
+  mov [esi+000004C4],ebx
+  jmp return
+
+ammo:
+  jmp newmem
+  nop
+return:
+registersymbol(ammo)
+
+[DISABLE]
+
+ammo:
+  db 89 9E C4 04 00 00
+
+unregistersymbol(ammo)
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: "server.dll"+226BA6
+
+"server.dll"+226B85: 7C 02                    -  jl server.dll+226B89
+"server.dll"+226B87: 8B C8                    -  mov ecx,eax
+"server.dll"+226B89: 8B 86 C4 04 00 00        -  mov eax,[esi+000004C4]
+"server.dll"+226B8F: 8B D8                    -  mov ebx,eax
+"server.dll"+226B91: 2B D9                    -  sub ebx,ecx
+"server.dll"+226B93: 3B C3                    -  cmp eax,ebx
+"server.dll"+226B95: 89 4C 24 24              -  mov [esp+24],ecx
+"server.dll"+226B99: 74 4C                    -  je server.dll+226BE7
+"server.dll"+226B9B: 8D 8E 60 01 00 00        -  lea ecx,[esi+00000160]
+"server.dll"+226BA1: E8 3A EC DD FF           -  call server.dll+57E0
+// ---------- INJECTING HERE ----------
+"server.dll"+226BA6: 89 9E C4 04 00 00        -  mov [esi+000004C4],ebx
+// ---------- DONE INJECTING  ----------
+"server.dll"+226BAC: EB 39                    -  jmp server.dll+226BE7
+"server.dll"+226BAE: 8B 86 BC 04 00 00        -  mov eax,[esi+000004BC]
+"server.dll"+226BB4: 50                       -  push eax
+"server.dll"+226BB5: 8B CF                    -  mov ecx,edi
+"server.dll"+226BB7: E8 54 C2 FF FF           -  call server.dll+222E10
+"server.dll"+226BBC: 8B 4C 24 24              -  mov ecx,[esp+24]
+"server.dll"+226BC0: 3B C8                    -  cmp ecx,eax
+"server.dll"+226BC2: 7C 14                    -  jl server.dll+226BD8
+"server.dll"+226BC4: 8B 86 BC 04 00 00        -  mov eax,[esi+000004BC]
+"server.dll"+226BCA: 50                       -  push eax
+}
+</AssemblerScript>
+      <CheatEntries>
+        <CheatEntry>
+          <ID>4</ID>
+          <Description>"ammo1"</Description>
+          <LastState Activated="1"/>
+          <VariableType>Auto Assembler Script</VariableType>
+          <AssemblerScript>{ Game   : hl2.exe
+  Version: 
+  Date   : 2019-06-05
+  Author : Hipp
+
+  This script does blah blah blah
+}
+
+[ENABLE]
+
+aobscanmodule(ammo1,server.dll,89 AE C4 04 00 00 33) // should be unique
+alloc(newmem,$1000)
+
+label(code)
+label(return)
+
+newmem:
+  inc ebp
+code:
+  mov [esi+000004C4],ebp
+  jmp return
+
+ammo1:
+  jmp newmem
+  nop
+return:
+registersymbol(ammo1)
+
+[DISABLE]
+
+ammo1:
+  db 89 AE C4 04 00 00
+
+unregistersymbol(ammo1)
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: "server.dll"+354FE
+
+"server.dll"+354DF: 3B D8                    -  cmp ebx,eax
+"server.dll"+354E1: 7E 02                    -  jle server.dll+354E5
+"server.dll"+354E3: 8B D8                    -  mov ebx,eax
+"server.dll"+354E5: 8B 86 C4 04 00 00        -  mov eax,[esi+000004C4]
+"server.dll"+354EB: 8B E8                    -  mov ebp,eax
+"server.dll"+354ED: 2B EB                    -  sub ebp,ebx
+"server.dll"+354EF: 3B C5                    -  cmp eax,ebp
+"server.dll"+354F1: 74 11                    -  je server.dll+35504
+"server.dll"+354F3: 8D 8E 60 01 00 00        -  lea ecx,[esi+00000160]
+"server.dll"+354F9: E8 E2 02 FD FF           -  call server.dll+57E0
+// ---------- INJECTING HERE ----------
+"server.dll"+354FE: 89 AE C4 04 00 00        -  mov [esi+000004C4],ebp
+// ---------- DONE INJECTING  ----------
+"server.dll"+35504: 33 ED                    -  xor ebp,ebp
+"server.dll"+35506: 8D 44 24 18              -  lea eax,[esp+18]
+"server.dll"+3550A: C7 44 24 40 00 00 00 00  -  mov [esp+40],00000000
+"server.dll"+35512: C7 44 24 44 00 00 00 00  -  mov [esp+44],00000000
+"server.dll"+3551A: C7 44 24 48 00 00 00 00  -  mov [esp+48],00000000
+"server.dll"+35522: C7 44 24 4C 00 00 00 46  -  mov [esp+4C],46000000
+"server.dll"+3552A: C7 44 24 54 04 00 00 00  -  mov [esp+54],00000004
+"server.dll"+35532: 89 6C 24 58              -  mov [esp+58],ebp
+"server.dll"+35536: 89 6C 24 5C              -  mov [esp+5C],ebp
+"server.dll"+3553A: 89 6C 24 68              -  mov [esp+68],ebp
+}
+</AssemblerScript>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>7</ID>
+          <Description>"granade"</Description>
+          <LastState Activated="1"/>
+          <VariableType>Auto Assembler Script</VariableType>
+          <AssemblerScript>{ Game   : hl2.exe
+  Version: 
+  Date   : 2019-06-05
+  Author : Hipp
+
+  This script does blah blah blah
+}
+
+[ENABLE]
+
+aobscanmodule(granade,server.dll,89 9C BE 30 06 00 00 5F 5E 5B C2 08 00 90 90 90 90 90 90) // should be unique
+alloc(newmem,$1000)
+
+label(code)
+label(return)
+
+newmem:
+  inc ebx
+code:
+  mov [esi+edi*4+00000630],ebx
+  jmp return
+
+granade:
+  jmp newmem
+  nop
+  nop
+return:
+registersymbol(granade)
+
+[DISABLE]
+
+granade:
+  db 89 9C BE 30 06 00 00
+
+unregistersymbol(granade)
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: "server.dll"+222D59
+
+"server.dll"+222D3C: 33 DB                             -  xor ebx,ebx
+"server.dll"+222D3E: 85 C0                             -  test eax,eax
+"server.dll"+222D40: 0F 9E C3                          -  setle bl
+"server.dll"+222D43: 4B                                -  dec ebx
+"server.dll"+222D44: 23 D8                             -  and ebx,eax
+"server.dll"+222D46: 39 9C BE 30 06 00 00              -  cmp [esi+edi*4+00000630],ebx
+"server.dll"+222D4D: 74 11                             -  je server.dll+222D60
+"server.dll"+222D4F: 8B CE                             -  mov ecx,esi
+"server.dll"+222D51: 8B 01                             -  mov eax,[ecx]
+"server.dll"+222D53: FF 90 A0 03 00 00                 -  call dword ptr [eax+000003A0]
+// ---------- INJECTING HERE ----------
+"server.dll"+222D59: 89 9C BE 30 06 00 00              -  mov [esi+edi*4+00000630],ebx
+// ---------- DONE INJECTING  ----------
+"server.dll"+222D60: 5F                                -  pop edi
+"server.dll"+222D61: 5E                                -  pop esi
+"server.dll"+222D62: 5B                                -  pop ebx
+"server.dll"+222D63: C2 08 00                          -  ret 0008
+"server.dll"+222D66: 90                                -  nop 
+"server.dll"+222D67: 90                                -  nop 
+"server.dll"+222D68: 90                                -  nop 
+"server.dll"+222D69: 90                                -  nop 
+"server.dll"+222D6A: 90                                -  nop 
+"server.dll"+222D6B: 90                                -  nop 
+}
+</AssemblerScript>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>19</ID>
+          <Description>"shotgun"</Description>
+          <LastState Activated="1"/>
+          <VariableType>Auto Assembler Script</VariableType>
+          <AssemblerScript>{ Game   : hl2.exe
+  Version: 
+  Date   : 2019-06-05
+  Author : Hipp
+
+  This script does blah blah blah
+}
+
+[ENABLE]
+
+aobscanmodule(shotgun,server.dll,97 E8 FF 89 9F C4 04 00 00) // should be unique
+alloc(newmem,$1000)
+
+label(code)
+label(return)
+
+newmem:
+  inc bl
+code:
+  mov [edi+000004C4],ebx
+  jmp return
+
+shotgun+03:
+  jmp newmem
+  nop
+return:
+registersymbol(shotgun)
+
+[DISABLE]
+
+shotgun+03:
+  db 89 9F C4 04 00 00
+
+unregistersymbol(shotgun)
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: "server.dll"+17C0C5
+
+"server.dll"+17C09D: E8 3E 97 E8 FF     -  call server.dll+57E0
+"server.dll"+17C0A2: 8B 54 24 08        -  mov edx,[esp+08]
+"server.dll"+17C0A6: 89 97 80 04 00 00  -  mov [edi+00000480],edx
+"server.dll"+17C0AC: 8B 87 C4 04 00 00  -  mov eax,[edi+000004C4]
+"server.dll"+17C0B2: 53                 -  push ebx
+"server.dll"+17C0B3: 8D 58 FF           -  lea ebx,[eax-01]
+"server.dll"+17C0B6: 3B C3              -  cmp eax,ebx
+"server.dll"+17C0B8: 74 11              -  je server.dll+17C0CB
+"server.dll"+17C0BA: 8D 8F 60 01 00 00  -  lea ecx,[edi+00000160]
+"server.dll"+17C0C0: E8 1B 97 E8 FF     -  call server.dll+57E0
+// ---------- INJECTING HERE ----------
+"server.dll"+17C0C5: 89 9F C4 04 00 00  -  mov [edi+000004C4],ebx
+// ---------- DONE INJECTING  ----------
+"server.dll"+17C0CB: 8B 06              -  mov eax,[esi]
+"server.dll"+17C0CD: 55                 -  push ebp
+"server.dll"+17C0CE: 8D 4C 24 14        -  lea ecx,[esp+14]
+"server.dll"+17C0D2: 51                 -  push ecx
+"server.dll"+17C0D3: 8B CE              -  mov ecx,esi
+"server.dll"+17C0D5: FF 90 20 03 00 00  -  call dword ptr [eax+00000320]
+"server.dll"+17C0DB: 8B 16              -  mov edx,[esi]
+"server.dll"+17C0DD: 68 D4 D0 31 3E     -  push 3E31D0D4
+"server.dll"+17C0E2: 8D 44 24 30        -  lea eax,[esp+30]
+"server.dll"+17C0E6: 50                 -  push eax
+}
+</AssemblerScript>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>14</ID>
+          <Description>"magnum"</Description>
+          <LastState Activated="1"/>
+          <VariableType>Auto Assembler Script</VariableType>
+          <AssemblerScript>{ Game   : hl2.exe
+  Version: 
+  Date   : 2019-06-05
+  Author : Hipp
+
+  This script does blah blah blah
+}
+
+[ENABLE]
+
+aobscanmodule(INJECT,server.dll,89 10 C2 04 00 90 90 90 90 90 90 90 90 E9) // should be unique
+alloc(newmem,$1000)
+
+label(code)
+label(return)
+
+newmem:
+  inc edx
+code:
+  mov [eax],edx
+  ret 0004
+  jmp return
+
+INJECT:
+  jmp newmem
+return:
+registersymbol(INJECT)
+
+[DISABLE]
+
+INJECT:
+  db 89 10 C2 04 00
+
+unregistersymbol(INJECT)
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: "server.dll"+1622A3
+
+"server.dll"+162284: 74 0E                          -  je server.dll+162294
+"server.dll"+162286: C6 80 3C FD FF FF 01           -  mov byte ptr [eax-000002C4],01
+"server.dll"+16228D: 8B 12                          -  mov edx,[edx]
+"server.dll"+16228F: 89 10                          -  mov [eax],edx
+"server.dll"+162291: C2 04 00                       -  ret 0004
+"server.dll"+162294: 8B 88 A8 FC FF FF              -  mov ecx,[eax-00000358]
+"server.dll"+16229A: 85 C9                          -  test ecx,ecx
+"server.dll"+16229C: 74 03                          -  je server.dll+1622A1
+"server.dll"+16229E: 83 09 01                       -  or dword ptr [ecx],01
+"server.dll"+1622A1: 8B 12                          -  mov edx,[edx]
+// ---------- INJECTING HERE ----------
+"server.dll"+1622A3: 89 10                          -  mov [eax],edx
+"server.dll"+1622A5: C2 04 00                       -  ret 0004
+// ---------- DONE INJECTING  ----------
+"server.dll"+1622A8: 90                             -  nop 
+"server.dll"+1622A9: 90                             -  nop 
+"server.dll"+1622AA: 90                             -  nop 
+"server.dll"+1622AB: 90                             -  nop 
+"server.dll"+1622AC: 90                             -  nop 
+"server.dll"+1622AD: 90                             -  nop 
+"server.dll"+1622AE: 90                             -  nop 
+"server.dll"+1622AF: 90                             -  nop 
+"server.dll"+1622B0: E9 0B 00 00 00                 -  jmp server.dll+1622C0
+"server.dll"+1622B5: 90                             -  nop 
+}
+</AssemblerScript>
+        </CheatEntry>
+      </CheatEntries>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>1</ID>
+      <Description>"Нет описания"</Description>
+      <VariableType>4 Bytes</VariableType>
+      <Address>2E54E544</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>17</ID>
+      <Description>"power"</Description>
+      <LastState Activated="1"/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>{ Game   : hl2.exe
+  Version: 
+  Date   : 2019-06-05
+  Author : Hipp
+
+  This script does blah blah blah
+}
+
+[ENABLE]
+
+aobscanmodule(power,server.dll,C3 D9 81 30 0D 00 00) // should be unique
+alloc(newmem,$1000)
+
+label(code)
+label(return)
+
+newmem:
+  mov [ecx+d30],(float)100
+code:
+  fld dword ptr [ecx+00000D30]
+  jmp return
+
+power+01:
+  jmp newmem
+  nop
+return:
+registersymbol(power)
+
+[DISABLE]
+
+power+01:
+  db D9 81 30 0D 00 00
+
+unregistersymbol(power)
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: "server.dll"+5E56D
+
+"server.dll"+5E55B: 90                 -  nop 
+"server.dll"+5E55C: 90                 -  nop 
+"server.dll"+5E55D: 90                 -  nop 
+"server.dll"+5E55E: 90                 -  nop 
+"server.dll"+5E55F: 90                 -  nop 
+"server.dll"+5E560: 8B 81 38 0D 00 00  -  mov eax,[ecx+00000D38]
+"server.dll"+5E566: 85 C0              -  test eax,eax
+"server.dll"+5E568: 74 03              -  je server.dll+5E56D
+"server.dll"+5E56A: 32 C0              -  xor al,al
+"server.dll"+5E56C: C3                 -  ret 
+// ---------- INJECTING HERE ----------
+"server.dll"+5E56D: D9 81 30 0D 00 00  -  fld dword ptr [ecx+00000D30]
+// ---------- DONE INJECTING  ----------
+"server.dll"+5E573: D8 1D D0 46 3D 22  -  fcomp dword ptr [server.dll+3D46D0]
+"server.dll"+5E579: DF E0              -  fnstsw ax
+"server.dll"+5E57B: F6 C4 01           -  test ah,01
+"server.dll"+5E57E: 75 03              -  jne server.dll+5E583
+"server.dll"+5E580: 32 C0              -  xor al,al
+"server.dll"+5E582: C3                 -  ret 
+"server.dll"+5E583: D9 81 78 0D 00 00  -  fld dword ptr [ecx+00000D78]
+"server.dll"+5E589: A1 5C A9 57 22     -  mov eax,[server.dll+57A95C]
+"server.dll"+5E58E: D8 05 C0 56 3D 22  -  fadd dword ptr [server.dll+3D56C0]
+"server.dll"+5E594: D8 58 0C           -  fcomp dword ptr [eax+0C]
+}
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>3</ID>
+      <Description>"ohk"</Description>
+      <LastState Activated="1"/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>{ Game   : hl2.exe
+  Version: 
+  Date   : 2019-06-05
+  Author : Hipp
+
+  This script does blah blah blah
+}
+
+[ENABLE]
+
+aobscanmodule(OHK,server.dll,89 BE 9C 00 00 00 5F 5E 5D B8) // should be unique
+alloc(newmem,$1000)
+
+label(code)
+label(return)
+
+newmem:
+
+  cmp esi,[22589df0]
+  je code
+  xor edi,edi
+
+
+code:
+  mov [esi+0000009C],edi
+  jmp return
+
+OHK:
+  jmp newmem
+  nop
+return:
+registersymbol(OHK)
+
+[DISABLE]
+
+OHK:
+  db 89 BE 9C 00 00 00
+
+unregistersymbol(OHK)
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: "server.dll"+220E6C
+
+"server.dll"+220E4C: C2 04 00              -  ret 0004
+"server.dll"+220E4F: 8B 9E 9C 00 00 00     -  mov ebx,[esi+0000009C]
+"server.dll"+220E55: E8 7E 52 1A 00        -  call server.dll+3C60D8
+"server.dll"+220E5A: 8B FB                 -  mov edi,ebx
+"server.dll"+220E5C: 2B F8                 -  sub edi,eax
+"server.dll"+220E5E: 3B DF                 -  cmp ebx,edi
+"server.dll"+220E60: 74 10                 -  je server.dll+220E72
+"server.dll"+220E62: 8B CE                 -  mov ecx,esi
+"server.dll"+220E64: 8B 11                 -  mov edx,[ecx]
+"server.dll"+220E66: FF 92 94 01 00 00     -  call dword ptr [edx+00000194]
+// ---------- INJECTING HERE ----------
+"server.dll"+220E6C: 89 BE 9C 00 00 00     -  mov [esi+0000009C],edi
+// ---------- DONE INJECTING  ----------
+"server.dll"+220E72: 5F                    -  pop edi
+"server.dll"+220E73: 5E                    -  pop esi
+"server.dll"+220E74: 5D                    -  pop ebp
+"server.dll"+220E75: B8 01 00 00 00        -  mov eax,00000001
+"server.dll"+220E7A: 5B                    -  pop ebx
+"server.dll"+220E7B: 83 C4 18              -  add esp,18
+"server.dll"+220E7E: C2 04 00              -  ret 0004
+"server.dll"+220E81: 90                    -  nop 
+"server.dll"+220E82: 90                    -  nop 
+"server.dll"+220E83: 90                    -  nop 
+}
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>18</ID>
+      <Description>"inf health"</Description>
+      <LastState Activated="1"/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>{ Game   : hl2.exe
+  Version: 
+  Date   : 2019-06-05
+  Author : Hipp
+
+  This script does blah blah blah
+}
+
+[ENABLE]
+
+aobscanmodule(inf_hl,server.dll,8B 85 9C 00 00 00 8B) // should be unique
+alloc(newmem,$1000)
+
+label(code)
+label(return)
+
+newmem:
+  mov [ebp+0000009C],#100
+code:
+  mov eax,[ebp+0000009C]
+  jmp return
+
+inf_hl:
+  jmp newmem
+  nop
+return:
+registersymbol(inf_hl)
+
+[DISABLE]
+
+inf_hl:
+  db 8B 85 9C 00 00 00
+
+unregistersymbol(inf_hl)
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: "server.dll"+34870A
+
+"server.dll"+3486E3: 8A 86 F0 01 00 00     -  mov al,[esi+000001F0]
+"server.dll"+3486E9: 84 C0                 -  test al,al
+"server.dll"+3486EB: 74 09                 -  je server.dll+3486F6
+"server.dll"+3486ED: C6 86 00 02 00 00 01  -  mov byte ptr [esi+00000200],01
+"server.dll"+3486F4: EB 0D                 -  jmp server.dll+348703
+"server.dll"+3486F6: 8B 86 6C 01 00 00     -  mov eax,[esi+0000016C]
+"server.dll"+3486FC: 85 C0                 -  test eax,eax
+"server.dll"+3486FE: 74 03                 -  je server.dll+348703
+"server.dll"+348700: 83 08 01              -  or dword ptr [eax],01
+"server.dll"+348703: 89 8C 9E 10 06 00 00  -  mov [esi+ebx*4+00000610],ecx
+// ---------- INJECTING HERE ----------
+"server.dll"+34870A: 8B 85 9C 00 00 00     -  mov eax,[ebp+0000009C]
+// ---------- DONE INJECTING  ----------
+"server.dll"+348710: 8B 8C 9E 94 06 00 00  -  mov ecx,[esi+ebx*4+00000694]
+"server.dll"+348717: 33 D2                 -  xor edx,edx
+"server.dll"+348719: 85 C0                 -  test eax,eax
+"server.dll"+34871B: 0F 9C C2              -  setl dl
+"server.dll"+34871E: 4A                    -  dec edx
+"server.dll"+34871F: 23 C2                 -  and eax,edx
+"server.dll"+348721: 3B C8                 -  cmp ecx,eax
+"server.dll"+348723: 74 27                 -  je server.dll+34874C
+"server.dll"+348725: 8A 8E F0 01 00 00     -  mov cl,[esi+000001F0]
+"server.dll"+34872B: 84 C9                 -  test cl,cl
+}
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>6</ID>
+      <Description>"health"</Description>
+      <VariableType>4 Bytes</VariableType>
+      <Address>"server.dll"+00589DF0</Address>
+      <Offsets>
+        <Offset>9C</Offset>
+      </Offsets>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>10</ID>
+      <Description>"x pos"</Description>
+      <VariableType>Float</VariableType>
+      <Address>"server.dll"+00589DF0</Address>
+      <Offsets>
+        <Offset>2bc</Offset>
+      </Offsets>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>12</ID>
+      <Description>"y pos"</Description>
+      <VariableType>Float</VariableType>
+      <Address>"server.dll"+00589DF0</Address>
+      <Offsets>
+        <Offset>2c0</Offset>
+      </Offsets>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>11</ID>
+      <Description>"z pos"</Description>
+      <VariableType>Float</VariableType>
+      <Address>"server.dll"+00589DF0</Address>
+      <Offsets>
+        <Offset>2c4</Offset>
+      </Offsets>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>16</ID>
+      <Description>"energy"</Description>
+      <VariableType>Float</VariableType>
+      <Address>"server.dll"+00589DF0</Address>
+      <Offsets>
+        <Offset>d30</Offset>
+      </Offsets>
+    </CheatEntry>
+  </CheatEntries>
+  <UserdefinedSymbols/>
+  <Structures StructVersion="2">
+    <Structure Name="безымянная структура" AutoFill="0" AutoCreate="1" DefaultHex="0" AutoDestroy="0" DoNotSaveLocal="0" RLECompression="1" AutoCreateStructsize="4096">
+      <Elements>
+        <Element Offset="0" Vartype="Pointer" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="4" Vartype="4 Bytes" Bytesize="4" RLECount="2" DisplayMethod="Целое без знака"/>
+        <Element Offset="12" Vartype="Pointer" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="16" Vartype="4 Bytes" Bytesize="4" RLECount="6" DisplayMethod="Целое без знака"/>
+        <Element Offset="40" Vartype="Float" Bytesize="4" RLECount="3" DisplayMethod="Целое без знака"/>
+        <Element Offset="52" Vartype="4 Bytes" Bytesize="4" RLECount="33" DisplayMethod="Целое без знака"/>
+        <Element Offset="184" Vartype="Pointer" Bytesize="4" RLECount="2" PointerSize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="192" Vartype="4 Bytes" Bytesize="4" RLECount="13" DisplayMethod="Целое без знака"/>
+        <Element Offset="244" Vartype="Pointer" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="248" Vartype="4 Bytes" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="252" Vartype="String" Bytesize="9" DisplayMethod="Целое без знака"/>
+        <Element Offset="261" Vartype="Byte" Bytesize="1" RLECount="3" DisplayMethod="Целое без знака"/>
+        <Element Offset="264" Vartype="Float" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="268" Vartype="4 Bytes" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="272" Vartype="Float" Bytesize="4" RLECount="3" DisplayMethod="Целое без знака"/>
+        <Element Offset="284" Vartype="4 Bytes" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="288" Vartype="Pointer" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="292" Vartype="4 Bytes" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="296" Vartype="Float" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="300" Vartype="4 Bytes" Bytesize="4" RLECount="7" DisplayMethod="Целое без знака"/>
+        <Element Offset="328" Vartype="Float" Bytesize="4" RLECount="2" DisplayMethod="Целое без знака"/>
+        <Element Offset="336" Vartype="4 Bytes" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="340" Vartype="Float" Bytesize="4" RLECount="3" DisplayMethod="Целое без знака"/>
+        <Element Offset="352" Vartype="Pointer" Bytesize="4" RLECount="2" PointerSize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="360" Vartype="String" Bytesize="6" DisplayMethod="Целое без знака"/>
+        <Element Offset="366" Vartype="Byte" Bytesize="1" RLECount="2" DisplayMethod="Целое без знака"/>
+        <Element Offset="368" Vartype="4 Bytes" Bytesize="4" RLECount="28" DisplayMethod="Целое без знака"/>
+        <Element Offset="480" Vartype="Float" Bytesize="4" RLECount="3" DisplayMethod="Целое без знака"/>
+        <Element Offset="492" Vartype="Pointer" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="496" Vartype="4 Bytes" Bytesize="4" RLECount="3" DisplayMethod="Целое без знака"/>
+        <Element Offset="508" Vartype="Byte" Bytesize="1" RLECount="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="512" Vartype="4 Bytes" Bytesize="4" RLECount="6" DisplayMethod="Целое без знака"/>
+        <Element Offset="536" Vartype="Double" Bytesize="8" DisplayMethod="Целое без знака"/>
+        <Element Offset="544" Vartype="4 Bytes" Bytesize="4" RLECount="8" DisplayMethod="Целое без знака"/>
+        <Element Offset="576" Vartype="Pointer" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="580" Vartype="4 Bytes" Bytesize="4" RLECount="6" DisplayMethod="Целое без знака"/>
+        <Element Offset="604" Vartype="Double" Bytesize="8" DisplayMethod="Целое без знака"/>
+        <Element Offset="612" Vartype="4 Bytes" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="616" Vartype="Double" Bytesize="8" DisplayMethod="Целое без знака"/>
+        <Element Offset="624" Vartype="Float" Bytesize="4" RLECount="7" DisplayMethod="Целое без знака"/>
+        <Element Offset="652" Vartype="Double" Bytesize="8" DisplayMethod="Целое без знака"/>
+        <Element Offset="660" Vartype="Float" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="664" Vartype="4 Bytes" Bytesize="4" RLECount="3" DisplayMethod="Целое без знака"/>
+        <Element Offset="676" Vartype="Double" Bytesize="8" DisplayMethod="Целое без знака"/>
+        <Element Offset="684" Vartype="4 Bytes" Bytesize="4" RLECount="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="700" Vartype="Float" Bytesize="4" RLECount="3" DisplayMethod="Целое без знака"/>
+        <Element Offset="712" Vartype="4 Bytes" Bytesize="4" RLECount="29" DisplayMethod="Целое без знака"/>
+        <Element Offset="828" Vartype="Byte" Bytesize="1" RLECount="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="832" Vartype="Float" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="836" Vartype="4 Bytes" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="840" Vartype="Float" Bytesize="4" RLECount="3" DisplayMethod="Целое без знака"/>
+        <Element Offset="852" Vartype="Byte" Bytesize="1" RLECount="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="856" Vartype="Float" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="860" Vartype="4 Bytes" Bytesize="4" RLECount="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="876" Vartype="Float" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="880" Vartype="4 Bytes" Bytesize="4" RLECount="11" DisplayMethod="Целое без знака"/>
+        <Element Offset="924" Vartype="Double" Bytesize="8" DisplayMethod="Целое без знака"/>
+        <Element Offset="932" Vartype="Float" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="936" Vartype="4 Bytes" Bytesize="4" RLECount="3" DisplayMethod="Целое без знака"/>
+        <Element Offset="948" Vartype="Float" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="952" Vartype="4 Bytes" Bytesize="4" RLECount="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="968" Vartype="Double" Bytesize="8" DisplayMethod="Целое без знака"/>
+        <Element Offset="976" Vartype="4 Bytes" Bytesize="4" RLECount="42" DisplayMethod="Целое без знака"/>
+        <Element Offset="1144" Vartype="Pointer" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="1148" Vartype="4 Bytes" Bytesize="4" RLECount="3" DisplayMethod="Целое без знака"/>
+        <Element Offset="1160" Vartype="Pointer" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="1164" Vartype="4 Bytes" Bytesize="4" RLECount="73" DisplayMethod="Целое без знака"/>
+        <Element Offset="1456" Vartype="Pointer" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="1460" Vartype="4 Bytes" Bytesize="4" RLECount="14" DisplayMethod="Целое без знака"/>
+        <Element Offset="1516" Vartype="Float" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="1520" Vartype="4 Bytes" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="1524" Vartype="Double" Bytesize="8" DisplayMethod="Целое без знака"/>
+        <Element Offset="1532" Vartype="4 Bytes" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="1536" Vartype="Float" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="1540" Vartype="4 Bytes" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="1544" Vartype="Double" Bytesize="8" DisplayMethod="Целое без знака"/>
+        <Element Offset="1552" Vartype="4 Bytes" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="1556" Vartype="Float" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="1560" Vartype="4 Bytes" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="1564" Vartype="Byte" Bytesize="1" RLECount="3" DisplayMethod="Целое без знака"/>
+        <Element Offset="1567" Vartype="2 Bytes" Bytesize="2" DisplayMethod="Целое без знака"/>
+        <Element Offset="1569" Vartype="Byte" Bytesize="1" RLECount="3" DisplayMethod="Целое без знака"/>
+        <Element Offset="1572" Vartype="4 Bytes" Bytesize="4" RLECount="2" DisplayMethod="Целое без знака"/>
+        <Element Offset="1580" Vartype="Byte" Bytesize="1" RLECount="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="1584" Vartype="4 Bytes" Bytesize="4" RLECount="32" DisplayMethod="Целое без знака"/>
+        <Element Offset="1712" Vartype="Pointer" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="1716" Vartype="4 Bytes" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="1720" Vartype="Pointer" Bytesize="4" RLECount="2" PointerSize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="1728" Vartype="4 Bytes" Bytesize="4" RLECount="44" DisplayMethod="Целое без знака"/>
+        <Element Offset="1904" Vartype="Pointer" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="1908" Vartype="4 Bytes" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="1912" Vartype="Pointer" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="1916" Vartype="4 Bytes" Bytesize="4" RLECount="25" DisplayMethod="Целое без знака"/>
+        <Element Offset="2016" Vartype="Float" Bytesize="4" RLECount="6" DisplayMethod="Целое без знака"/>
+        <Element Offset="2040" Vartype="4 Bytes" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="2044" Vartype="Float" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="2048" Vartype="4 Bytes" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="2052" Vartype="Pointer" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="2056" Vartype="4 Bytes" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="2060" Vartype="Float" Bytesize="4" RLECount="3" DisplayMethod="Целое без знака"/>
+        <Element Offset="2072" Vartype="4 Bytes" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="2076" Vartype="Pointer" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="2080" Vartype="Double" Bytesize="8" DisplayMethod="Целое без знака"/>
+        <Element Offset="2088" Vartype="4 Bytes" Bytesize="4" RLECount="2" DisplayMethod="Целое без знака"/>
+        <Element Offset="2096" Vartype="Pointer" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="2100" Vartype="4 Bytes" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="2104" Vartype="Float" Bytesize="4" RLECount="2" DisplayMethod="Целое без знака"/>
+        <Element Offset="2112" Vartype="4 Bytes" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="2116" Vartype="Pointer" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="2120" Vartype="Double" Bytesize="8" DisplayMethod="Целое без знака"/>
+        <Element Offset="2128" Vartype="4 Bytes" Bytesize="4" RLECount="2" DisplayMethod="Целое без знака"/>
+        <Element Offset="2136" Vartype="Pointer" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="2140" Vartype="4 Bytes" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="2144" Vartype="Float" Bytesize="4" RLECount="3" DisplayMethod="Целое без знака"/>
+        <Element Offset="2156" Vartype="Pointer" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="2160" Vartype="Float" Bytesize="4" RLECount="10" DisplayMethod="Целое без знака"/>
+        <Element Offset="2200" Vartype="Byte" Bytesize="1" RLECount="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="2204" Vartype="Float" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="2208" Vartype="4 Bytes" Bytesize="4" RLECount="21" DisplayMethod="Целое без знака"/>
+        <Element Offset="2292" Vartype="Pointer" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="2296" Vartype="4 Bytes" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="2300" Vartype="Byte" Bytesize="1" DisplayMethod="Целое без знака"/>
+        <Element Offset="2301" Vartype="String" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="2305" Vartype="Byte" Bytesize="1" RLECount="3" DisplayMethod="Целое без знака"/>
+        <Element Offset="2308" Vartype="4 Bytes" Bytesize="4" RLECount="14" DisplayMethod="Целое без знака"/>
+        <Element Offset="2364" Vartype="Byte" Bytesize="1" DisplayMethod="Целое без знака"/>
+        <Element Offset="2365" Vartype="String" Bytesize="5" DisplayMethod="Целое без знака"/>
+        <Element Offset="2370" Vartype="Byte" Bytesize="1" RLECount="2" DisplayMethod="Целое без знака"/>
+        <Element Offset="2372" Vartype="4 Bytes" Bytesize="4" RLECount="8" DisplayMethod="Целое без знака"/>
+        <Element Offset="2404" Vartype="Float" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="2408" Vartype="4 Bytes" Bytesize="4" RLECount="14" DisplayMethod="Целое без знака"/>
+        <Element Offset="2464" Vartype="Float" Bytesize="4" RLECount="3" DisplayMethod="Целое без знака"/>
+        <Element Offset="2476" Vartype="4 Bytes" Bytesize="4" RLECount="10" DisplayMethod="Целое без знака"/>
+        <Element Offset="2516" Vartype="Float" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="2520" Vartype="4 Bytes" Bytesize="4" RLECount="6" DisplayMethod="Целое без знака"/>
+        <Element Offset="2544" Vartype="Pointer" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="2548" Vartype="4 Bytes" Bytesize="4" RLECount="3" DisplayMethod="Целое без знака"/>
+        <Element Offset="2560" Vartype="Pointer" Bytesize="4" RLECount="4" PointerSize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="2576" Vartype="4 Bytes" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="2580" Vartype="Float" Bytesize="4" RLECount="3" DisplayMethod="Целое без знака"/>
+        <Element Offset="2592" Vartype="4 Bytes" Bytesize="4" RLECount="80" DisplayMethod="Целое без знака"/>
+        <Element Offset="2912" Vartype="Float" Bytesize="4" RLECount="8" DisplayMethod="Целое без знака"/>
+        <Element Offset="2944" Vartype="4 Bytes" Bytesize="4" RLECount="14" DisplayMethod="Целое без знака"/>
+        <Element Offset="3000" Vartype="Float" Bytesize="4" RLECount="2" DisplayMethod="Целое без знака"/>
+        <Element Offset="3008" Vartype="4 Bytes" Bytesize="4" RLECount="3" DisplayMethod="Целое без знака"/>
+        <Element Offset="3020" Vartype="Pointer" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="3024" Vartype="4 Bytes" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="3028" Vartype="Byte" Bytesize="1" RLECount="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="3032" Vartype="Pointer" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="3036" Vartype="4 Bytes" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="3040" Vartype="Byte" Bytesize="1" DisplayMethod="Целое без знака"/>
+        <Element Offset="3041" Vartype="String" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="3045" Vartype="Byte" Bytesize="1" RLECount="3" DisplayMethod="Целое без знака"/>
+        <Element Offset="3048" Vartype="4 Bytes" Bytesize="4" RLECount="8" DisplayMethod="Целое без знака"/>
+        <Element Offset="3080" Vartype="Pointer" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="3084" Vartype="4 Bytes" Bytesize="4" RLECount="2" DisplayMethod="Целое без знака"/>
+        <Element Offset="3092" Vartype="Pointer" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="3096" Vartype="4 Bytes" Bytesize="4" RLECount="3" DisplayMethod="Целое без знака"/>
+        <Element Offset="3108" Vartype="Pointer" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="3112" Vartype="4 Bytes" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="3116" Vartype="Float" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="3120" Vartype="4 Bytes" Bytesize="4" RLECount="10" DisplayMethod="Целое без знака"/>
+        <Element Offset="3160" Vartype="Float" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="3164" Vartype="4 Bytes" Bytesize="4" RLECount="8" DisplayMethod="Целое без знака"/>
+        <Element Offset="3196" Vartype="Pointer" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="3200" Vartype="4 Bytes" Bytesize="4" RLECount="14" DisplayMethod="Целое без знака"/>
+        <Element Offset="3256" Vartype="Float" Bytesize="4" RLECount="9" DisplayMethod="Целое без знака"/>
+        <Element Offset="3292" Vartype="4 Bytes" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="3296" Vartype="String" Bytesize="8" DisplayMethod="Целое без знака"/>
+        <Element Offset="3304" Vartype="4 Bytes" Bytesize="4" RLECount="17" DisplayMethod="Целое без знака"/>
+        <Element Offset="3372" Vartype="Pointer" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="3376" Vartype="Float" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="3380" Vartype="4 Bytes" Bytesize="4" RLECount="7" DisplayMethod="Целое без знака"/>
+        <Element Offset="3408" Vartype="Float" Bytesize="4" RLECount="8" DisplayMethod="Целое без знака"/>
+        <Element Offset="3440" Vartype="4 Bytes" Bytesize="4" RLECount="2" DisplayMethod="Целое без знака"/>
+        <Element Offset="3448" Vartype="Float" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="3452" Vartype="4 Bytes" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="3456" Vartype="Pointer" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="3460" Vartype="Float" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="3464" Vartype="4 Bytes" Bytesize="4" RLECount="53" DisplayMethod="Целое без знака"/>
+        <Element Offset="3676" Vartype="Double" Bytesize="8" DisplayMethod="Целое без знака"/>
+        <Element Offset="3684" Vartype="4 Bytes" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="3688" Vartype="Float" Bytesize="4" RLECount="2" DisplayMethod="Целое без знака"/>
+        <Element Offset="3696" Vartype="4 Bytes" Bytesize="4" RLECount="2" DisplayMethod="Целое без знака"/>
+        <Element Offset="3704" Vartype="Float" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="3708" Vartype="Pointer" Bytesize="4" RLECount="4" PointerSize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="3724" Vartype="4 Bytes" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="3728" Vartype="Pointer" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="3732" Vartype="4 Bytes" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="3736" Vartype="Pointer" Bytesize="4" RLECount="2" PointerSize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="3744" Vartype="Float" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="3748" Vartype="4 Bytes" Bytesize="4" RLECount="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="3764" Vartype="Float" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="3768" Vartype="4 Bytes" Bytesize="4" RLECount="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="3784" Vartype="Float" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="3788" Vartype="4 Bytes" Bytesize="4" RLECount="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="3804" Vartype="Float" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="3808" Vartype="4 Bytes" Bytesize="4" RLECount="2" DisplayMethod="Целое без знака"/>
+        <Element Offset="3816" Vartype="Pointer" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="3820" Vartype="4 Bytes" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="3824" Vartype="Float" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="3828" Vartype="4 Bytes" Bytesize="4" RLECount="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="3844" Vartype="Float" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="3848" Vartype="4 Bytes" Bytesize="4" RLECount="2" DisplayMethod="Целое без знака"/>
+        <Element Offset="3856" Vartype="Pointer" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="3860" Vartype="4 Bytes" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="3864" Vartype="Float" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="3868" Vartype="4 Bytes" Bytesize="4" RLECount="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="3884" Vartype="Float" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="3888" Vartype="4 Bytes" Bytesize="4" RLECount="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="3904" Vartype="Float" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="3908" Vartype="4 Bytes" Bytesize="4" RLECount="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="3924" Vartype="Float" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="3928" Vartype="4 Bytes" Bytesize="4" RLECount="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="3944" Vartype="Pointer" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="3948" Vartype="4 Bytes" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="3952" Vartype="Float" Bytesize="4" RLECount="2" DisplayMethod="Целое без знака"/>
+        <Element Offset="3960" Vartype="Pointer" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="3964" Vartype="4 Bytes" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="3968" Vartype="Pointer" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="3972" Vartype="4 Bytes" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="3976" Vartype="Pointer" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="3980" Vartype="4 Bytes" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="3984" Vartype="Pointer" Bytesize="4" RLECount="2" PointerSize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="3992" Vartype="Float" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="3996" Vartype="4 Bytes" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="4000" Vartype="Float" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="4004" Vartype="4 Bytes" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="4008" Vartype="Pointer" Bytesize="4" RLECount="3" PointerSize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="4020" Vartype="4 Bytes" Bytesize="4" RLECount="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="4036" Vartype="Pointer" Bytesize="4" RLECount="4" PointerSize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="4052" Vartype="4 Bytes" Bytesize="4" RLECount="3" DisplayMethod="Целое без знака"/>
+        <Element Offset="4064" Vartype="Pointer" Bytesize="4" RLECount="2" PointerSize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="4072" Vartype="Float" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="4076" Vartype="4 Bytes" Bytesize="4" RLECount="3" DisplayMethod="Целое без знака"/>
+        <Element Offset="4088" Vartype="Pointer" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="4092" Vartype="4 Bytes" Bytesize="4" DisplayMethod="Целое без знака"/>
+      </Elements>
+    </Structure>
+  </Structures>
+</CheatTable>

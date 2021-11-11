@@ -1,0 +1,449 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CheatTable CheatEngineTableVersion="29">
+  <CheatEntries>
+    <CheatEntry>
+      <ID>1</ID>
+      <Description>"Нет описания"</Description>
+      <VariableType>4 Bytes</VariableType>
+      <Address>036AF07C</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>2</ID>
+      <Description>"в мешках"</Description>
+      <LastState Activated="1"/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>[ENABLE]
+HobbyFarm.exe+7B95D:
+ add dword ptr [edi+0000032C],00
+
+ 
+[DISABLE]
+HobbyFarm.exe+7B95D:
+ add dword ptr [edi+0000032C],-01//83 87 2c 03 00 00 ff
+
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>7</ID>
+      <Description>"в руках"</Description>
+      <LastState Activated="1"/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>{ Game   : HobbyFarm.exe
+  Version: 
+  Date   : 2020-04-14
+  Author : Hipp
+
+  This script does blah blah blah
+}
+
+[ENABLE]
+
+aobscanmodule(box,HobbyFarm.exe,3B 94 BB A0 02 00 00) // should be unique
+alloc(newmem,$1000)
+
+label(code)
+label(return)
+
+newmem:
+
+code:
+  cmp edx,6
+  jmp return
+
+box:
+  jmp newmem
+  nop 2
+return:
+registersymbol(box)
+
+[DISABLE]
+
+box:
+  db 3B 94 BB A0 02 00 00
+
+unregistersymbol(box)
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: "HobbyFarm.exe"+2DE0
+
+"HobbyFarm.exe"+2DC2: 8B 8B 98 02 00 00              -  mov ecx,[ebx+00000298]
+"HobbyFarm.exe"+2DC8: 3B 8C 83 A0 02 00 00           -  cmp ecx,[ebx+eax*4+000002A0]
+"HobbyFarm.exe"+2DCF: 72 8D                          -  jb HobbyFarm.exe+2D5E
+"HobbyFarm.exe"+2DD1: 5F                             -  pop edi
+"HobbyFarm.exe"+2DD2: 33 C0                          -  xor eax,eax
+"HobbyFarm.exe"+2DD4: 5E                             -  pop esi
+"HobbyFarm.exe"+2DD5: C3                             -  ret 
+"HobbyFarm.exe"+2DD6: 3B C7                          -  cmp eax,edi
+"HobbyFarm.exe"+2DD8: 75 F7                          -  jne HobbyFarm.exe+2DD1
+"HobbyFarm.exe"+2DDA: 8B 93 98 02 00 00              -  mov edx,[ebx+00000298]
+// ---------- INJECTING HERE ----------
+"HobbyFarm.exe"+2DE0: 3B 94 BB A0 02 00 00           -  cmp edx,[ebx+edi*4+000002A0]
+// ---------- DONE INJECTING  ----------
+"HobbyFarm.exe"+2DE7: 73 E8                          -  jae HobbyFarm.exe+2DD1
+"HobbyFarm.exe"+2DE9: 5F                             -  pop edi
+"HobbyFarm.exe"+2DEA: B8 01 00 00 00                 -  mov eax,00000001
+"HobbyFarm.exe"+2DEF: 5E                             -  pop esi
+"HobbyFarm.exe"+2DF0: C3                             -  ret 
+"HobbyFarm.exe"+2DF1: 5F                             -  pop edi
+"HobbyFarm.exe"+2DF2: 32 C0                          -  xor al,al
+"HobbyFarm.exe"+2DF4: 5E                             -  pop esi
+"HobbyFarm.exe"+2DF5: C3                             -  ret 
+"HobbyFarm.exe"+2DF6: CC                             -  int 3 
+}
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>3</ID>
+      <Description>"speed_time"</Description>
+      <LastState Activated="1"/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>{ Game   : HobbyFarm.exe
+  Version: 
+  Date   : 2020-04-13
+  Author : Hipp
+
+  This script does blah blah blah
+}
+
+[ENABLE]
+
+aobscanmodule(speed_time,HobbyFarm.exe,D8 64 24 6C D9 1F) // should be unique
+alloc(newmem,$1000)
+
+label(code)
+label(return)
+
+newmem:
+  mov dword ptr [esp+6c],0
+code:
+  fsub dword ptr [esp+6C]
+  fstp dword ptr [edi]
+  jmp return
+
+speed_time:
+  jmp newmem
+  nop
+return:
+registersymbol(speed_time)
+
+[DISABLE]
+
+speed_time:
+  db D8 64 24 6C D9 1F
+
+unregistersymbol(speed_time)
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: "HobbyFarm.exe"+6E5D5
+
+"HobbyFarm.exe"+6E5B7: 8B F1                    -  mov esi,ecx
+"HobbyFarm.exe"+6E5B9: 8A 5E 04                 -  mov bl,[esi+04]
+"HobbyFarm.exe"+6E5BC: D9 EE                    -  fldz 
+"HobbyFarm.exe"+6E5BE: 33 ED                    -  xor ebp,ebp
+"HobbyFarm.exe"+6E5C0: D8 54 AE 30              -  fcom dword ptr [esi+ebp*4+30]
+"HobbyFarm.exe"+6E5C4: 8D 7C AE 30              -  lea edi,[esi+ebp*4+30]
+"HobbyFarm.exe"+6E5C8: DF E0                    -  fnstsw ax
+"HobbyFarm.exe"+6E5CA: F6 C4 44                 -  test ah,44
+"HobbyFarm.exe"+6E5CD: 0F 8B D9 00 00 00        -  jnp HobbyFarm.exe+6E6AC
+"HobbyFarm.exe"+6E5D3: D9 07                    -  fld dword ptr [edi]
+// ---------- INJECTING HERE ----------
+"HobbyFarm.exe"+6E5D5: D8 64 24 6C              -  fsub dword ptr [esp+6C]
+"HobbyFarm.exe"+6E5D9: D9 1F                    -  fstp dword ptr [edi]
+// ---------- DONE INJECTING  ----------
+"HobbyFarm.exe"+6E5DB: D9 54 24 14              -  fst dword ptr [esp+14]
+"HobbyFarm.exe"+6E5DF: D9 07                    -  fld dword ptr [edi]
+"HobbyFarm.exe"+6E5E1: DC 1D 70 D1 53 00        -  fcomp qword ptr [HobbyFarm.exe+13D170]
+"HobbyFarm.exe"+6E5E7: DF E0                    -  fnstsw ax
+"HobbyFarm.exe"+6E5E9: F6 C4 41                 -  test ah,41
+"HobbyFarm.exe"+6E5EC: 8B C7                    -  mov eax,edi
+"HobbyFarm.exe"+6E5EE: 74 04                    -  je HobbyFarm.exe+6E5F4
+"HobbyFarm.exe"+6E5F0: 8D 44 24 14              -  lea eax,[esp+14]
+"HobbyFarm.exe"+6E5F4: D9 00                    -  fld dword ptr [eax]
+"HobbyFarm.exe"+6E5F6: B3 01                    -  mov bl,01
+}
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>4</ID>
+      <Description>"Скрипт автоассемблера"</Description>
+      <LastState/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>{ Game   : HobbyFarm.exe
+  Version: 
+  Date   : 2020-04-13
+  Author : Hipp
+
+  This script does blah blah blah
+}
+
+[ENABLE]
+
+aobscanmodule(time,HobbyFarm.exe,D9 45 08 8B 3D 0C E3 51 00 D9 96 5C) // should be unique
+alloc(newmem,$1000)
+
+label(code)
+label(return)
+
+newmem:
+  mov dword ptr [ebp+08],(float)1
+code:
+  fld dword ptr [ebp+08]
+  mov edi,[HobbyFarm.exe+11E30C]
+  jmp return
+
+time:
+  jmp newmem
+  nop 4
+return:
+registersymbol(time)
+
+[DISABLE]
+
+time:
+  db D9 45 08 8B 3D 0C E3 51 00
+
+unregistersymbol(time)
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: "HobbyFarm.exe"+1B85A
+
+"HobbyFarm.exe"+1B838: 68 E9 8B 51 00           -  push HobbyFarm.exe+118BE9
+"HobbyFarm.exe"+1B83D: 64 A1 00 00 00 00        -  mov eax,fs:[00000000]
+"HobbyFarm.exe"+1B843: 50                       -  push eax
+"HobbyFarm.exe"+1B844: 83 EC 28                 -  sub esp,28
+"HobbyFarm.exe"+1B847: 57                       -  push edi
+"HobbyFarm.exe"+1B848: A1 1C 30 56 00           -  mov eax,[HobbyFarm.exe+16301C]
+"HobbyFarm.exe"+1B84D: 33 C4                    -  xor eax,esp
+"HobbyFarm.exe"+1B84F: 50                       -  push eax
+"HobbyFarm.exe"+1B850: 8D 44 24 30              -  lea eax,[esp+30]
+"HobbyFarm.exe"+1B854: 64 A3 00 00 00 00        -  mov fs:[00000000],eax
+// ---------- INJECTING HERE ----------
+"HobbyFarm.exe"+1B85A: D9 45 08                 -  fld dword ptr [ebp+08]
+"HobbyFarm.exe"+1B85D: 8B 3D 0C E3 51 00        -  mov edi,[HobbyFarm.exe+11E30C]
+// ---------- DONE INJECTING  ----------
+"HobbyFarm.exe"+1B863: D9 96 5C 08 00 00        -  fst dword ptr [esi+0000085C]
+"HobbyFarm.exe"+1B869: 51                       -  push ecx
+"HobbyFarm.exe"+1B86A: D8 B6 58 08 00 00        -  fdiv dword ptr [esi+00000858]
+"HobbyFarm.exe"+1B870: 8B 8E 90 01 00 00        -  mov ecx,[esi+00000190]
+"HobbyFarm.exe"+1B876: D9 5C 24 0C              -  fstp dword ptr [esp+0C]
+"HobbyFarm.exe"+1B87A: D9 44 24 0C              -  fld dword ptr [esp+0C]
+"HobbyFarm.exe"+1B87E: D9 1C 24                 -  fstp dword ptr [esp]
+"HobbyFarm.exe"+1B881: FF D7                    -  call edi
+"HobbyFarm.exe"+1B883: D9 86 5C 08 00 00        -  fld dword ptr [esi+0000085C]
+"HobbyFarm.exe"+1B889: D8 B6 58 08 00 00        -  fdiv dword ptr [esi+00000858]
+}
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>5</ID>
+      <Description>"Скрипт автоассемблера"</Description>
+      <LastState/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>{ Game   : HobbyFarm.exe
+  Version: 
+  Date   : 2020-04-13
+  Author : Hipp
+
+  This script does blah blah blah
+}
+
+[ENABLE]
+
+aobscanmodule(INJECT,HobbyFarm.exe,D9 44 24 1C D9 95 BC 04 00 00) // should be unique
+alloc(newmem,$1000)
+
+label(code)
+label(return)
+
+newmem:
+  mov dword ptr [esp+1C],0
+code:
+  fld dword ptr [esp+1C]
+  fst dword ptr [ebp+000004BC]
+  jmp return
+
+INJECT:
+  jmp newmem
+  nop 5
+return:
+registersymbol(INJECT)
+
+[DISABLE]
+
+INJECT:
+  db D9 44 24 1C D9 95 BC 04 00 00
+
+unregistersymbol(INJECT)
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: "HobbyFarm.exe"+83F61
+
+"HobbyFarm.exe"+83F3B: D9 85 BC 04 00 00  -  fld dword ptr [ebp+000004BC]
+"HobbyFarm.exe"+83F41: 8B 50 30           -  mov edx,[eax+30]
+"HobbyFarm.exe"+83F44: DD 5C 24 24        -  fstp qword ptr [esp+24]
+"HobbyFarm.exe"+83F48: 8B CD              -  mov ecx,ebp
+"HobbyFarm.exe"+83F4A: FF D2              -  call edx
+"HobbyFarm.exe"+83F4C: D8 8D 34 03 00 00  -  fmul dword ptr [ebp+00000334]
+"HobbyFarm.exe"+83F52: 8B B5 C0 05 00 00  -  mov esi,[ebp+000005C0]
+"HobbyFarm.exe"+83F58: 51                 -  push ecx
+"HobbyFarm.exe"+83F59: DC 6C 24 28        -  fsubr qword ptr [esp+28]
+"HobbyFarm.exe"+83F5D: D9 5C 24 1C        -  fstp dword ptr [esp+1C]
+// ---------- INJECTING HERE ----------
+"HobbyFarm.exe"+83F61: D9 44 24 1C        -  fld dword ptr [esp+1C]
+"HobbyFarm.exe"+83F65: D9 95 BC 04 00 00  -  fst dword ptr [ebp+000004BC]
+// ---------- DONE INJECTING  ----------
+"HobbyFarm.exe"+83F6B: D8 AD C0 04 00 00  -  fsubr dword ptr [ebp+000004C0]
+"HobbyFarm.exe"+83F71: D9 5C 24 1C        -  fstp dword ptr [esp+1C]
+"HobbyFarm.exe"+83F75: D9 44 24 1C        -  fld dword ptr [esp+1C]
+"HobbyFarm.exe"+83F79: D9 1C 24           -  fstp dword ptr [esp]
+"HobbyFarm.exe"+83F7C: E8 AF 78 F9 FF     -  call HobbyFarm.exe+1B830
+"HobbyFarm.exe"+83F81: 33 F6              -  xor esi,esi
+"HobbyFarm.exe"+83F83: 8B 8D 60 03 00 00  -  mov ecx,[ebp+00000360]
+"HobbyFarm.exe"+83F89: 85 C9              -  test ecx,ecx
+"HobbyFarm.exe"+83F8B: 74 41              -  je HobbyFarm.exe+83FCE
+"HobbyFarm.exe"+83F8D: 8B 85 64 03 00 00  -  mov eax,[ebp+00000364]
+}
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>6</ID>
+      <Description>"Нет описания"</Description>
+      <VariableType>Float</VariableType>
+      <Address>092BBC34</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>8</ID>
+      <Description>"time"</Description>
+      <LastState Activated="1"/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>{ Game   : HobbyFarm.exe
+  Version: 
+  Date   : 2020-04-15
+  Author : Hipp
+
+  This script does blah blah blah
+}
+
+[ENABLE]
+
+aobscanmodule(time,RenderBear.dll,D8 44 24 04 D9 9C 08 30 02 00 00) // should be unique
+alloc(newmem,$1000)
+
+label(code)
+label(return)
+
+newmem:
+  mov dword ptr [esp+04],(float)0
+code:
+  fadd dword ptr [esp+04]
+  fstp dword ptr [eax+ecx+00000230]
+  jmp return
+
+time:
+  jmp newmem
+  nop 6
+return:
+registersymbol(time)
+
+[DISABLE]
+
+time:
+  db D8 44 24 04 D9 9C 08 30 02 00 00
+
+unregistersymbol(time)
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: "RenderBear.dll"+8C6F0
+
+"RenderBear.dll"+8C6D0: B0 01                 -  mov al,01
+"RenderBear.dll"+8C6D2: 88 44 0E 2B           -  mov [esi+ecx+2B],al
+"RenderBear.dll"+8C6D6: 88 41 2E              -  mov [ecx+2E],al
+"RenderBear.dll"+8C6D9: 88 41 2F              -  mov [ecx+2F],al
+"RenderBear.dll"+8C6DC: 5E                    -  pop esi
+"RenderBear.dll"+8C6DD: C2 08 00              -  ret 0008
+"RenderBear.dll"+8C6E0: 8B 54 24 08           -  mov edx,[esp+08]
+"RenderBear.dll"+8C6E4: 8B C2                 -  mov eax,edx
+"RenderBear.dll"+8C6E6: 6B C0 34              -  imul eax,eax,34
+"RenderBear.dll"+8C6E9: D9 84 08 30 02 00 00  -  fld dword ptr [eax+ecx+00000230]
+// ---------- INJECTING HERE ----------
+"RenderBear.dll"+8C6F0: D8 44 24 04           -  fadd dword ptr [esp+04]
+"RenderBear.dll"+8C6F4: D9 9C 08 30 02 00 00  -  fstp dword ptr [eax+ecx+00000230]
+// ---------- DONE INJECTING  ----------
+"RenderBear.dll"+8C6FB: 8D 84 08 30 02 00 00  -  lea eax,[eax+ecx+00000230]
+"RenderBear.dll"+8C702: B0 01                 -  mov al,01
+"RenderBear.dll"+8C704: 88 44 0A 2B           -  mov [edx+ecx+2B],al
+"RenderBear.dll"+8C708: 88 41 2E              -  mov [ecx+2E],al
+"RenderBear.dll"+8C70B: C2 08 00              -  ret 0008
+"RenderBear.dll"+8C70E: CC                    -  int 3 
+"RenderBear.dll"+8C70F: CC                    -  int 3 
+"RenderBear.dll"+8C710: 8B 44 24 04           -  mov eax,[esp+04]
+"RenderBear.dll"+8C714: 6B C0 34              -  imul eax,eax,34
+"RenderBear.dll"+8C717: D9 84 08 2C 02 00 00  -  fld dword ptr [eax+ecx+0000022C]
+}
+</AssemblerScript>
+    </CheatEntry>
+  </CheatEntries>
+  <CheatCodes>
+    <CodeEntry>
+      <Description>Изменение mov [esi+08],00000000</Description>
+      <AddressString>HobbyFarm.exe+D870</AddressString>
+      <Before>
+        <Byte>49</Byte>
+        <Byte>04</Byte>
+        <Byte>3B</Byte>
+        <Byte>46</Byte>
+        <Byte>04</Byte>
+      </Before>
+      <Actual>
+        <Byte>C7</Byte>
+        <Byte>46</Byte>
+        <Byte>08</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>74</Byte>
+        <Byte>1A</Byte>
+        <Byte>57</Byte>
+        <Byte>8D</Byte>
+        <Byte>9B</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry>
+      <Description>Изменение je 0042EDD0</Description>
+      <AddressString>HobbyFarm.exe+2EBE8</AddressString>
+      <Before>
+        <Byte>02</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+        <Byte>85</Byte>
+        <Byte>C9</Byte>
+      </Before>
+      <Actual>
+        <Byte>0F</Byte>
+        <Byte>84</Byte>
+        <Byte>E2</Byte>
+        <Byte>01</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>8B</Byte>
+        <Byte>86</Byte>
+        <Byte>BC</Byte>
+        <Byte>02</Byte>
+        <Byte>00</Byte>
+      </After>
+    </CodeEntry>
+  </CheatCodes>
+  <UserdefinedSymbols/>
+  <Comments>RenderBear.dll+8C6F4 - fstp dword ptr [eax+ecx+00000230] - time
+</Comments>
+</CheatTable>

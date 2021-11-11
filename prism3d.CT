@@ -1,0 +1,287 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CheatTable CheatEngineTableVersion="29">
+  <CheatEntries>
+    <CheatEntry>
+      <ID>3</ID>
+      <Description>"health"</Description>
+      <VariableType>2 Bytes</VariableType>
+      <Address>"prism3d.exe"+000A1C80</Address>
+      <Offsets>
+        <Offset>0</Offset>
+        <Offset>6E4</Offset>
+        <Offset>A30</Offset>
+      </Offsets>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>4</ID>
+      <Description>"ohk"</Description>
+      <LastState Activated="1"/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>{ Game   : prism3d.exe
+  Version: 
+  Date   : 2020-04-24
+  Author : Hipp
+
+  This script does blah blah blah
+}
+
+[ENABLE]
+
+aobscanmodule(ohk,duke_base.dll,D9 9E 84 0B 00 00 F6) // should be unique
+alloc(newmem,$1000)
+
+label(code)
+label(return)
+
+newmem:
+
+code:
+  fstp dword ptr [esi+00000B84]
+  push eax
+  mov eax,[nec]
+  mov [esi+00000B84],eax
+  pop eax
+  jmp return
+nec:
+  dd (float)0
+ohk:
+  jmp newmem
+  nop
+return:
+registersymbol(ohk)
+
+[DISABLE]
+
+ohk:
+  db D9 9E 84 0B 00 00
+
+unregistersymbol(ohk)
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: "duke_base.dll"+2F78E
+
+"duke_base.dll"+2F75E: 68 00 00 A0 41                 -  push 41A00000
+"duke_base.dll"+2F763: 8B CE                          -  mov ecx,esi
+"duke_base.dll"+2F765: E8 C6 F2 FF FF                 -  call duke_base.dll+2EA30
+"duke_base.dll"+2F76A: 84 DB                          -  test bl,bl
+"duke_base.dll"+2F76C: 74 0C                          -  je duke_base.dll+2F77A
+"duke_base.dll"+2F76E: C7 86 70 0C 00 00 38 00 00 00  -  mov [esi+00000C70],00000038
+"duke_base.dll"+2F778: EB 0A                          -  jmp duke_base.dll+2F784
+"duke_base.dll"+2F77A: C7 86 70 0C 00 00 3A 00 00 00  -  mov [esi+00000C70],0000003A
+"duke_base.dll"+2F784: D9 86 84 0B 00 00              -  fld dword ptr [esi+00000B84]
+"duke_base.dll"+2F78A: D8 64 24 4C                    -  fsub dword ptr [esp+4C]
+// ---------- INJECTING HERE ----------
+"duke_base.dll"+2F78E: D9 9E 84 0B 00 00              -  fstp dword ptr [esi+00000B84]
+// ---------- DONE INJECTING  ----------
+"duke_base.dll"+2F794: F6 86 7F 0B 00 00 01           -  test byte ptr [esi+00000B7F],01
+"duke_base.dll"+2F79B: 74 17                          -  je duke_base.dll+2F7B4
+"duke_base.dll"+2F79D: D9 86 84 0B 00 00              -  fld dword ptr [esi+00000B84]
+"duke_base.dll"+2F7A3: E8 BE E1 0E 00                 -  call duke_base.dll+11D966
+"duke_base.dll"+2F7A8: 8B 0D DC 69 B1 09              -  mov ecx,[duke_base.dll+1869DC]
+"duke_base.dll"+2F7AE: 50                             -  push eax
+"duke_base.dll"+2F7AF: E8 7C 87 0B 00                 -  call duke_base.dll+E7F30
+"duke_base.dll"+2F7B4: D9 86 84 0B 00 00              -  fld dword ptr [esi+00000B84]
+"duke_base.dll"+2F7BA: D8 1D BC 6C AB 09              -  fcomp dword ptr [duke_base.dll+126CBC]
+"duke_base.dll"+2F7C0: DF E0                          -  fnstsw ax
+}
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>5</ID>
+      <Description>"helli"</Description>
+      <LastState Activated="1"/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>{ Game   : prism3d.exe
+  Version: 
+  Date   : 2020-04-24
+  Author : Hipp
+
+  This script does blah blah blah
+}
+
+[ENABLE]
+
+aobscanmodule(helli,duke_base.dll,D8 64 24 10 D9 98 5C 14 00 00 8B 86 1C 0B 00 00 D9 80 5C 14 00 00 D8) // should be unique
+alloc(newmem,$1000)
+
+label(code)
+label(return)
+
+newmem:
+
+code:
+  fsub dword ptr [v_helli]
+  fstp dword ptr [eax+0000145C]
+  jmp return
+v_helli:
+  dd (float)200
+helli:
+  jmp newmem
+  nop 5
+return:
+registersymbol(helli)
+
+[DISABLE]
+
+helli:
+  db D8 64 24 10 D9 98 5C 14 00 00
+
+unregistersymbol(helli)
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: "duke_base.dll"+10F8B
+
+"duke_base.dll"+10F5E: F6 C4 41              -  test ah,41
+"duke_base.dll"+10F61: 0F 85 85 14 00 00     -  jne duke_base.dll+123EC
+"duke_base.dll"+10F67: 8B 81 C4 17 00 00     -  mov eax,[ecx+000017C4]
+"duke_base.dll"+10F6D: 68 00 00 00 40        -  push 40000000
+"duke_base.dll"+10F72: 68 00 00 48 42        -  push 42480000
+"duke_base.dll"+10F77: 50                    -  push eax
+"duke_base.dll"+10F78: 8B CE                 -  mov ecx,esi
+"duke_base.dll"+10F7A: E8 F1 14 00 00        -  call duke_base.dll+12470
+"duke_base.dll"+10F7F: 8B 86 1C 0B 00 00     -  mov eax,[esi+00000B1C]
+"duke_base.dll"+10F85: D9 80 5C 14 00 00     -  fld dword ptr [eax+0000145C]
+// ---------- INJECTING HERE ----------
+"duke_base.dll"+10F8B: D8 64 24 10           -  fsub dword ptr [esp+10]
+"duke_base.dll"+10F8F: D9 98 5C 14 00 00     -  fstp dword ptr [eax+0000145C]
+// ---------- DONE INJECTING  ----------
+"duke_base.dll"+10F95: 8B 86 1C 0B 00 00     -  mov eax,[esi+00000B1C]
+"duke_base.dll"+10F9B: D9 80 5C 14 00 00     -  fld dword ptr [eax+0000145C]
+"duke_base.dll"+10FA1: D8 A0 B4 14 00 00     -  fsub dword ptr [eax+000014B4]
+"duke_base.dll"+10FA7: E8 BA C9 10 00        -  call duke_base.dll+11D966
+"duke_base.dll"+10FAC: 8B 0D DC 69 B1 09     -  mov ecx,[duke_base.dll+1869DC]
+"duke_base.dll"+10FB2: 50                    -  push eax
+"duke_base.dll"+10FB3: E8 78 6F 0D 00        -  call duke_base.dll+E7F30
+"duke_base.dll"+10FB8: 8B 8E 1C 0B 00 00     -  mov ecx,[esi+00000B1C]
+"duke_base.dll"+10FBE: 8A 81 74 14 00 00     -  mov al,[ecx+00001474]
+"duke_base.dll"+10FC4: 84 C0                 -  test al,al
+}
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>6</ID>
+      <Description>"ammo"</Description>
+      <LastState Activated="1"/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>{ Game   : prism3d.exe
+  Version: 
+  Date   : 2020-04-24
+  Author : Hipp
+
+  This script does blah blah blah
+}
+
+[ENABLE]
+
+aobscanmodule(ammo,duke_base.dll,29 F2 B8 00 00 00 00) // should be unique
+alloc(newmem,$1000)
+
+label(code)
+label(return)
+
+newmem:
+
+code:
+  sub edx,esi
+  cmp edx,5
+  jl sub02
+sub01:
+  mov eax,00000000
+  jmp return
+sub02:
+  add edx,0a
+  jmp sub01
+ammo:
+  jmp newmem
+  nop 2
+return:
+registersymbol(ammo)
+
+[DISABLE]
+
+ammo:
+  db 29 F2 B8 00 00 00 00
+
+unregistersymbol(ammo)
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: "duke_base.dll"+7D8F4
+
+"duke_base.dll"+7D8D9: 85 C0                 -  test eax,eax
+"duke_base.dll"+7D8DB: 74 2D                 -  je duke_base.dll+7D90A
+"duke_base.dll"+7D8DD: 8B 4C 24 08           -  mov ecx,[esp+08]
+"duke_base.dll"+7D8E1: 8D 4C 48 38           -  lea ecx,[eax+ecx*2+38]
+"duke_base.dll"+7D8E5: 85 C9                 -  test ecx,ecx
+"duke_base.dll"+7D8E7: 74 21                 -  je duke_base.dll+7D90A
+"duke_base.dll"+7D8E9: 0F BF 11              -  movsx edx,word ptr [ecx]
+"duke_base.dll"+7D8EC: 8B 74 24 0C           -  mov esi,[esp+0C]
+"duke_base.dll"+7D8F0: 3B D6                 -  cmp edx,esi
+"duke_base.dll"+7D8F2: 7C 16                 -  jl duke_base.dll+7D90A
+// ---------- INJECTING HERE ----------
+"duke_base.dll"+7D8F4: 29 F2                 -  sub edx,esi
+"duke_base.dll"+7D8F6: B8 00 00 00 00        -  mov eax,00000000
+// ---------- DONE INJECTING  ----------
+"duke_base.dll"+7D8FB: 0F 98 C0              -  sets al
+"duke_base.dll"+7D8FE: 48                    -  dec eax
+"duke_base.dll"+7D8FF: 23 C2                 -  and eax,edx
+"duke_base.dll"+7D901: 66 89 01              -  mov [ecx],ax
+"duke_base.dll"+7D904: 8B C6                 -  mov eax,esi
+"duke_base.dll"+7D906: 5E                    -  pop esi
+"duke_base.dll"+7D907: C2 08 00              -  ret 0008
+"duke_base.dll"+7D90A: 33 C0                 -  xor eax,eax
+"duke_base.dll"+7D90C: 5E                    -  pop esi
+"duke_base.dll"+7D90D: C2 08 00              -  ret 0008
+}
+</AssemblerScript>
+    </CheatEntry>
+  </CheatEntries>
+  <CheatCodes>
+    <CodeEntry>
+      <Description>Изменение dec eax</Description>
+      <AddressString>duke_base.dll+7D8FE</AddressString>
+      <Before>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+        <Byte>0F</Byte>
+        <Byte>98</Byte>
+        <Byte>C0</Byte>
+      </Before>
+      <Actual>
+        <Byte>48</Byte>
+      </Actual>
+      <After>
+        <Byte>23</Byte>
+        <Byte>C2</Byte>
+        <Byte>66</Byte>
+        <Byte>89</Byte>
+        <Byte>01</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry>
+      <Description>Изменение sub edx,esi</Description>
+      <AddressString>duke_base.dll+7D8F4</AddressString>
+      <Before>
+        <Byte>0C</Byte>
+        <Byte>3B</Byte>
+        <Byte>D6</Byte>
+        <Byte>7C</Byte>
+        <Byte>16</Byte>
+      </Before>
+      <Actual>
+        <Byte>2B</Byte>
+        <Byte>D6</Byte>
+      </Actual>
+      <After>
+        <Byte>B8</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+      </After>
+    </CodeEntry>
+  </CheatCodes>
+  <UserdefinedSymbols/>
+</CheatTable>

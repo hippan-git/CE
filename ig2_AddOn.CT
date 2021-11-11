@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CheatTable CheatEngineTableVersion="29">
+  <CheatEntries>
+    <CheatEntry>
+      <ID>9</ID>
+      <Description>"prod(dword)"</Description>
+      <LastState Activated="1"/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>{ Game   : ig2_AddOn.exe
+  Version: 
+  Date   : 2020-03-19
+  Author : Hipp
+
+  This script does blah blah blah
+}
+
+[ENABLE]
+
+aobscanmodule(prog,ig2_AddOn.exe,89 04 CE 8B F2) // should be unique
+alloc(newmem,$1000)
+
+label(code)
+label(return)
+
+newmem:
+  cmp eax,0b
+  jge code
+  mov eax,0b
+code:
+  mov [esi+ecx*8],eax
+  mov esi,edx
+  jmp return
+
+prog:
+  jmp newmem
+return:
+registersymbol(prog)
+
+[DISABLE]
+
+prog:
+  db 89 04 CE 8B F2
+
+unregistersymbol(prog)
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: "ig2_AddOn.exe"+231F3F
+
+"ig2_AddOn.exe"+231F25: 8B 4D F0              -  mov ecx,[ebp-10]
+"ig2_AddOn.exe"+231F28: 33 CD                 -  xor ecx,ebp
+"ig2_AddOn.exe"+231F2A: E8 11 B6 06 00        -  call ig2_AddOn.exe+29D540
+"ig2_AddOn.exe"+231F2F: 8B E5                 -  mov esp,ebp
+"ig2_AddOn.exe"+231F31: 5D                    -  pop ebp
+"ig2_AddOn.exe"+231F32: C2 0C 00              -  ret 000C
+"ig2_AddOn.exe"+231F35: 8B 77 3C              -  mov esi,[edi+3C]
+"ig2_AddOn.exe"+231F38: 8B 4D AC              -  mov ecx,[ebp-54]
+"ig2_AddOn.exe"+231F3B: 8B 45 98              -  mov eax,[ebp-68]
+"ig2_AddOn.exe"+231F3E: 48                    -  dec eax
+// ---------- INJECTING HERE ----------
+"ig2_AddOn.exe"+231F3F: 89 04 CE              -  mov [esi+ecx*8],eax
+"ig2_AddOn.exe"+231F42: 8B F2                 -  mov esi,edx
+// ---------- DONE INJECTING  ----------
+"ig2_AddOn.exe"+231F44: 8B 47 40              -  mov eax,[edi+40]
+"ig2_AddOn.exe"+231F47: C1 E6 04              -  shl esi,04
+"ig2_AddOn.exe"+231F4A: 03 F2                 -  add esi,edx
+"ig2_AddOn.exe"+231F4C: C1 E6 02              -  shl esi,02
+"ig2_AddOn.exe"+231F4F: 89 75 94              -  mov [ebp-6C],esi
+"ig2_AddOn.exe"+231F52: FE 4C 06 01           -  dec [esi+eax+01]
+"ig2_AddOn.exe"+231F56: 8B C2                 -  mov eax,edx
+"ig2_AddOn.exe"+231F58: 8B 4F 40              -  mov ecx,[edi+40]
+"ig2_AddOn.exe"+231F5B: C1 E0 04              -  shl eax,04
+"ig2_AddOn.exe"+231F5E: 03 C2                 -  add eax,edx
+}
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>10</ID>
+      <Description>"prod(byte)"</Description>
+      <LastState Activated="1"/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>{ Game   : ig2_AddOn.exe
+  Version: 
+  Date   : 2020-03-19
+  Author : Hipp
+
+  This script does blah blah blah
+}
+
+[ENABLE]
+
+aobscanmodule(prod_byte,ig2_AddOn.exe,FE 4C 06 01 8B C2) // should be unique
+alloc(newmem,$1000)
+
+label(code)
+label(return)
+
+newmem:
+  cmp byte ptr [esi+eax+01],0b
+  jge code
+  mov byte ptr [esi+eax+01],0b
+code:
+  dec [esi+eax+01]
+  mov eax,edx
+  jmp return
+
+prod_byte:
+  jmp newmem
+  nop
+return:
+registersymbol(prod_byte)
+
+[DISABLE]
+
+prod_byte:
+  db FE 4C 06 01 8B C2
+
+unregistersymbol(prod_byte)
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: "ig2_AddOn.exe"+231F52
+
+"ig2_AddOn.exe"+231F38: 8B 4D AC              -  mov ecx,[ebp-54]
+"ig2_AddOn.exe"+231F3B: 8B 45 98              -  mov eax,[ebp-68]
+"ig2_AddOn.exe"+231F3E: 48                    -  dec eax
+"ig2_AddOn.exe"+231F3F: 89 04 CE              -  mov [esi+ecx*8],eax
+"ig2_AddOn.exe"+231F42: 8B F2                 -  mov esi,edx
+"ig2_AddOn.exe"+231F44: 8B 47 40              -  mov eax,[edi+40]
+"ig2_AddOn.exe"+231F47: C1 E6 04              -  shl esi,04
+"ig2_AddOn.exe"+231F4A: 03 F2                 -  add esi,edx
+"ig2_AddOn.exe"+231F4C: C1 E6 02              -  shl esi,02
+"ig2_AddOn.exe"+231F4F: 89 75 94              -  mov [ebp-6C],esi
+// ---------- INJECTING HERE ----------
+"ig2_AddOn.exe"+231F52: FE 4C 06 01           -  dec [esi+eax+01]
+"ig2_AddOn.exe"+231F56: 8B C2                 -  mov eax,edx
+// ---------- DONE INJECTING  ----------
+"ig2_AddOn.exe"+231F58: 8B 4F 40              -  mov ecx,[edi+40]
+"ig2_AddOn.exe"+231F5B: C1 E0 04              -  shl eax,04
+"ig2_AddOn.exe"+231F5E: 03 C2                 -  add eax,edx
+"ig2_AddOn.exe"+231F60: 89 45 98              -  mov [ebp-68],eax
+"ig2_AddOn.exe"+231F63: 0F B6 44 31 01        -  movzx eax,byte ptr [ecx+esi+01]
+"ig2_AddOn.exe"+231F68: 03 45 98              -  add eax,[ebp-68]
+"ig2_AddOn.exe"+231F6B: 8B 75 A0              -  mov esi,[ebp-60]
+"ig2_AddOn.exe"+231F6E: 8B 44 81 04           -  mov eax,[ecx+eax*4+04]
+"ig2_AddOn.exe"+231F72: 8B CF                 -  mov ecx,edi
+"ig2_AddOn.exe"+231F74: 89 06                 -  mov [esi],eax
+}
+</AssemblerScript>
+    </CheatEntry>
+  </CheatEntries>
+  <CheatCodes>
+    <CodeEntry>
+      <Description>Изменение dec eax</Description>
+      <AddressString>ig2_AddOn.exe+231F3E</AddressString>
+      <Before>
+        <Byte>4D</Byte>
+        <Byte>AC</Byte>
+        <Byte>8B</Byte>
+        <Byte>45</Byte>
+        <Byte>98</Byte>
+      </Before>
+      <Actual>
+        <Byte>48</Byte>
+      </Actual>
+      <After>
+        <Byte>89</Byte>
+        <Byte>04</Byte>
+        <Byte>CE</Byte>
+        <Byte>8B</Byte>
+        <Byte>F2</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry>
+      <Description>Изменение dec [esi+eax+01]</Description>
+      <AddressString>ig2_AddOn.exe+231F52</AddressString>
+      <Before>
+        <Byte>E6</Byte>
+        <Byte>02</Byte>
+        <Byte>89</Byte>
+        <Byte>75</Byte>
+        <Byte>94</Byte>
+      </Before>
+      <Actual>
+        <Byte>FE</Byte>
+        <Byte>4C</Byte>
+        <Byte>06</Byte>
+        <Byte>01</Byte>
+      </Actual>
+      <After>
+        <Byte>8B</Byte>
+        <Byte>C2</Byte>
+        <Byte>8B</Byte>
+        <Byte>4F</Byte>
+        <Byte>40</Byte>
+      </After>
+    </CodeEntry>
+  </CheatCodes>
+  <UserdefinedSymbols/>
+  <Comments>Информация об этой таблице:
+</Comments>
+</CheatTable>

@@ -1,0 +1,428 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CheatTable CheatEngineTableVersion="29">
+  <CheatEntries>
+    <CheatEntry>
+      <ID>13</ID>
+      <Description>"fuel"</Description>
+      <LastState/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>{ Game   : king.exe (остановлен)
+  Version: 
+  Date   : 2021-03-05
+  Author : Hipp
+
+  This script does blah blah blah
+}
+
+[ENABLE]
+
+aobscanmodule(fuel,king.exe,D8 69 24 D9 51 24) // should be unique
+alloc(newmem,$1000)
+
+label(code)
+label(return)
+
+newmem:
+
+code:
+  fsubr dword ptr [ecx+24]
+  fst dword ptr [ecx+24]
+  mov dword ptr[ecx+24],3f800000
+  jmp return
+
+fuel:
+  jmp newmem
+  nop
+return:
+registersymbol(fuel)
+
+[DISABLE]
+
+fuel:
+  db D8 69 24 D9 51 24
+
+unregistersymbol(fuel)
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: "king.exe"+EB77B
+
+"king.exe"+EB757: F6 C4 41              -  test ah,41
+"king.exe"+EB75A: 75 0A                 -  jne king.exe+EB766
+"king.exe"+EB75C: C7 41 24 00 00 80 3F  -  mov [ecx+24],3F800000
+"king.exe"+EB763: C2 04 00              -  ret 0004
+"king.exe"+EB766: 8B 44 24 04           -  mov eax,[esp+04]
+"king.exe"+EB76A: 89 41 24              -  mov [ecx+24],eax
+"king.exe"+EB76D: C2 04 00              -  ret 0004
+"king.exe"+EB770: 8B 41 28              -  mov eax,[ecx+28]
+"king.exe"+EB773: D9 44 24 04           -  fld dword ptr [esp+04]
+"king.exe"+EB777: D8 4C 81 18           -  fmul dword ptr [ecx+eax*4+18]
+// ---------- INJECTING HERE ----------
+"king.exe"+EB77B: D8 69 24              -  fsubr dword ptr [ecx+24]
+"king.exe"+EB77E: D9 51 24              -  fst dword ptr [ecx+24]
+// ---------- DONE INJECTING  ----------
+"king.exe"+EB781: D8 1D 50 C2 64 00     -  fcomp dword ptr [king.exe+24C250]
+"king.exe"+EB787: DF E0                 -  fnstsw ax
+"king.exe"+EB789: F6 C4 41              -  test ah,41
+"king.exe"+EB78C: 75 07                 -  jne king.exe+EB795
+"king.exe"+EB78E: C7 41 24 00 00 80 3F  -  mov [ecx+24],3F800000
+"king.exe"+EB795: D9 41 24              -  fld dword ptr [ecx+24]
+"king.exe"+EB798: D8 1D 64 C2 64 00     -  fcomp dword ptr [king.exe+24C264]
+"king.exe"+EB79E: DF E0                 -  fnstsw ax
+"king.exe"+EB7A0: F6 C4 01              -  test ah,01
+"king.exe"+EB7A3: 74 07                 -  je king.exe+EB7AC
+}
+</AssemblerScript>
+      <Hotkeys>
+        <Hotkey>
+          <Action>Toggle Activation</Action>
+          <Keys>
+            <Key>70</Key>
+          </Keys>
+          <ID>0</ID>
+        </Hotkey>
+      </Hotkeys>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>12</ID>
+      <Description>"halava"</Description>
+      <LastState Activated="1"/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>{ Game   : king.exe
+  Version: 
+  Date   : 2020-04-18
+  Author : Hipp
+
+  This script does blah blah blah
+}
+
+[ENABLE]
+
+aobscanmodule(halava,king.exe,D8 E1 DD 99 88 00 00 00) // should be unique
+alloc(newmem,$1000)
+
+label(code)
+label(return)
+
+newmem:
+
+code:
+  fsub st(0),st(1)
+  fcomp
+  //fstp qword ptr [ecx+00000088]
+  jmp return
+
+halava:
+  jmp newmem
+  nop 3
+return:
+registersymbol(halava)
+king.exe+7709F:
+ db 90 90 90 90 90 90
+
+[DISABLE]
+
+halava:
+  db D8 E1 DD 99 88 00 00 00
+king.exe+7709F:
+  je king.exe+7726D
+
+unregistersymbol(halava)
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: "king.exe"+770AB
+
+"king.exe"+7707F: 8B 4C 24 40              -  mov ecx,[esp+40]
+"king.exe"+77083: 83 C4 04                 -  add esp,04
+"king.exe"+77086: DD 82 60 03 00 00        -  fld qword ptr [edx+00000360]
+"king.exe"+7708C: DC 0D 80 B7 64 00        -  fmul qword ptr [king.exe+24B780]
+"king.exe"+77092: D8 C1                    -  fadd st(0),st(1)
+"king.exe"+77094: DC 91 88 00 00 00        -  fcom qword ptr [ecx+00000088]
+"king.exe"+7709A: DF E0                    -  fnstsw ax
+"king.exe"+7709C: F6 C4 01                 -  test ah,01
+"king.exe"+7709F: 0F 84 C8 01 00 00        -  je king.exe+7726D
+"king.exe"+770A5: DD 81 88 00 00 00        -  fld qword ptr [ecx+00000088]
+// ---------- INJECTING HERE ----------
+"king.exe"+770AB: D8 E1                    -  fsub st(0),st(1)
+"king.exe"+770AD: DD 99 88 00 00 00        -  fstp qword ptr [ecx+00000088]
+// ---------- DONE INJECTING  ----------
+"king.exe"+770B3: 8B 44 24 40              -  mov eax,[esp+40]
+"king.exe"+770B7: 8D 4C 24 06              -  lea ecx,[esp+06]
+"king.exe"+770BB: DD D8                    -  fstp st(0)
+"king.exe"+770BD: DD 80 60 03 00 00        -  fld qword ptr [eax+00000360]
+"king.exe"+770C3: DC 0D 80 B7 64 00        -  fmul qword ptr [king.exe+24B780]
+"king.exe"+770C9: 51                       -  push ecx
+"king.exe"+770CA: 8D 4C 24 14              -  lea ecx,[esp+14]
+"king.exe"+770CE: DC 80 88 00 00 00        -  fadd qword ptr [eax+00000088]
+"king.exe"+770D4: D8 C1                    -  fadd st(0),st(1)
+"king.exe"+770D6: DD 98 88 00 00 00        -  fstp qword ptr [eax+00000088]
+}
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>15</ID>
+      <Description>"красный свет"</Description>
+      <LastState Activated="1"/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>{ Game   : king.exe (остановлен)
+  Version: 
+  Date   : 2021-08-16
+  Author : Hipp
+
+  This script does blah blah blah
+}
+
+[ENABLE]
+
+aobscanmodule(invisibl,king.exe,36 CC 86 F8 00 00 00) // should be unique
+alloc(newmem,$1000)
+
+label(code)
+label(return)
+
+newmem:
+  mov dword ptr [esi+f8],0
+  mov dword ptr [esi+fc],0
+code:
+  fld qword ptr [esi+000000F8]
+  jmp return
+
+invisibl+01:
+  jmp newmem
+  nop
+return:
+registersymbol(invisibl)
+
+[DISABLE]
+
+invisibl+01:
+  db CC 86 F8 00 00 00
+
+unregistersymbol(invisibl)
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: "king.exe"+D0546
+
+"king.exe"+D0524: F6 C4 41                       -  test ah,41
+"king.exe"+D0527: 74 53                          -  je king.exe+D057C
+"king.exe"+D0529: 8A 86 C8 00 00 00              -  mov al,[esi+000000C8]
+"king.exe"+D052F: 84 C0                          -  test al,al
+"king.exe"+D0531: 75 49                          -  jne king.exe+D057C
+"king.exe"+D0533: DD 86 F0 00 00 00              -  fld qword ptr [esi+000000F0]
+"king.exe"+D0539: DC 1D 78 B6 64 00              -  fcomp qword ptr [king.exe+24B678]
+"king.exe"+D053F: DF E0                          -  fnstsw ax
+"king.exe"+D0541: F6 C4 41                       -  test ah,41
+"king.exe"+D0544: 74 36                          -  je king.exe+D057C
+// ---------- INJECTING HERE ----------
+"king.exe"+D0546: DD 86 F8 00 00 00              -  fld qword ptr [esi+000000F8]
+// ---------- DONE INJECTING  ----------
+"king.exe"+D054C: DC 1D 78 B6 64 00              -  fcomp qword ptr [king.exe+24B678]
+"king.exe"+D0552: DF E0                          -  fnstsw ax
+"king.exe"+D0554: F6 C4 41                       -  test ah,41
+"king.exe"+D0557: 74 23                          -  je king.exe+D057C
+"king.exe"+D0559: DD 86 00 01 00 00              -  fld qword ptr [esi+00000100]
+"king.exe"+D055F: DC 1D 78 B6 64 00              -  fcomp qword ptr [king.exe+24B678]
+"king.exe"+D0565: DF E0                          -  fnstsw ax
+"king.exe"+D0567: F6 C4 41                       -  test ah,41
+"king.exe"+D056A: 74 10                          -  je king.exe+D057C
+"king.exe"+D056C: 8A 86 08 01 00 00              -  mov al,[esi+00000108]
+}
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>10</ID>
+      <Description>"money"</Description>
+      <VariableType>Double</VariableType>
+      <Address>"king.exe"+0028D514</Address>
+      <Offsets>
+        <Offset>88</Offset>
+      </Offsets>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>5</ID>
+      <Description>"timer"</Description>
+      <LastState Activated="1"/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>{ Game   : king.exe
+  Version: 
+  Date   : 2020-04-16
+  Author : Hipp
+
+  This script does blah blah blah
+}
+
+[ENABLE]
+
+aobscanmodule(lic_time,king.exe,DC 86 90 0B 00 00) // should be unique
+alloc(newmem,$1000)
+
+label(code)
+label(return)
+registersymbol(var1)
+newmem:
+
+code:
+  fadd qword ptr [var1]
+  //fadd qword ptr [esi+00000B90]fadd qword ptr [esi+00000B90]
+  jmp return
+var1:
+  dq (double)0.005
+lic_time:
+  jmp newmem
+  nop
+return:
+registersymbol(lic_time)
+
+[DISABLE]
+
+lic_time:
+  db DC 86 90 0B 00 00
+unregistersymbol(var1)
+unregistersymbol(lic_time)
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: "king.exe"+1DE604
+
+"king.exe"+1DE5D2: 3B CF                          -  cmp ecx,edi
+"king.exe"+1DE5D4: 75 28                          -  jne king.exe+1DE5FE
+"king.exe"+1DE5D6: C7 86 90 0B 00 00 9A 99 99 99  -  mov [esi+00000B90],9999999A
+"king.exe"+1DE5E0: C7 86 94 0B 00 00 99 99 A9 3F  -  mov [esi+00000B94],3FA99999
+"king.exe"+1DE5EA: EB 12                          -  jmp king.exe+1DE5FE
+"king.exe"+1DE5EC: DD D8                          -  fstp st(0)
+"king.exe"+1DE5EE: DB 44 24 0C                    -  fild dword ptr [esp+0C]
+"king.exe"+1DE5F2: DC 0D 58 B6 64 00              -  fmul qword ptr [king.exe+24B658]
+"king.exe"+1DE5F8: DD 9E 90 0B 00 00              -  fstp qword ptr [esi+00000B90]
+"king.exe"+1DE5FE: DD 86 98 0B 00 00              -  fld qword ptr [esi+00000B98]
+// ---------- INJECTING HERE ----------
+"king.exe"+1DE604: DC 86 90 0B 00 00              -  fadd qword ptr [esi+00000B90]
+// ---------- DONE INJECTING  ----------
+"king.exe"+1DE60A: DD 9E 98 0B 00 00              -  fstp qword ptr [esi+00000B98]
+"king.exe"+1DE610: DD 86 90 0B 00 00              -  fld qword ptr [esi+00000B90]
+"king.exe"+1DE616: DC 1D 78 B6 64 00              -  fcomp qword ptr [king.exe+24B678]
+"king.exe"+1DE61C: DF E0                          -  fnstsw ax
+"king.exe"+1DE61E: F6 C4 01                       -  test ah,01
+"king.exe"+1DE621: 75 13                          -  jne king.exe+1DE636
+"king.exe"+1DE623: DD 86 90 0B 00 00              -  fld qword ptr [esi+00000B90]
+"king.exe"+1DE629: DC 1D A0 B6 64 00              -  fcomp qword ptr [king.exe+24B6A0]
+"king.exe"+1DE62F: DF E0                          -  fnstsw ax
+"king.exe"+1DE631: F6 C4 41                       -  test ah,41
+}
+</AssemblerScript>
+      <Hotkeys>
+        <Hotkey>
+          <Action>Toggle Activation</Action>
+          <Keys>
+            <Key>73</Key>
+          </Keys>
+          <ID>0</ID>
+        </Hotkey>
+      </Hotkeys>
+      <CheatEntries>
+        <CheatEntry>
+          <ID>9</ID>
+          <Description>"k time"</Description>
+          <VariableType>Double</VariableType>
+          <Address>var1</Address>
+          <Hotkeys>
+            <Hotkey>
+              <Action>Set Value</Action>
+              <Keys>
+                <Key>17</Key>
+                <Key>73</Key>
+              </Keys>
+              <Value>0.005</Value>
+              <ID>0</ID>
+            </Hotkey>
+            <Hotkey>
+              <Action>Set Value</Action>
+              <Keys>
+                <Key>16</Key>
+                <Key>73</Key>
+              </Keys>
+              <Value>0.5</Value>
+              <ID>1</ID>
+            </Hotkey>
+          </Hotkeys>
+        </CheatEntry>
+      </CheatEntries>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>3</ID>
+      <Description>"Нет описания"</Description>
+      <VariableType>4 Bytes</VariableType>
+      <Address>king.exe+2F3478</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>2</ID>
+      <Description>"Нет описания"</Description>
+      <VariableType>Double</VariableType>
+      <Address>6f3488</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>11</ID>
+      <Description>"Нет описания"</Description>
+      <VariableType>Double</VariableType>
+      <Address>0D92417C</Address>
+    </CheatEntry>
+  </CheatEntries>
+  <CheatCodes>
+    <CodeEntry>
+      <Description>Изменение sar eax,03</Description>
+      <AddressString>king.exe+169C6E</AddressString>
+      <Before>
+        <Byte>0D</Byte>
+        <Byte>80</Byte>
+        <Byte>34</Byte>
+        <Byte>6F</Byte>
+        <Byte>00</Byte>
+      </Before>
+      <Actual>
+        <Byte>C1</Byte>
+        <Byte>F8</Byte>
+        <Byte>03</Byte>
+      </Actual>
+      <After>
+        <Byte>85</Byte>
+        <Byte>C0</Byte>
+        <Byte>A3</Byte>
+        <Byte>78</Byte>
+        <Byte>34</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry>
+      <Description>Изменение je 0047726D</Description>
+      <AddressString>king.exe+7709F</AddressString>
+      <Before>
+        <Byte>DF</Byte>
+        <Byte>E0</Byte>
+        <Byte>F6</Byte>
+        <Byte>C4</Byte>
+        <Byte>01</Byte>
+      </Before>
+      <Actual>
+        <Byte>0F</Byte>
+        <Byte>84</Byte>
+        <Byte>C8</Byte>
+        <Byte>01</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>DD</Byte>
+        <Byte>81</Byte>
+        <Byte>88</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+      </After>
+    </CodeEntry>
+  </CheatCodes>
+  <UserdefinedSymbols/>
+  <Comments>king.exe+7792A - fst qword ptr [edi] - lic time
+king.exe+EB77E - fst dword ptr [ecx+24] - fuel
+king.exe+D0546 - fld qword ptr [esi+000000F8] - погоня
+
+</Comments>
+</CheatTable>

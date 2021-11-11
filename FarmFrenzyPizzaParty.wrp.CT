@@ -1,0 +1,369 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CheatTable CheatEngineTableVersion="29">
+  <CheatEntries>
+    <CheatEntry>
+      <ID>0</ID>
+      <Description>"fastanimal"</Description>
+      <LastState Activated="1"/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>{ Game   : FarmFrenzyPizzaParty.wrp.exe
+  Version: 
+  Date   : 2020-07-07
+  Author : Hipp
+
+  This script does blah blah blah
+}
+
+[ENABLE]
+
+aobscanmodule(fastanimal,FarmFrenzyPizzaParty.wrp.exe,D8 86 B4 03 00 00) // should be unique
+alloc(newmem,$1000)
+
+label(code)
+label(return)
+
+newmem:
+  fcomp
+  fld dword ptr [f_var]
+code:
+  fadd dword ptr [esi+000003B4]
+  jmp return
+f_var:
+  dd (float)0.03
+fastanimal:
+  jmp newmem
+  nop
+return:
+registersymbol(fastanimal)
+
+[DISABLE]
+
+fastanimal:
+  db D8 86 B4 03 00 00
+
+unregistersymbol(fastanimal)
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: "FarmFrenzyPizzaParty.wrp.exe"+8ADF7
+
+"FarmFrenzyPizzaParty.wrp.exe"+8ADD2: D9 5D E4           -  fstp dword ptr [ebp-1C]
+"FarmFrenzyPizzaParty.wrp.exe"+8ADD5: 8B 4D E4           -  mov ecx,[ebp-1C]
+"FarmFrenzyPizzaParty.wrp.exe"+8ADD8: 8B 86 74 04 00 00  -  mov eax,[esi+00000474]
+"FarmFrenzyPizzaParty.wrp.exe"+8ADDE: 89 4D E4           -  mov [ebp-1C],ecx
+"FarmFrenzyPizzaParty.wrp.exe"+8ADE1: 8B 4E 30           -  mov ecx,[esi+30]
+"FarmFrenzyPizzaParty.wrp.exe"+8ADE4: 3B C8              -  cmp ecx,eax
+"FarmFrenzyPizzaParty.wrp.exe"+8ADE6: 0F 84 B0 00 00 00  -  je FarmFrenzyPizzaParty.wrp.exe+8AE9C
+"FarmFrenzyPizzaParty.wrp.exe"+8ADEC: D9 45 E4           -  fld dword ptr [ebp-1C]
+"FarmFrenzyPizzaParty.wrp.exe"+8ADEF: 8B 86 1C 04 00 00  -  mov eax,[esi+0000041C]
+"FarmFrenzyPizzaParty.wrp.exe"+8ADF5: 3B C3              -  cmp eax,ebx
+// ---------- INJECTING HERE ----------
+"FarmFrenzyPizzaParty.wrp.exe"+8ADF7: D8 86 B4 03 00 00  -  fadd dword ptr [esi+000003B4]
+// ---------- DONE INJECTING  ----------
+"FarmFrenzyPizzaParty.wrp.exe"+8ADFD: D9 9E B4 03 00 00  -  fstp dword ptr [esi+000003B4]
+"FarmFrenzyPizzaParty.wrp.exe"+8AE03: D9 45 E4           -  fld dword ptr [ebp-1C]
+"FarmFrenzyPizzaParty.wrp.exe"+8AE06: D8 86 CC 03 00 00  -  fadd dword ptr [esi+000003CC]
+"FarmFrenzyPizzaParty.wrp.exe"+8AE0C: D9 96 CC 03 00 00  -  fst dword ptr [esi+000003CC]
+"FarmFrenzyPizzaParty.wrp.exe"+8AE12: 0F 85 82 00 00 00  -  jne FarmFrenzyPizzaParty.wrp.exe+8AE9A
+"FarmFrenzyPizzaParty.wrp.exe"+8AE18: D8 9E D0 03 00 00  -  fcomp dword ptr [esi+000003D0]
+"FarmFrenzyPizzaParty.wrp.exe"+8AE1E: DF E0              -  fnstsw ax
+"FarmFrenzyPizzaParty.wrp.exe"+8AE20: F6 C4 41           -  test ah,41
+"FarmFrenzyPizzaParty.wrp.exe"+8AE23: 75 77              -  jne FarmFrenzyPizzaParty.wrp.exe+8AE9C
+"FarmFrenzyPizzaParty.wrp.exe"+8AE25: D9 86 A4 03 00 00  -  fld dword ptr [esi+000003A4]
+}
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>2</ID>
+      <Description>"sklad"</Description>
+      <LastState Activated="1"/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>[ENABLE]
+FarmFrenzyPizzaParty.wrp.exe+6456F:
+ db 90 90
+
+ 
+[DISABLE]
+FarmFrenzyPizzaParty.wrp.exe+6456F:
+ db 75 16// jne FarmFrenzyPizzaParty.wrp.exe+64587
+
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>4</ID>
+      <Description>"truck"</Description>
+      <LastState Activated="1"/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>[ENABLE]
+FarmFrenzyPizzaParty.wrp.exe+E19C1:
+ jmp FarmFrenzyPizzaParty.wrp.exe+E19D6
+
+
+
+ 
+ 
+[DISABLE]
+FarmFrenzyPizzaParty.wrp.exe+E19C1:
+ jb FarmFrenzyPizzaParty.wrp.exe+E19D6
+
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>5</ID>
+      <Description>"product"</Description>
+      <LastState Activated="1"/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>{ Game   : FarmFrenzyPizzaParty.wrp.exe
+  Version: 
+  Date   : 2020-07-07
+  Author : Hipp
+
+  This script does blah blah blah
+}
+
+[ENABLE]
+
+aobscanmodule(product,FarmFrenzyPizzaParty.wrp.exe,89 8C 86 1C 03 00 00) // should be unique
+alloc(newmem,$1000)
+
+label(code)
+label(return)
+
+newmem:
+  add ecx,4
+code:
+  mov [esi+eax*4+0000031C],ecx
+  jmp return
+
+product:
+  jmp newmem
+  nop 2
+return:
+registersymbol(product)
+
+[DISABLE]
+
+product:
+  db 89 8C 86 1C 03 00 00
+
+unregistersymbol(product)
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: "FarmFrenzyPizzaParty.wrp.exe"+64188
+
+"FarmFrenzyPizzaParty.wrp.exe"+64169: B8 38 11 00 00        -  mov eax,00001138
+"FarmFrenzyPizzaParty.wrp.exe"+6416E: E8 BD 33 17 00        -  call FarmFrenzyPizzaParty.wrp.exe+1D7530
+"FarmFrenzyPizzaParty.wrp.exe"+64173: 8B 45 08              -  mov eax,[ebp+08]
+"FarmFrenzyPizzaParty.wrp.exe"+64176: 8B 55 0C              -  mov edx,[ebp+0C]
+"FarmFrenzyPizzaParty.wrp.exe"+64179: 53                    -  push ebx
+"FarmFrenzyPizzaParty.wrp.exe"+6417A: 56                    -  push esi
+"FarmFrenzyPizzaParty.wrp.exe"+6417B: 8B F1                 -  mov esi,ecx
+"FarmFrenzyPizzaParty.wrp.exe"+6417D: 8B 8C 86 1C 03 00 00  -  mov ecx,[esi+eax*4+0000031C]
+"FarmFrenzyPizzaParty.wrp.exe"+64184: 03 CA                 -  add ecx,edx
+"FarmFrenzyPizzaParty.wrp.exe"+64186: 85 D2                 -  test edx,edx
+// ---------- INJECTING HERE ----------
+"FarmFrenzyPizzaParty.wrp.exe"+64188: 89 8C 86 1C 03 00 00  -  mov [esi+eax*4+0000031C],ecx
+// ---------- DONE INJECTING  ----------
+"FarmFrenzyPizzaParty.wrp.exe"+6418F: 8B 8E DC 02 00 00     -  mov ecx,[esi+000002DC]
+"FarmFrenzyPizzaParty.wrp.exe"+64195: D9 81 3C 02 00 00     -  fld dword ptr [ecx+0000023C]
+"FarmFrenzyPizzaParty.wrp.exe"+6419B: 57                    -  push edi
+"FarmFrenzyPizzaParty.wrp.exe"+6419C: 89 55 08              -  mov [ebp+08],edx
+"FarmFrenzyPizzaParty.wrp.exe"+6419F: DB 45 08              -  fild dword ptr [ebp+08]
+"FarmFrenzyPizzaParty.wrp.exe"+641A2: 89 65 F0              -  mov [ebp-10],esp
+"FarmFrenzyPizzaParty.wrp.exe"+641A5: C7 45 FC 00 00 00 00  -  mov [ebp-04],00000000
+"FarmFrenzyPizzaParty.wrp.exe"+641AC: 8D 04 40              -  lea eax,[eax+eax*2]
+"FarmFrenzyPizzaParty.wrp.exe"+641AF: 7D 06                 -  jnl FarmFrenzyPizzaParty.wrp.exe+641B7
+"FarmFrenzyPizzaParty.wrp.exe"+641B1: D8 05 D0 89 65 00     -  fadd dword ptr [FarmFrenzyPizzaParty.wrp.exe+2589D0]
+}
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>7</ID>
+      <Description>"progress"</Description>
+      <LastState Activated="1"/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>{ Game   : FarmFrenzyPizzaParty.wrp.exe
+  Version: 
+  Date   : 2020-07-07
+  Author : Hipp
+
+  This script does blah blah blah
+}
+
+[ENABLE]
+
+aobscanmodule(progress,FarmFrenzyPizzaParty.wrp.exe,D8 86 08 03 00 00 D9) // should be unique
+alloc(newmem,$1000)
+
+label(code)
+label(return)
+
+newmem:
+  fcomp
+  fld dword ptr [p_var]
+code:
+  fadd dword ptr [esi+00000308]
+  jmp return
+p_var:
+  dd (float)0.07
+progress:
+  jmp newmem
+  nop
+return:
+registersymbol(progress)
+
+[DISABLE]
+
+progress:
+  db D8 86 08 03 00 00
+
+unregistersymbol(progress)
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: "FarmFrenzyPizzaParty.wrp.exe"+5914C
+
+"FarmFrenzyPizzaParty.wrp.exe"+5911E: D8 86 AC 01 00 00     -  fadd dword ptr [esi+000001AC]
+"FarmFrenzyPizzaParty.wrp.exe"+59124: D9 9E AC 01 00 00     -  fstp dword ptr [esi+000001AC]
+"FarmFrenzyPizzaParty.wrp.exe"+5912A: EB 42                 -  jmp FarmFrenzyPizzaParty.wrp.exe+5916E
+"FarmFrenzyPizzaParty.wrp.exe"+5912C: D9 45 EC              -  fld dword ptr [ebp-14]
+"FarmFrenzyPizzaParty.wrp.exe"+5912F: 8B 8E F0 02 00 00     -  mov ecx,[esi+000002F0]
+"FarmFrenzyPizzaParty.wrp.exe"+59135: D8 86 AC 01 00 00     -  fadd dword ptr [esi+000001AC]
+"FarmFrenzyPizzaParty.wrp.exe"+5913B: C6 86 B0 01 00 00 01  -  mov byte ptr [esi+000001B0],01
+"FarmFrenzyPizzaParty.wrp.exe"+59142: 51                    -  push ecx
+"FarmFrenzyPizzaParty.wrp.exe"+59143: D9 9E AC 01 00 00     -  fstp dword ptr [esi+000001AC]
+"FarmFrenzyPizzaParty.wrp.exe"+59149: D9 45 E8              -  fld dword ptr [ebp-18]
+// ---------- INJECTING HERE ----------
+"FarmFrenzyPizzaParty.wrp.exe"+5914C: D8 86 08 03 00 00     -  fadd dword ptr [esi+00000308]
+// ---------- DONE INJECTING  ----------
+"FarmFrenzyPizzaParty.wrp.exe"+59152: D9 96 08 03 00 00     -  fst dword ptr [esi+00000308]
+"FarmFrenzyPizzaParty.wrp.exe"+59158: D9 81 38 02 00 00     -  fld dword ptr [ecx+00000238]
+"FarmFrenzyPizzaParty.wrp.exe"+5915E: D9 C9                 -  fxch st(1)
+"FarmFrenzyPizzaParty.wrp.exe"+59160: D8 37                 -  fdiv dword ptr [edi]
+"FarmFrenzyPizzaParty.wrp.exe"+59162: D8 C9                 -  fmul st(0),st(1)
+"FarmFrenzyPizzaParty.wrp.exe"+59164: D9 1C 24              -  fstp dword ptr [esp]
+"FarmFrenzyPizzaParty.wrp.exe"+59167: DD D8                 -  fstp st(0)
+"FarmFrenzyPizzaParty.wrp.exe"+59169: E8 92 20 FB FF        -  call FarmFrenzyPizzaParty.wrp.exe+B200
+"FarmFrenzyPizzaParty.wrp.exe"+5916E: D9 86 08 03 00 00     -  fld dword ptr [esi+00000308]
+"FarmFrenzyPizzaParty.wrp.exe"+59174: D8 1F                 -  fcomp dword ptr [edi]
+}
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>9</ID>
+      <Description>"fast game"</Description>
+      <LastState/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>[ENABLE]
+FarmFrenzyPizzaParty.wrp.exe+D33F4:
+ jmp FarmFrenzyPizzaParty.wrp.exe+D35A5
+ nop
+
+ 
+[DISABLE]
+FarmFrenzyPizzaParty.wrp.exe+D33F4:
+ jae FarmFrenzyPizzaParty.wrp.exe+D35A5
+
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>10</ID>
+      <Description>"time"</Description>
+      <LastState/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>{ Game   : FarmFrenzyPizzaParty.wrp.exe
+  Version: 
+  Date   : 2020-07-07
+  Author : Hipp
+
+  This script does blah blah blah
+}
+
+[ENABLE]
+
+aobscanmodule(time,FarmFrenzyPizzaParty.wrp.exe,D8 86 8C 02 00 00 D9 9E 8C 02 00 00 D9) // should be unique
+alloc(newmem,$1000)
+
+label(code)
+label(return)
+
+newmem:
+  //frndint
+  fcomp
+  fld dword ptr [v_time]
+code:
+  fadd dword ptr [esi+0000028C]
+  jmp return
+v_time:
+  dd (float)0.1
+time:
+  jmp newmem
+  nop
+return:
+registersymbol(time)
+
+[DISABLE]
+
+time:
+  db D8 86 8C 02 00 00
+
+unregistersymbol(time)
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: "FarmFrenzyPizzaParty.wrp.exe"+1FBA0
+
+"FarmFrenzyPizzaParty.wrp.exe"+1FB86: D9 9E 8C 02 00 00     -  fstp dword ptr [esi+0000028C]
+"FarmFrenzyPizzaParty.wrp.exe"+1FB8C: 8B 4D F4              -  mov ecx,[ebp-0C]
+"FarmFrenzyPizzaParty.wrp.exe"+1FB8F: 64 89 0D 00 00 00 00  -  mov fs:[00000000],ecx
+"FarmFrenzyPizzaParty.wrp.exe"+1FB96: 5F                    -  pop edi
+"FarmFrenzyPizzaParty.wrp.exe"+1FB97: 5E                    -  pop esi
+"FarmFrenzyPizzaParty.wrp.exe"+1FB98: 5B                    -  pop ebx
+"FarmFrenzyPizzaParty.wrp.exe"+1FB99: 8B E5                 -  mov esp,ebp
+"FarmFrenzyPizzaParty.wrp.exe"+1FB9B: 5D                    -  pop ebp
+"FarmFrenzyPizzaParty.wrp.exe"+1FB9C: C3                    -  ret 
+"FarmFrenzyPizzaParty.wrp.exe"+1FB9D: D9 45 EC              -  fld dword ptr [ebp-14]
+// ---------- INJECTING HERE ----------
+"FarmFrenzyPizzaParty.wrp.exe"+1FBA0: D8 86 8C 02 00 00     -  fadd dword ptr [esi+0000028C]
+// ---------- DONE INJECTING  ----------
+"FarmFrenzyPizzaParty.wrp.exe"+1FBA6: D9 9E 8C 02 00 00     -  fstp dword ptr [esi+0000028C]
+"FarmFrenzyPizzaParty.wrp.exe"+1FBAC: D9 45 EC              -  fld dword ptr [ebp-14]
+"FarmFrenzyPizzaParty.wrp.exe"+1FBAF: D8 86 A4 04 00 00     -  fadd dword ptr [esi+000004A4]
+"FarmFrenzyPizzaParty.wrp.exe"+1FBB5: D9 9E A4 04 00 00     -  fstp dword ptr [esi+000004A4]
+"FarmFrenzyPizzaParty.wrp.exe"+1FBBB: D9 45 EC              -  fld dword ptr [ebp-14]
+"FarmFrenzyPizzaParty.wrp.exe"+1FBBE: D8 86 A8 04 00 00     -  fadd dword ptr [esi+000004A8]
+"FarmFrenzyPizzaParty.wrp.exe"+1FBC4: D9 9E A8 04 00 00     -  fstp dword ptr [esi+000004A8]
+"FarmFrenzyPizzaParty.wrp.exe"+1FBCA: E8 91 41 FF FF        -  call FarmFrenzyPizzaParty.wrp.exe+13D60
+"FarmFrenzyPizzaParty.wrp.exe"+1FBCF: 8B CE                 -  mov ecx,esi
+"FarmFrenzyPizzaParty.wrp.exe"+1FBD1: E8 CA CF FF FF        -  call FarmFrenzyPizzaParty.wrp.exe+1CBA0
+}
+</AssemblerScript>
+    </CheatEntry>
+  </CheatEntries>
+  <CheatCodes>
+    <CodeEntry>
+      <Description>Изменение jne FarmFrenzyPizzaParty.wrp.exe+64587</Description>
+      <AddressString>FarmFrenzyPizzaParty.wrp.exe+6456F</AddressString>
+      <Before>
+        <Byte>DF</Byte>
+        <Byte>E0</Byte>
+        <Byte>F6</Byte>
+        <Byte>C4</Byte>
+        <Byte>01</Byte>
+      </Before>
+      <Actual>
+        <Byte>75</Byte>
+        <Byte>16</Byte>
+      </Actual>
+      <After>
+        <Byte>B8</Byte>
+        <Byte>01</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+      </After>
+    </CodeEntry>
+  </CheatCodes>
+  <UserdefinedSymbols/>
+</CheatTable>

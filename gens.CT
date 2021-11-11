@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CheatTable CheatEngineTableVersion="29">
+  <CheatEntries>
+    <CheatEntry>
+      <ID>0</ID>
+      <Description>"A0"</Description>
+      <LastState Value="00069E6D" RealAddress="00495664"/>
+      <ShowAsHex>1</ShowAsHex>
+      <VariableType>4 Bytes</VariableType>
+      <Address>gens.exe+385664</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>1</ID>
+      <Description>"A1"</Description>
+      <LastState Value="FFFFFF8B" RealAddress="00495668"/>
+      <ShowAsHex>1</ShowAsHex>
+      <VariableType>4 Bytes</VariableType>
+      <Address>gens.exe+385668</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>2</ID>
+      <Description>"A2"</Description>
+      <LastState Value="00000BD0" RealAddress="0049566C"/>
+      <ShowAsHex>1</ShowAsHex>
+      <VariableType>4 Bytes</VariableType>
+      <Address>gens.exe+38566C</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>3</ID>
+      <Description>"A3"</Description>
+      <LastState Value="FFFFC010" RealAddress="00495670"/>
+      <ShowAsHex>1</ShowAsHex>
+      <VariableType>4 Bytes</VariableType>
+      <Address>gens.exe+385670</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>4</ID>
+      <Description>"A4"</Description>
+      <LastState Value="00044E32" RealAddress="00495674"/>
+      <ShowAsHex>1</ShowAsHex>
+      <VariableType>4 Bytes</VariableType>
+      <Address>gens.exe+385674</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>5</ID>
+      <Description>"A5"</Description>
+      <LastState Value="FFFFFB70" RealAddress="00495678"/>
+      <ShowAsHex>1</ShowAsHex>
+      <VariableType>4 Bytes</VariableType>
+      <Address>gens.exe+385678</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>6</ID>
+      <Description>"A6"</Description>
+      <LastState Value="00000000" RealAddress="0049567C"/>
+      <ShowAsHex>1</ShowAsHex>
+      <VariableType>4 Bytes</VariableType>
+      <Address>gens.exe+38567C</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>7</ID>
+      <Description>"A7"</Description>
+      <LastState Value="A3FFF7B6" RealAddress="00495680"/>
+      <ShowAsHex>1</ShowAsHex>
+      <VariableType>4 Bytes</VariableType>
+      <Address>gens.exe+385680</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>8</ID>
+      <Description>"D0"</Description>
+      <LastState Value="000000FF" RealAddress="00495644"/>
+      <ShowAsHex>1</ShowAsHex>
+      <VariableType>4 Bytes</VariableType>
+      <Address>gens.exe+385644</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>9</ID>
+      <Description>"D1"</Description>
+      <LastState Value="000000FF" RealAddress="00495648"/>
+      <ShowAsHex>1</ShowAsHex>
+      <VariableType>4 Bytes</VariableType>
+      <Address>gens.exe+385648</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>10</ID>
+      <Description>"D2"</Description>
+      <LastState Value="7F7F0002" RealAddress="0049564C"/>
+      <ShowAsHex>1</ShowAsHex>
+      <VariableType>4 Bytes</VariableType>
+      <Address>gens.exe+38564C</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>11</ID>
+      <Description>"D3"</Description>
+      <LastState Value="00000000" RealAddress="00495650"/>
+      <ShowAsHex>1</ShowAsHex>
+      <VariableType>4 Bytes</VariableType>
+      <Address>gens.exe+385650</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>12</ID>
+      <Description>"D4"</Description>
+      <LastState Value="00040000" RealAddress="00495654"/>
+      <ShowAsHex>1</ShowAsHex>
+      <VariableType>4 Bytes</VariableType>
+      <Address>gens.exe+385654</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>13</ID>
+      <Description>"D5"</Description>
+      <LastState Value="FFFFFFFF" RealAddress="00495658"/>
+      <ShowAsHex>1</ShowAsHex>
+      <VariableType>4 Bytes</VariableType>
+      <Address>gens.exe+385658</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>14</ID>
+      <Description>"D6"</Description>
+      <LastState Value="0000FF04" RealAddress="0049565C"/>
+      <ShowAsHex>1</ShowAsHex>
+      <VariableType>4 Bytes</VariableType>
+      <Address>gens.exe+38565C</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>15</ID>
+      <Description>"D7"</Description>
+      <LastState Value="0000FFFF" RealAddress="00495660"/>
+      <ShowAsHex>1</ShowAsHex>
+      <VariableType>4 Bytes</VariableType>
+      <Address>gens.exe+385660</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>19</ID>
+      <Description>"PC"</Description>
+      <LastState Value="00000696" RealAddress="0256D920"/>
+      <ShowAsHex>1</ShowAsHex>
+      <VariableType>4 Bytes</VariableType>
+      <Address>gens.exe+245D920</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>20</ID>
+      <Description>"flag"</Description>
+      <LastState Value="04" RealAddress="00495698"/>
+      <ShowAsHex>1</ShowAsHex>
+      <VariableType>Byte</VariableType>
+      <Address>gens.exe+385698</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>17</ID>
+      <Description>"first ram"</Description>
+      <LastState Value="2020" RealAddress="004FEDC0"/>
+      <ShowAsHex>1</ShowAsHex>
+      <VariableType>2 Bytes</VariableType>
+      <Address>gens.exe+3EEDC0</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>18</ID>
+      <Description>"last ram"</Description>
+      <LastState Value="0000" RealAddress="0050EDBE"/>
+      <ShowAsHex>1</ShowAsHex>
+      <VariableType>2 Bytes</VariableType>
+      <Address>gens.exe+3FEDBe</Address>
+    </CheatEntry>
+  </CheatEntries>
+  <UserdefinedSymbols/>
+  <Comments>ram 63edc0 - 64edbf
+</Comments>
+</CheatTable>

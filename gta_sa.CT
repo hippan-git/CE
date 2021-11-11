@@ -1,0 +1,310 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CheatTable CheatEngineTableVersion="29">
+  <CheatEntries>
+    <CheatEntry>
+      <ID>0</ID>
+      <Description>"Нет описания"</Description>
+      <VariableType>Float</VariableType>
+      <Address>0BD486A0</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>1</ID>
+      <Description>"Нет описания"</Description>
+      <VariableType>Float</VariableType>
+      <Address>gta_sa.exe+771A38</Address>
+      <Offsets>
+        <Offset>540</Offset>
+      </Offsets>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>2</ID>
+      <Description>"OHK"</Description>
+      <LastState/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>{ Game   : gta_sa.exe
+  Version: 
+  Date   : 2018-11-17
+  Author : Hipp
+
+  This script does blah blah blah
+}
+
+[ENABLE]
+
+aobscanmodule(OHK,gta_sa.exe,89 96 40 05 00 00) // should be unique
+alloc(newmem,$1000)
+//B71A38
+label(code)
+label(return)
+label(iam)
+
+
+
+newmem:
+  cmp [00B71A38],esi
+  je iam
+  mov edx,(float)0
+code:
+  mov [esi+00000540],edx
+  jmp return
+iam:
+  mov edx,(float)100
+  jmp code
+
+OHK:
+  jmp newmem
+  nop
+return:
+registersymbol(OHK)
+
+[DISABLE]
+
+OHK:
+  db 89 96 40 05 00 00
+
+unregistersymbol(OHK)
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: "gta_sa.exe"+B339F
+
+"gta_sa.exe"+B3379: F6 C4 01           -  test ah,01
+"gta_sa.exe"+B337C: 0F 85 88 00 00 00  -  jne gta_sa.exe+B340A
+"gta_sa.exe"+B3382: 38 5C 24 1C        -  cmp [esp+1C],bl
+"gta_sa.exe"+B3386: 88 5F 08           -  mov [edi+08],bl
+"gta_sa.exe"+B3389: 8B 4D 04           -  mov ecx,[ebp+04]
+"gta_sa.exe"+B338C: 89 0F              -  mov [edi],ecx
+"gta_sa.exe"+B338E: D9 86 40 05 00 00  -  fld dword ptr [esi+00000540]
+"gta_sa.exe"+B3394: D8 65 04           -  fsub dword ptr [ebp+04]
+"gta_sa.exe"+B3397: D9 5C 24 14        -  fstp dword ptr [esp+14]
+"gta_sa.exe"+B339B: 8B 54 24 14        -  mov edx,[esp+14]
+// ---------- INJECTING HERE ----------
+"gta_sa.exe"+B339F: 89 96 40 05 00 00  -  mov [esi+00000540],edx
+// ---------- DONE INJECTING  ----------
+"gta_sa.exe"+B33A5: 74 74              -  je gta_sa.exe+B341B
+"gta_sa.exe"+B33A7: 83 7D 0C 35        -  cmp dword ptr [ebp+0C],35
+"gta_sa.exe"+B33AB: 75 1C              -  jne gta_sa.exe+B33C9
+"gta_sa.exe"+B33AD: 53                 -  push ebx
+"gta_sa.exe"+B33AE: 53                 -  push ebx
+"gta_sa.exe"+B33AF: 53                 -  push ebx
+"gta_sa.exe"+B33B0: 68 00 00 80 3F     -  push 3F800000
+"gta_sa.exe"+B33B5: 53                 -  push ebx
+"gta_sa.exe"+B33B6: 68 65 01 00 00     -  push 00000165
+"gta_sa.exe"+B33BB: 8B CE              -  mov ecx,esi
+}
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>3</ID>
+      <Description>"z pos"</Description>
+      <VariableType>Float</VariableType>
+      <Address>"gta_sa.exe"+00771A38</Address>
+      <Offsets>
+        <Offset>38</Offset>
+        <Offset>14</Offset>
+      </Offsets>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>4</ID>
+      <Description>"OHK_car"</Description>
+      <LastState/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>{ Game   : gta_sa.exe
+  Version: 
+  Date   : 2018-12-19
+  Author : Hipp
+
+  This script does blah blah blah
+}
+
+[ENABLE]
+
+aobscanmodule(OHK_car,gta_sa.exe,D9 9E C0 04 00 00 89) // should be unique
+alloc(newmem,$1000)
+
+label(code)
+label(return)
+
+newmem:
+
+code:
+  fstp dword ptr [esi+000004C0]
+  mov [esi+000004C0],(float)1
+  jmp return
+
+OHK_car:
+  jmp newmem
+  nop
+return:
+registersymbol(OHK_car)
+
+[DISABLE]
+
+OHK_car:
+  db D9 9E C0 04 00 00
+
+unregistersymbol(OHK_car)
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: "gta_sa.exe"+2D88B3
+
+"gta_sa.exe"+2D8885: D8 9C 24 90 00 00 00              -  fcomp dword ptr [esp+00000090]
+"gta_sa.exe"+2D888C: DF E0                             -  fnstsw ax
+"gta_sa.exe"+2D888E: F6 C4 41                          -  test ah,41
+"gta_sa.exe"+2D8891: 0F 85 8A 01 00 00                 -  jne gta_sa.exe+2D8A21
+"gta_sa.exe"+2D8897: D9 86 C0 04 00 00                 -  fld dword ptr [esi+000004C0]
+"gta_sa.exe"+2D889D: 0F B6 46 36                       -  movzx eax,byte ptr [esi+36]
+"gta_sa.exe"+2D88A1: D8 A4 24 90 00 00 00              -  fsub dword ptr [esp+00000090]
+"gta_sa.exe"+2D88A8: 8B 96 C0 04 00 00                 -  mov edx,[esi+000004C0]
+"gta_sa.exe"+2D88AE: C1 E8 03                          -  shr eax,03
+"gta_sa.exe"+2D88B1: 3B C5                             -  cmp eax,ebp
+// ---------- INJECTING HERE ----------
+"gta_sa.exe"+2D88B3: D9 9E C0 04 00 00                 -  fstp dword ptr [esi+000004C0]
+// ---------- DONE INJECTING  ----------
+"gta_sa.exe"+2D88B9: 89 94 24 88 00 00 00              -  mov [esp+00000088],edx
+"gta_sa.exe"+2D88C0: 74 12                             -  je gta_sa.exe+2D88D4
+"gta_sa.exe"+2D88C2: 83 F8 01                          -  cmp eax,01
+"gta_sa.exe"+2D88C5: 0F 8E EC 00 00 00                 -  jng gta_sa.exe+2D89B7
+"gta_sa.exe"+2D88CB: 83 F8 03                          -  cmp eax,03
+"gta_sa.exe"+2D88CE: 0F 8F E3 00 00 00                 -  jg gta_sa.exe+2D89B7
+"gta_sa.exe"+2D88D4: 3B FD                             -  cmp edi,ebp
+"gta_sa.exe"+2D88D6: 0F 84 DB 00 00 00                 -  je gta_sa.exe+2D89B7
+"gta_sa.exe"+2D88DC: 8A 47 36                          -  mov al,[edi+36]
+"gta_sa.exe"+2D88DF: 24 07                             -  and al,07
+}
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>5</ID>
+      <Description>"Скрипт автоассемблера"</Description>
+      <LastState Activated="1"/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>{ Game   : gta_sa.exe
+  Version: 
+  Date   : 2019-10-23
+  Author : Hipp
+
+  This script does blah blah blah
+}
+
+[ENABLE]
+
+aobscanmodule(guns,gta_sa.exe,8B 41 0C 85 C0 0F 95) // should be unique
+alloc(newmem,$1000)
+
+label(code)
+label(return)
+
+newmem:
+  mov [ecx+0c],#200
+code:
+  mov eax,[ecx+0C]
+  test eax,eax
+  jmp return
+
+guns:
+  jmp newmem
+return:
+registersymbol(guns)
+
+[DISABLE]
+
+guns:
+  db 8B 41 0C 85 C0
+
+unregistersymbol(guns)
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: "gta_sa.exe"+33BAE8
+
+"gta_sa.exe"+33BACD: 90                    -  nop 
+"gta_sa.exe"+33BACE: 90                    -  nop 
+"gta_sa.exe"+33BACF: 90                    -  nop 
+"gta_sa.exe"+33BAD0: 8B 01                 -  mov eax,[ecx]
+"gta_sa.exe"+33BAD2: 83 F8 2E              -  cmp eax,2E
+"gta_sa.exe"+33BAD5: 77 11                 -  ja gta_sa.exe+33BAE8
+"gta_sa.exe"+33BAD7: 0F B6 80 FC BA 73 00  -  movzx eax,byte ptr [eax+gta_sa.exe+33BAFC]
+"gta_sa.exe"+33BADE: FF 24 85 F4 BA 73 00  -  jmp dword ptr [eax*4+gta_sa.exe+33BAF4]
+"gta_sa.exe"+33BAE5: B0 01                 -  mov al,01
+"gta_sa.exe"+33BAE7: C3                    -  ret 
+// ---------- INJECTING HERE ----------
+"gta_sa.exe"+33BAE8: 8B 41 0C              -  mov eax,[ecx+0C]
+"gta_sa.exe"+33BAEB: 85 C0                 -  test eax,eax
+// ---------- DONE INJECTING  ----------
+"gta_sa.exe"+33BAED: 0F 95 C0              -  setne al
+"gta_sa.exe"+33BAF0: C3                    -  ret 
+"gta_sa.exe"+33BAF1: 8D 49 00              -  lea ecx,[ecx+00]
+"gta_sa.exe"+33BAF4: E5 BA                 -  in eax,-46
+"gta_sa.exe"+33BAF6: 73 00                 -  jae gta_sa.exe+33BAF8
+"gta_sa.exe"+33BAF8: E8 BA 73 00 00        -  call gta_sa.exe+342EB7
+"gta_sa.exe"+33BAFD: 00 00                 -  add [eax],al
+"gta_sa.exe"+33BAFF: 00 00                 -  add [eax],al
+"gta_sa.exe"+33BB01: 00 01                 -  add [ecx],al
+"gta_sa.exe"+33BB03: 01 00                 -  add [eax],eax
+}
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>6</ID>
+      <Description>"4 Bytes"</Description>
+      <VariableType>4 Bytes</VariableType>
+      <Address>BDFAE64</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>7</ID>
+      <Description>"4 Bytes"</Description>
+      <VariableType>4 Bytes</VariableType>
+      <Address>BDFAE60</Address>
+    </CheatEntry>
+  </CheatEntries>
+  <UserdefinedSymbols/>
+  <Structures StructVersion="2">
+    <Structure Name="безымянная структура" AutoFill="0" AutoCreate="1" DefaultHex="0" AutoDestroy="0" DoNotSaveLocal="0" RLECompression="1" AutoCreateStructsize="4096">
+      <Elements>
+        <Element Offset="0" Vartype="4 Bytes" Bytesize="4" RLECount="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="16" Vartype="4 Bytes" Bytesize="4" RLECount="2" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="24" Vartype="4 Bytes" Bytesize="4" RLECount="6" DisplayMethod="Целое без знака"/>
+        <Element Offset="48" Vartype="4 Bytes" Bytesize="4" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="52" Vartype="4 Bytes" Bytesize="4" RLECount="6" DisplayMethod="Целое без знака"/>
+        <Element Offset="76" Vartype="4 Bytes" Bytesize="4" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="80" Vartype="4 Bytes" Bytesize="4" RLECount="6" DisplayMethod="Целое без знака"/>
+        <Element Offset="104" Vartype="4 Bytes" Bytesize="4" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="108" Vartype="4 Bytes" Bytesize="4" RLECount="6" DisplayMethod="Целое без знака"/>
+        <Element Offset="132" Vartype="Pointer" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="136" Vartype="4 Bytes" Bytesize="4" RLECount="6" DisplayMethod="Целое без знака"/>
+        <Element Offset="160" Vartype="Float" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="164" Vartype="4 Bytes" Bytesize="4" RLECount="6" DisplayMethod="Целое без знака"/>
+        <Element Offset="188" Vartype="Pointer" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="192" Vartype="4 Bytes" Bytesize="4" RLECount="13" DisplayMethod="Целое без знака"/>
+        <Element Offset="244" Vartype="4 Bytes" Bytesize="4" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="248" Vartype="4 Bytes" Bytesize="4" RLECount="6" DisplayMethod="Целое без знака"/>
+        <Element Offset="272" Vartype="4 Bytes" Bytesize="4" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="276" Vartype="4 Bytes" Bytesize="4" RLECount="6" DisplayMethod="Целое без знака"/>
+        <Element Offset="300" Vartype="4 Bytes" Bytesize="4" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="304" Vartype="4 Bytes" Bytesize="4" RLECount="3" DisplayMethod="Целое без знака"/>
+        <Element Offset="316" Vartype="String" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="320" Vartype="Byte" Bytesize="1" RLECount="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="324" Vartype="4 Bytes" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="328" Vartype="4 Bytes" Bytesize="4" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="332" Vartype="Pointer" Bytesize="4" RLECount="2" DisplayMethod="Целое без знака"/>
+        <Element Offset="340" Vartype="4 Bytes" Bytesize="4" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="344" Vartype="Double" Bytesize="8" DisplayMethod="Целое без знака"/>
+        <Element Offset="352" Vartype="4 Bytes" Bytesize="4" RLECount="7" DisplayMethod="Целое без знака"/>
+        <Element Offset="380" Vartype="4 Bytes" Bytesize="4" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="384" Vartype="4 Bytes" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="388" Vartype="4 Bytes" Bytesize="4" RLECount="2" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="396" Vartype="4 Bytes" Bytesize="4" RLECount="2" DisplayMethod="Целое без знака"/>
+        <Element Offset="404" Vartype="4 Bytes" Bytesize="4" RLECount="6" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="428" Vartype="4 Bytes" Bytesize="4" RLECount="2" DisplayMethod="Целое без знака"/>
+        <Element Offset="436" Vartype="Double" Bytesize="8" DisplayMethod="Целое без знака"/>
+        <Element Offset="444" Vartype="4 Bytes" Bytesize="4" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="448" Vartype="4 Bytes" Bytesize="4" RLECount="3" DisplayMethod="Целое без знака"/>
+        <Element Offset="460" Vartype="4 Bytes" Bytesize="4" RLECount="2" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="468" Vartype="Pointer" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="472" Vartype="4 Bytes" Bytesize="4" RLECount="10" DisplayMethod="Шестнадцатеричный"/>
+      </Elements>
+    </Structure>
+  </Structures>
+</CheatTable>

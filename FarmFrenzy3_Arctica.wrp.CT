@@ -1,0 +1,631 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CheatTable CheatEngineTableVersion="29">
+  <CheatEntries>
+    <CheatEntry>
+      <ID>0</ID>
+      <Description>"timer"</Description>
+      <LastState/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>{ Game   : FarmFrenzy3_Arctica.wrp.exe
+  Version: 
+  Date   : 2020-01-27
+  Author : Hipp
+
+  This script does blah blah blah
+}
+
+[ENABLE]
+
+aobscanmodule(timer,FarmFrenzy3_Arctica.wrp.exe,D8 87 64 04 00 00 8B) // should be unique
+alloc(newmem,$1000)
+
+label(code)
+label(return)
+
+newmem:
+  //fcomp
+  //fld dword ptr [var]
+  frndint
+code:
+  fadd dword ptr [edi+00000464]
+  jmp return
+var:
+  dd (float)0.5
+
+timer:
+  jmp newmem
+  nop
+return:
+registersymbol(timer)
+
+[DISABLE]
+
+timer:
+  db D8 87 64 04 00 00
+
+unregistersymbol(timer)
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: "FarmFrenzy3_Arctica.wrp.exe"+4A0F2
+
+"FarmFrenzy3_Arctica.wrp.exe"+4A0B8: 8B BD 38 E9 FF FF              -  mov edi,[ebp-000016C8]
+"FarmFrenzy3_Arctica.wrp.exe"+4A0BE: C7 05 58 72 87 00 00 00 00 00  -  mov [FarmFrenzy3_Arctica.wrp.exe+477258],00000000
+"FarmFrenzy3_Arctica.wrp.exe"+4A0C8: 8B 0D AC 6C 87 00              -  mov ecx,[FarmFrenzy3_Arctica.wrp.exe+476CAC]
+"FarmFrenzy3_Arctica.wrp.exe"+4A0CE: 8B 01                          -  mov eax,[ecx]
+"FarmFrenzy3_Arctica.wrp.exe"+4A0D0: C7 45 FC 01 00 00 00           -  mov [ebp-04],00000001
+"FarmFrenzy3_Arctica.wrp.exe"+4A0D7: FF 50 0C                       -  call dword ptr [eax+0C]
+"FarmFrenzy3_Arctica.wrp.exe"+4A0DA: D9 9D 38 E9 FF FF              -  fstp dword ptr [ebp-000016C8]
+"FarmFrenzy3_Arctica.wrp.exe"+4A0E0: 8B 8D 38 E9 FF FF              -  mov ecx,[ebp-000016C8]
+"FarmFrenzy3_Arctica.wrp.exe"+4A0E6: 89 8D 40 E9 FF FF              -  mov [ebp-000016C0],ecx
+"FarmFrenzy3_Arctica.wrp.exe"+4A0EC: D9 85 40 E9 FF FF              -  fld dword ptr [ebp-000016C0]
+// ---------- INJECTING HERE ----------
+"FarmFrenzy3_Arctica.wrp.exe"+4A0F2: D8 87 64 04 00 00              -  fadd dword ptr [edi+00000464]
+// ---------- DONE INJECTING  ----------
+"FarmFrenzy3_Arctica.wrp.exe"+4A0F8: 8B CF                          -  mov ecx,edi
+"FarmFrenzy3_Arctica.wrp.exe"+4A0FA: D9 9F 64 04 00 00              -  fstp dword ptr [edi+00000464]
+"FarmFrenzy3_Arctica.wrp.exe"+4A100: D9 85 40 E9 FF FF              -  fld dword ptr [ebp-000016C0]
+"FarmFrenzy3_Arctica.wrp.exe"+4A106: D8 87 D0 08 00 00              -  fadd dword ptr [edi+000008D0]
+"FarmFrenzy3_Arctica.wrp.exe"+4A10C: D9 9F D0 08 00 00              -  fstp dword ptr [edi+000008D0]
+"FarmFrenzy3_Arctica.wrp.exe"+4A112: D9 85 40 E9 FF FF              -  fld dword ptr [ebp-000016C0]
+"FarmFrenzy3_Arctica.wrp.exe"+4A118: D8 87 D4 08 00 00              -  fadd dword ptr [edi+000008D4]
+"FarmFrenzy3_Arctica.wrp.exe"+4A11E: D9 9F D4 08 00 00              -  fstp dword ptr [edi+000008D4]
+"FarmFrenzy3_Arctica.wrp.exe"+4A124: E8 A7 EF FD FF                 -  call FarmFrenzy3_Arctica.wrp.exe+290D0
+"FarmFrenzy3_Arctica.wrp.exe"+4A129: 8B 35 9C 6F 87 00              -  mov esi,[FarmFrenzy3_Arctica.wrp.exe+476F9C]
+}
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>1</ID>
+      <Description>"fastAnimal"</Description>
+      <LastState Activated="1"/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>{ Game   : FarmFrenzy3_Arctica.wrp.exe
+  Version: 
+  Date   : 2020-01-27
+  Author : Hipp
+
+  This script does blah blah blah
+}
+
+[ENABLE]
+
+aobscanmodule(animal,FarmFrenzy3_Arctica.wrp.exe,D8 86 28 04 00 00) // should be unique
+alloc(newmem,$1000)
+
+label(code)
+label(return)
+
+newmem:
+  fcomp
+  fld dword ptr [var]
+code:
+  fadd dword ptr [esi+00000428]
+  jmp return
+var:
+  dd (float)0.07
+animal:
+  jmp newmem
+  nop
+return:
+registersymbol(animal)
+
+[DISABLE]
+
+animal:
+  db D8 86 28 04 00 00
+
+unregistersymbol(animal)
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: "FarmFrenzy3_Arctica.wrp.exe"+11C077
+
+"FarmFrenzy3_Arctica.wrp.exe"+11C051: FF 52 08                       -  call dword ptr [edx+08]
+"FarmFrenzy3_Arctica.wrp.exe"+11C054: 8D 8E F0 04 00 00              -  lea ecx,[esi+000004F0]
+"FarmFrenzy3_Arctica.wrp.exe"+11C05A: 8B F8                          -  mov edi,eax
+"FarmFrenzy3_Arctica.wrp.exe"+11C05C: 8B 01                          -  mov eax,[ecx]
+"FarmFrenzy3_Arctica.wrp.exe"+11C05E: FF 50 08                       -  call dword ptr [eax+08]
+"FarmFrenzy3_Arctica.wrp.exe"+11C061: 3B F8                          -  cmp edi,eax
+"FarmFrenzy3_Arctica.wrp.exe"+11C063: 0F 84 F6 00 00 00              -  je FarmFrenzy3_Arctica.wrp.exe+11C15F
+"FarmFrenzy3_Arctica.wrp.exe"+11C069: D9 85 40 E9 FF FF              -  fld dword ptr [ebp-000016C0]
+"FarmFrenzy3_Arctica.wrp.exe"+11C06F: 8B 86 9C 04 00 00              -  mov eax,[esi+0000049C]
+"FarmFrenzy3_Arctica.wrp.exe"+11C075: 85 C0                          -  test eax,eax
+// ---------- INJECTING HERE ----------
+"FarmFrenzy3_Arctica.wrp.exe"+11C077: D8 86 28 04 00 00              -  fadd dword ptr [esi+00000428]
+// ---------- DONE INJECTING  ----------
+"FarmFrenzy3_Arctica.wrp.exe"+11C07D: D9 9E 28 04 00 00              -  fstp dword ptr [esi+00000428]
+"FarmFrenzy3_Arctica.wrp.exe"+11C083: D9 85 40 E9 FF FF              -  fld dword ptr [ebp-000016C0]
+"FarmFrenzy3_Arctica.wrp.exe"+11C089: D8 86 40 04 00 00              -  fadd dword ptr [esi+00000440]
+"FarmFrenzy3_Arctica.wrp.exe"+11C08F: D9 96 40 04 00 00              -  fst dword ptr [esi+00000440]
+"FarmFrenzy3_Arctica.wrp.exe"+11C095: 0F 85 C2 00 00 00              -  jne FarmFrenzy3_Arctica.wrp.exe+11C15D
+"FarmFrenzy3_Arctica.wrp.exe"+11C09B: D8 9E 44 04 00 00              -  fcomp dword ptr [esi+00000444]
+"FarmFrenzy3_Arctica.wrp.exe"+11C0A1: DF E0                          -  fnstsw ax
+"FarmFrenzy3_Arctica.wrp.exe"+11C0A3: F6 C4 41                       -  test ah,41
+"FarmFrenzy3_Arctica.wrp.exe"+11C0A6: 0F 85 B3 00 00 00              -  jne FarmFrenzy3_Arctica.wrp.exe+11C15F
+"FarmFrenzy3_Arctica.wrp.exe"+11C0AC: D9 86 18 04 00 00              -  fld dword ptr [esi+00000418]
+}
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>7</ID>
+      <Description>"mamont"</Description>
+      <LastState Activated="1"/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>{ Game   : FarmFrenzy3_Arctica.wrp.exe
+  Version: 
+  Date   : 2020-01-27
+  Author : Hipp
+
+  This script does blah blah blah
+}
+
+[ENABLE]
+
+aobscanmodule(mamont,FarmFrenzy3_Arctica.wrp.exe,D8 83 28 04 00 00) // should be unique
+alloc(newmem,$1000)
+
+label(code)
+label(return)
+
+newmem:
+  fadd dword ptr [var]
+code:
+  fadd dword ptr [ebx+00000428]
+  jmp return
+var:
+  dd (float)0.07
+mamont:
+  jmp newmem
+  nop
+return:
+registersymbol(mamont)
+
+[DISABLE]
+
+mamont:
+  db D8 83 28 04 00 00
+
+unregistersymbol(mamont)
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: "FarmFrenzy3_Arctica.wrp.exe"+103F53
+
+"FarmFrenzy3_Arctica.wrp.exe"+103F2A: FF 90 08 01 00 00     -  call dword ptr [eax+00000108]
+"FarmFrenzy3_Arctica.wrp.exe"+103F30: 8A 83 14 04 00 00     -  mov al,[ebx+00000414]
+"FarmFrenzy3_Arctica.wrp.exe"+103F36: 84 C0                 -  test al,al
+"FarmFrenzy3_Arctica.wrp.exe"+103F38: 0F 85 74 FF FF FF     -  jne FarmFrenzy3_Arctica.wrp.exe+103EB2
+"FarmFrenzy3_Arctica.wrp.exe"+103F3E: 8B 83 9C 04 00 00     -  mov eax,[ebx+0000049C]
+"FarmFrenzy3_Arctica.wrp.exe"+103F44: 3B C7                 -  cmp eax,edi
+"FarmFrenzy3_Arctica.wrp.exe"+103F46: 74 05                 -  je FarmFrenzy3_Arctica.wrp.exe+103F4D
+"FarmFrenzy3_Arctica.wrp.exe"+103F48: 83 F8 02              -  cmp eax,02
+"FarmFrenzy3_Arctica.wrp.exe"+103F4B: 75 12                 -  jne FarmFrenzy3_Arctica.wrp.exe+103F5F
+"FarmFrenzy3_Arctica.wrp.exe"+103F4D: D9 85 40 E9 FF FF     -  fld dword ptr [ebp-000016C0]
+// ---------- INJECTING HERE ----------
+"FarmFrenzy3_Arctica.wrp.exe"+103F53: D8 83 28 04 00 00     -  fadd dword ptr [ebx+00000428]
+// ---------- DONE INJECTING  ----------
+"FarmFrenzy3_Arctica.wrp.exe"+103F59: D9 9B 28 04 00 00     -  fstp dword ptr [ebx+00000428]
+"FarmFrenzy3_Arctica.wrp.exe"+103F5F: 8B 43 2C              -  mov eax,[ebx+2C]
+"FarmFrenzy3_Arctica.wrp.exe"+103F62: 8D 4B 2C              -  lea ecx,[ebx+2C]
+"FarmFrenzy3_Arctica.wrp.exe"+103F65: FF 50 08              -  call dword ptr [eax+08]
+"FarmFrenzy3_Arctica.wrp.exe"+103F68: 8B 93 F0 04 00 00     -  mov edx,[ebx+000004F0]
+"FarmFrenzy3_Arctica.wrp.exe"+103F6E: 8D 8B F0 04 00 00     -  lea ecx,[ebx+000004F0]
+"FarmFrenzy3_Arctica.wrp.exe"+103F74: 8B F0                 -  mov esi,eax
+"FarmFrenzy3_Arctica.wrp.exe"+103F76: FF 52 08              -  call dword ptr [edx+08]
+"FarmFrenzy3_Arctica.wrp.exe"+103F79: 3B F0                 -  cmp esi,eax
+"FarmFrenzy3_Arctica.wrp.exe"+103F7B: 0F 84 31 FF FF FF     -  je FarmFrenzy3_Arctica.wrp.exe+103EB2
+}
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>3</ID>
+      <Description>"infTruck"</Description>
+      <LastState Activated="1"/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>[ENABLE]
+FarmFrenzy3_Arctica.wrp.exe+87792:
+ jmp FarmFrenzy3_Arctica.wrp.exe+877A7
+
+ 
+ 
+[DISABLE]
+FarmFrenzy3_Arctica.wrp.exe+87792:
+ jb FarmFrenzy3_Arctica.wrp.exe+877A7
+
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>2</ID>
+      <Description>"Нет описания"</Description>
+      <VariableType>Float</VariableType>
+      <Address>287F6508</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>4</ID>
+      <Description>"infSclad"</Description>
+      <LastState Activated="1"/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>[ENABLE]
+FarmFrenzy3_Arctica.wrp.exe+1548EB:
+ db 90 90
+FarmFrenzy3_Arctica.wrp.exe+15492F:
+ db 90 90
+
+ 
+ 
+[DISABLE]
+FarmFrenzy3_Arctica.wrp.exe+1548EB:
+ je FarmFrenzy3_Arctica.wrp.exe+1548F3
+FarmFrenzy3_Arctica.wrp.exe+15492F:
+ jne FarmFrenzy3_Arctica.wrp.exe+154938
+
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>5</ID>
+      <Description>"product"</Description>
+      <LastState Activated="1"/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>{ Game   : FarmFrenzy3_Arctica.wrp.exe
+  Version: 
+  Date   : 2020-01-27
+  Author : Hipp
+
+  This script does blah blah blah
+}
+
+[ENABLE]
+
+aobscanmodule(product,FarmFrenzy3_Arctica.wrp.exe,89 8C 86 CC 03 00 00) // should be unique
+alloc(newmem,$1000)
+
+label(code)
+label(return)
+
+newmem:
+  add ecx,4
+code:
+  mov [esi+eax*4+000003CC],ecx
+  jmp return
+
+product:
+  jmp newmem
+  nop 2
+return:
+registersymbol(product)
+
+[DISABLE]
+
+product:
+  db 89 8C 86 CC 03 00 00
+
+unregistersymbol(product)
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: "FarmFrenzy3_Arctica.wrp.exe"+154255
+
+"FarmFrenzy3_Arctica.wrp.exe"+154220: 8D 95 34 E9 FF FF              -  lea edx,[ebp-000016CC]
+"FarmFrenzy3_Arctica.wrp.exe"+154226: 52                             -  push edx
+"FarmFrenzy3_Arctica.wrp.exe"+154227: C7 85 34 E9 FF FF 57 86 7A 00  -  mov [ebp-000016CC],FarmFrenzy3_Arctica.wrp.exe+3A8657
+"FarmFrenzy3_Arctica.wrp.exe"+154231: E8 D0 26 1C 00                 -  call FarmFrenzy3_Arctica.wrp.exe+316906
+"FarmFrenzy3_Arctica.wrp.exe"+154236: 8B B5 38 E9 FF FF              -  mov esi,[ebp-000016C8]
+"FarmFrenzy3_Arctica.wrp.exe"+15423C: C7 05 58 7D 87 00 00 00 00 00  -  mov [FarmFrenzy3_Arctica.wrp.exe+477D58],00000000
+"FarmFrenzy3_Arctica.wrp.exe"+154246: 8B 45 08                       -  mov eax,[ebp+08]
+"FarmFrenzy3_Arctica.wrp.exe"+154249: 8B 8C 86 CC 03 00 00           -  mov ecx,[esi+eax*4+000003CC]
+"FarmFrenzy3_Arctica.wrp.exe"+154250: 8B 55 0C                       -  mov edx,[ebp+0C]
+"FarmFrenzy3_Arctica.wrp.exe"+154253: 03 CA                          -  add ecx,edx
+// ---------- INJECTING HERE ----------
+"FarmFrenzy3_Arctica.wrp.exe"+154255: 89 8C 86 CC 03 00 00           -  mov [esi+eax*4+000003CC],ecx
+// ---------- DONE INJECTING  ----------
+"FarmFrenzy3_Arctica.wrp.exe"+15425C: 8B 8E 20 03 00 00              -  mov ecx,[esi+00000320]
+"FarmFrenzy3_Arctica.wrp.exe"+154262: 8A 99 88 02 00 00              -  mov bl,[ecx+00000288]
+"FarmFrenzy3_Arctica.wrp.exe"+154268: D9 81 74 02 00 00              -  fld dword ptr [ecx+00000274]
+"FarmFrenzy3_Arctica.wrp.exe"+15426E: 84 DB                          -  test bl,bl
+"FarmFrenzy3_Arctica.wrp.exe"+154270: C7 45 FC 01 00 00 00           -  mov [ebp-04],00000001
+"FarmFrenzy3_Arctica.wrp.exe"+154277: 74 06                          -  je FarmFrenzy3_Arctica.wrp.exe+15427F
+"FarmFrenzy3_Arctica.wrp.exe"+154279: D8 A9 70 02 00 00              -  fsubr dword ptr [ecx+00000270]
+"FarmFrenzy3_Arctica.wrp.exe"+15427F: 85 D2                          -  test edx,edx
+"FarmFrenzy3_Arctica.wrp.exe"+154281: 89 55 08                       -  mov [ebp+08],edx
+"FarmFrenzy3_Arctica.wrp.exe"+154284: DB 45 08                       -  fild dword ptr [ebp+08]
+}
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>6</ID>
+      <Description>"process"</Description>
+      <LastState Activated="1"/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>{ Game   : FarmFrenzy3_Arctica.wrp.exe
+  Version: 
+  Date   : 2020-01-27
+  Author : Hipp
+
+  This script does blah blah blah
+}
+
+[ENABLE]
+
+aobscanmodule(process,FarmFrenzy3_Arctica.wrp.exe,D8 86 54 03 00 00 D9) // should be unique
+alloc(newmem,$1000)
+
+label(code)
+label(return)
+
+newmem:
+  fadd dword ptr [var]
+code:
+  fadd dword ptr [esi+00000354]
+  jmp return
+var:
+  dd (float)0.09
+process:
+  jmp newmem
+  nop
+return:
+registersymbol(process)
+
+[DISABLE]
+
+process:
+  db D8 86 54 03 00 00
+
+unregistersymbol(process)
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: "FarmFrenzy3_Arctica.wrp.exe"+145D9D
+
+"FarmFrenzy3_Arctica.wrp.exe"+145D69: D8 86 D8 01 00 00              -  fadd dword ptr [esi+000001D8]
+"FarmFrenzy3_Arctica.wrp.exe"+145D6F: D9 9E D8 01 00 00              -  fstp dword ptr [esi+000001D8]
+"FarmFrenzy3_Arctica.wrp.exe"+145D75: EB 46                          -  jmp FarmFrenzy3_Arctica.wrp.exe+145DBD
+"FarmFrenzy3_Arctica.wrp.exe"+145D77: D9 85 38 E9 FF FF              -  fld dword ptr [ebp-000016C8]
+"FarmFrenzy3_Arctica.wrp.exe"+145D7D: 8B 8E 3C 03 00 00              -  mov ecx,[esi+0000033C]
+"FarmFrenzy3_Arctica.wrp.exe"+145D83: D8 86 D8 01 00 00              -  fadd dword ptr [esi+000001D8]
+"FarmFrenzy3_Arctica.wrp.exe"+145D89: C6 86 DC 01 00 00 01           -  mov byte ptr [esi+000001DC],01
+"FarmFrenzy3_Arctica.wrp.exe"+145D90: 51                             -  push ecx
+"FarmFrenzy3_Arctica.wrp.exe"+145D91: D9 9E D8 01 00 00              -  fstp dword ptr [esi+000001D8]
+"FarmFrenzy3_Arctica.wrp.exe"+145D97: D9 85 30 E9 FF FF              -  fld dword ptr [ebp-000016D0]
+// ---------- INJECTING HERE ----------
+"FarmFrenzy3_Arctica.wrp.exe"+145D9D: D8 86 54 03 00 00              -  fadd dword ptr [esi+00000354]
+// ---------- DONE INJECTING  ----------
+"FarmFrenzy3_Arctica.wrp.exe"+145DA3: D9 96 54 03 00 00              -  fst dword ptr [esi+00000354]
+"FarmFrenzy3_Arctica.wrp.exe"+145DA9: D9 81 70 02 00 00              -  fld dword ptr [ecx+00000270]
+"FarmFrenzy3_Arctica.wrp.exe"+145DAF: D8 37                          -  fdiv dword ptr [edi]
+"FarmFrenzy3_Arctica.wrp.exe"+145DB1: D8 C9                          -  fmul st(0),st(1)
+"FarmFrenzy3_Arctica.wrp.exe"+145DB3: D9 1C 24                       -  fstp dword ptr [esp]
+"FarmFrenzy3_Arctica.wrp.exe"+145DB6: DD D8                          -  fstp st(0)
+"FarmFrenzy3_Arctica.wrp.exe"+145DB8: E8 D3 59 ED FF                 -  call FarmFrenzy3_Arctica.wrp.exe+1B790
+"FarmFrenzy3_Arctica.wrp.exe"+145DBD: D9 86 54 03 00 00              -  fld dword ptr [esi+00000354]
+"FarmFrenzy3_Arctica.wrp.exe"+145DC3: D8 1F                          -  fcomp dword ptr [edi]
+"FarmFrenzy3_Arctica.wrp.exe"+145DC5: DF E0                          -  fnstsw ax
+}
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>8</ID>
+      <Description>"stars"</Description>
+      <LastState/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>{ Game   : FarmFrenzy3_Arctica.wrp.exe
+  Version: 
+  Date   : 2020-02-05
+  Author : Hipp
+
+  This script does blah blah blah
+}
+
+[ENABLE]
+
+aobscanmodule(stars,FarmFrenzy3_Arctica.wrp.exe,39 B7 D0 09 00 00) // should be unique
+alloc(newmem,$1000)
+
+label(code)
+label(return)
+
+newmem:
+  add [edi+000009D0],#1500
+code:
+  cmp [edi+000009D0],esi
+  jmp return
+
+stars:
+  jmp newmem
+  nop
+return:
+registersymbol(stars)
+
+[DISABLE]
+
+stars:
+  db 39 B7 D0 09 00 00
+
+unregistersymbol(stars)
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: "FarmFrenzy3_Arctica.wrp.exe"+12BDA0
+
+"FarmFrenzy3_Arctica.wrp.exe"+12BD7A: E8 41 AF ED FF                 -  call FarmFrenzy3_Arctica.wrp.exe+6CC0
+"FarmFrenzy3_Arctica.wrp.exe"+12BD7F: 85 F6                          -  test esi,esi
+"FarmFrenzy3_Arctica.wrp.exe"+12BD81: C6 45 FC 02                    -  mov byte ptr [ebp-04],02
+"FarmFrenzy3_Arctica.wrp.exe"+12BD85: 8D 8D D0 E7 FF FF              -  lea ecx,[ebp-00001830]
+"FarmFrenzy3_Arctica.wrp.exe"+12BD8B: 76 1B                          -  jna FarmFrenzy3_Arctica.wrp.exe+12BDA8
+"FarmFrenzy3_Arctica.wrp.exe"+12BD8D: 56                             -  push esi
+"FarmFrenzy3_Arctica.wrp.exe"+12BD8E: E8 DD 89 ED FF                 -  call FarmFrenzy3_Arctica.wrp.exe+4770
+"FarmFrenzy3_Arctica.wrp.exe"+12BD93: 8B 8B BC 02 00 00              -  mov ecx,[ebx+000002BC]
+"FarmFrenzy3_Arctica.wrp.exe"+12BD99: 6A 01                          -  push 01
+"FarmFrenzy3_Arctica.wrp.exe"+12BD9B: E8 00 AE 06 00                 -  call FarmFrenzy3_Arctica.wrp.exe+196BA0
+// ---------- INJECTING HERE ----------
+"FarmFrenzy3_Arctica.wrp.exe"+12BDA0: 39 B7 D0 09 00 00              -  cmp [edi+000009D0],esi
+// ---------- DONE INJECTING  ----------
+"FarmFrenzy3_Arctica.wrp.exe"+12BDA6: EB 34                          -  jmp FarmFrenzy3_Arctica.wrp.exe+12BDDC
+"FarmFrenzy3_Arctica.wrp.exe"+12BDA8: 8B 83 D8 02 00 00              -  mov eax,[ebx+000002D8]
+"FarmFrenzy3_Arctica.wrp.exe"+12BDAE: 8D 14 80                       -  lea edx,[eax+eax*4]
+"FarmFrenzy3_Arctica.wrp.exe"+12BDB1: 8B BC 97 18 05 00 00           -  mov edi,[edi+edx*4+00000518]
+"FarmFrenzy3_Arctica.wrp.exe"+12BDB8: 57                             -  push edi
+"FarmFrenzy3_Arctica.wrp.exe"+12BDB9: E8 B2 89 ED FF                 -  call FarmFrenzy3_Arctica.wrp.exe+4770
+"FarmFrenzy3_Arctica.wrp.exe"+12BDBE: 8B 8B BC 02 00 00              -  mov ecx,[ebx+000002BC]
+"FarmFrenzy3_Arctica.wrp.exe"+12BDC4: 6A 00                          -  push 00
+"FarmFrenzy3_Arctica.wrp.exe"+12BDC6: E8 D5 AD 06 00                 -  call FarmFrenzy3_Arctica.wrp.exe+196BA0
+"FarmFrenzy3_Arctica.wrp.exe"+12BDCB: A1 F0 6C 87 00                 -  mov eax,[FarmFrenzy3_Arctica.wrp.exe+476CF0]
+}
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>13</ID>
+      <Description>"inf game"</Description>
+      <LastState Activated="1"/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>[ENABLE]
+FarmFrenzy3_Arctica.wrp.exe+57810:
+ db 90 90 90 90 90 90
+//проверка задач уровня
+ 
+[DISABLE]
+FarmFrenzy3_Arctica.wrp.exe+57810:
+ jae FarmFrenzy3_Arctica.wrp.exe+579E9
+
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>14</ID>
+      <Description>"fast game"</Description>
+      <LastState/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>[ENABLE]
+FarmFrenzy3_Arctica.wrp.exe+57810:
+ jmp FarmFrenzy3_Arctica.wrp.exe+579E9
+ nop
+
+ 
+ 
+[DISABLE]
+FarmFrenzy3_Arctica.wrp.exe+57810:
+ jae FarmFrenzy3_Arctica.wrp.exe+579E9
+
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>9</ID>
+      <Description>"звезды в магазине"</Description>
+      <LastState/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>{ Game   : FarmFrenzy3_Arctica.wrp.exe
+  Version: 
+  Date   : 2020-06-02
+  Author : Hipp
+
+  This script does blah blah blah
+}
+
+[ENABLE]
+
+aobscanmodule(star_shop,FarmFrenzy3_Arctica.wrp.exe,8B 00 50 8D 8D D4 E7 FF FF) // should be unique
+alloc(newmem,$1000)
+
+label(code)
+label(return)
+
+newmem:
+  add dword ptr [eax],#15000
+code:
+  mov eax,[eax]
+  push eax
+  lea ecx,[ebp-0000182C]
+  jmp return
+
+star_shop:
+  jmp newmem
+  nop 4
+return:
+registersymbol(star_shop)
+
+[DISABLE]
+
+star_shop:
+  db 8B 00 50 8D 8D D4 E7 FF FF
+
+unregistersymbol(star_shop)
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: "FarmFrenzy3_Arctica.wrp.exe"+1C440B
+
+"FarmFrenzy3_Arctica.wrp.exe"+1C43E3: C6 45 FC 02                    -  mov byte ptr [ebp-04],02
+"FarmFrenzy3_Arctica.wrp.exe"+1C43E7: C7 45 E8 0F 00 00 00           -  mov [ebp-18],0000000F
+"FarmFrenzy3_Arctica.wrp.exe"+1C43EE: 89 5D E4                       -  mov [ebp-1C],ebx
+"FarmFrenzy3_Arctica.wrp.exe"+1C43F1: 88 5D D4                       -  mov [ebp-2C],bl
+"FarmFrenzy3_Arctica.wrp.exe"+1C43F4: E8 87 09 E4 FF                 -  call FarmFrenzy3_Arctica.wrp.exe+4D80
+"FarmFrenzy3_Arctica.wrp.exe"+1C43F9: 8D 4D D0                       -  lea ecx,[ebp-30]
+"FarmFrenzy3_Arctica.wrp.exe"+1C43FC: 51                             -  push ecx
+"FarmFrenzy3_Arctica.wrp.exe"+1C43FD: B9 58 6C 87 00                 -  mov ecx,FarmFrenzy3_Arctica.wrp.exe+476C58
+"FarmFrenzy3_Arctica.wrp.exe"+1C4402: C6 45 FC 03                    -  mov byte ptr [ebp-04],03
+"FarmFrenzy3_Arctica.wrp.exe"+1C4406: E8 D5 EA E4 FF                 -  call FarmFrenzy3_Arctica.wrp.exe+12EE0
+// ---------- INJECTING HERE ----------
+"FarmFrenzy3_Arctica.wrp.exe"+1C440B: 8B 00                          -  mov eax,[eax]
+"FarmFrenzy3_Arctica.wrp.exe"+1C440D: 50                             -  push eax
+"FarmFrenzy3_Arctica.wrp.exe"+1C440E: 8D 8D D4 E7 FF FF              -  lea ecx,[ebp-0000182C]
+// ---------- DONE INJECTING  ----------
+"FarmFrenzy3_Arctica.wrp.exe"+1C4414: E8 57 03 E4 FF                 -  call FarmFrenzy3_Arctica.wrp.exe+4770
+"FarmFrenzy3_Arctica.wrp.exe"+1C4419: 83 7D E8 10                    -  cmp dword ptr [ebp-18],10
+"FarmFrenzy3_Arctica.wrp.exe"+1C441D: C6 45 FC 02                    -  mov byte ptr [ebp-04],02
+"FarmFrenzy3_Arctica.wrp.exe"+1C4421: 72 0C                          -  jb FarmFrenzy3_Arctica.wrp.exe+1C442F
+"FarmFrenzy3_Arctica.wrp.exe"+1C4423: 8B 55 D4                       -  mov edx,[ebp-2C]
+"FarmFrenzy3_Arctica.wrp.exe"+1C4426: 52                             -  push edx
+"FarmFrenzy3_Arctica.wrp.exe"+1C4427: E8 67 24 15 00                 -  call FarmFrenzy3_Arctica.wrp.exe+316893
+"FarmFrenzy3_Arctica.wrp.exe"+1C442C: 83 C4 04                       -  add esp,04
+"FarmFrenzy3_Arctica.wrp.exe"+1C442F: 8D 45 B4                       -  lea eax,[ebp-4C]
+"FarmFrenzy3_Arctica.wrp.exe"+1C4432: 50                             -  push eax
+}
+</AssemblerScript>
+    </CheatEntry>
+  </CheatEntries>
+  <CheatCodes>
+    <CodeEntry>
+      <Description>Изменение jb FarmFrenzy3_Arctica.wrp.exe+12322B</Description>
+      <AddressString>FarmFrenzy3_Arctica.wrp.exe+1231EB</AddressString>
+      <Before>
+        <Byte>00</Byte>
+        <Byte>76</Byte>
+        <Byte>42</Byte>
+        <Byte>3B</Byte>
+        <Byte>D7</Byte>
+      </Before>
+      <Actual>
+        <Byte>72</Byte>
+        <Byte>3E</Byte>
+      </Actual>
+      <After>
+        <Byte>8D</Byte>
+        <Byte>0C</Byte>
+        <Byte>81</Byte>
+        <Byte>03</Byte>
+        <Byte>C8</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry>
+      <Description>Изменение inc ecx</Description>
+      <AddressString>FarmFrenzy3_Arctica.wrp.exe+16A0AC</AddressString>
+      <Before>
+        <Byte>83</Byte>
+        <Byte>D8</Byte>
+        <Byte>08</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+      </Before>
+      <Actual>
+        <Byte>41</Byte>
+      </Actual>
+      <After>
+        <Byte>89</Byte>
+        <Byte>8C</Byte>
+        <Byte>83</Byte>
+        <Byte>D8</Byte>
+        <Byte>08</Byte>
+      </After>
+    </CodeEntry>
+  </CheatCodes>
+  <UserdefinedSymbols/>
+</CheatTable>

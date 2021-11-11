@@ -1,0 +1,844 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CheatTable CheatEngineTableVersion="29">
+  <CheatEntries>
+    <CheatEntry>
+      <ID>0</ID>
+      <Description>"money"</Description>
+      <LastState/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>{ Game   : Sims.exe
+  Version: 
+  Date   : 2018-08-07
+  Author : Hipp
+
+  This script does blah blah blah
+}
+
+[ENABLE]
+
+aobscanmodule(money,Sims.exe,29 B1 90 00 00 00) // should be unique
+alloc(newmem,$1000)
+
+label(code)
+label(return)
+label(absolute)
+
+newmem:
+  cmp esi,0
+  jl absolute
+  jmp code
+
+absolute:
+  neg esi
+code:
+  add [ecx+00000090],esi
+  jmp return
+
+money:
+  jmp newmem
+  nop
+return:
+registersymbol(money)
+
+[DISABLE]
+
+money:
+  db 29 B1 90 00 00 00
+
+unregistersymbol(money)
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: "Sims.exe"+6DA49
+
+"Sims.exe"+6DA32: 5F                    -  pop edi
+"Sims.exe"+6DA33: 5E                    -  pop esi
+"Sims.exe"+6DA34: 5B                    -  pop ebx
+"Sims.exe"+6DA35: C2 04 00              -  ret 0004
+"Sims.exe"+6DA38: 66 83 79 50 01        -  cmp word ptr [ecx+50],01
+"Sims.exe"+6DA3D: 74 54                 -  je Sims.exe+6DA93
+"Sims.exe"+6DA3F: 8B 54 24 04           -  mov edx,[esp+04]
+"Sims.exe"+6DA43: 53                    -  push ebx
+"Sims.exe"+6DA44: 56                    -  push esi
+"Sims.exe"+6DA45: 8B 74 24 10           -  mov esi,[esp+10]
+// ---------- INJECTING HERE ----------
+"Sims.exe"+6DA49: 29 B1 90 00 00 00     -  sub [ecx+00000090],esi
+// ---------- DONE INJECTING  ----------
+"Sims.exe"+6DA4F: 01 B4 91 84 01 00 00  -  add [ecx+edx*4+00000184],esi
+"Sims.exe"+6DA56: 8B B1 90 00 00 00     -  mov esi,[ecx+00000090]
+"Sims.exe"+6DA5C: 8D 81 90 00 00 00     -  lea eax,[ecx+00000090]
+"Sims.exe"+6DA62: 8D 94 91 84 01 00 00  -  lea edx,[ecx+edx*4+00000184]
+"Sims.exe"+6DA69: 57                    -  push edi
+"Sims.exe"+6DA6A: 8B C6                 -  mov eax,esi
+"Sims.exe"+6DA6C: BF 10 27 00 00        -  mov edi,00002710
+"Sims.exe"+6DA71: 99                    -  cdq 
+"Sims.exe"+6DA72: 8B DF                 -  mov ebx,edi
+"Sims.exe"+6DA74: 56                    -  push esi
+}
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>3</ID>
+      <Description>"гигиена"</Description>
+      <LastState/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>{ Game   : Sims.exe
+  Version: 
+  Date   : 2018-08-07
+  Author : Hipp
+
+  This script does blah blah blah
+}
+
+[ENABLE]
+
+aobscanmodule(gigi,Sims.exe,D9 59 20 D9 41 24 d8) // should be unique
+alloc(newmem,$1000)
+
+label(code)
+label(return)
+
+newmem:
+
+code:
+  fstp dword ptr [ecx+20]
+  mov dword ptr [ecx+20],(float)100
+  fld dword ptr [ecx+24]
+  jmp return
+
+gigi:
+  jmp newmem
+  nop
+return:
+registersymbol(gigi)
+
+[DISABLE]
+
+gigi:
+  db D9 59 20 D9 41 24
+
+unregistersymbol(gigi)
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: "Sims.exe"+21102
+
+"Sims.exe"+210E2: D9 59 38              -  fstp dword ptr [ecx+38]
+"Sims.exe"+210E5: D8 59 2C              -  fcomp dword ptr [ecx+2C]
+"Sims.exe"+210E8: DF E0                 -  fnstsw ax
+"Sims.exe"+210EA: 9E                    -  sahf 
+"Sims.exe"+210EB: 77 23                 -  ja Sims.exe+21110
+"Sims.exe"+210ED: D9 41 3C              -  fld dword ptr [ecx+3C]
+"Sims.exe"+210F0: D8 A2 34 49 6E 00     -  fsub dword ptr [edx+Sims.exe+2E4934]
+"Sims.exe"+210F6: D9 59 3C              -  fstp dword ptr [ecx+3C]
+"Sims.exe"+210F9: D9 41 20              -  fld dword ptr [ecx+20]
+"Sims.exe"+210FC: D8 A2 1C 49 6E 00     -  fsub dword ptr [edx+Sims.exe+2E491C]
+// ---------- INJECTING HERE ----------
+"Sims.exe"+21102: D9 59 20              -  fstp dword ptr [ecx+20]
+"Sims.exe"+21105: D9 41 24              -  fld dword ptr [ecx+24]
+// ---------- DONE INJECTING  ----------
+"Sims.exe"+21108: 90                    -  nop 
+"Sims.exe"+21109: 90                    -  nop 
+"Sims.exe"+2110A: 90                    -  nop 
+"Sims.exe"+2110B: 90                    -  nop 
+"Sims.exe"+2110C: 90                    -  nop 
+"Sims.exe"+2110D: 90                    -  nop 
+"Sims.exe"+2110E: EB 21                 -  jmp Sims.exe+21131
+"Sims.exe"+21110: D9 82 28 49 6E 00     -  fld dword ptr [edx+Sims.exe+2E4928]
+"Sims.exe"+21116: D8 49 3C              -  fmul dword ptr [ecx+3C]
+"Sims.exe"+21119: D9 59 3C              -  fstp dword ptr [ecx+3C]
+}
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>4</ID>
+      <Description>"пузырь"</Description>
+      <LastState/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>{ Game   : Sims.exe
+  Version: 
+  Date   : 2018-08-07
+  Author : Hipp
+
+  This script does blah blah blah
+}
+
+[ENABLE]
+
+aobscanmodule(pipi,Sims.exe,D9 59 24 D9 05 60 6A 66 00) // should be unique
+alloc(newmem,$1000)
+
+label(code)
+label(return)
+
+newmem:
+
+code:
+  fstp dword ptr [ecx+24]
+  mov dword ptr [ecx+24],(float)100
+  fld dword ptr [Sims.exe+266A60]
+  jmp return
+
+pipi:
+  jmp newmem
+  nop
+  nop
+  nop
+  nop
+return:
+registersymbol(pipi)
+
+[DISABLE]
+
+pipi:
+  db D9 59 24 D9 05 60 6A 66 00
+
+unregistersymbol(pipi)
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: "Sims.exe"+21131
+
+"Sims.exe"+21108: D8 A2 04 49 6E 00     -  fsub dword ptr [edx+Sims.exe+2E4904]
+"Sims.exe"+2110E: EB 21                 -  jmp Sims.exe+21131
+"Sims.exe"+21110: D9 82 28 49 6E 00     -  fld dword ptr [edx+Sims.exe+2E4928]
+"Sims.exe"+21116: D8 49 3C              -  fmul dword ptr [ecx+3C]
+"Sims.exe"+21119: D9 59 3C              -  fstp dword ptr [ecx+3C]
+"Sims.exe"+2111C: D9 41 20              -  fld dword ptr [ecx+20]
+"Sims.exe"+2111F: D8 A2 10 49 6E 00     -  fsub dword ptr [edx+Sims.exe+2E4910]
+"Sims.exe"+21125: D9 59 20              -  fstp dword ptr [ecx+20]
+"Sims.exe"+21128: D9 41 24              -  fld dword ptr [ecx+24]
+"Sims.exe"+2112B: D8 A2 F8 48 6E 00     -  fsub dword ptr [edx+Sims.exe+2E48F8]
+// ---------- INJECTING HERE ----------
+"Sims.exe"+21131: D9 59 24              -  fstp dword ptr [ecx+24]
+"Sims.exe"+21134: D9 05 60 6A 66 00     -  fld dword ptr [Sims.exe+266A60]
+// ---------- DONE INJECTING  ----------
+"Sims.exe"+2113A: D9 05 4C 67 66 00     -  fld dword ptr [Sims.exe+26674C]
+"Sims.exe"+21140: 6A 10                 -  push 10
+"Sims.exe"+21142: 8B D1                 -  mov edx,ecx
+"Sims.exe"+21144: 5E                    -  pop esi
+"Sims.exe"+21145: D8 12                 -  fcom dword ptr [edx]
+"Sims.exe"+21147: DF E0                 -  fnstsw ax
+"Sims.exe"+21149: 9E                    -  sahf 
+"Sims.exe"+2114A: 73 02                 -  jae Sims.exe+2114E
+"Sims.exe"+2114C: D9 12                 -  fst dword ptr [edx]
+"Sims.exe"+2114E: D9 02                 -  fld dword ptr [edx]
+}
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>7</ID>
+      <Description>"голод"</Description>
+      <LastState/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>{ Game   : Sims.exe
+  Version: 
+  Date   : 2018-08-07
+  Author : Hipp
+
+  This script does blah blah blah
+}
+
+[ENABLE]
+
+aobscanmodule(hung,Sims.exe,D9 59 1C DD D8 D8) // should be unique
+alloc(newmem,$1000)
+
+label(code)
+label(return)
+
+newmem:
+
+code:
+  fstp dword ptr [ecx+1C]
+  mov dword ptr [ecx+1C],(float)100
+  fstp st(0)
+  jmp return
+
+hung:
+  jmp newmem
+return:
+registersymbol(hung)
+
+[DISABLE]
+
+hung:
+  db D9 59 1C DD D8
+
+unregistersymbol(hung)
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: "Sims.exe"+210B9
+
+"Sims.exe"+21091: DB 45 FC              -  fild dword ptr [ebp-04]
+"Sims.exe"+21094: D8 8A 64 49 6E 00     -  fmul dword ptr [edx+Sims.exe+2E4964]
+"Sims.exe"+2109A: D8 82 70 49 6E 00     -  fadd dword ptr [edx+Sims.exe+2E4970]
+"Sims.exe"+210A0: D8 69 18              -  fsubr dword ptr [ecx+18]
+"Sims.exe"+210A3: D9 59 18              -  fstp dword ptr [ecx+18]
+"Sims.exe"+210A6: D9 41 1C              -  fld dword ptr [ecx+1C]
+"Sims.exe"+210A9: D9 C0                 -  fld st(0)
+"Sims.exe"+210AB: D8 05 4C 67 66 00     -  fadd dword ptr [Sims.exe+26674C]
+"Sims.exe"+210B1: D8 8A 58 49 6E 00     -  fmul dword ptr [edx+Sims.exe+2E4958]
+"Sims.exe"+210B7: D8 E9                 -  fsubr st(0),st(1)
+// ---------- INJECTING HERE ----------
+"Sims.exe"+210B9: D9 59 1C              -  fstp dword ptr [ecx+1C]
+"Sims.exe"+210BC: DD D8                 -  fstp st(0)
+// ---------- DONE INJECTING  ----------
+"Sims.exe"+210BE: D8 51 2C              -  fcom dword ptr [ecx+2C]
+"Sims.exe"+210C1: DF E0                 -  fnstsw ax
+"Sims.exe"+210C3: 9E                    -  sahf 
+"Sims.exe"+210C4: 77 1F                 -  ja Sims.exe+210E5
+"Sims.exe"+210C6: 0F BF 86 98 05 00 00  -  movsx eax,word ptr [esi+00000598]
+"Sims.exe"+210CD: 89 45 FC              -  mov [ebp-04],eax
+"Sims.exe"+210D0: DB 45 FC              -  fild dword ptr [ebp-04]
+"Sims.exe"+210D3: D8 8A 40 49 6E 00     -  fmul dword ptr [edx+Sims.exe+2E4940]
+"Sims.exe"+210D9: D8 82 4C 49 6E 00     -  fadd dword ptr [edx+Sims.exe+2E494C]
+"Sims.exe"+210DF: D8 69 38              -  fsubr dword ptr [ecx+38]
+}
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>9</ID>
+      <Description>"общение"</Description>
+      <LastState/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>{ Game   : Sims.exe
+  Version: 
+  Date   : 2018-08-07
+  Author : Hipp
+
+  This script does blah blah blah
+}
+
+[ENABLE]
+
+aobscanmodule(ob,Sims.exe,D9 59 38 D8 59 2C) // should be unique
+alloc(newmem,$1000)
+
+label(code)
+label(return)
+
+newmem:
+
+code:
+  fstp dword ptr [ecx+38]
+  mov dword ptr [ecx+38],(float)100
+  fcomp dword ptr [ecx+2C]
+  jmp return
+
+ob:
+  jmp newmem
+  nop
+return:
+registersymbol(ob)
+
+[DISABLE]
+
+ob:
+  db D9 59 38 D8 59 2C
+
+unregistersymbol(ob)
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: "Sims.exe"+210E2
+
+"Sims.exe"+210BE: D8 51 2C              -  fcom dword ptr [ecx+2C]
+"Sims.exe"+210C1: DF E0                 -  fnstsw ax
+"Sims.exe"+210C3: 9E                    -  sahf 
+"Sims.exe"+210C4: 77 1F                 -  ja Sims.exe+210E5
+"Sims.exe"+210C6: 0F BF 86 98 05 00 00  -  movsx eax,word ptr [esi+00000598]
+"Sims.exe"+210CD: 89 45 FC              -  mov [ebp-04],eax
+"Sims.exe"+210D0: DB 45 FC              -  fild dword ptr [ebp-04]
+"Sims.exe"+210D3: D8 8A 40 49 6E 00     -  fmul dword ptr [edx+Sims.exe+2E4940]
+"Sims.exe"+210D9: D8 82 4C 49 6E 00     -  fadd dword ptr [edx+Sims.exe+2E494C]
+"Sims.exe"+210DF: D8 69 38              -  fsubr dword ptr [ecx+38]
+// ---------- INJECTING HERE ----------
+"Sims.exe"+210E2: D9 59 38              -  fstp dword ptr [ecx+38]
+"Sims.exe"+210E5: D8 59 2C              -  fcomp dword ptr [ecx+2C]
+// ---------- DONE INJECTING  ----------
+"Sims.exe"+210E8: DF E0                 -  fnstsw ax
+"Sims.exe"+210EA: 9E                    -  sahf 
+"Sims.exe"+210EB: 77 23                 -  ja Sims.exe+21110
+"Sims.exe"+210ED: D9 41 3C              -  fld dword ptr [ecx+3C]
+"Sims.exe"+210F0: D8 A2 34 49 6E 00     -  fsub dword ptr [edx+Sims.exe+2E4934]
+"Sims.exe"+210F6: D9 59 3C              -  fstp dword ptr [ecx+3C]
+"Sims.exe"+210F9: D9 41 20              -  fld dword ptr [ecx+20]
+"Sims.exe"+210FC: D8 A2 1C 49 6E 00     -  fsub dword ptr [edx+Sims.exe+2E491C]
+"Sims.exe"+21102: D9 59 20              -  fstp dword ptr [ecx+20]
+"Sims.exe"+21105: D9 41 24              -  fld dword ptr [ecx+24]
+}
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>6</ID>
+      <Description>"комфорт"</Description>
+      <LastState/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>{ Game   : Sims.exe
+  Version: 
+  Date   : 2018-08-07
+  Author : Hipp
+
+  This script does blah blah blah
+}
+
+[ENABLE]
+
+aobscanmodule(comfort,Sims.exe,D9 59 18 D9 41 1C) // should be unique
+alloc(newmem,$1000)
+
+label(code)
+label(return)
+
+newmem:
+
+code:
+  fstp dword ptr [ecx+18]
+  mov dword ptr [ecx+18],(float)100
+  fld dword ptr [ecx+1C]
+  jmp return
+
+comfort:
+  jmp newmem
+  nop
+return:
+registersymbol(comfort)
+
+[DISABLE]
+
+comfort:
+  db D9 59 18 D9 41 1C
+
+unregistersymbol(comfort)
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: "Sims.exe"+210A3
+
+"Sims.exe"+2107D: D8 69 24              -  fsubr dword ptr [ecx+24]
+"Sims.exe"+21080: D9 59 24              -  fstp dword ptr [ecx+24]
+"Sims.exe"+21083: EB 02                 -  jmp Sims.exe+21087
+"Sims.exe"+21085: DD D8                 -  fstp st(0)
+"Sims.exe"+21087: 0F BF 86 92 05 00 00  -  movsx eax,word ptr [esi+00000592]
+"Sims.exe"+2108E: 89 45 FC              -  mov [ebp-04],eax
+"Sims.exe"+21091: DB 45 FC              -  fild dword ptr [ebp-04]
+"Sims.exe"+21094: D8 8A 64 49 6E 00     -  fmul dword ptr [edx+Sims.exe+2E4964]
+"Sims.exe"+2109A: D8 82 70 49 6E 00     -  fadd dword ptr [edx+Sims.exe+2E4970]
+"Sims.exe"+210A0: D8 69 18              -  fsubr dword ptr [ecx+18]
+// ---------- INJECTING HERE ----------
+"Sims.exe"+210A3: D9 59 18              -  fstp dword ptr [ecx+18]
+"Sims.exe"+210A6: D9 41 1C              -  fld dword ptr [ecx+1C]
+// ---------- DONE INJECTING  ----------
+"Sims.exe"+210A9: D9 C0                 -  fld st(0)
+"Sims.exe"+210AB: D8 05 4C 67 66 00     -  fadd dword ptr [Sims.exe+26674C]
+"Sims.exe"+210B1: D8 8A 58 49 6E 00     -  fmul dword ptr [edx+Sims.exe+2E4958]
+"Sims.exe"+210B7: D8 E9                 -  fsubr st(0),st(1)
+"Sims.exe"+210B9: D9 59 1C              -  fstp dword ptr [ecx+1C]
+"Sims.exe"+210BC: DD D8                 -  fstp st(0)
+"Sims.exe"+210BE: D8 51 2C              -  fcom dword ptr [ecx+2C]
+"Sims.exe"+210C1: DF E0                 -  fnstsw ax
+"Sims.exe"+210C3: 9E                    -  sahf 
+"Sims.exe"+210C4: 77 1F                 -  ja Sims.exe+210E5
+}
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>8</ID>
+      <Description>"радость"</Description>
+      <LastState/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>{ Game   : Sims.exe
+  Version: 
+  Date   : 2018-08-07
+  Author : Hipp
+
+  This script does blah blah blah
+}
+
+[ENABLE]
+
+aobscanmodule(radost,Sims.exe,A2 * * * * D9 59 3C D9 41 20) // should be unique
+alloc(newmem,$1000)
+
+label(code)
+label(return)
+
+newmem:
+
+code:
+  fstp dword ptr [ecx+3C]
+  mov dword ptr [ecx+3C],(float)100
+  fld dword ptr [ecx+20]
+  jmp return
+
+radost+05:
+  jmp newmem
+  nop
+return:
+registersymbol(radost)
+
+[DISABLE]
+
+radost+05:
+  db D9 59 3C D9 41 20
+
+unregistersymbol(radost)
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: "Sims.exe"+210F6
+
+"Sims.exe"+210D3: D8 8A 40 49 6E 00     -  fmul dword ptr [edx+Sims.exe+2E4940]
+"Sims.exe"+210D9: D8 82 4C 49 6E 00     -  fadd dword ptr [edx+Sims.exe+2E494C]
+"Sims.exe"+210DF: D8 69 38              -  fsubr dword ptr [ecx+38]
+"Sims.exe"+210E2: D9 59 38              -  fstp dword ptr [ecx+38]
+"Sims.exe"+210E5: D8 59 2C              -  fcomp dword ptr [ecx+2C]
+"Sims.exe"+210E8: DF E0                 -  fnstsw ax
+"Sims.exe"+210EA: 9E                    -  sahf 
+"Sims.exe"+210EB: 77 23                 -  ja Sims.exe+21110
+"Sims.exe"+210ED: D9 41 3C              -  fld dword ptr [ecx+3C]
+"Sims.exe"+210F0: D8 A2 34 49 6E 00     -  fsub dword ptr [edx+Sims.exe+2E4934]
+// ---------- INJECTING HERE ----------
+"Sims.exe"+210F6: D9 59 3C              -  fstp dword ptr [ecx+3C]
+"Sims.exe"+210F9: D9 41 20              -  fld dword ptr [ecx+20]
+// ---------- DONE INJECTING  ----------
+"Sims.exe"+210FC: D8 A2 1C 49 6E 00     -  fsub dword ptr [edx+Sims.exe+2E491C]
+"Sims.exe"+21102: D9 59 20              -  fstp dword ptr [ecx+20]
+"Sims.exe"+21105: D9 41 24              -  fld dword ptr [ecx+24]
+"Sims.exe"+21108: D8 A2 04 49 6E 00     -  fsub dword ptr [edx+Sims.exe+2E4904]
+"Sims.exe"+2110E: EB 21                 -  jmp Sims.exe+21131
+"Sims.exe"+21110: D9 82 28 49 6E 00     -  fld dword ptr [edx+Sims.exe+2E4928]
+"Sims.exe"+21116: D8 49 3C              -  fmul dword ptr [ecx+3C]
+"Sims.exe"+21119: D9 59 3C              -  fstp dword ptr [ecx+3C]
+"Sims.exe"+2111C: D9 41 20              -  fld dword ptr [ecx+20]
+"Sims.exe"+2111F: D8 A2 10 49 6E 00     -  fsub dword ptr [edx+Sims.exe+2E4910]
+}
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>18</ID>
+      <Description>"комната"</Description>
+      <LastState Activated="1"/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>{ Game   : Sims.exe
+  Version: 
+  Date   : 2020-05-06
+  Author : Hipp
+
+  This script does blah blah blah
+}
+
+[ENABLE]
+
+aobscanmodule(room,Sims.exe,89 86 C0 07 00 00) // should be unique
+alloc(newmem,$1000)
+
+label(code)
+label(return)
+
+newmem:
+  mov eax,(float)100
+code:
+  mov [esi+000007C0],eax
+  jmp return
+
+room:
+  jmp newmem
+  nop
+return:
+registersymbol(room)
+
+[DISABLE]
+
+room:
+  db 89 86 C0 07 00 00
+
+unregistersymbol(room)
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: "Sims.exe"+5CF12
+
+"Sims.exe"+5CEF8: 84 C0                 -  test al,al
+"Sims.exe"+5CEFA: 75 13                 -  jne Sims.exe+5CF0F
+"Sims.exe"+5CEFC: D9 45 FC              -  fld dword ptr [ebp-04]
+"Sims.exe"+5CEFF: D8 1D 7C 65 66 00     -  fcomp dword ptr [Sims.exe+26657C]
+"Sims.exe"+5CF05: DF E0                 -  fnstsw ax
+"Sims.exe"+5CF07: 9E                    -  sahf 
+"Sims.exe"+5CF08: 73 05                 -  jae Sims.exe+5CF0F
+"Sims.exe"+5CF0A: D9 EE                 -  fldz 
+"Sims.exe"+5CF0C: D9 5D FC              -  fstp dword ptr [ebp-04]
+"Sims.exe"+5CF0F: 8B 45 FC              -  mov eax,[ebp-04]
+// ---------- INJECTING HERE ----------
+"Sims.exe"+5CF12: 89 86 C0 07 00 00     -  mov [esi+000007C0],eax
+// ---------- DONE INJECTING  ----------
+"Sims.exe"+5CF18: 66 FF 86 C2 05 00 00  -  inc word ptr [esi+000005C2]
+"Sims.exe"+5CF1F: 8B 8E D0 0A 00 00     -  mov ecx,[esi+00000AD0]
+"Sims.exe"+5CF25: 3B 8E D4 0A 00 00     -  cmp ecx,[esi+00000AD4]
+"Sims.exe"+5CF2B: 74 53                 -  je Sims.exe+5CF80
+"Sims.exe"+5CF2D: 8B 01                 -  mov eax,[ecx]
+"Sims.exe"+5CF2F: D9 41 08              -  fld dword ptr [ecx+08]
+"Sims.exe"+5CF32: 8D 94 86 8C 07 00 00  -  lea edx,[esi+eax*4+0000078C]
+"Sims.exe"+5CF39: 8B 41 04              -  mov eax,[ecx+04]
+"Sims.exe"+5CF3C: 89 45 FC              -  mov [ebp-04],eax
+"Sims.exe"+5CF3F: D9 45 FC              -  fld dword ptr [ebp-04]
+}
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>5</ID>
+      <Description>"энергия"</Description>
+      <LastState/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>{ Game   : Sims.exe
+  Version: 
+  Date   : 2018-08-07
+  Author : Hipp
+
+  This script does blah blah blah
+}
+
+[ENABLE]
+
+aobscanmodule(enrg,Sims.exe,D9 59 14 EB 02) // should be unique
+alloc(newmem,$1000)
+
+label(code)
+label(return)
+
+newmem:
+
+code:
+  fstp dword ptr [ecx+14]
+  push eax
+  mov eax,[var_eng]
+  mov [ecx+14],eax
+  pop eax
+  jmp Sims.exe+2106A
+  jmp return
+var_eng:
+  dd (float)100
+enrg:
+  jmp newmem
+return:
+registersymbol(enrg)
+registersymbol(var_eng)
+[DISABLE]
+
+enrg:
+  db D9 59 14 EB 02
+
+unregistersymbol(enrg)
+unregistersymbol(var_eng)
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: "Sims.exe"+21063
+
+"Sims.exe"+2103B: D8 41 14              -  fadd dword ptr [ecx+14]
+"Sims.exe"+2103E: D9 51 14              -  fst dword ptr [ecx+14]
+"Sims.exe"+21041: A1 6C 48 6E 00        -  mov eax,[Sims.exe+2E486C]
+"Sims.exe"+21046: 8B 40 1C              -  mov eax,[eax+1C]
+"Sims.exe"+21049: 0F BF 40 10           -  movsx eax,word ptr [eax+10]
+"Sims.exe"+2104D: 3B 82 A0 49 6E 00     -  cmp eax,[edx+Sims.exe+2E49A0]
+"Sims.exe"+21053: 7E 13                 -  jle Sims.exe+21068
+"Sims.exe"+21055: 3B 82 94 49 6E 00     -  cmp eax,[edx+Sims.exe+2E4994]
+"Sims.exe"+2105B: 7D 0B                 -  jnl Sims.exe+21068
+"Sims.exe"+2105D: D8 A2 88 49 6E 00     -  fsub dword ptr [edx+Sims.exe+2E4988]
+// ---------- INJECTING HERE ----------
+"Sims.exe"+21063: D9 59 14              -  fstp dword ptr [ecx+14]
+"Sims.exe"+21066: EB 02                 -  jmp Sims.exe+2106A
+// ---------- DONE INJECTING  ----------
+"Sims.exe"+21068: DD D8                 -  fstp st(0)
+"Sims.exe"+2106A: D9 41 1C              -  fld dword ptr [ecx+1C]
+"Sims.exe"+2106D: D8 61 5C              -  fsub dword ptr [ecx+5C]
+"Sims.exe"+21070: D8 D1                 -  fcom st(0),st(1)
+"Sims.exe"+21072: DF E0                 -  fnstsw ax
+"Sims.exe"+21074: 9E                    -  sahf 
+"Sims.exe"+21075: 76 0E                 -  jna Sims.exe+21085
+"Sims.exe"+21077: D8 8A 7C 49 6E 00     -  fmul dword ptr [edx+Sims.exe+2E497C]
+"Sims.exe"+2107D: D8 69 24              -  fsubr dword ptr [ecx+24]
+"Sims.exe"+21080: D9 59 24              -  fstp dword ptr [ecx+24]
+}
+</AssemblerScript>
+      <CheatEntries>
+        <CheatEntry>
+          <ID>19</ID>
+          <Description>"Нет описания"</Description>
+          <VariableType>Float</VariableType>
+          <Address>var_eng</Address>
+        </CheatEntry>
+      </CheatEntries>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>21</ID>
+      <Description>"friend"</Description>
+      <LastState/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>{ Game   : Sims.exe
+  Version: 
+  Date   : 2020-05-07
+  Author : Hipp
+
+  This script does blah blah blah
+}
+
+[ENABLE]
+
+aobscanmodule(friend,Sims.exe,8B 4C 24 0C 8B 00 89) // should be unique
+alloc(newmem,$1000)
+
+label(code)
+label(return)
+
+newmem:
+
+code:
+  mov ecx,[esp+0C]
+  mov eax,[eax]
+
+  inc ecx
+  jmp return
+
+friend:
+  jmp newmem
+  nop
+return:
+registersymbol(friend)
+
+[DISABLE]
+
+friend:
+  db 8B 4C 24 0C 8B 00
+
+unregistersymbol(friend)
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: "Sims.exe"+651D0
+
+"Sims.exe"+651B6: 3B C1           -  cmp eax,ecx
+"Sims.exe"+651B8: 74 10           -  je Sims.exe+651CA
+"Sims.exe"+651BA: 8B 10           -  mov edx,[eax]
+"Sims.exe"+651BC: 8B 52 0C        -  mov edx,[edx+0C]
+"Sims.exe"+651BF: 3B 54 24 04     -  cmp edx,[esp+04]
+"Sims.exe"+651C3: 74 05           -  je Sims.exe+651CA
+"Sims.exe"+651C5: 83 C0 04        -  add eax,04
+"Sims.exe"+651C8: EB EC           -  jmp Sims.exe+651B6
+"Sims.exe"+651CA: 8B 00           -  mov eax,[eax]
+"Sims.exe"+651CC: 8B 54 24 08     -  mov edx,[esp+08]
+// ---------- INJECTING HERE ----------
+"Sims.exe"+651D0: 8B 4C 24 0C     -  mov ecx,[esp+0C]
+"Sims.exe"+651D4: 8B 00           -  mov eax,[eax]
+// ---------- DONE INJECTING  ----------
+"Sims.exe"+651D6: 89 0C 90        -  mov [eax+edx*4],ecx
+"Sims.exe"+651D9: C2 0C 00        -  ret 000C
+"Sims.exe"+651DC: 55              -  push ebp
+"Sims.exe"+651DD: 8B EC           -  mov ebp,esp
+"Sims.exe"+651DF: 83 EC 0C        -  sub esp,0C
+"Sims.exe"+651E2: 83 4D FC FF     -  or dword ptr [ebp-04],-01
+"Sims.exe"+651E6: 53              -  push ebx
+"Sims.exe"+651E7: 57              -  push edi
+"Sims.exe"+651E8: 8B D9           -  mov ebx,ecx
+"Sims.exe"+651EA: 8B 4D 08        -  mov ecx,[ebp+08]
+}
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>12</ID>
+      <Description>"skills"</Description>
+      <LastState/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>{ Game   : Sims.exe
+  Version: 
+  Date   : 2018-08-08
+  Author : Hipp
+
+  This script does blah blah blah
+}
+
+[ENABLE]
+
+aobscanmodule(skills,Sims.exe,A4 FB FF 0F BF 04 78 59) // should be unique
+alloc(newmem,$1000)
+alloc(var_sk,$4)
+
+label(code)
+label(return)
+
+var_sk:
+db 00 00 00 00
+
+newmem:
+
+code:
+  push ebx
+  mov bx,[var_sk]
+  mov [eax+edi*2],bx
+  movsx eax,word ptr [eax+edi*2]
+  pop ebx
+  pop ecx
+  jmp return
+
+skills+03:
+  jmp newmem
+return:
+registersymbol(skills)
+registersymbol(var_sk)
+
+[DISABLE]
+
+skills+03:
+  db 0F BF 04 78 59
+unregistersymbol(var_sk)
+unregistersymbol(skills)
+dealloc(newmem)
+dealloc(var_sk)
+
+{
+// ORIGINAL CODE - INJECTION POINT: "Sims.exe"+1302F4
+
+"Sims.exe"+1302C2: 83 BE D4 00 00 00 00  -  cmp dword ptr [esi+000000D4],00
+"Sims.exe"+1302C9: 0F 84 33 01 00 00     -  je Sims.exe+130402
+"Sims.exe"+1302CF: 83 7D F0 FF           -  cmp dword ptr [ebp-10],-01
+"Sims.exe"+1302D3: 0F 84 29 01 00 00     -  je Sims.exe+130402
+"Sims.exe"+1302D9: C7 45 EC B0 42 6F 00  -  mov [ebp-14],Sims.exe+2F42B0
+"Sims.exe"+1302E0: C7 45 E4 EC DF 66 00  -  mov [ebp-1C],Sims.exe+26DFEC
+"Sims.exe"+1302E7: 8B 45 E4              -  mov eax,[ebp-1C]
+"Sims.exe"+1302EA: FF 75 F0              -  push [ebp-10]
+"Sims.exe"+1302ED: 8B 38                 -  mov edi,[eax]
+"Sims.exe"+1302EF: E8 AA A4 FB FF        -  call Sims.exe+EA79E
+// ---------- INJECTING HERE ----------
+"Sims.exe"+1302F4: 0F BF 04 78           -  movsx eax,word ptr [eax+edi*2]
+"Sims.exe"+1302F8: 59                    -  pop ecx
+// ---------- DONE INJECTING  ----------
+"Sims.exe"+1302F9: 6A 64                 -  push 64
+"Sims.exe"+1302FB: 99                    -  cdq 
+"Sims.exe"+1302FC: 59                    -  pop ecx
+"Sims.exe"+1302FD: F7 F9                 -  idiv ecx
+"Sims.exe"+1302FF: 6A 0A                 -  push 0A
+"Sims.exe"+130301: 59                    -  pop ecx
+"Sims.exe"+130302: 3B C1                 -  cmp eax,ecx
+"Sims.exe"+130304: 89 45 E8              -  mov [ebp-18],eax
+"Sims.exe"+130307: 7E 05                 -  jle Sims.exe+13030E
+"Sims.exe"+130309: 89 4D E8              -  mov [ebp-18],ecx
+}
+</AssemblerScript>
+      <CheatEntries>
+        <CheatEntry>
+          <ID>13</ID>
+          <Description>"Нет описания"</Description>
+          <VariableType>2 Bytes</VariableType>
+          <Address>var_sk</Address>
+        </CheatEntry>
+      </CheatEntries>
+    </CheatEntry>
+  </CheatEntries>
+  <UserdefinedSymbols/>
+  <Comments>Sims.exe+52ECB - mov [eax],si
+за все
+Sims.exe+651A9 - mov eax,[eax] - отношения
+</Comments>
+</CheatTable>

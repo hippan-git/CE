@@ -1,0 +1,431 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CheatTable CheatEngineTableVersion="29">
+  <CheatEntries>
+    <CheatEntry>
+      <ID>0</ID>
+      <Description>"fastanimal"</Description>
+      <LastState Activated="1"/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>{ Game   : FarmFrenzy3.wrp.exe
+  Version: 
+  Date   : 2020-01-26
+  Author : Hipp
+
+  This script does blah blah blah
+}
+
+[ENABLE]
+
+aobscanmodule(fastanimal,FarmFrenzy3.wrp.exe,D8 86 FC 03 00 00) // should be unique
+alloc(newmem,$1000)
+
+label(code)
+label(return)
+
+newmem:
+  fstp dword ptr [temp]
+  fld dword ptr [var]
+code:
+  fadd dword ptr [esi+000003FC]
+  jmp return
+
+var:
+  dd (float)0.08
+temp:
+  dd 00
+
+fastanimal:
+  jmp newmem
+  nop
+return:
+registersymbol(fastanimal)
+
+[DISABLE]
+
+fastanimal:
+  db D8 86 FC 03 00 00
+
+unregistersymbol(fastanimal)
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: "FarmFrenzy3.wrp.exe"+B3830
+
+"FarmFrenzy3.wrp.exe"+B380E: 5B                    -  pop ebx
+"FarmFrenzy3.wrp.exe"+B380F: 8B E5                 -  mov esp,ebp
+"FarmFrenzy3.wrp.exe"+B3811: 5D                    -  pop ebp
+"FarmFrenzy3.wrp.exe"+B3812: C3                    -  ret 
+"FarmFrenzy3.wrp.exe"+B3813: 8B 4E 30              -  mov ecx,[esi+30]
+"FarmFrenzy3.wrp.exe"+B3816: 3B 8E E8 04 00 00     -  cmp ecx,[esi+000004E8]
+"FarmFrenzy3.wrp.exe"+B381C: 0F 84 CD 00 00 00     -  je FarmFrenzy3.wrp.exe+B38EF
+"FarmFrenzy3.wrp.exe"+B3822: D9 85 AC EF FF FF     -  fld dword ptr [ebp-00001054]
+"FarmFrenzy3.wrp.exe"+B3828: 8B 86 70 04 00 00     -  mov eax,[esi+00000470]
+"FarmFrenzy3.wrp.exe"+B382E: 3B C3                 -  cmp eax,ebx
+// ---------- INJECTING HERE ----------
+"FarmFrenzy3.wrp.exe"+B3830: D8 86 FC 03 00 00     -  fadd dword ptr [esi+000003FC]
+// ---------- DONE INJECTING  ----------
+"FarmFrenzy3.wrp.exe"+B3836: D9 9E FC 03 00 00     -  fstp dword ptr [esi+000003FC]
+"FarmFrenzy3.wrp.exe"+B383C: D9 85 AC EF FF FF     -  fld dword ptr [ebp-00001054]
+"FarmFrenzy3.wrp.exe"+B3842: D8 86 14 04 00 00     -  fadd dword ptr [esi+00000414]
+"FarmFrenzy3.wrp.exe"+B3848: D9 96 14 04 00 00     -  fst dword ptr [esi+00000414]
+"FarmFrenzy3.wrp.exe"+B384E: 0F 85 99 00 00 00     -  jne FarmFrenzy3.wrp.exe+B38ED
+"FarmFrenzy3.wrp.exe"+B3854: D8 9E 18 04 00 00     -  fcomp dword ptr [esi+00000418]
+"FarmFrenzy3.wrp.exe"+B385A: DF E0                 -  fnstsw ax
+"FarmFrenzy3.wrp.exe"+B385C: F6 C4 41              -  test ah,41
+"FarmFrenzy3.wrp.exe"+B385F: 0F 85 8A 00 00 00     -  jne FarmFrenzy3.wrp.exe+B38EF
+"FarmFrenzy3.wrp.exe"+B3865: D9 86 EC 03 00 00     -  fld dword ptr [esi+000003EC]
+}
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>1</ID>
+      <Description>"infTruck"</Description>
+      <LastState Activated="1"/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>[ENABLE]
+FarmFrenzy3.wrp.exe+59D85:
+ jmp FarmFrenzy3.wrp.exe+59D9A
+
+ 
+ 
+[DISABLE]
+FarmFrenzy3.wrp.exe+59D85:
+ jb FarmFrenzy3.wrp.exe+59D9A
+
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>2</ID>
+      <Description>"product"</Description>
+      <LastState/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>{ Game   : FarmFrenzy3.wrp.exe
+  Version: 
+  Date   : 2020-01-26
+  Author : Hipp
+
+  This script does blah blah blah
+}
+
+[ENABLE]
+
+aobscanmodule(product,FarmFrenzy3.wrp.exe,01 94 86 94 03 00 00) // should be unique
+alloc(newmem,$1000)
+
+label(code)
+label(return)
+
+newmem:
+  add edx,4
+code:
+  add [esi+eax*4+00000394],edx
+  jmp return
+
+product:
+  jmp newmem
+  nop 2
+return:
+registersymbol(product)
+
+[DISABLE]
+
+product:
+  db 01 94 86 94 03 00 00
+
+unregistersymbol(product)
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: "FarmFrenzy3.wrp.exe"+D7865
+
+"FarmFrenzy3.wrp.exe"+D7848: 51                    -  push ecx
+"FarmFrenzy3.wrp.exe"+D7849: B8 3C 11 00 00        -  mov eax,0000113C
+"FarmFrenzy3.wrp.exe"+D784E: E8 6D 31 11 00        -  call FarmFrenzy3.wrp.exe+1EA9C0
+"FarmFrenzy3.wrp.exe"+D7853: A1 7C 04 70 00        -  mov eax,[FarmFrenzy3.wrp.exe+30047C]
+"FarmFrenzy3.wrp.exe"+D7858: 8B 55 0C              -  mov edx,[ebp+0C]
+"FarmFrenzy3.wrp.exe"+D785B: 53                    -  push ebx
+"FarmFrenzy3.wrp.exe"+D785C: 56                    -  push esi
+"FarmFrenzy3.wrp.exe"+D785D: 8B F1                 -  mov esi,ecx
+"FarmFrenzy3.wrp.exe"+D785F: 89 45 EC              -  mov [ebp-14],eax
+"FarmFrenzy3.wrp.exe"+D7862: 8B 45 08              -  mov eax,[ebp+08]
+// ---------- INJECTING HERE ----------
+"FarmFrenzy3.wrp.exe"+D7865: 01 94 86 94 03 00 00  -  add [esi+eax*4+00000394],edx
+// ---------- DONE INJECTING  ----------
+"FarmFrenzy3.wrp.exe"+D786C: 8B 8E E0 02 00 00     -  mov ecx,[esi+000002E0]
+"FarmFrenzy3.wrp.exe"+D7872: 8A 99 5C 02 00 00     -  mov bl,[ecx+0000025C]
+"FarmFrenzy3.wrp.exe"+D7878: D9 81 48 02 00 00     -  fld dword ptr [ecx+00000248]
+"FarmFrenzy3.wrp.exe"+D787E: 84 DB                 -  test bl,bl
+"FarmFrenzy3.wrp.exe"+D7880: 57                    -  push edi
+"FarmFrenzy3.wrp.exe"+D7881: 89 65 F0              -  mov [ebp-10],esp
+"FarmFrenzy3.wrp.exe"+D7884: C7 45 FC 00 00 00 00  -  mov [ebp-04],00000000
+"FarmFrenzy3.wrp.exe"+D788B: 74 06                 -  je FarmFrenzy3.wrp.exe+D7893
+"FarmFrenzy3.wrp.exe"+D788D: D8 A9 44 02 00 00     -  fsubr dword ptr [ecx+00000244]
+"FarmFrenzy3.wrp.exe"+D7893: 85 D2                 -  test edx,edx
+}
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>3</ID>
+      <Description>"progress"</Description>
+      <LastState/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>{ Game   : FarmFrenzy3.wrp.exe
+  Version: 
+  Date   : 2020-01-26
+  Author : Hipp
+
+  This script does blah blah blah
+}
+
+[ENABLE]
+
+aobscanmodule(progress,FarmFrenzy3.wrp.exe,D8 86 14 03 00 00 D9) // should be unique
+alloc(newmem,$1000)
+
+label(code)
+label(return)
+
+newmem:
+  fstp dword ptr [temp]
+  fld dword ptr [var]
+code:
+  fadd dword ptr [esi+00000314]
+  jmp return
+temp:
+  dd 00
+var:
+  dd (float)0.1
+progress:
+  jmp newmem
+  nop
+return:
+registersymbol(progress)
+
+[DISABLE]
+
+progress:
+  db D8 86 14 03 00 00
+
+unregistersymbol(progress)
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: "FarmFrenzy3.wrp.exe"+CBC6A
+
+"FarmFrenzy3.wrp.exe"+CBC36: D8 86 BC 01 00 00     -  fadd dword ptr [esi+000001BC]
+"FarmFrenzy3.wrp.exe"+CBC3C: D9 9E BC 01 00 00     -  fstp dword ptr [esi+000001BC]
+"FarmFrenzy3.wrp.exe"+CBC42: EB 48                 -  jmp FarmFrenzy3.wrp.exe+CBC8C
+"FarmFrenzy3.wrp.exe"+CBC44: D9 85 B0 EF FF FF     -  fld dword ptr [ebp-00001050]
+"FarmFrenzy3.wrp.exe"+CBC4A: 8B 8E FC 02 00 00     -  mov ecx,[esi+000002FC]
+"FarmFrenzy3.wrp.exe"+CBC50: D8 86 BC 01 00 00     -  fadd dword ptr [esi+000001BC]
+"FarmFrenzy3.wrp.exe"+CBC56: C6 86 C0 01 00 00 01  -  mov byte ptr [esi+000001C0],01
+"FarmFrenzy3.wrp.exe"+CBC5D: 51                    -  push ecx
+"FarmFrenzy3.wrp.exe"+CBC5E: D9 9E BC 01 00 00     -  fstp dword ptr [esi+000001BC]
+"FarmFrenzy3.wrp.exe"+CBC64: D9 85 AC EF FF FF     -  fld dword ptr [ebp-00001054]
+// ---------- INJECTING HERE ----------
+"FarmFrenzy3.wrp.exe"+CBC6A: D8 86 14 03 00 00     -  fadd dword ptr [esi+00000314]
+// ---------- DONE INJECTING  ----------
+"FarmFrenzy3.wrp.exe"+CBC70: D9 96 14 03 00 00     -  fst dword ptr [esi+00000314]
+"FarmFrenzy3.wrp.exe"+CBC76: D9 81 44 02 00 00     -  fld dword ptr [ecx+00000244]
+"FarmFrenzy3.wrp.exe"+CBC7C: D9 C9                 -  fxch st(1)
+"FarmFrenzy3.wrp.exe"+CBC7E: D8 37                 -  fdiv dword ptr [edi]
+"FarmFrenzy3.wrp.exe"+CBC80: D8 C9                 -  fmul st(0),st(1)
+"FarmFrenzy3.wrp.exe"+CBC82: D9 1C 24              -  fstp dword ptr [esp]
+"FarmFrenzy3.wrp.exe"+CBC85: DD D8                 -  fstp st(0)
+"FarmFrenzy3.wrp.exe"+CBC87: E8 B4 A2 F4 FF        -  call FarmFrenzy3.wrp.exe+15F40
+"FarmFrenzy3.wrp.exe"+CBC8C: D9 86 14 03 00 00     -  fld dword ptr [esi+00000314]
+"FarmFrenzy3.wrp.exe"+CBC92: D8 1F                 -  fcomp dword ptr [edi]
+}
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>4</ID>
+      <Description>"infSklad"</Description>
+      <LastState/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>[ENABLE]
+FarmFrenzy3.wrp.exe+D78D2:
+ db 90 90
+
+ 
+ 
+[DISABLE]
+FarmFrenzy3.wrp.exe+D78D2:
+ je FarmFrenzy3.wrp.exe+D78DA
+
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>5</ID>
+      <Description>"timer"</Description>
+      <LastState/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>{ Game   : FarmFrenzy3.wrp.exe
+  Version: 
+  Date   : 2020-01-26
+  Author : Hipp
+
+  This script does blah blah blah
+}
+
+[ENABLE]
+
+aobscanmodule(timer,FarmFrenzy3.wrp.exe,D8 86 A8 02 00 00 8B) // should be unique
+alloc(newmem,$1000)
+
+label(code)
+label(return)
+
+newmem:
+  fstp dword ptr [temp]
+  fld dword ptr [var]
+code:
+  fadd dword ptr [esi+000002A8]
+  jmp return
+var:
+  dd 00
+temp:
+  dd 00
+timer:
+  jmp newmem
+  nop
+return:
+registersymbol(timer)
+
+[DISABLE]
+
+timer:
+  db D8 86 A8 02 00 00
+
+unregistersymbol(timer)
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: "FarmFrenzy3.wrp.exe"+2DE4D
+
+"FarmFrenzy3.wrp.exe"+2DE22: 89 45 EC              -  mov [ebp-14],eax
+"FarmFrenzy3.wrp.exe"+2DE25: 8B 01                 -  mov eax,[ecx]
+"FarmFrenzy3.wrp.exe"+2DE27: 57                    -  push edi
+"FarmFrenzy3.wrp.exe"+2DE28: 89 65 F0              -  mov [ebp-10],esp
+"FarmFrenzy3.wrp.exe"+2DE2B: C7 45 FC 00 00 00 00  -  mov [ebp-04],00000000
+"FarmFrenzy3.wrp.exe"+2DE32: FF 50 0C              -  call dword ptr [eax+0C]
+"FarmFrenzy3.wrp.exe"+2DE35: D9 9D B0 EF FF FF     -  fstp dword ptr [ebp-00001050]
+"FarmFrenzy3.wrp.exe"+2DE3B: 8B 8D B0 EF FF FF     -  mov ecx,[ebp-00001050]
+"FarmFrenzy3.wrp.exe"+2DE41: 89 8D B0 EF FF FF     -  mov [ebp-00001050],ecx
+"FarmFrenzy3.wrp.exe"+2DE47: D9 85 B0 EF FF FF     -  fld dword ptr [ebp-00001050]
+// ---------- INJECTING HERE ----------
+"FarmFrenzy3.wrp.exe"+2DE4D: D8 86 A8 02 00 00     -  fadd dword ptr [esi+000002A8]
+// ---------- DONE INJECTING  ----------
+"FarmFrenzy3.wrp.exe"+2DE53: 8B CE                 -  mov ecx,esi
+"FarmFrenzy3.wrp.exe"+2DE55: D9 9E A8 02 00 00     -  fstp dword ptr [esi+000002A8]
+"FarmFrenzy3.wrp.exe"+2DE5B: D9 85 B0 EF FF FF     -  fld dword ptr [ebp-00001050]
+"FarmFrenzy3.wrp.exe"+2DE61: D8 86 F4 04 00 00     -  fadd dword ptr [esi+000004F4]
+"FarmFrenzy3.wrp.exe"+2DE67: D9 9E F4 04 00 00     -  fstp dword ptr [esi+000004F4]
+"FarmFrenzy3.wrp.exe"+2DE6D: D9 85 B0 EF FF FF     -  fld dword ptr [ebp-00001050]
+"FarmFrenzy3.wrp.exe"+2DE73: D8 86 F8 04 00 00     -  fadd dword ptr [esi+000004F8]
+"FarmFrenzy3.wrp.exe"+2DE79: D9 9E F8 04 00 00     -  fstp dword ptr [esi+000004F8]
+"FarmFrenzy3.wrp.exe"+2DE7F: E8 BC AC FE FF        -  call FarmFrenzy3.wrp.exe+18B40
+"FarmFrenzy3.wrp.exe"+2DE84: 8B 86 90 02 00 00     -  mov eax,[esi+00000290]
+}
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>6</ID>
+      <Description>"stars"</Description>
+      <LastState/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>{ Game   : FarmFrenzy3.wrp.exe
+  Version: 
+  Date   : 2020-04-12
+  Author : Hipp
+
+  This script does blah blah blah
+}
+
+[ENABLE]
+
+aobscanmodule(stars,FarmFrenzy3.wrp.exe,89 30 83 BD B0 EF FF FF 10) // should be unique
+alloc(newmem,$1000)
+
+label(code)
+label(return)
+
+newmem:
+
+code:
+  mov [eax],esi
+  add [eax],#100000
+  cmp dword ptr [ebp-00001050],10
+  jmp return
+
+stars:
+  jmp newmem
+  nop 4
+return:
+registersymbol(stars)
+
+[DISABLE]
+
+stars:
+  db 89 30 83 BD B0 EF FF FF 10
+
+unregistersymbol(stars)
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: "FarmFrenzy3.wrp.exe"+122E9B
+
+"FarmFrenzy3.wrp.exe"+122E69: 2B F0                          -  sub esi,eax
+"FarmFrenzy3.wrp.exe"+122E6B: C7 85 B0 EF FF FF 0F 00 00 00  -  mov [ebp-00001050],0000000F
+"FarmFrenzy3.wrp.exe"+122E75: 89 9D AC EF FF FF              -  mov [ebp-00001054],ebx
+"FarmFrenzy3.wrp.exe"+122E7B: 88 9D 9C EF FF FF              -  mov [ebp-00001064],bl
+"FarmFrenzy3.wrp.exe"+122E81: E8 CA 1C EE FF                 -  call FarmFrenzy3.wrp.exe+4B50
+"FarmFrenzy3.wrp.exe"+122E86: 8D 85 98 EF FF FF              -  lea eax,[ebp-00001068]
+"FarmFrenzy3.wrp.exe"+122E8C: 50                             -  push eax
+"FarmFrenzy3.wrp.exe"+122E8D: B9 70 24 70 00                 -  mov ecx,FarmFrenzy3.wrp.exe+302470
+"FarmFrenzy3.wrp.exe"+122E92: C6 45 FC 02                    -  mov byte ptr [ebp-04],02
+"FarmFrenzy3.wrp.exe"+122E96: E8 95 7F F0 FF                 -  call FarmFrenzy3.wrp.exe+2AE30
+// ---------- INJECTING HERE ----------
+"FarmFrenzy3.wrp.exe"+122E9B: 89 30                          -  mov [eax],esi
+"FarmFrenzy3.wrp.exe"+122E9D: 83 BD B0 EF FF FF 10           -  cmp dword ptr [ebp-00001050],10
+// ---------- DONE INJECTING  ----------
+"FarmFrenzy3.wrp.exe"+122EA4: 88 5D FC                       -  mov [ebp-04],bl
+"FarmFrenzy3.wrp.exe"+122EA7: 72 0F                          -  jb FarmFrenzy3.wrp.exe+122EB8
+"FarmFrenzy3.wrp.exe"+122EA9: 8B 8D 9C EF FF FF              -  mov ecx,[ebp-00001064]
+"FarmFrenzy3.wrp.exe"+122EAF: 51                             -  push ecx
+"FarmFrenzy3.wrp.exe"+122EB0: E8 8E 72 0C 00                 -  call FarmFrenzy3.wrp.exe+1EA143
+"FarmFrenzy3.wrp.exe"+122EB5: 83 C4 04                       -  add esp,04
+"FarmFrenzy3.wrp.exe"+122EB8: 8B 47 50                       -  mov eax,[edi+50]
+"FarmFrenzy3.wrp.exe"+122EBB: 8D 70 01                       -  lea esi,[eax+01]
+"FarmFrenzy3.wrp.exe"+122EBE: 8B 47 48                       -  mov eax,[edi+48]
+"FarmFrenzy3.wrp.exe"+122EC1: 6B C0 1C                       -  imul eax,eax,1C
+}
+</AssemblerScript>
+    </CheatEntry>
+  </CheatEntries>
+  <CheatCodes>
+    <CodeEntry>
+      <Description>Изменение je 004D78DA</Description>
+      <AddressString>FarmFrenzy3.wrp.exe+D78D2</AddressString>
+      <Before>
+        <Byte>02</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+        <Byte>84</Byte>
+        <Byte>C0</Byte>
+      </Before>
+      <Actual>
+        <Byte>74</Byte>
+        <Byte>06</Byte>
+      </Actual>
+      <After>
+        <Byte>D8</Byte>
+        <Byte>A9</Byte>
+        <Byte>44</Byte>
+        <Byte>02</Byte>
+        <Byte>00</Byte>
+      </After>
+    </CodeEntry>
+  </CheatCodes>
+  <UserdefinedSymbols/>
+</CheatTable>

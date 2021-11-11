@@ -1,0 +1,246 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CheatTable CheatEngineTableVersion="29">
+  <CheatEntries>
+    <CheatEntry>
+      <ID>1</ID>
+      <Description>"опыт"</Description>
+      <VariableType>4 Bytes</VariableType>
+      <Address>Vampire.exe+12F540</Address>
+      <Offsets>
+        <Offset>3e8</Offset>
+      </Offsets>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>3</ID>
+      <Description>"health"</Description>
+      <VariableType>Float</VariableType>
+      <Address>Vampire.exe+12F540</Address>
+      <Offsets>
+        <Offset>20c</Offset>
+      </Offsets>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>4</ID>
+      <Description>"OHK"</Description>
+      <LastState Activated="1"/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>{ Game   : Vampire.exe
+  Version: 
+  Date   : 2019-11-22
+  Author : Hipp
+
+  This script does blah blah blah
+}
+
+[ENABLE]
+
+aobscanmodule(OHK,Vampire.exe,D9 9E 0C 02 00 00 E8) // should be unique
+alloc(newmem,$1000)
+
+label(code)
+label(return)
+
+newmem:
+  cmp [Vampire.exe+12F540],esi
+  je return
+  mov dword ptr [v_ohk],(float)0
+  fld dword ptr [v_ohk]
+code:
+  fstp dword ptr [esi+0000020C]
+  jmp return
+v_ohk:
+  db 00 00 00 00
+OHK:
+  jmp newmem
+  nop
+return:
+registersymbol(OHK)
+
+[DISABLE]
+
+OHK:
+  db D9 9E 0C 02 00 00
+
+unregistersymbol(OHK)
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: "Vampire.exe"+52022
+
+"Vampire.exe"+51FFF: 85 C0              -  test eax,eax
+"Vampire.exe"+52001: 74 14              -  je Vampire.exe+52017
+"Vampire.exe"+52003: D9 44 24 10        -  fld dword ptr [esp+10]
+"Vampire.exe"+52007: D8 0D 64 B7 4E 00  -  fmul dword ptr [Vampire.exe+EB764]
+"Vampire.exe"+5200D: D9 5C 24 10        -  fstp dword ptr [esp+10]
+"Vampire.exe"+52011: EB 04              -  jmp Vampire.exe+52017
+"Vampire.exe"+52013: 8B 5C 24 20        -  mov ebx,[esp+20]
+"Vampire.exe"+52017: D9 86 0C 02 00 00  -  fld dword ptr [esi+0000020C]
+"Vampire.exe"+5201D: D8 64 24 10        -  fsub dword ptr [esp+10]
+"Vampire.exe"+52021: 56                 -  push esi
+// ---------- INJECTING HERE ----------
+"Vampire.exe"+52022: D9 9E 0C 02 00 00  -  fstp dword ptr [esi+0000020C]
+// ---------- DONE INJECTING  ----------
+"Vampire.exe"+52028: E8 73 1C FB FF     -  call Vampire.exe+3CA0
+"Vampire.exe"+5202D: D9 86 0C 02 00 00  -  fld dword ptr [esi+0000020C]
+"Vampire.exe"+52033: D8 1D F4 B3 4E 00  -  fcomp dword ptr [Vampire.exe+EB3F4]
+"Vampire.exe"+52039: 83 C4 04           -  add esp,04
+"Vampire.exe"+5203C: DF E0              -  fnstsw ax
+"Vampire.exe"+5203E: F6 C4 01           -  test ah,01
+"Vampire.exe"+52041: 74 21              -  je Vampire.exe+52064
+"Vampire.exe"+52043: 8B 44 24 10        -  mov eax,[esp+10]
+"Vampire.exe"+52047: 6A 00              -  push 00
+"Vampire.exe"+52049: 50                 -  push eax
+}
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>5</ID>
+      <Description>"gold"</Description>
+      <VariableType>4 Bytes</VariableType>
+      <Address>Vampire.exe+2326D8</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>7</ID>
+      <Description>"people"</Description>
+      <LastState/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>{ Game   : Vampire.exe
+  Version: 
+  Date   : 2019-11-22
+  Author : Hipp
+
+  This script does blah blah blah
+}
+
+[ENABLE]
+
+aobscanmodule(peopling,Vampire.exe,D9 86 A8 02 00 00 E8) // should be unique
+alloc(newmem,$1000)
+
+label(code)
+label(return)
+
+newmem:
+  mov dword ptr [esi+000002A8],(float)100
+code:
+  fld dword ptr [esi+000002A8]
+  jmp return
+
+peopling:
+  jmp newmem
+  nop
+return:
+registersymbol(peopling)
+
+[DISABLE]
+
+peopling:
+  db D9 86 A8 02 00 00
+
+unregistersymbol(peopling)
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: "Vampire.exe"+49F5
+
+"Vampire.exe"+49DB: 83 C4 18           -  add esp,18
+"Vampire.exe"+49DE: 5F                 -  pop edi
+"Vampire.exe"+49DF: 5E                 -  pop esi
+"Vampire.exe"+49E0: 5B                 -  pop ebx
+"Vampire.exe"+49E1: C3                 -  ret 
+"Vampire.exe"+49E2: 8B 15 84 F4 52 00  -  mov edx,[Vampire.exe+12F484]
+"Vampire.exe"+49E8: 6A 64              -  push 64
+"Vampire.exe"+49EA: 68 88 4E 4F 00     -  push Vampire.exe+F4E88
+"Vampire.exe"+49EF: 52                 -  push edx
+"Vampire.exe"+49F0: E8 EB 00 0D 00     -  call Vampire.exe+D4AE0
+// ---------- INJECTING HERE ----------
+"Vampire.exe"+49F5: D9 86 A8 02 00 00  -  fld dword ptr [esi+000002A8]
+// ---------- DONE INJECTING  ----------
+"Vampire.exe"+49FB: E8 80 91 0D 00     -  call Vampire.exe+DDB80
+"Vampire.exe"+4A00: 50                 -  push eax
+"Vampire.exe"+4A01: A1 74 F4 52 00     -  mov eax,[Vampire.exe+12F474]
+"Vampire.exe"+4A06: 68 8C 4E 4F 00     -  push Vampire.exe+F4E8C
+"Vampire.exe"+4A0B: 50                 -  push eax
+"Vampire.exe"+4A0C: E8 CF 00 0D 00     -  call Vampire.exe+D4AE0
+"Vampire.exe"+4A11: 8B 0D 9C F4 52 00  -  mov ecx,[Vampire.exe+12F49C]
+"Vampire.exe"+4A17: 83 C4 18           -  add esp,18
+"Vampire.exe"+4A1A: 68 00 00 C8 42     -  push 42C80000
+"Vampire.exe"+4A1F: 6A 00              -  push 00
+}
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>10</ID>
+      <Description>"blood"</Description>
+      <LastState Activated="1"/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>{ Game   : Vampire.exe
+  Version: 
+  Date   : 2019-11-22
+  Author : Hipp
+
+  This script does blah blah blah
+}
+
+[ENABLE]
+
+aobscanmodule(blood,Vampire.exe,D9 9E A4 02 00 00 80) // should be unique
+alloc(newmem,$1000)
+
+label(code)
+label(return)
+
+newmem:
+  mov dword ptr [v_blood],(float)100
+  fld dword ptr [v_blood]
+code:
+  fstp dword ptr [esi+000002A4]
+  jmp return
+v_blood:
+  db 00 00 00 00
+blood:
+  jmp newmem
+  nop
+return:
+registersymbol(blood)
+
+[DISABLE]
+
+blood:
+  db D9 9E A4 02 00 00
+
+unregistersymbol(blood)
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: "Vampire.exe"+95307
+
+"Vampire.exe"+952E2: D8 5C 24 10           -  fcomp dword ptr [esp+10]
+"Vampire.exe"+952E6: DF E0                 -  fnstsw ax
+"Vampire.exe"+952E8: F6 C4 01              -  test ah,01
+"Vampire.exe"+952EB: 75 06                 -  jne Vampire.exe+952F3
+"Vampire.exe"+952ED: D9 44 24 10           -  fld dword ptr [esp+10]
+"Vampire.exe"+952F1: EB 0E                 -  jmp Vampire.exe+95301
+"Vampire.exe"+952F3: D9 86 CC 02 00 00     -  fld dword ptr [esi+000002CC]
+"Vampire.exe"+952F9: EB 06                 -  jmp Vampire.exe+95301
+"Vampire.exe"+952FB: D9 05 24 B4 4E 00     -  fld dword ptr [Vampire.exe+EB424]
+"Vampire.exe"+95301: 8A 8E FC 01 00 00     -  mov cl,[esi+000001FC]
+// ---------- INJECTING HERE ----------
+"Vampire.exe"+95307: D9 9E A4 02 00 00     -  fstp dword ptr [esi+000002A4]
+// ---------- DONE INJECTING  ----------
+"Vampire.exe"+9530D: 80 F9 02              -  cmp cl,02
+"Vampire.exe"+95310: 75 3C                 -  jne Vampire.exe+9534E
+"Vampire.exe"+95312: F6 86 F4 01 00 00 10  -  test byte ptr [esi+000001F4],10
+"Vampire.exe"+95319: 75 33                 -  jne Vampire.exe+9534E
+"Vampire.exe"+9531B: D9 86 A4 02 00 00     -  fld dword ptr [esi+000002A4]
+"Vampire.exe"+95321: D8 1D 24 B4 4E 00     -  fcomp dword ptr [Vampire.exe+EB424]
+"Vampire.exe"+95327: DF E0                 -  fnstsw ax
+"Vampire.exe"+95329: F6 C4 40              -  test ah,40
+"Vampire.exe"+9532C: 74 20                 -  je Vampire.exe+9534E
+"Vampire.exe"+9532E: 6A 00                 -  push 00
+}
+</AssemblerScript>
+    </CheatEntry>
+  </CheatEntries>
+  <UserdefinedSymbols/>
+</CheatTable>

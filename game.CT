@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CheatTable CheatEngineTableVersion="26">
+  <CheatEntries>
+    <CheatEntry>
+      <ID>1</ID>
+      <Description>"money"</Description>
+      <LastState Activated="1"/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>[ENABLE]
+Game.exe+E53A9:
+db 29 C8
+
+[DISABLE]
+Game.exe+E53A9:
+db 2B C7
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>14</ID>
+      <Description>"zero money"</Description>
+      <LastState/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>{ Game   : game.exe
+  Version: 
+  Date   : 2019-08-15
+  Author : Hipp
+
+  This script does blah blah blah
+}
+
+[ENABLE]
+
+aobscanmodule(zero_money,game.exe,89 86 4C 02 00 00 5E) // should be unique
+alloc(newmem,$1000)
+
+label(code)
+label(return)
+
+newmem:
+  xor eax,eax
+code:
+  mov [esi+0000024C],eax
+  jmp return
+
+zero_money:
+  jmp newmem
+  nop
+return:
+registersymbol(zero_money)
+
+[DISABLE]
+
+zero_money:
+  db 89 86 4C 02 00 00
+
+unregistersymbol(zero_money)
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: "game.exe"+E514D
+
+"game.exe"+E511E: 8B 44 24 0C        -  mov eax,[esp+0C]
+"game.exe"+E5122: 8B 0D 34 0B AC 00  -  mov ecx,[game.exe+6C0B34]
+"game.exe"+E5128: 8B 14 81           -  mov edx,[ecx+eax*4]
+"game.exe"+E512B: 8B 46 34           -  mov eax,[esi+34]
+"game.exe"+E512E: DB 82 B8 00 00 00  -  fild dword ptr [edx+000000B8]
+"game.exe"+E5134: D8 88 48 01 00 00  -  fmul dword ptr [eax+00000148]
+"game.exe"+E513A: D8 4C 24 08        -  fmul dword ptr [esp+08]
+"game.exe"+E513E: DA 86 4C 02 00 00  -  fiadd [esi+0000024C]
+"game.exe"+E5144: E8 C7 9F 29 00     -  call game.exe+37F110
+"game.exe"+E5149: D9 44 24 08        -  fld dword ptr [esp+08]
+// ---------- INJECTING HERE ----------
+"game.exe"+E514D: 89 86 4C 02 00 00  -  mov [esi+0000024C],eax
+// ---------- DONE INJECTING  ----------
+"game.exe"+E5153: 5E                 -  pop esi
+"game.exe"+E5154: C2 08 00           -  ret 0008
+"game.exe"+E5157: 90                 -  nop 
+"game.exe"+E5158: 90                 -  nop 
+"game.exe"+E5159: 90                 -  nop 
+"game.exe"+E515A: 90                 -  nop 
+"game.exe"+E515B: 90                 -  nop 
+"game.exe"+E515C: 90                 -  nop 
+"game.exe"+E515D: 90                 -  nop 
+"game.exe"+E515E: 90                 -  nop 
+}
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>4</ID>
+      <Description>"fast build"</Description>
+      <LastState Activated="1"/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>[ENABLE]
+Game.exe+B9367:
+db EB 89 90
+Game.exe+B92F2:
+db 80 7E 59 00 75 02 B2 36 89 56 24 EB 6B
+
+[DISABLE]
+Game.exe+B9367:
+db 89 56 24
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>15</ID>
+      <Description>"no reload"</Description>
+      <LastState/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>[ENABLE]
+Game.exe+29E9A0:
+db 89 71
+
+[DISABLE]
+Game.exe+29E9A0:
+db 8A 51
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>10</ID>
+      <Description>"immortal"</Description>
+      <LastState Activated="1"/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>[ENABLE]
+Game.exe+2A4FB5:
+db 89 76 6C 84 C0 75
+
+[DISABLE]
+Game.exe+2A4FB5:
+db 8A 46 77 84 C0 74
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>8</ID>
+      <Description>"pro unit tech"</Description>
+      <LastState/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>[ENABLE]
+Game.exe+2DAE7F:
+db 88
+
+[DISABLE]
+Game.exe+2DAE7F:
+db 8A
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>9</ID>
+      <Description>"map"</Description>
+      <LastState Activated="1"/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>[ENABLE]
+Game.exe+F3054:
+db 73 32
+
+[DISABLE]
+Game.exe+F3054:
+db 74 2E
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>11</ID>
+      <Description>"Нет описания"</Description>
+      <LastState Value="108" RealAddress="097801AC"/>
+      <VariableType>4 Bytes</VariableType>
+      <Address>097801AC</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>12</ID>
+      <Description>"Нет описания"</Description>
+      <LastState Value="2506261862" RealAddress="0C99C2D4"/>
+      <VariableType>4 Bytes</VariableType>
+      <Address>0C99C2D4</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>13</ID>
+      <Description>"Нет описания"</Description>
+      <LastState Value="0" RealAddress="0976A214"/>
+      <VariableType>4 Bytes</VariableType>
+      <Address>0976A214</Address>
+    </CheatEntry>
+  </CheatEntries>
+  <CheatCodes>
+    <CodeEntry>
+      <Description>Изменение sub eax,edi</Description>
+      <Address>004E48F9</Address>
+      <ModuleName>game.exe</ModuleName>
+      <ModuleNameOffset>E48F9</ModuleNameOffset>
+      <Before>
+        <Byte>12</Byte>
+        <Byte>7E</Byte>
+        <Byte>2A</Byte>
+        <Byte>EB</Byte>
+        <Byte>8F</Byte>
+      </Before>
+      <Actual>
+        <Byte>2B</Byte>
+        <Byte>C7</Byte>
+      </Actual>
+      <After>
+        <Byte>89</Byte>
+        <Byte>7C</Byte>
+        <Byte>24</Byte>
+        <Byte>24</Byte>
+        <Byte>89</Byte>
+      </After>
+    </CodeEntry>
+  </CheatCodes>
+  <UserdefinedSymbols/>
+  <Comments>обращается к деньгам
+game.exe+E53AF - mov [ebx+0000024C],eax
+</Comments>
+</CheatTable>

@@ -1,0 +1,495 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CheatTable CheatEngineTableVersion="29">
+  <CheatEntries>
+    <CheatEntry>
+      <ID>15</ID>
+      <Description>"timer"</Description>
+      <LastState/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>{ Game   : FarmFrenzy3_Madagascar.wrp.exe
+  Version: 
+  Date   : 2020-07-05
+  Author : Hipp
+
+  This script does blah blah blah
+}
+
+[ENABLE]
+
+aobscanmodule(timer,FarmFrenzy3_Madagascar.wrp.exe,D8 86 E8 03 00 00 8B) // should be unique
+alloc(newmem,$1000)
+
+label(code)
+label(return)
+
+newmem:
+  frndint
+  //fcomp
+  //fld dword ptr [var_time]
+code:
+  fadd dword ptr [esi+000003E8]
+  jmp return
+var_time:
+  dd (float)0.1
+timer:
+  jmp newmem
+  nop
+return:
+registersymbol(timer)
+
+[DISABLE]
+
+timer:
+  db D8 86 E8 03 00 00
+
+unregistersymbol(timer)
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: "FarmFrenzy3_Madagascar.wrp.exe"+26519
+
+"FarmFrenzy3_Madagascar.wrp.exe"+264F7: 8B 0D EC 7E 8A 00     -  mov ecx,[FarmFrenzy3_Madagascar.wrp.exe+4A7EEC]
+"FarmFrenzy3_Madagascar.wrp.exe"+264FD: 8B 01                 -  mov eax,[ecx]
+"FarmFrenzy3_Madagascar.wrp.exe"+264FF: 57                    -  push edi
+"FarmFrenzy3_Madagascar.wrp.exe"+26500: 89 65 F0              -  mov [ebp-10],esp
+"FarmFrenzy3_Madagascar.wrp.exe"+26503: C7 45 FC 00 00 00 00  -  mov [ebp-04],00000000
+"FarmFrenzy3_Madagascar.wrp.exe"+2650A: FF 50 0C              -  call dword ptr [eax+0C]
+"FarmFrenzy3_Madagascar.wrp.exe"+2650D: D9 5D EC              -  fstp dword ptr [ebp-14]
+"FarmFrenzy3_Madagascar.wrp.exe"+26510: 8B 4D EC              -  mov ecx,[ebp-14]
+"FarmFrenzy3_Madagascar.wrp.exe"+26513: 89 4D EC              -  mov [ebp-14],ecx
+"FarmFrenzy3_Madagascar.wrp.exe"+26516: D9 45 EC              -  fld dword ptr [ebp-14]
+// ---------- INJECTING HERE ----------
+"FarmFrenzy3_Madagascar.wrp.exe"+26519: D8 86 E8 03 00 00     -  fadd dword ptr [esi+000003E8]
+// ---------- DONE INJECTING  ----------
+"FarmFrenzy3_Madagascar.wrp.exe"+2651F: 8B CE                 -  mov ecx,esi
+"FarmFrenzy3_Madagascar.wrp.exe"+26521: D9 9E E8 03 00 00     -  fstp dword ptr [esi+000003E8]
+"FarmFrenzy3_Madagascar.wrp.exe"+26527: D9 45 EC              -  fld dword ptr [ebp-14]
+"FarmFrenzy3_Madagascar.wrp.exe"+2652A: D8 86 28 08 00 00     -  fadd dword ptr [esi+00000828]
+"FarmFrenzy3_Madagascar.wrp.exe"+26530: D9 9E 28 08 00 00     -  fstp dword ptr [esi+00000828]
+"FarmFrenzy3_Madagascar.wrp.exe"+26536: D9 45 EC              -  fld dword ptr [ebp-14]
+"FarmFrenzy3_Madagascar.wrp.exe"+26539: D8 86 2C 08 00 00     -  fadd dword ptr [esi+0000082C]
+"FarmFrenzy3_Madagascar.wrp.exe"+2653F: D9 9E 2C 08 00 00     -  fstp dword ptr [esi+0000082C]
+"FarmFrenzy3_Madagascar.wrp.exe"+26545: E8 76 03 FF FF        -  call FarmFrenzy3_Madagascar.wrp.exe+168C0
+"FarmFrenzy3_Madagascar.wrp.exe"+2654A: A0 F8 7E 8A 00        -  mov al,[FarmFrenzy3_Madagascar.wrp.exe+4A7EF8]
+}
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>17</ID>
+      <Description>"fastanimal"</Description>
+      <LastState Activated="1"/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>{ Game   : FarmFrenzy3_Madagascar.wrp.exe
+  Version: 
+  Date   : 2020-07-05
+  Author : Hipp
+
+  This script does blah blah blah
+}
+
+[ENABLE]
+
+aobscanmodule(fastanimal,FarmFrenzy3_Madagascar.wrp.exe,C3 D8 86 B8 04 00 00) // should be unique
+alloc(newmem,$1000)
+
+label(code)
+label(return)
+
+newmem:
+  fcomp
+  fld dword ptr [var1]
+code:
+  fadd dword ptr [esi+000004B8]
+  jmp return
+var1:
+  dd (float)0.07
+fastanimal+01:
+  jmp newmem
+  nop
+return:
+registersymbol(fastanimal)
+
+[DISABLE]
+
+fastanimal+01:
+  db D8 86 B8 04 00 00
+
+unregistersymbol(fastanimal)
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: "FarmFrenzy3_Madagascar.wrp.exe"+C6FF3
+
+"FarmFrenzy3_Madagascar.wrp.exe"+C6FCC: FF 50 08              -  call dword ptr [eax+08]
+"FarmFrenzy3_Madagascar.wrp.exe"+C6FCF: 8B 96 A8 05 00 00     -  mov edx,[esi+000005A8]
+"FarmFrenzy3_Madagascar.wrp.exe"+C6FD5: 8D 8E A8 05 00 00     -  lea ecx,[esi+000005A8]
+"FarmFrenzy3_Madagascar.wrp.exe"+C6FDB: 8B F8                 -  mov edi,eax
+"FarmFrenzy3_Madagascar.wrp.exe"+C6FDD: FF 52 08              -  call dword ptr [edx+08]
+"FarmFrenzy3_Madagascar.wrp.exe"+C6FE0: 3B F8                 -  cmp edi,eax
+"FarmFrenzy3_Madagascar.wrp.exe"+C6FE2: 0F 84 E9 00 00 00     -  je FarmFrenzy3_Madagascar.wrp.exe+C70D1
+"FarmFrenzy3_Madagascar.wrp.exe"+C6FE8: D9 45 EC              -  fld dword ptr [ebp-14]
+"FarmFrenzy3_Madagascar.wrp.exe"+C6FEB: 8B 86 2C 05 00 00     -  mov eax,[esi+0000052C]
+"FarmFrenzy3_Madagascar.wrp.exe"+C6FF1: 3B C3                 -  cmp eax,ebx
+// ---------- INJECTING HERE ----------
+"FarmFrenzy3_Madagascar.wrp.exe"+C6FF3: D8 86 B8 04 00 00     -  fadd dword ptr [esi+000004B8]
+// ---------- DONE INJECTING  ----------
+"FarmFrenzy3_Madagascar.wrp.exe"+C6FF9: D9 9E B8 04 00 00     -  fstp dword ptr [esi+000004B8]
+"FarmFrenzy3_Madagascar.wrp.exe"+C6FFF: D9 45 EC              -  fld dword ptr [ebp-14]
+"FarmFrenzy3_Madagascar.wrp.exe"+C7002: D8 86 D0 04 00 00     -  fadd dword ptr [esi+000004D0]
+"FarmFrenzy3_Madagascar.wrp.exe"+C7008: D9 96 D0 04 00 00     -  fst dword ptr [esi+000004D0]
+"FarmFrenzy3_Madagascar.wrp.exe"+C700E: 0F 85 BB 00 00 00     -  jne FarmFrenzy3_Madagascar.wrp.exe+C70CF
+"FarmFrenzy3_Madagascar.wrp.exe"+C7014: D8 9E D4 04 00 00     -  fcomp dword ptr [esi+000004D4]
+"FarmFrenzy3_Madagascar.wrp.exe"+C701A: DF E0                 -  fnstsw ax
+"FarmFrenzy3_Madagascar.wrp.exe"+C701C: F6 C4 41              -  test ah,41
+"FarmFrenzy3_Madagascar.wrp.exe"+C701F: 0F 85 AC 00 00 00     -  jne FarmFrenzy3_Madagascar.wrp.exe+C70D1
+"FarmFrenzy3_Madagascar.wrp.exe"+C7025: D9 86 A8 04 00 00     -  fld dword ptr [esi+000004A8]
+}
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>18</ID>
+      <Description>"progress"</Description>
+      <LastState Activated="1"/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>{ Game   : FarmFrenzy3_Madagascar.wrp.exe
+  Version: 
+  Date   : 2020-07-05
+  Author : Hipp
+
+  This script does blah blah blah
+}
+
+[ENABLE]
+
+aobscanmodule(progress,FarmFrenzy3_Madagascar.wrp.exe,D8 86 68 03 00 00 D9) // should be unique
+alloc(newmem,$1000)
+
+label(code)
+label(return)
+
+newmem:
+  fcomp
+  fld dword ptr [var_prog]
+code:
+  fadd dword ptr [esi+00000368]
+  jmp return
+var_prog:
+  dd (float)0.07
+progress:
+  jmp newmem
+  nop
+return:
+registersymbol(progress)
+
+[DISABLE]
+
+progress:
+  db D8 86 68 03 00 00
+
+unregistersymbol(progress)
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: "FarmFrenzy3_Madagascar.wrp.exe"+E1DAD
+
+"FarmFrenzy3_Madagascar.wrp.exe"+E1D7F: D8 86 EC 01 00 00     -  fadd dword ptr [esi+000001EC]
+"FarmFrenzy3_Madagascar.wrp.exe"+E1D85: D9 9E EC 01 00 00     -  fstp dword ptr [esi+000001EC]
+"FarmFrenzy3_Madagascar.wrp.exe"+E1D8B: EB 40                 -  jmp FarmFrenzy3_Madagascar.wrp.exe+E1DCD
+"FarmFrenzy3_Madagascar.wrp.exe"+E1D8D: D9 45 D4              -  fld dword ptr [ebp-2C]
+"FarmFrenzy3_Madagascar.wrp.exe"+E1D90: 8B 8E 50 03 00 00     -  mov ecx,[esi+00000350]
+"FarmFrenzy3_Madagascar.wrp.exe"+E1D96: D8 86 EC 01 00 00     -  fadd dword ptr [esi+000001EC]
+"FarmFrenzy3_Madagascar.wrp.exe"+E1D9C: C6 86 F0 01 00 00 01  -  mov byte ptr [esi+000001F0],01
+"FarmFrenzy3_Madagascar.wrp.exe"+E1DA3: 51                    -  push ecx
+"FarmFrenzy3_Madagascar.wrp.exe"+E1DA4: D9 9E EC 01 00 00     -  fstp dword ptr [esi+000001EC]
+"FarmFrenzy3_Madagascar.wrp.exe"+E1DAA: D9 45 DC              -  fld dword ptr [ebp-24]
+// ---------- INJECTING HERE ----------
+"FarmFrenzy3_Madagascar.wrp.exe"+E1DAD: D8 86 68 03 00 00     -  fadd dword ptr [esi+00000368]
+// ---------- DONE INJECTING  ----------
+"FarmFrenzy3_Madagascar.wrp.exe"+E1DB3: D9 96 68 03 00 00     -  fst dword ptr [esi+00000368]
+"FarmFrenzy3_Madagascar.wrp.exe"+E1DB9: D9 81 84 02 00 00     -  fld dword ptr [ecx+00000284]
+"FarmFrenzy3_Madagascar.wrp.exe"+E1DBF: D8 33                 -  fdiv dword ptr [ebx]
+"FarmFrenzy3_Madagascar.wrp.exe"+E1DC1: D8 C9                 -  fmul st(0),st(1)
+"FarmFrenzy3_Madagascar.wrp.exe"+E1DC3: D9 1C 24              -  fstp dword ptr [esp]
+"FarmFrenzy3_Madagascar.wrp.exe"+E1DC6: DD D8                 -  fstp st(0)
+"FarmFrenzy3_Madagascar.wrp.exe"+E1DC8: E8 53 A9 F4 FF        -  call FarmFrenzy3_Madagascar.wrp.exe+2C720
+"FarmFrenzy3_Madagascar.wrp.exe"+E1DCD: D9 86 68 03 00 00     -  fld dword ptr [esi+00000368]
+"FarmFrenzy3_Madagascar.wrp.exe"+E1DD3: D8 1B                 -  fcomp dword ptr [ebx]
+"FarmFrenzy3_Madagascar.wrp.exe"+E1DD5: DF E0                 -  fnstsw ax
+}
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>21</ID>
+      <Description>"infSklad"</Description>
+      <LastState Activated="1"/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>{ Game   : FarmFrenzy3_Madagascar.wrp.exe
+  Version: 
+  Date   : 2020-07-05
+  Author : Hipp
+
+  This script does blah blah blah
+}
+
+[ENABLE]
+
+aobscanmodule(sklad,FarmFrenzy3_Madagascar.wrp.exe,D9 99 88 02 00 00 E8 43) // should be unique
+alloc(newmem,$1000)
+
+label(code)
+label(return)
+
+newmem:
+  fcomp
+  fld dword ptr [var_sklad]
+code:
+  fstp dword ptr [ecx+00000288]
+  jmp return
+var_sklad:
+  dd (float)0
+sklad:
+  jmp newmem
+  nop
+return:
+registersymbol(sklad)
+
+[DISABLE]
+
+sklad:
+  db D9 99 88 02 00 00
+
+unregistersymbol(sklad)
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: "FarmFrenzy3_Madagascar.wrp.exe"+ED8E2
+
+"FarmFrenzy3_Madagascar.wrp.exe"+ED8C1: DF E0                 -  fnstsw ax
+"FarmFrenzy3_Madagascar.wrp.exe"+ED8C3: DD D8                 -  fstp st(0)
+"FarmFrenzy3_Madagascar.wrp.exe"+ED8C5: F6 C4 41              -  test ah,41
+"FarmFrenzy3_Madagascar.wrp.exe"+ED8C8: 7B 08                 -  jnp FarmFrenzy3_Madagascar.wrp.exe+ED8D2
+"FarmFrenzy3_Madagascar.wrp.exe"+ED8CA: DD D8                 -  fstp st(0)
+"FarmFrenzy3_Madagascar.wrp.exe"+ED8CC: D9 81 84 02 00 00     -  fld dword ptr [ecx+00000284]
+"FarmFrenzy3_Madagascar.wrp.exe"+ED8D2: 8A 81 9C 02 00 00     -  mov al,[ecx+0000029C]
+"FarmFrenzy3_Madagascar.wrp.exe"+ED8D8: 84 C0                 -  test al,al
+"FarmFrenzy3_Madagascar.wrp.exe"+ED8DA: 74 06                 -  je FarmFrenzy3_Madagascar.wrp.exe+ED8E2
+"FarmFrenzy3_Madagascar.wrp.exe"+ED8DC: D8 A9 84 02 00 00     -  fsubr dword ptr [ecx+00000284]
+// ---------- INJECTING HERE ----------
+"FarmFrenzy3_Madagascar.wrp.exe"+ED8E2: D9 99 88 02 00 00     -  fstp dword ptr [ecx+00000288]
+// ---------- DONE INJECTING  ----------
+"FarmFrenzy3_Madagascar.wrp.exe"+ED8E8: E8 43 DB 0B 00        -  call FarmFrenzy3_Madagascar.wrp.exe+1AB430
+"FarmFrenzy3_Madagascar.wrp.exe"+ED8ED: 8B 4D F4              -  mov ecx,[ebp-0C]
+"FarmFrenzy3_Madagascar.wrp.exe"+ED8F0: 5F                    -  pop edi
+"FarmFrenzy3_Madagascar.wrp.exe"+ED8F1: C6 86 44 03 00 00 01  -  mov byte ptr [esi+00000344],01
+"FarmFrenzy3_Madagascar.wrp.exe"+ED8F8: 5E                    -  pop esi
+"FarmFrenzy3_Madagascar.wrp.exe"+ED8F9: 64 89 0D 00 00 00 00  -  mov fs:[00000000],ecx
+"FarmFrenzy3_Madagascar.wrp.exe"+ED900: 5B                    -  pop ebx
+"FarmFrenzy3_Madagascar.wrp.exe"+ED901: 8B E5                 -  mov esp,ebp
+"FarmFrenzy3_Madagascar.wrp.exe"+ED903: 5D                    -  pop ebp
+"FarmFrenzy3_Madagascar.wrp.exe"+ED904: C2 08 00              -  ret 0008
+}
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>22</ID>
+      <Description>"infTruck"</Description>
+      <LastState Activated="1"/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>[ENABLE]
+FarmFrenzy3_Madagascar.wrp.exe+5D4C1:
+ jmp FarmFrenzy3_Madagascar.wrp.exe+5D4D6
+
+ 
+ 
+[DISABLE]
+FarmFrenzy3_Madagascar.wrp.exe+5D4C1:
+ jb FarmFrenzy3_Madagascar.wrp.exe+5D4D6
+
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>23</ID>
+      <Description>"product"</Description>
+      <LastState Activated="1"/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>{ Game   : FarmFrenzy3_Madagascar.wrp.exe
+  Version: 
+  Date   : 2020-07-05
+  Author : Hipp
+
+  This script does blah blah blah
+}
+
+[ENABLE]
+
+aobscanmodule(product,FarmFrenzy3_Madagascar.wrp.exe,01 94 86 DC 03 00 00) // should be unique
+alloc(newmem,$1000)
+
+label(code)
+label(return)
+
+newmem:
+  add edx,4
+code:
+  add [esi+eax*4+000003DC],edx
+  jmp return
+
+product:
+  jmp newmem
+  nop 2
+return:
+registersymbol(product)
+
+[DISABLE]
+
+product:
+  db 01 94 86 DC 03 00 00
+
+unregistersymbol(product)
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: "FarmFrenzy3_Madagascar.wrp.exe"+ED86D
+
+"FarmFrenzy3_Madagascar.wrp.exe"+ED850: 50                    -  push eax
+"FarmFrenzy3_Madagascar.wrp.exe"+ED851: 64 89 25 00 00 00 00  -  mov fs:[00000000],esp
+"FarmFrenzy3_Madagascar.wrp.exe"+ED858: 51                    -  push ecx
+"FarmFrenzy3_Madagascar.wrp.exe"+ED859: B8 38 11 00 00        -  mov eax,00001138
+"FarmFrenzy3_Madagascar.wrp.exe"+ED85E: E8 DD 9D 17 00        -  call FarmFrenzy3_Madagascar.wrp.exe+267640
+"FarmFrenzy3_Madagascar.wrp.exe"+ED863: 8B 45 08              -  mov eax,[ebp+08]
+"FarmFrenzy3_Madagascar.wrp.exe"+ED866: 8B 55 0C              -  mov edx,[ebp+0C]
+"FarmFrenzy3_Madagascar.wrp.exe"+ED869: 53                    -  push ebx
+"FarmFrenzy3_Madagascar.wrp.exe"+ED86A: 56                    -  push esi
+"FarmFrenzy3_Madagascar.wrp.exe"+ED86B: 8B F1                 -  mov esi,ecx
+// ---------- INJECTING HERE ----------
+"FarmFrenzy3_Madagascar.wrp.exe"+ED86D: 01 94 86 DC 03 00 00  -  add [esi+eax*4+000003DC],edx
+// ---------- DONE INJECTING  ----------
+"FarmFrenzy3_Madagascar.wrp.exe"+ED874: 8B 8E 34 03 00 00     -  mov ecx,[esi+00000334]
+"FarmFrenzy3_Madagascar.wrp.exe"+ED87A: 8A 99 9C 02 00 00     -  mov bl,[ecx+0000029C]
+"FarmFrenzy3_Madagascar.wrp.exe"+ED880: D9 81 88 02 00 00     -  fld dword ptr [ecx+00000288]
+"FarmFrenzy3_Madagascar.wrp.exe"+ED886: 84 DB                 -  test bl,bl
+"FarmFrenzy3_Madagascar.wrp.exe"+ED888: 57                    -  push edi
+"FarmFrenzy3_Madagascar.wrp.exe"+ED889: 89 65 F0              -  mov [ebp-10],esp
+"FarmFrenzy3_Madagascar.wrp.exe"+ED88C: C7 45 FC 00 00 00 00  -  mov [ebp-04],00000000
+"FarmFrenzy3_Madagascar.wrp.exe"+ED893: 74 06                 -  je FarmFrenzy3_Madagascar.wrp.exe+ED89B
+"FarmFrenzy3_Madagascar.wrp.exe"+ED895: D8 A9 84 02 00 00     -  fsubr dword ptr [ecx+00000284]
+"FarmFrenzy3_Madagascar.wrp.exe"+ED89B: 85 D2                 -  test edx,edx
+}
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>24</ID>
+      <Description>"elef"</Description>
+      <LastState Activated="1"/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>{ Game   : FarmFrenzy3_Madagascar.wrp.exe
+  Version: 
+  Date   : 2020-07-05
+  Author : Hipp
+
+  This script does blah blah blah
+}
+
+[ENABLE]
+
+aobscanmodule(elefant,FarmFrenzy3_Madagascar.wrp.exe,D8 86 B8 04 00 00) // should be unique
+alloc(newmem,$1000)
+
+label(code)
+label(return)
+
+newmem:
+  fcomp
+  fld dword ptr [var_el]
+code:
+  fadd dword ptr [esi+000004B8]
+  jmp return
+var_el:
+  dd (float)0.07
+elefant:
+  jmp newmem
+  nop
+return:
+registersymbol(elefant)
+
+[DISABLE]
+
+elefant:
+  db D8 86 B8 04 00 00
+
+unregistersymbol(elefant)
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: "FarmFrenzy3_Madagascar.wrp.exe"+BA5C9
+
+"FarmFrenzy3_Madagascar.wrp.exe"+BA5A7: 8B 11                 -  mov edx,[ecx]
+"FarmFrenzy3_Madagascar.wrp.exe"+BA5A9: FF 92 08 01 00 00     -  call dword ptr [edx+00000108]
+"FarmFrenzy3_Madagascar.wrp.exe"+BA5AF: 38 9E A4 04 00 00     -  cmp [esi+000004A4],bl
+"FarmFrenzy3_Madagascar.wrp.exe"+BA5B5: 75 8C                 -  jne FarmFrenzy3_Madagascar.wrp.exe+BA543
+"FarmFrenzy3_Madagascar.wrp.exe"+BA5B7: 8B 86 2C 05 00 00     -  mov eax,[esi+0000052C]
+"FarmFrenzy3_Madagascar.wrp.exe"+BA5BD: 3B C3                 -  cmp eax,ebx
+"FarmFrenzy3_Madagascar.wrp.exe"+BA5BF: 74 05                 -  je FarmFrenzy3_Madagascar.wrp.exe+BA5C6
+"FarmFrenzy3_Madagascar.wrp.exe"+BA5C1: 83 F8 02              -  cmp eax,02
+"FarmFrenzy3_Madagascar.wrp.exe"+BA5C4: 75 0F                 -  jne FarmFrenzy3_Madagascar.wrp.exe+BA5D5
+"FarmFrenzy3_Madagascar.wrp.exe"+BA5C6: D9 45 EC              -  fld dword ptr [ebp-14]
+// ---------- INJECTING HERE ----------
+"FarmFrenzy3_Madagascar.wrp.exe"+BA5C9: D8 86 B8 04 00 00     -  fadd dword ptr [esi+000004B8]
+// ---------- DONE INJECTING  ----------
+"FarmFrenzy3_Madagascar.wrp.exe"+BA5CF: D9 9E B8 04 00 00     -  fstp dword ptr [esi+000004B8]
+"FarmFrenzy3_Madagascar.wrp.exe"+BA5D5: 8B 56 2C              -  mov edx,[esi+2C]
+"FarmFrenzy3_Madagascar.wrp.exe"+BA5D8: 8D 4E 2C              -  lea ecx,[esi+2C]
+"FarmFrenzy3_Madagascar.wrp.exe"+BA5DB: FF 52 08              -  call dword ptr [edx+08]
+"FarmFrenzy3_Madagascar.wrp.exe"+BA5DE: 8D 8E A8 05 00 00     -  lea ecx,[esi+000005A8]
+"FarmFrenzy3_Madagascar.wrp.exe"+BA5E4: 8B F8                 -  mov edi,eax
+"FarmFrenzy3_Madagascar.wrp.exe"+BA5E6: 8B 01                 -  mov eax,[ecx]
+"FarmFrenzy3_Madagascar.wrp.exe"+BA5E8: FF 50 08              -  call dword ptr [eax+08]
+"FarmFrenzy3_Madagascar.wrp.exe"+BA5EB: 3B F8                 -  cmp edi,eax
+"FarmFrenzy3_Madagascar.wrp.exe"+BA5ED: 0F 84 50 FF FF FF     -  je FarmFrenzy3_Madagascar.wrp.exe+BA543
+}
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>25</ID>
+      <Description>"fast game"</Description>
+      <LastState/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>[ENABLE]
+FarmFrenzy3_Madagascar.wrp.exe+3D5A8:
+ jmp FarmFrenzy3_Madagascar.wrp.exe+3D757
+ nop
+
+ 
+ 
+[DISABLE]
+FarmFrenzy3_Madagascar.wrp.exe+3D5A8:
+ jae FarmFrenzy3_Madagascar.wrp.exe+3D757
+
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>28</ID>
+      <Description>"inf game"</Description>
+      <LastState Activated="1"/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>[ENABLE]
+FarmFrenzy3_Madagascar.wrp.exe+3D5A8:
+ db 90 90 90 90 90 90
+ 
+ 
+[DISABLE]
+FarmFrenzy3_Madagascar.wrp.exe+3D5A8:
+ jae FarmFrenzy3_Madagascar.wrp.exe+3D757
+
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>27</ID>
+      <Description>"Нет описания"</Description>
+      <LastState Value="3014753" RealAddress="15D809E4"/>
+      <VariableType>4 Bytes</VariableType>
+      <Address>15D809E4</Address>
+    </CheatEntry>
+  </CheatEntries>
+  <UserdefinedSymbols/>
+</CheatTable>

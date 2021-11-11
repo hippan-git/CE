@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CheatTable CheatEngineTableVersion="29">
+  <CheatEntries>
+    <CheatEntry>
+      <ID>0</ID>
+      <Description>"Left"</Description>
+      <LastState Value="0" RealAddress="0077D0A0"/>
+      <VariableType>4 Bytes</VariableType>
+      <Address>fifa2002.exe+37D0A0</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>1</ID>
+      <Description>"Right"</Description>
+      <LastState Value="0" RealAddress="0077D0A4"/>
+      <VariableType>4 Bytes</VariableType>
+      <Address>fifa2002.exe+37D0A0+4</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>2</ID>
+      <Description>"Скрипт автоассемблера"</Description>
+      <LastState/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>{ Game   : fifa2002.exe
+  Version: 
+  Date   : 2018-07-02
+  Author : Hipp
+
+  This script does blah blah blah
+}
+
+[ENABLE]
+
+aobscanmodule(Goal,fifa2002.exe,FF 04 85 A0 D0 77 00) // should be unique
+alloc(newmem,$1000)
+
+label(code)
+label(return)
+
+newmem:
+  {cmp eax,0
+  je return
+  }
+  mov eax,1 // 0 - левый игрок... 1 - правый игрок
+code:
+  db FF 04 85 A0 D0 77 00 // inc [eax*4+fifa2002.exe+37D0A0]
+  jmp return
+
+Goal:
+  jmp newmem
+  nop
+  nop
+return:
+registersymbol(Goal)
+
+[DISABLE]
+
+Goal:
+  db FF 04 85 A0 D0 77 00
+
+unregistersymbol(Goal)
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: "fifa2002.exe"+84D1A
+
+"fifa2002.exe"+84CF9: E8 02 0C 0E 00        -  call fifa2002.exe+165900
+"fifa2002.exe"+84CFE: 50                    -  push eax
+"fifa2002.exe"+84CFF: E8 DC 21 0E 00        -  call fifa2002.exe+166EE0
+"fifa2002.exe"+84D04: 8B 2D B4 CE 77 00     -  mov ebp,[fifa2002.exe+37CEB4]
+"fifa2002.exe"+84D0A: 83 C4 04              -  add esp,04
+"fifa2002.exe"+84D0D: 3C 03                 -  cmp al,03
+"fifa2002.exe"+84D0F: 74 10                 -  je fifa2002.exe+84D21
+"fifa2002.exe"+84D11: 83 FD 03              -  cmp ebp,03
+"fifa2002.exe"+84D14: 74 0B                 -  je fifa2002.exe+84D21
+"fifa2002.exe"+84D16: 8B 44 24 14           -  mov eax,[esp+14]
+// ---------- INJECTING HERE ----------
+"fifa2002.exe"+84D1A: FF 04 85 A0 D0 77 00  -  inc [eax*4+fifa2002.exe+37D0A0]
+// ---------- DONE INJECTING  ----------
+"fifa2002.exe"+84D21: A1 A8 D0 77 00        -  mov eax,[fifa2002.exe+37D0A8]
+"fifa2002.exe"+84D26: 83 F8 50              -  cmp eax,50
+"fifa2002.exe"+84D29: 75 1C                 -  jne fifa2002.exe+84D47
+"fifa2002.exe"+84D2B: B9 4F 00 00 00        -  mov ecx,0000004F
+"fifa2002.exe"+84D30: BE C0 D0 77 00        -  mov esi,fifa2002.exe+37D0C0
+"fifa2002.exe"+84D35: BF BC D0 77 00        -  mov edi,fifa2002.exe+37D0BC
+"fifa2002.exe"+84D3A: F3 A5                 - repe  movsd 
+"fifa2002.exe"+84D3C: A1 A8 D0 77 00        -  mov eax,[fifa2002.exe+37D0A8]
+"fifa2002.exe"+84D41: 48                    -  dec eax
+"fifa2002.exe"+84D42: A3 A8 D0 77 00        -  mov [fifa2002.exe+37D0A8],eax
+}
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>3</ID>
+      <Description>"time"</Description>
+      <LastState Value="0" RealAddress="0070A5A8"/>
+      <VariableType>4 Bytes</VariableType>
+      <Address>fifa2002.exe+30A5A8</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>4</ID>
+      <Description>"victory"</Description>
+      <LastState/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>{ Game   : fifa2002.exe
+  Version: 
+  Date   : 2018-07-03
+  Author : Hipp
+
+  This script does blah blah blah
+}
+
+[ENABLE]
+
+aobscanmodule(time,fifa2002.exe,03 C6 83 F8 3C) // should be unique
+alloc(newmem,$1000)
+
+label(code)
+label(return)
+
+newmem:
+
+code:
+  add eax,esi
+  cmp eax,1
+  jmp return
+
+time:
+  jmp newmem
+return:
+registersymbol(time)
+
+[DISABLE]
+
+time:
+  db 03 C6 83 F8 3C
+
+unregistersymbol(time)
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: "fifa2002.exe"+7C4B6
+
+"fifa2002.exe"+7C494: 74 16                          -  je fifa2002.exe+7C4AC
+"fifa2002.exe"+7C496: E8 65 94 0E 00                 -  call fifa2002.exe+165900
+"fifa2002.exe"+7C49B: 50                             -  push eax
+"fifa2002.exe"+7C49C: E8 8F A6 0E 00                 -  call fifa2002.exe+166B30
+"fifa2002.exe"+7C4A1: 83 C4 04                       -  add esp,04
+"fifa2002.exe"+7C4A4: 3C 01                          -  cmp al,01
+"fifa2002.exe"+7C4A6: 0F 84 4A 01 00 00              -  je fifa2002.exe+7C5F6
+"fifa2002.exe"+7C4AC: A1 70 CE 77 00                 -  mov eax,[fifa2002.exe+37CE70]
+"fifa2002.exe"+7C4B1: 56                             -  push esi
+"fifa2002.exe"+7C4B2: 8B 74 24 20                    -  mov esi,[esp+20]
+// ---------- INJECTING HERE ----------
+"fifa2002.exe"+7C4B6: 03 C6                          -  add eax,esi
+"fifa2002.exe"+7C4B8: 83 F8 3C                       -  cmp eax,3C
+// ---------- DONE INJECTING  ----------
+"fifa2002.exe"+7C4BB: A3 70 CE 77 00                 -  mov [fifa2002.exe+37CE70],eax
+"fifa2002.exe"+7C4C0: 72 44                          -  jb fifa2002.exe+7C506
+"fifa2002.exe"+7C4C2: 8B 15 68 CE 77 00              -  mov edx,[fifa2002.exe+37CE68]
+"fifa2002.exe"+7C4C8: 8B C8                          -  mov ecx,eax
+"fifa2002.exe"+7C4CA: A1 64 CE 77 00                 -  mov eax,[fifa2002.exe+37CE64]
+"fifa2002.exe"+7C4CF: 83 E9 3C                       -  sub ecx,3C
+"fifa2002.exe"+7C4D2: 40                             -  inc eax
+"fifa2002.exe"+7C4D3: 42                             -  inc edx
+"fifa2002.exe"+7C4D4: 89 0D 70 CE 77 00              -  mov [fifa2002.exe+37CE70],ecx
+"fifa2002.exe"+7C4DA: A3 64 CE 77 00                 -  mov [fifa2002.exe+37CE64],eax
+}
+</AssemblerScript>
+    </CheatEntry>
+  </CheatEntries>
+  <UserdefinedSymbols/>
+  <Comments>fifa2002.exe+84D1A голы
+</Comments>
+</CheatTable>

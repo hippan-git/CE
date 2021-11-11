@@ -1,0 +1,636 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CheatTable CheatEngineTableVersion="29">
+  <CheatEntries>
+    <CheatEntry>
+      <ID>0</ID>
+      <Description>"Time"</Description>
+      <LastState Activated="1"/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>{ Game   : farm2.wrp.exe
+  Version: 
+  Date   : 2020-01-06
+  Author : Hipp
+
+  This script does blah blah blah
+}
+
+[ENABLE]
+
+aobscanmodule(time,farm2.wrp.exe,CE D8 86 98 02 00 00) // should be unique
+alloc(newmem,$1000)
+
+label(code)
+label(return)
+
+newmem:
+  mov [ktime],(float)0
+  fcomp
+  fld dword ptr [ktime]
+code:
+  fadd dword ptr [esi+00000298]
+  jmp return
+
+ktime:
+  dd 00
+
+time+01:
+  jmp newmem
+  nop
+return:
+registersymbol(time)
+
+[DISABLE]
+
+time+01:
+  db D8 86 98 02 00 00
+
+unregistersymbol(time)
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: "farm2.wrp.exe"+2313B
+
+"farm2.wrp.exe"+23125: 8B 4D F4              -  mov ecx,[ebp-0C]
+"farm2.wrp.exe"+23128: 64 89 0D 00 00 00 00  -  mov fs:[00000000],ecx
+"farm2.wrp.exe"+2312F: 5F                    -  pop edi
+"farm2.wrp.exe"+23130: 5E                    -  pop esi
+"farm2.wrp.exe"+23131: 5B                    -  pop ebx
+"farm2.wrp.exe"+23132: 8B E5                 -  mov esp,ebp
+"farm2.wrp.exe"+23134: 5D                    -  pop ebp
+"farm2.wrp.exe"+23135: C3                    -  ret 
+"farm2.wrp.exe"+23136: D9 45 EC              -  fld dword ptr [ebp-14]
+"farm2.wrp.exe"+23139: 8B CE                 -  mov ecx,esi
+// ---------- INJECTING HERE ----------
+"farm2.wrp.exe"+2313B: D8 86 98 02 00 00     -  fadd dword ptr [esi+00000298]
+// ---------- DONE INJECTING  ----------
+"farm2.wrp.exe"+23141: D9 9E 98 02 00 00     -  fstp dword ptr [esi+00000298]
+"farm2.wrp.exe"+23147: D9 45 EC              -  fld dword ptr [ebp-14]
+"farm2.wrp.exe"+2314A: D8 86 68 06 00 00     -  fadd dword ptr [esi+00000668]
+"farm2.wrp.exe"+23150: D9 9E 68 06 00 00     -  fstp dword ptr [esi+00000668]
+"farm2.wrp.exe"+23156: D9 45 EC              -  fld dword ptr [ebp-14]
+"farm2.wrp.exe"+23159: D8 86 6C 06 00 00     -  fadd dword ptr [esi+0000066C]
+"farm2.wrp.exe"+2315F: D9 9E 6C 06 00 00     -  fstp dword ptr [esi+0000066C]
+"farm2.wrp.exe"+23165: E8 16 77 FF FF        -  call farm2.wrp.exe+1A880
+"farm2.wrp.exe"+2316A: 8B CE                 -  mov ecx,esi
+"farm2.wrp.exe"+2316C: E8 BF CC FF FF        -  call farm2.wrp.exe+1FE30
+}
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>1</ID>
+      <Description>"Нет описания"</Description>
+      <VariableType>4 Bytes</VariableType>
+      <Address>07232FD8</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>15</ID>
+      <Description>"infTrack"</Description>
+      <LastState Activated="1"/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>[ENABLE]
+farm2.wrp.exe+E7C41:
+ jmp farm2.wrp.exe+E7C56
+
+ 
+[DISABLE]
+farm2.wrp.exe+E7C41:
+ jb farm2.wrp.exe+E7C56
+
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>17</ID>
+      <Description>"Скрипт автоассемблера"</Description>
+      <LastState Activated="1"/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>{ Game   : farm2.wrp.exe
+  Version: 
+  Date   : 2020-02-05
+  Author : Hipp
+
+  This script does blah blah blah
+}
+
+[ENABLE]
+
+aobscanmodule(sclad,farm2.wrp.exe,D9 99 3C 02 00 00 E8 9A) // should be unique
+alloc(newmem,$1000)
+
+label(code)
+label(return)
+
+newmem:
+  fcomp
+  fld dword ptr [var]
+code:
+  fstp dword ptr [ecx+0000023C]
+  jmp return
+
+var:
+  dd (float)1
+
+sclad:
+  jmp newmem
+  nop
+return:
+registersymbol(sclad)
+
+[DISABLE]
+
+sclad:
+  db D9 99 3C 02 00 00
+
+unregistersymbol(sclad)
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: "farm2.wrp.exe"+6705B
+
+"farm2.wrp.exe"+6703E: DE C1                 -  faddp 
+"farm2.wrp.exe"+67040: D9 81 38 02 00 00     -  fld dword ptr [ecx+00000238]
+"farm2.wrp.exe"+67046: D9 C1                 -  fld st(1)
+"farm2.wrp.exe"+67048: D8 D9                 -  fcomp st(0),st(1)
+"farm2.wrp.exe"+6704A: DF E0                 -  fnstsw ax
+"farm2.wrp.exe"+6704C: DD D8                 -  fstp st(0)
+"farm2.wrp.exe"+6704E: F6 C4 41              -  test ah,41
+"farm2.wrp.exe"+67051: EB 08                 -  jmp farm2.wrp.exe+6705B
+"farm2.wrp.exe"+67053: DD D8                 -  fstp st(0)
+"farm2.wrp.exe"+67055: D9 81 38 02 00 00     -  fld dword ptr [ecx+00000238]
+// ---------- INJECTING HERE ----------
+"farm2.wrp.exe"+6705B: D9 99 3C 02 00 00     -  fstp dword ptr [ecx+0000023C]
+// ---------- DONE INJECTING  ----------
+"farm2.wrp.exe"+67061: E8 9A CA 0C 00        -  call farm2.wrp.exe+133B00
+"farm2.wrp.exe"+67066: 8B 4D F4              -  mov ecx,[ebp-0C]
+"farm2.wrp.exe"+67069: 5F                    -  pop edi
+"farm2.wrp.exe"+6706A: C6 86 EC 02 00 00 01  -  mov byte ptr [esi+000002EC],01
+"farm2.wrp.exe"+67071: 5E                    -  pop esi
+"farm2.wrp.exe"+67072: 64 89 0D 00 00 00 00  -  mov fs:[00000000],ecx
+"farm2.wrp.exe"+67079: 5B                    -  pop ebx
+"farm2.wrp.exe"+6707A: 8B E5                 -  mov esp,ebp
+"farm2.wrp.exe"+6707C: 5D                    -  pop ebp
+"farm2.wrp.exe"+6707D: C2 08 00              -  ret 0008
+}
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>8</ID>
+      <Description>"process"</Description>
+      <LastState Activated="1"/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>{ Game   : farm2.wrp.exe
+  Version: 
+  Date   : 2020-01-06
+  Author : Hipp
+
+  This script does blah blah blah
+}
+
+[ENABLE]
+
+aobscanmodule(progress,farm2.wrp.exe,D8 86 FC 02 00 00 D9) // should be unique
+alloc(newmem,$1000)
+
+label(code)
+label(return)
+
+newmem:
+  fcomp
+  fld dword ptr [v_proc]
+code:
+  fadd dword ptr [esi+000002FC]
+  jmp return
+
+v_proc:
+  dd (float)0.1
+progress:
+  jmp newmem
+  nop
+
+
+return:
+registersymbol(progress)
+
+[DISABLE]
+
+progress:
+  db D8 86 FC 02 00 00
+
+unregistersymbol(progress)
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: "farm2.wrp.exe"+5CA3E
+
+"farm2.wrp.exe"+5CA10: D8 86 AC 01 00 00     -  fadd dword ptr [esi+000001AC]
+"farm2.wrp.exe"+5CA16: D9 9E AC 01 00 00     -  fstp dword ptr [esi+000001AC]
+"farm2.wrp.exe"+5CA1C: EB 42                 -  jmp farm2.wrp.exe+5CA60
+"farm2.wrp.exe"+5CA1E: D9 45 EC              -  fld dword ptr [ebp-14]
+"farm2.wrp.exe"+5CA21: 8B 8E E4 02 00 00     -  mov ecx,[esi+000002E4]
+"farm2.wrp.exe"+5CA27: D8 86 AC 01 00 00     -  fadd dword ptr [esi+000001AC]
+"farm2.wrp.exe"+5CA2D: C6 86 B0 01 00 00 01  -  mov byte ptr [esi+000001B0],01
+"farm2.wrp.exe"+5CA34: 51                    -  push ecx
+"farm2.wrp.exe"+5CA35: D9 9E AC 01 00 00     -  fstp dword ptr [esi+000001AC]
+"farm2.wrp.exe"+5CA3B: D9 45 E8              -  fld dword ptr [ebp-18]
+// ---------- INJECTING HERE ----------
+"farm2.wrp.exe"+5CA3E: D8 86 FC 02 00 00     -  fadd dword ptr [esi+000002FC]
+// ---------- DONE INJECTING  ----------
+"farm2.wrp.exe"+5CA44: D9 96 FC 02 00 00     -  fst dword ptr [esi+000002FC]
+"farm2.wrp.exe"+5CA4A: D9 81 38 02 00 00     -  fld dword ptr [ecx+00000238]
+"farm2.wrp.exe"+5CA50: D9 C9                 -  fxch st(1)
+"farm2.wrp.exe"+5CA52: D8 37                 -  fdiv dword ptr [edi]
+"farm2.wrp.exe"+5CA54: D8 C9                 -  fmul st(0),st(1)
+"farm2.wrp.exe"+5CA56: D9 1C 24              -  fstp dword ptr [esp]
+"farm2.wrp.exe"+5CA59: DD D8                 -  fstp st(0)
+"farm2.wrp.exe"+5CA5B: E8 E0 E7 FA FF        -  call farm2.wrp.exe+B240
+"farm2.wrp.exe"+5CA60: D9 86 FC 02 00 00     -  fld dword ptr [esi+000002FC]
+"farm2.wrp.exe"+5CA66: D8 1F                 -  fcomp dword ptr [edi]
+}
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>14</ID>
+      <Description>"fast animal"</Description>
+      <LastState Activated="1"/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>{ Game   : farm2.wrp.exe
+  Version: 
+  Date   : 2020-01-25
+  Author : Hipp
+
+  This script does blah blah blah
+}
+
+[ENABLE]
+
+aobscanmodule(animal,farm2.wrp.exe,D8 86 B4 03 00 00) // should be unique
+alloc(newmem,$1000)
+
+label(code)
+label(return)
+
+newmem:
+  fcomp
+  fld dword ptr [var]
+code:
+  fadd dword ptr [esi+000003B4]
+  jmp return
+
+var:
+  dd (float)0.05
+animal:
+  jmp newmem
+  nop
+return:
+registersymbol(animal)
+
+[DISABLE]
+
+animal:
+  db D8 86 B4 03 00 00
+
+unregistersymbol(animal)
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: "farm2.wrp.exe"+8DC89
+
+"farm2.wrp.exe"+8DC6D: 8B 0D 04 19 78 00     -  mov ecx,[farm2.wrp.exe+381904]
+"farm2.wrp.exe"+8DC73: E8 88 87 09 00        -  call farm2.wrp.exe+126400
+"farm2.wrp.exe"+8DC78: 8B 4D F4              -  mov ecx,[ebp-0C]
+"farm2.wrp.exe"+8DC7B: 64 89 0D 00 00 00 00  -  mov fs:[00000000],ecx
+"farm2.wrp.exe"+8DC82: 5F                    -  pop edi
+"farm2.wrp.exe"+8DC83: 5E                    -  pop esi
+"farm2.wrp.exe"+8DC84: 5B                    -  pop ebx
+"farm2.wrp.exe"+8DC85: 8B E5                 -  mov esp,ebp
+"farm2.wrp.exe"+8DC87: 5D                    -  pop ebp
+"farm2.wrp.exe"+8DC88: C3                    -  ret 
+// ---------- INJECTING HERE ----------
+"farm2.wrp.exe"+8DC89: D8 86 B4 03 00 00     -  fadd dword ptr [esi+000003B4]
+// ---------- DONE INJECTING  ----------
+"farm2.wrp.exe"+8DC8F: 8B 86 14 04 00 00     -  mov eax,[esi+00000414]
+"farm2.wrp.exe"+8DC95: 3B C3                 -  cmp eax,ebx
+"farm2.wrp.exe"+8DC97: D9 9E B4 03 00 00     -  fstp dword ptr [esi+000003B4]
+"farm2.wrp.exe"+8DC9D: D9 45 EC              -  fld dword ptr [ebp-14]
+"farm2.wrp.exe"+8DCA0: D8 86 C8 03 00 00     -  fadd dword ptr [esi+000003C8]
+"farm2.wrp.exe"+8DCA6: D9 96 C8 03 00 00     -  fst dword ptr [esi+000003C8]
+"farm2.wrp.exe"+8DCAC: 0F 85 85 00 00 00     -  jne farm2.wrp.exe+8DD37
+"farm2.wrp.exe"+8DCB2: D8 9E CC 03 00 00     -  fcomp dword ptr [esi+000003CC]
+"farm2.wrp.exe"+8DCB8: DF E0                 -  fnstsw ax
+"farm2.wrp.exe"+8DCBA: F6 C4 41              -  test ah,41
+}
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>18</ID>
+      <Description>"need"</Description>
+      <LastState Activated="1"/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>{ Game   : farm2.wrp.exe
+  Version: 
+  Date   : 2020-02-06
+  Author : Hipp
+
+  This script does blah blah blah
+}
+
+[ENABLE]
+
+aobscanmodule(need,farm2.wrp.exe,89 8C 83 70 06 00 00 8B 35) // should be unique
+alloc(newmem,$1000)
+
+label(code)
+label(return)
+
+newmem:
+  add ecx,09
+code:
+  mov [ebx+eax*4+00000670],ecx
+  jmp return
+
+need:
+  jmp newmem
+  nop 2
+return:
+registersymbol(need)
+
+[DISABLE]
+
+need:
+  db 89 8C 83 70 06 00 00
+
+unregistersymbol(need)
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: "farm2.wrp.exe"+39EB9
+
+"farm2.wrp.exe"+39E90: E8 9B 26 FF FF        -  call farm2.wrp.exe+2C530
+"farm2.wrp.exe"+39E95: 8B 00                 -  mov eax,[eax]
+"farm2.wrp.exe"+39E97: 68 A8 EB 77 00        -  push farm2.wrp.exe+37EBA8
+"farm2.wrp.exe"+39E9C: B9 48 18 78 00        -  mov ecx,farm2.wrp.exe+381848
+"farm2.wrp.exe"+39EA1: 8D 70 01              -  lea esi,[eax+01]
+"farm2.wrp.exe"+39EA4: E8 87 26 FF FF        -  call farm2.wrp.exe+2C530
+"farm2.wrp.exe"+39EA9: 89 30                 -  mov [eax],esi
+"farm2.wrp.exe"+39EAB: 8B 87 94 02 00 00     -  mov eax,[edi+00000294]
+"farm2.wrp.exe"+39EB1: 8B 8C 83 70 06 00 00  -  mov ecx,[ebx+eax*4+00000670]
+"farm2.wrp.exe"+39EB8: 41                    -  inc ecx
+// ---------- INJECTING HERE ----------
+"farm2.wrp.exe"+39EB9: 89 8C 83 70 06 00 00  -  mov [ebx+eax*4+00000670],ecx
+// ---------- DONE INJECTING  ----------
+"farm2.wrp.exe"+39EC0: 8B 35 F8 18 78 00     -  mov esi,[farm2.wrp.exe+3818F8]
+"farm2.wrp.exe"+39EC6: 8B 87 94 02 00 00     -  mov eax,[edi+00000294]
+"farm2.wrp.exe"+39ECC: 6A 01                 -  push 01
+"farm2.wrp.exe"+39ECE: 50                    -  push eax
+"farm2.wrp.exe"+39ECF: 8B CE                 -  mov ecx,esi
+"farm2.wrp.exe"+39ED1: E8 FA D0 02 00        -  call farm2.wrp.exe+66FD0
+"farm2.wrp.exe"+39ED6: 8B 0D E0 18 78 00     -  mov ecx,[farm2.wrp.exe+3818E0]
+"farm2.wrp.exe"+39EDC: E8 5F 77 06 00        -  call farm2.wrp.exe+A1640
+"farm2.wrp.exe"+39EE1: 8B 17                 -  mov edx,[edi]
+"farm2.wrp.exe"+39EE3: 8D 45 EC              -  lea eax,[ebp-14]
+}
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>3</ID>
+      <Description>"product"</Description>
+      <LastState Activated="1"/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>{ Game   : farm2.wrp.exe
+  Version: 
+  Date   : 2020-01-06
+  Author : Hipp
+
+  This script does blah blah blah
+}
+
+[ENABLE]
+
+aobscanmodule(sklad,farm2.wrp.exe,89 8C 86 1C 03 00 00) // should be unique
+alloc(newmem,$1000)
+
+label(code)
+label(return)
+
+newmem:
+  add ecx,04
+code:
+  mov [esi+eax*4+0000031C],ecx
+  jmp return
+
+sklad:
+  jmp newmem
+  nop 2
+return:
+registersymbol(sklad)
+
+[DISABLE]
+
+sklad:
+  db 89 8C 86 1C 03 00 00
+
+unregistersymbol(sklad)
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: "farm2.wrp.exe"+67008
+
+"farm2.wrp.exe"+66FE9: B8 38 11 00 00        -  mov eax,00001138
+"farm2.wrp.exe"+66FEE: E8 DD 65 17 00        -  call farm2.wrp.exe+1DD5D0
+"farm2.wrp.exe"+66FF3: 8B 45 08              -  mov eax,[ebp+08]
+"farm2.wrp.exe"+66FF6: 8B 55 0C              -  mov edx,[ebp+0C]
+"farm2.wrp.exe"+66FF9: 53                    -  push ebx
+"farm2.wrp.exe"+66FFA: 56                    -  push esi
+"farm2.wrp.exe"+66FFB: 8B F1                 -  mov esi,ecx
+"farm2.wrp.exe"+66FFD: 8B 8C 86 1C 03 00 00  -  mov ecx,[esi+eax*4+0000031C]
+"farm2.wrp.exe"+67004: 03 CA                 -  add ecx,edx
+"farm2.wrp.exe"+67006: 85 D2                 -  test edx,edx
+// ---------- INJECTING HERE ----------
+"farm2.wrp.exe"+67008: 89 8C 86 1C 03 00 00  -  mov [esi+eax*4+0000031C],ecx
+// ---------- DONE INJECTING  ----------
+"farm2.wrp.exe"+6700F: 8B 8E DC 02 00 00     -  mov ecx,[esi+000002DC]
+"farm2.wrp.exe"+67015: D9 81 3C 02 00 00     -  fld dword ptr [ecx+0000023C]
+"farm2.wrp.exe"+6701B: 57                    -  push edi
+"farm2.wrp.exe"+6701C: 89 55 08              -  mov [ebp+08],edx
+"farm2.wrp.exe"+6701F: DB 45 08              -  fild dword ptr [ebp+08]
+"farm2.wrp.exe"+67022: 89 65 F0              -  mov [ebp-10],esp
+"farm2.wrp.exe"+67025: C7 45 FC 00 00 00 00  -  mov [ebp-04],00000000
+"farm2.wrp.exe"+6702C: 8D 04 40              -  lea eax,[eax+eax*2]
+"farm2.wrp.exe"+6702F: 7D 06                 -  jnl farm2.wrp.exe+67037
+"farm2.wrp.exe"+67031: D8 05 28 F9 65 00     -  fadd dword ptr [farm2.wrp.exe+25F928]
+}
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>12</ID>
+      <Description>"points"</Description>
+      <LastState/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>{ Game   : farm2.wrp.exe
+  Version: 
+  Date   : 2020-01-07
+  Author : Hipp
+
+  This script does blah blah blah
+}
+
+[ENABLE]
+
+aobscanmodule(points,farm2.wrp.exe,89 81 40 06 00 00) // should be unique
+alloc(newmem,$1000)
+
+label(code)
+label(return)
+
+newmem:
+  add eax,[v_points]
+code:
+  mov [ecx+00000640],eax
+  jmp return
+v_points:
+  dd #1000
+points:
+  jmp newmem
+  nop
+return:
+registersymbol(points)
+registersymbol(v_points)
+[DISABLE]
+
+points:
+  db 89 81 40 06 00 00
+
+unregistersymbol(points)
+unregistersymbol(v_points)
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: "farm2.wrp.exe"+144B9
+
+"farm2.wrp.exe"+1449A: 64 A1 00 00 00 00     -  mov eax,fs:[00000000]
+"farm2.wrp.exe"+144A0: 50                    -  push eax
+"farm2.wrp.exe"+144A1: 64 89 25 00 00 00 00  -  mov fs:[00000000],esp
+"farm2.wrp.exe"+144A8: 51                    -  push ecx
+"farm2.wrp.exe"+144A9: B8 38 11 00 00        -  mov eax,00001138
+"farm2.wrp.exe"+144AE: E8 1D 91 1C 00        -  call farm2.wrp.exe+1DD5D0
+"farm2.wrp.exe"+144B3: 8B 45 08              -  mov eax,[ebp+08]
+"farm2.wrp.exe"+144B6: 53                    -  push ebx
+"farm2.wrp.exe"+144B7: 56                    -  push esi
+"farm2.wrp.exe"+144B8: 57                    -  push edi
+// ---------- INJECTING HERE ----------
+"farm2.wrp.exe"+144B9: 89 81 40 06 00 00     -  mov [ecx+00000640],eax
+// ---------- DONE INJECTING  ----------
+"farm2.wrp.exe"+144BF: 8B 0D E0 18 78 00     -  mov ecx,[farm2.wrp.exe+3818E0]
+"farm2.wrp.exe"+144C5: 89 65 F0              -  mov [ebp-10],esp
+"farm2.wrp.exe"+144C8: C7 45 FC 00 00 00 00  -  mov [ebp-04],00000000
+"farm2.wrp.exe"+144CF: E8 8C C9 08 00        -  call farm2.wrp.exe+A0E60
+"farm2.wrp.exe"+144D4: 8B 4D F4              -  mov ecx,[ebp-0C]
+"farm2.wrp.exe"+144D7: 5F                    -  pop edi
+"farm2.wrp.exe"+144D8: 5E                    -  pop esi
+"farm2.wrp.exe"+144D9: 64 89 0D 00 00 00 00  -  mov fs:[00000000],ecx
+"farm2.wrp.exe"+144E0: 5B                    -  pop ebx
+"farm2.wrp.exe"+144E1: 8B E5                 -  mov esp,ebp
+}
+</AssemblerScript>
+      <CheatEntries>
+        <CheatEntry>
+          <ID>11</ID>
+          <Description>"Нет описания"</Description>
+          <VariableType>4 Bytes</VariableType>
+          <Address>v_points</Address>
+        </CheatEntry>
+      </CheatEntries>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>9</ID>
+      <Description>"Нет описания"</Description>
+      <VariableType>4 Bytes</VariableType>
+      <Address>028B3448</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>10</ID>
+      <Description>"clear"</Description>
+      <LastState/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>{ Game   : farm2.wrp.exe
+  Version: 
+  Date   : 2020-01-07
+  Author : Hipp
+
+  Избавление от продукции
+}
+
+[ENABLE]
+
+aobscanmodule(out,farm2.wrp.exe,89 84 96 1C 03 00 00) // should be unique
+alloc(newmem,$1000)
+
+label(code)
+label(return)
+
+newmem:
+  xor eax,eax
+code:
+  mov [esi+edx*4+0000031C],eax
+  jmp return
+
+out:
+  jmp newmem
+  nop 2
+return:
+registersymbol(out)
+
+[DISABLE]
+
+out:
+  db 89 84 96 1C 03 00 00
+
+unregistersymbol(out)
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: "farm2.wrp.exe"+6746D
+
+"farm2.wrp.exe"+67453: 57                          -  push edi
+"farm2.wrp.exe"+67454: 89 65 F0                    -  mov [ebp-10],esp
+"farm2.wrp.exe"+67457: C7 45 FC 00 00 00 00        -  mov [ebp-04],00000000
+"farm2.wrp.exe"+6745E: 74 67                       -  je farm2.wrp.exe+674C7
+"farm2.wrp.exe"+67460: 8B 7D 0C                    -  mov edi,[ebp+0C]
+"farm2.wrp.exe"+67463: 3B C7                       -  cmp eax,edi
+"farm2.wrp.exe"+67465: 73 02                       -  jae farm2.wrp.exe+67469
+"farm2.wrp.exe"+67467: 8B F8                       -  mov edi,eax
+"farm2.wrp.exe"+67469: 2B C7                       -  sub eax,edi
+"farm2.wrp.exe"+6746B: 85 FF                       -  test edi,edi
+// ---------- INJECTING HERE ----------
+"farm2.wrp.exe"+6746D: 89 84 96 1C 03 00 00        -  mov [esi+edx*4+0000031C],eax
+// ---------- DONE INJECTING  ----------
+"farm2.wrp.exe"+67474: 8B 8E DC 02 00 00           -  mov ecx,[esi+000002DC]
+"farm2.wrp.exe"+6747A: D9 81 3C 02 00 00           -  fld dword ptr [ecx+0000023C]
+"farm2.wrp.exe"+67480: 89 7D 08                    -  mov [ebp+08],edi
+"farm2.wrp.exe"+67483: DB 45 08                    -  fild dword ptr [ebp+08]
+"farm2.wrp.exe"+67486: 8D 04 52                    -  lea eax,[edx+edx*2]
+"farm2.wrp.exe"+67489: 7D 06                       -  jnl farm2.wrp.exe+67491
+"farm2.wrp.exe"+6748B: D8 05 28 F9 65 00           -  fadd dword ptr [farm2.wrp.exe+25F928]
+"farm2.wrp.exe"+67491: D8 0C 85 28 1B 78 00        -  fmul dword ptr [eax*4+farm2.wrp.exe+381B28]
+"farm2.wrp.exe"+67498: DE E9                       -  fsubp st(1),st(0)
+"farm2.wrp.exe"+6749A: D9 81 38 02 00 00           -  fld dword ptr [ecx+00000238]
+}
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>13</ID>
+      <Description>"Нет описания"</Description>
+      <VariableType>4 Bytes</VariableType>
+      <Address>2043DC00</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>16</ID>
+      <Description>"Нет описания"</Description>
+      <VariableType>Float</VariableType>
+      <Address>132E759C</Address>
+    </CheatEntry>
+  </CheatEntries>
+  <UserdefinedSymbols/>
+  <Comments>farm2.wrp.exe+D11C5 - mov eax,[eax] обращаетс к очкам
+farm2.wrp.exe+D39C7 - mov edx,[eax] звезды
+</Comments>
+</CheatTable>

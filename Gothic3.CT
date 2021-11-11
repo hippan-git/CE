@@ -1,0 +1,317 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CheatTable CheatEngineTableVersion="26">
+  <CheatEntries>
+    <CheatEntry>
+      <ID>1</ID>
+      <Description>"health"</Description>
+      <VariableType>4 Bytes</VariableType>
+      <Address>Script.dll+66E00</Address>
+      <Offsets>
+        <Offset>14</Offset>
+        <Offset>4</Offset>
+        <Offset>14</Offset>
+        <Offset>a8</Offset>
+      </Offsets>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>12</ID>
+      <Description>"mana"</Description>
+      <VariableType>4 Bytes</VariableType>
+      <Address>Script.dll+66E00</Address>
+      <Offsets>
+        <Offset>14</Offset>
+        <Offset>4</Offset>
+        <Offset>a4</Offset>
+        <Offset>a8</Offset>
+      </Offsets>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>5</ID>
+      <Description>"STR"</Description>
+      <VariableType>4 Bytes</VariableType>
+      <Address>Script.dll+66E00</Address>
+      <Offsets>
+        <Offset>14</Offset>
+        <Offset>4</Offset>
+        <Offset>44</Offset>
+        <Offset>a8</Offset>
+      </Offsets>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>13</ID>
+      <Description>"древние знания"</Description>
+      <VariableType>4 Bytes</VariableType>
+      <Address>Script.dll+66E00</Address>
+      <Offsets>
+        <Offset>28</Offset>
+        <Offset>4</Offset>
+        <Offset>44</Offset>
+        <Offset>a8</Offset>
+      </Offsets>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>2</ID>
+      <Description>"быстрая панель"</Description>
+      <LastState Activated="1"/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>{ Game   : Gothic3.exe
+  Version: 
+  Date   : 2018-06-19
+  Author : Hipp
+
+  This script does blah blah blah
+}
+
+[ENABLE]
+
+aobscanmodule(inv,Game.dll,29 6B 3C 83 7F 0C 00) // should be unique
+alloc(newmem,$1000)
+
+label(code)
+label(return)
+
+newmem:
+
+code:
+  xor ebp,ebp
+  sub [ebx+3C],ebp
+  cmp dword ptr [edi+0C],00
+  jmp return
+
+inv:
+  jmp newmem
+  nop
+  nop
+return:
+registersymbol(inv)
+
+[DISABLE]
+
+inv:
+  db 29 6B 3C 83 7F 0C 00
+
+unregistersymbol(inv)
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: "Game.dll"+C3988
+
+"Game.dll"+C3974: 32 C0              -  xor al,al
+"Game.dll"+C3976: 5D                 -  pop ebp
+"Game.dll"+C3977: C2 04 00           -  ret 0004
+"Game.dll"+C397A: E8 51 04 00 00     -  call Game.dll+C3DD0
+"Game.dll"+C397F: 5B                 -  pop ebx
+"Game.dll"+C3980: 5F                 -  pop edi
+"Game.dll"+C3981: 5E                 -  pop esi
+"Game.dll"+C3982: B0 01              -  mov al,01
+"Game.dll"+C3984: 5D                 -  pop ebp
+"Game.dll"+C3985: C2 04 00           -  ret 0004
+// ---------- INJECTING HERE ----------
+"Game.dll"+C3988: 29 6B 3C           -  sub [ebx+3C],ebp
+"Game.dll"+C398B: 83 7F 0C 00        -  cmp dword ptr [edi+0C],00
+// ---------- DONE INJECTING  ----------
+"Game.dll"+C398F: 74 0C              -  je Game.dll+C399D
+"Game.dll"+C3991: 8B 4F 0C           -  mov ecx,[edi+0C]
+"Game.dll"+C3994: 8B 11              -  mov edx,[ecx]
+"Game.dll"+C3996: 8B 42 04           -  mov eax,[edx+04]
+"Game.dll"+C3999: 53                 -  push ebx
+"Game.dll"+C399A: 56                 -  push esi
+"Game.dll"+C399B: FF D0              -  call eax
+"Game.dll"+C399D: 5B                 -  pop ebx
+"Game.dll"+C399E: 5F                 -  pop edi
+"Game.dll"+C399F: 5E                 -  pop esi
+}
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>10</ID>
+      <Description>"ed point"</Description>
+      <VariableType>4 Bytes</VariableType>
+      <Address>Script.dll+66E00</Address>
+      <Offsets>
+        <Offset>58</Offset>
+      </Offsets>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>3</ID>
+      <Description>"inv"</Description>
+      <LastState Activated="1"/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>[ENABLE]
+Game.gCInventory_PS::TransferItemsTo+1B5:
+ db 90 90 90
+
+//Game.dll+C3988:
+// add [ebx+3C],ebp
+
+ 
+ 
+[DISABLE]
+Game.gCInventory_PS::TransferItemsTo+1B5:
+ sub [esi+3C],ebx
+
+//Game.dll+C3988:
+// sub [ebx+3C],ebp
+
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>7</ID>
+      <Description>"востановление"</Description>
+      <LastState/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>{ Game   : Gothic3.exe
+  Version: 
+  Date   : 2018-06-20
+  Author : Hipp
+
+  This script does blah blah blah
+}
+
+[ENABLE]
+
+aobscanmodule(plus,Game.dll,89 4E 14 68 88 00 c7 00 8B CE FF D0 5E B0) // should be unique
+alloc(newmem,$1000)
+
+label(code)
+label(return)
+
+newmem:
+  mov ecx,[esi+18]
+
+code:
+  mov [esi+14],ecx
+  push Game.gCHUDPage::`vftable'+494
+  jmp return
+
+plus:
+  jmp newmem
+  nop
+  nop
+  nop
+return:
+registersymbol(plus)
+
+[DISABLE]
+
+plus:
+  db 89 4E 14 68 88 00 c7 00
+
+unregistersymbol(plus)
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: "Game.dll"+14EBCC
+
+"Game.dll"+14EBB1: 8B 16              -  mov edx,[esi]
+"Game.dll"+14EBB3: 8B 42 58           -  mov eax,[edx+58]
+"Game.dll"+14EBB6: 6A 00              -  push 00
+"Game.dll"+14EBB8: 68 88 00 C1 00     -  push Game.dll+2D0088
+"Game.dll"+14EBBD: 8B CE              -  mov ecx,esi
+"Game.dll"+14EBBF: FF D0              -  call eax
+"Game.dll"+14EBC1: 8B 4C 24 10        -  mov ecx,[esp+10]
+"Game.dll"+14EBC5: 8B 16              -  mov edx,[esi]
+"Game.dll"+14EBC7: 8B 42 5C           -  mov eax,[edx+5C]
+"Game.dll"+14EBCA: 6A 00              -  push 00
+// ---------- INJECTING HERE ----------
+"Game.dll"+14EBCC: 89 4E 14           -  mov [esi+14],ecx
+"Game.dll"+14EBCF: 68 88 00 C1 00     -  push Game.dll+2D0088
+// ---------- DONE INJECTING  ----------
+"Game.dll"+14EBD4: 8B CE              -  mov ecx,esi
+"Game.dll"+14EBD6: FF D0              -  call eax
+"Game.dll"+14EBD8: 5E                 -  pop esi
+"Game.dll"+14EBD9: B0 01              -  mov al,01
+"Game.dll"+14EBDB: 5B                 -  pop ebx
+"Game.dll"+14EBDC: C2 08 00           -  ret 0008
+"Game.dll"+14EBDF: 5E                 -  pop esi
+"Game.dll"+14EBE0: 32 C0              -  xor al,al
+"Game.dll"+14EBE2: 5B                 -  pop ebx
+"Game.dll"+14EBE3: C2 08 00           -  ret 0008
+}
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>14</ID>
+      <Description>"OHK"</Description>
+      <LastState/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>{ Game   : Gothic3.exe (остановлен)
+  Version: 
+  Date   : 2018-11-16
+  Author : Hipp
+
+  This script does blah blah blah
+}
+
+[ENABLE]
+
+
+aobscanmodule(OHK,Game.dll,6A 00 89 4E 14 68 9C) // should be unique
+alloc(newmem,$1000)
+
+label(code)
+label(return)
+
+newmem:
+  push eax
+  mov eax,[esi+14]
+  cmp [esi+14],0
+  je code
+  cmp eax,[esi+18]
+  je code
+  mov ecx,#-1
+
+code:
+  pop eax
+  push 00
+  mov [esi+14],ecx
+  jmp return
+
+OHK:
+  jmp newmem
+return:
+registersymbol(OHK)
+
+[DISABLE]
+
+OHK:
+  db 6A 00 89 4E 14
+
+unregistersymbol(OHK)
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: "Game.dll"+3B42C
+
+"Game.dll"+3B411: 8B F1                 -  mov esi,ecx
+"Game.dll"+3B413: 8B 06                 -  mov eax,[esi]
+"Game.dll"+3B415: 8B 50 58              -  mov edx,[eax+58]
+"Game.dll"+3B418: 6A 00                 -  push 00
+"Game.dll"+3B41A: 68 9C 31 7B 00        -  push Game.dll+2C319C
+"Game.dll"+3B41F: FF D2                 -  call edx
+"Game.dll"+3B421: 8B 44 24 08           -  mov eax,[esp+08]
+"Game.dll"+3B425: 8B 08                 -  mov ecx,[eax]
+"Game.dll"+3B427: 8B 16                 -  mov edx,[esi]
+"Game.dll"+3B429: 8B 42 5C              -  mov eax,[edx+5C]
+// ---------- INJECTING HERE ----------
+"Game.dll"+3B42C: 6A 00                 -  push 00
+"Game.dll"+3B42E: 89 4E 14              -  mov [esi+14],ecx
+// ---------- DONE INJECTING  ----------
+"Game.dll"+3B431: 68 9C 31 7B 00        -  push Game.dll+2C319C
+"Game.dll"+3B436: 8B CE                 -  mov ecx,esi
+"Game.dll"+3B438: FF D0                 -  call eax
+"Game.dll"+3B43A: 5E                    -  pop esi
+"Game.dll"+3B43B: C2 04 00              -  ret 0004
+"Game.dll"+3B43E: CC                    -  int 3 
+"Game.dll"+3B43F: CC                    -  int 3 
+"Game.dll"+3B440: 56                    -  push esi
+"Game.dll"+3B441: 8B F1                 -  mov esi,ecx
+"Game.dll"+3B443: 8B 06                 -  mov eax,[esi]
+}
+</AssemblerScript>
+    </CheatEntry>
+  </CheatEntries>
+  <UserdefinedSymbols/>
+  <Comments>Game.dll+83E95 - mov edx,[eax+1C] //репутация городов
+</Comments>
+</CheatTable>

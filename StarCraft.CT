@@ -1,0 +1,1207 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CheatTable CheatEngineTableVersion="29">
+  <CheatEntries>
+    <CheatEntry>
+      <ID>0</ID>
+      <Description>"minerals"</Description>
+      <LastState Value="25950" RealAddress="0057F104"/>
+      <VariableType>4 Bytes</VariableType>
+      <Address>StarCraft.exe+17F104</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>1</ID>
+      <Description>"vespen"</Description>
+      <LastState Value="21150" RealAddress="0057F134"/>
+      <VariableType>4 Bytes</VariableType>
+      <Address>0057F134</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>15</ID>
+      <Description>"res+"</Description>
+      <LastState Activated="1"/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>{ Game   : StarCraft.exe
+  Version: 
+  Date   : 2020-04-25
+  Author : Hipp
+
+  This script does blah blah blah
+}
+
+[ENABLE]
+
+aobscanmodule(res,StarCraft.exe,03 F9 89 3C 85 F0 F0 57 00) // should be unique
+alloc(newmem,$1000)
+
+label(code)
+label(return)
+
+newmem:
+  mov ecx,#100
+code:
+  add edi,ecx
+  mov [eax*4+StarCraft.exe+17F0F0],edi
+  jmp return
+
+res:
+  jmp newmem
+  nop 4
+return:
+registersymbol(res)
+
+[DISABLE]
+
+res:
+  db 03 F9 89 3C 85 F0 F0 57 00
+
+unregistersymbol(res)
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: "StarCraft.exe"+F39C9
+
+"StarCraft.exe"+F39A0: 57                    -  push edi
+"StarCraft.exe"+F39A1: 8B C6                 -  mov eax,esi
+"StarCraft.exe"+F39A3: E8 58 FF FF FF        -  call StarCraft.exe+F3900
+"StarCraft.exe"+F39A8: 8A 86 E0 00 00 00     -  mov al,[esi+000000E0]
+"StarCraft.exe"+F39AE: A8 02                 -  test al,02
+"StarCraft.exe"+F39B0: BA 01 00 00 00        -  mov edx,00000001
+"StarCraft.exe"+F39B5: 74 48                 -  je StarCraft.exe+F39FF
+"StarCraft.exe"+F39B7: 0F B6 46 4C           -  movzx eax,byte ptr [esi+4C]
+"StarCraft.exe"+F39BB: 8B 3C 85 F0 F0 57 00  -  mov edi,[eax*4+StarCraft.exe+17F0F0]
+"StarCraft.exe"+F39C2: 0F B6 8E CF 00 00 00  -  movzx ecx,byte ptr [esi+000000CF]
+// ---------- INJECTING HERE ----------
+"StarCraft.exe"+F39C9: 03 F9                 -  add edi,ecx
+"StarCraft.exe"+F39CB: 89 3C 85 F0 F0 57 00  -  mov [eax*4+StarCraft.exe+17F0F0],edi
+// ---------- DONE INJECTING  ----------
+"StarCraft.exe"+F39D2: 0F B6 46 4C           -  movzx eax,byte ptr [esi+4C]
+"StarCraft.exe"+F39D6: 8B 3C 85 80 F1 57 00  -  mov edi,[eax*4+StarCraft.exe+17F180]
+"StarCraft.exe"+F39DD: 0F B6 8E CF 00 00 00  -  movzx ecx,byte ptr [esi+000000CF]
+"StarCraft.exe"+F39E4: 03 F9                 -  add edi,ecx
+"StarCraft.exe"+F39E6: 89 3C 85 80 F1 57 00  -  mov [eax*4+StarCraft.exe+17F180],edi
+"StarCraft.exe"+F39ED: 0F B6 46 4C           -  movzx eax,byte ptr [esi+4C]
+"StarCraft.exe"+F39F1: 69 C0 E8 04 00 00     -  imul eax,eax,000004E8
+"StarCraft.exe"+F39F7: 8D 80 F4 FE 68 00     -  lea eax,[eax+StarCraft.exe+28FEF4]
+"StarCraft.exe"+F39FD: EB 4A                 -  jmp StarCraft.exe+F3A49
+"StarCraft.exe"+F39FF: 84 C2                 -  test dl,al
+}
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>16</ID>
+      <Description>"vespen+"</Description>
+      <LastState Activated="1"/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>{ Game   : StarCraft.exe
+  Version: 
+  Date   : 2020-04-25
+  Author : Hipp
+
+  This script does blah blah blah
+}
+
+[ENABLE]
+
+aobscanmodule(vespen,StarCraft.exe,03 F9 89 3C 85 20 F1 57 00) // should be unique
+alloc(newmem,$1000)
+
+label(code)
+label(return)
+
+newmem:
+  mov ecx,#100
+code:
+
+  add edi,ecx
+  mov [eax*4+StarCraft.exe+17F120],edi
+  jmp return
+
+vespen:
+  jmp newmem
+  nop 4
+return:
+registersymbol(vespen)
+
+[DISABLE]
+
+vespen:
+  db 03 F9 89 3C 85 20 F1 57 00
+
+unregistersymbol(vespen)
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: "StarCraft.exe"+F3A15
+
+"StarCraft.exe"+F39E6: 89 3C 85 80 F1 57 00     -  mov [eax*4+StarCraft.exe+17F180],edi
+"StarCraft.exe"+F39ED: 0F B6 46 4C              -  movzx eax,byte ptr [esi+4C]
+"StarCraft.exe"+F39F1: 69 C0 E8 04 00 00        -  imul eax,eax,000004E8
+"StarCraft.exe"+F39F7: 8D 80 F4 FE 68 00        -  lea eax,[eax+StarCraft.exe+28FEF4]
+"StarCraft.exe"+F39FD: EB 4A                    -  jmp StarCraft.exe+F3A49
+"StarCraft.exe"+F39FF: 84 C2                    -  test dl,al
+"StarCraft.exe"+F3A01: 74 4F                    -  je StarCraft.exe+F3A52
+"StarCraft.exe"+F3A03: 0F B6 46 4C              -  movzx eax,byte ptr [esi+4C]
+"StarCraft.exe"+F3A07: 8B 3C 85 20 F1 57 00     -  mov edi,[eax*4+StarCraft.exe+17F120]
+"StarCraft.exe"+F3A0E: 0F B6 8E CF 00 00 00     -  movzx ecx,byte ptr [esi+000000CF]
+// ---------- INJECTING HERE ----------
+"StarCraft.exe"+F3A15: 03 F9                    -  add edi,ecx
+"StarCraft.exe"+F3A17: 89 3C 85 20 F1 57 00     -  mov [eax*4+StarCraft.exe+17F120],edi
+// ---------- DONE INJECTING  ----------
+"StarCraft.exe"+F3A1E: 0F B6 46 4C              -  movzx eax,byte ptr [esi+4C]
+"StarCraft.exe"+F3A22: 8B 3C 85 50 F1 57 00     -  mov edi,[eax*4+StarCraft.exe+17F150]
+"StarCraft.exe"+F3A29: 0F B6 8E CF 00 00 00     -  movzx ecx,byte ptr [esi+000000CF]
+"StarCraft.exe"+F3A30: 03 F9                    -  add edi,ecx
+"StarCraft.exe"+F3A32: 89 3C 85 50 F1 57 00     -  mov [eax*4+StarCraft.exe+17F150],edi
+"StarCraft.exe"+F3A39: 0F B6 46 4C              -  movzx eax,byte ptr [esi+4C]
+"StarCraft.exe"+F3A3D: 69 C0 E8 04 00 00        -  imul eax,eax,000004E8
+"StarCraft.exe"+F3A43: 8D 80 F8 FE 68 00        -  lea eax,[eax+StarCraft.exe+28FEF8]
+"StarCraft.exe"+F3A49: 0F B6 8E CF 00 00 00     -  movzx ecx,byte ptr [esi+000000CF]
+"StarCraft.exe"+F3A50: 01 08                    -  add [eax],ecx
+}
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>2</ID>
+      <Description>"resource"</Description>
+      <LastState/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>{ Game   : StarCraft.exe
+  Version: 
+  Date   : 2018-08-31
+  Author : Hipp
+
+  This script does blah blah blah
+}
+
+[ENABLE]
+
+aobscanmodule(resource,StarCraft.exe,66 89 86 D0 00 00 00) // should be unique
+alloc(newmem,$1000)
+
+label(code)
+label(return)
+
+newmem:
+  //mov ax,1
+code:
+  mov [esi+000000D0],ax
+  add [esi+d0],#100
+  jmp return
+
+resource:
+  jmp newmem
+  nop
+  nop
+return:
+registersymbol(resource)
+
+[DISABLE]
+
+resource:
+  db 66 89 86 D0 00 00 00
+
+unregistersymbol(resource)
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: "StarCraft.exe"+69667
+
+"StarCraft.exe"+6964E: CC                          -  int 3 
+"StarCraft.exe"+6964F: CC                          -  int 3 
+"StarCraft.exe"+69650: 56                          -  push esi
+"StarCraft.exe"+69651: 8B F0                       -  mov esi,eax
+"StarCraft.exe"+69653: 33 C0                       -  xor eax,eax
+"StarCraft.exe"+69655: 66 8B 86 D0 00 00 00        -  mov ax,[esi+000000D0]
+"StarCraft.exe"+6965C: 66 3D 08 00                 -  cmp ax,0008
+"StarCraft.exe"+69660: 72 4A                       -  jb StarCraft.exe+696AC
+"StarCraft.exe"+69662: 83 C0 F8                    -  add eax,-08
+"StarCraft.exe"+69665: 84 C9                       -  test cl,cl
+// ---------- INJECTING HERE ----------
+"StarCraft.exe"+69667: 66 89 86 D0 00 00 00        -  mov [esi+000000D0],ax
+// ---------- DONE INJECTING  ----------
+"StarCraft.exe"+6966E: 74 1B                       -  je StarCraft.exe+6968B
+"StarCraft.exe"+69670: 66 85 C0                    -  test ax,ax
+"StarCraft.exe"+69673: 74 0B                       -  je StarCraft.exe+69680
+"StarCraft.exe"+69675: 8B CE                       -  mov ecx,esi
+"StarCraft.exe"+69677: E8 B4 F1 FF FF              -  call StarCraft.exe+68830
+"StarCraft.exe"+6967C: B0 08                       -  mov al,08
+"StarCraft.exe"+6967E: 5E                          -  pop esi
+"StarCraft.exe"+6967F: C3                          -  ret 
+"StarCraft.exe"+69680: 8B C6                       -  mov eax,esi
+"StarCraft.exe"+69682: E8 89 C0 00 00              -  call StarCraft.exe+75710
+}
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>3</ID>
+      <Description>"damage unit"</Description>
+      <LastState/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>{ Game   : StarCraft.exe
+  Version: 
+  Date   : 2018-08-31
+  Author : Hipp
+
+  This script does blah blah blah
+}
+
+[ENABLE]
+
+aobscanmodule(kill,StarCraft.exe,F1 8B 48 08 89 0D 4C A9 6C 00) // should be unique
+alloc(newmem,$100)
+
+
+label(code)
+label(return)
+
+
+
+
+newmem:
+   mov [var_1],eax
+  //mov word ptr [eax+09],1
+code:
+  mov [StarCraft.exe+2CA94C],ecx
+  jmp return
+
+var_1:
+  db dd dd dd dd
+kill+04:
+  jmp newmem
+  nop
+return:
+registersymbol(kill)
+registersymbol(var_1)
+
+[DISABLE]
+
+kill+04:
+  db 89 0D 4C A9 6C 00
+
+unregistersymbol(kill)
+unregistersymbol(var_1)
+dealloc(newmem)
+
+
+{
+// ORIGINAL CODE - INJECTION POINT: "StarCraft.exe"+26F5C
+
+"StarCraft.exe"+26F4B: 5F                          -  pop edi
+"StarCraft.exe"+26F4C: C3                          -  ret 
+"StarCraft.exe"+26F4D: CC                          -  int 3 
+"StarCraft.exe"+26F4E: CC                          -  int 3 
+"StarCraft.exe"+26F4F: CC                          -  int 3 
+"StarCraft.exe"+26F50: A1 48 72 59 00              -  mov eax,[StarCraft.exe+197248]
+"StarCraft.exe"+26F55: 53                          -  push ebx
+"StarCraft.exe"+26F56: 56                          -  push esi
+"StarCraft.exe"+26F57: 8B F1                       -  mov esi,ecx
+"StarCraft.exe"+26F59: 8B 48 08                    -  mov ecx,[eax+08]
+// ---------- INJECTING HERE ----------
+"StarCraft.exe"+26F5C: 89 0D 4C A9 6C 00           -  mov [StarCraft.exe+2CA94C],ecx
+// ---------- DONE INJECTING  ----------
+"StarCraft.exe"+26F62: 66 0F B6 90 A3 00 00 00     -  movzx dx,byte ptr [eax+000000A3]
+"StarCraft.exe"+26F6A: 8B 40 60                    -  mov eax,[eax+60]
+"StarCraft.exe"+26F6D: C1 F8 08                    -  sar eax,08
+"StarCraft.exe"+26F70: 66 89 15 0C AC 6C 00        -  mov [StarCraft.exe+2CAC0C],dx
+"StarCraft.exe"+26F77: A3 EC A9 6C 00              -  mov [StarCraft.exe+2CA9EC],eax
+"StarCraft.exe"+26F7C: E8 6F D9 FF FF              -  call StarCraft.exe+248F0
+"StarCraft.exe"+26F81: A0 E5 C1 68 00              -  mov al,[StarCraft.exe+28C1E5]
+"StarCraft.exe"+26F86: B3 02                       -  mov bl,02
+"StarCraft.exe"+26F88: 3A C3                       -  cmp al,bl
+"StarCraft.exe"+26F8A: 74 1B                       -  je StarCraft.exe+26FA7
+}
+</AssemblerScript>
+      <CheatEntries>
+        <CheatEntry>
+          <ID>7</ID>
+          <Description>"Нет описания"</Description>
+          <ShowAsHex>1</ShowAsHex>
+          <VariableType>4 Bytes</VariableType>
+          <Address>var_1</Address>
+        </CheatEntry>
+      </CheatEntries>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>5</ID>
+      <Description>"damage build"</Description>
+      <LastState/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>{ Game   : StarCraft.exe
+  Version: 
+  Date   : 2018-08-31
+  Author : Hipp
+
+  This script does blah blah blah
+}
+
+[ENABLE]
+
+aobscanmodule(build_damage,StarCraft.exe,A3 4C A9 6C 00) // should be unique
+alloc(newmem,$100)
+alloc(build_v,$4)
+
+label(code)
+label(return)
+
+newmem:
+  mov [build_v],esi
+  //mov word ptr [esi+9],1
+code:
+  mov [StarCraft.exe+2CA94C],eax
+  jmp return
+
+build_damage:
+  jmp newmem
+return:
+registersymbol(build_damage)
+registersymbol(build_v)
+[DISABLE]
+
+build_damage:
+  db A3 4C A9 6C 00
+
+unregistersymbol(build_damage)
+unregistersymbol(build_v)
+dealloc(newmem)
+dealloc(build_v)
+
+{
+// ORIGINAL CODE - INJECTION POINT: "StarCraft.exe"+2789C
+
+"StarCraft.exe"+2788B: CC                       -  int 3 
+"StarCraft.exe"+2788C: CC                       -  int 3 
+"StarCraft.exe"+2788D: CC                       -  int 3 
+"StarCraft.exe"+2788E: CC                       -  int 3 
+"StarCraft.exe"+2788F: CC                       -  int 3 
+"StarCraft.exe"+27890: 53                       -  push ebx
+"StarCraft.exe"+27891: 56                       -  push esi
+"StarCraft.exe"+27892: 8B 35 48 72 59 00        -  mov esi,[StarCraft.exe+197248]
+"StarCraft.exe"+27898: 8B 46 08                 -  mov eax,[esi+08]
+"StarCraft.exe"+2789B: 57                       -  push edi
+// ---------- INJECTING HERE ----------
+"StarCraft.exe"+2789C: A3 4C A9 6C 00           -  mov [StarCraft.exe+2CA94C],eax
+// ---------- DONE INJECTING  ----------
+"StarCraft.exe"+278A1: 8B 56 60                 -  mov edx,[esi+60]
+"StarCraft.exe"+278A4: 8B F9                    -  mov edi,ecx
+"StarCraft.exe"+278A6: 66 0F B6 8E A3 00 00 00  -  movzx cx,byte ptr [esi+000000A3]
+"StarCraft.exe"+278AE: C1 FA 08                 -  sar edx,08
+"StarCraft.exe"+278B1: 66 89 0D 0C AC 6C 00     -  mov [StarCraft.exe+2CAC0C],cx
+"StarCraft.exe"+278B8: 89 15 EC A9 6C 00        -  mov [StarCraft.exe+2CA9EC],edx
+"StarCraft.exe"+278BE: E8 4D D1 FF FF           -  call StarCraft.exe+24A10
+"StarCraft.exe"+278C3: A2 F0 A9 6C 00           -  mov [StarCraft.exe+2CA9F0],al
+"StarCraft.exe"+278C8: E8 23 D0 FF FF           -  call StarCraft.exe+248F0
+"StarCraft.exe"+278CD: 66 8B 5E 64              -  mov bx,[esi+64]
+}
+</AssemblerScript>
+      <CheatEntries>
+        <CheatEntry>
+          <ID>4</ID>
+          <Description>"показание"</Description>
+          <ShowAsHex>1</ShowAsHex>
+          <VariableType>4 Bytes</VariableType>
+          <Address>build_v</Address>
+        </CheatEntry>
+      </CheatEntries>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>12</ID>
+      <Description>"показание"</Description>
+      <LastState Value="1301" RealAddress="006CA94D"/>
+      <VariableType>2 Bytes</VariableType>
+      <Address>StarCraft.exe+2CA94D</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>6</ID>
+      <Description>"deremont"</Description>
+      <LastState/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>{ Game   : StarCraft.exe
+  Version: 
+  Date   : 2018-08-31
+  Author : Hipp
+
+  This script does blah blah blah
+}
+
+[ENABLE]
+
+aobscanmodule(deremont,StarCraft.exe,89 4E 08 8B 04 85 50 23 66 00) // should be unique
+alloc(newmem,$1000)
+
+label(code)
+label(return)
+
+newmem:
+
+code:
+  sub [esi+08],#100
+  //mov [esi+08],ecx
+  db 8B 04 85 50 23 66 00//mov eax,[eax*4+StarCraft.exe+262350]
+  jmp return
+
+deremont:
+  jmp newmem
+  nop
+  nop
+  nop
+  nop
+  nop
+return:
+registersymbol(deremont)
+
+[DISABLE]
+
+deremont:
+  db 89 4E 08 8B 04 85 50 23 66 00
+
+unregistersymbol(deremont)
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: "StarCraft.exe"+67347
+
+"StarCraft.exe"+67339: CC                    -  int 3 
+"StarCraft.exe"+6733A: CC                    -  int 3 
+"StarCraft.exe"+6733B: CC                    -  int 3 
+"StarCraft.exe"+6733C: CC                    -  int 3 
+"StarCraft.exe"+6733D: CC                    -  int 3 
+"StarCraft.exe"+6733E: CC                    -  int 3 
+"StarCraft.exe"+6733F: CC                    -  int 3 
+"StarCraft.exe"+67340: 56                    -  push esi
+"StarCraft.exe"+67341: 8B F0                 -  mov esi,eax
+"StarCraft.exe"+67343: 0F B7 46 64           -  movzx eax,word ptr [esi+64]
+// ---------- INJECTING HERE ----------
+"StarCraft.exe"+67347: 89 4E 08              -  mov [esi+08],ecx
+"StarCraft.exe"+6734A: 8B 04 85 50 23 66 00  -  mov eax,[eax*4+StarCraft.exe+262350]
+// ---------- DONE INJECTING  ----------
+"StarCraft.exe"+67351: 3B C8                 -  cmp ecx,eax
+"StarCraft.exe"+67353: 7E 03                 -  jle StarCraft.exe+67358
+"StarCraft.exe"+67355: 89 46 08              -  mov [esi+08],eax
+"StarCraft.exe"+67358: 8B 46 0C              -  mov eax,[esi+0C]
+"StarCraft.exe"+6735B: F6 40 0E 08           -  test byte ptr [eax+0E],08
+"StarCraft.exe"+6735F: 74 10                 -  je StarCraft.exe+67371
+"StarCraft.exe"+67361: 8A 0D B0 F0 57 00     -  mov cl,[StarCraft.exe+17F0B0]
+"StarCraft.exe"+67367: 84 48 0C              -  test [eax+0C],cl
+"StarCraft.exe"+6736A: 74 05                 -  je StarCraft.exe+67371
+"StarCraft.exe"+6736C: E8 BF 00 03 00        -  call StarCraft.exe+97430
+}
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>8</ID>
+      <Description>"ohk"</Description>
+      <LastState Activated="1"/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>{ Game   : StarCraft.exe
+  Version: 
+  Date   : 2018-08-31
+  Author : Hipp
+
+  This script does blah blah blah
+}
+
+[ENABLE]
+
+aobscanmodule(ohk,StarCraft.exe,89 43 08 6A 00) // should be unique
+alloc(newmem,$1000)
+
+label(code)
+label(return)
+label(iam)
+
+
+
+newmem:
+  cmp [ebx+134],0
+  je iam
+
+
+code:
+  mov [ebx+08],1
+  //mov [ebx+08],eax
+  push 00
+  jmp return
+
+iam:
+  push 00
+  jmp return
+
+ohk:
+  jmp newmem
+return:
+registersymbol(ohk)
+
+[DISABLE]
+
+ohk:
+  db 89 43 08 6A 00
+
+unregistersymbol(ohk)
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: "StarCraft.exe"+798B9
+
+"StarCraft.exe"+798A5: 84 C9                 -  test cl,cl
+"StarCraft.exe"+798A7: 75 74                 -  jne StarCraft.exe+7991D
+"StarCraft.exe"+798A9: 8B CE                 -  mov ecx,esi
+"StarCraft.exe"+798AB: E8 10 C1 FF FF        -  call StarCraft.exe+759C0
+"StarCraft.exe"+798B0: 5E                    -  pop esi
+"StarCraft.exe"+798B1: 5F                    -  pop edi
+"StarCraft.exe"+798B2: 5B                    -  pop ebx
+"StarCraft.exe"+798B3: 5D                    -  pop ebp
+"StarCraft.exe"+798B4: C2 0C 00              -  ret 000C
+"StarCraft.exe"+798B7: 2B C7                 -  sub eax,edi
+// ---------- INJECTING HERE ----------
+"StarCraft.exe"+798B9: 89 43 08              -  mov [ebx+08],eax
+"StarCraft.exe"+798BC: 6A 00                 -  push 00
+// ---------- DONE INJECTING  ----------
+"StarCraft.exe"+798BE: 8B C3                 -  mov eax,ebx
+"StarCraft.exe"+798C0: E8 3B 7F FB FF        -  call StarCraft.exe+31800
+"StarCraft.exe"+798C5: 66 89 83 38 01 00 00  -  mov [ebx+00000138],ax
+"StarCraft.exe"+798CC: 6A 01                 -  push 01
+"StarCraft.exe"+798CE: 8B C3                 -  mov eax,ebx
+"StarCraft.exe"+798D0: E8 2B 7F FB FF        -  call StarCraft.exe+31800
+"StarCraft.exe"+798D5: 66 89 83 3A 01 00 00  -  mov [ebx+0000013A],ax
+"StarCraft.exe"+798DC: F6 83 DC 00 00 00 01  -  test byte ptr [ebx+000000DC],01
+"StarCraft.exe"+798E3: 74 1F                 -  je StarCraft.exe+79904
+"StarCraft.exe"+798E5: 8B 4B 0C              -  mov ecx,[ebx+0C]
+}
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>9</ID>
+      <Description>"no energy"</Description>
+      <LastState/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>{ Game   : StarCraft.exe
+  Version: 
+  Date   : 2018-09-01
+  Author : Hipp
+
+  This script does blah blah blah
+}
+
+[ENABLE]
+
+aobscanmodule(no_energy,StarCraft.exe,66 89 BE A2 00 00 00 75) // should be unique
+alloc(newmem,$1000)
+
+label(code)
+label(return)
+
+newmem:
+
+code:
+  mov word ptr[esi+000000A2],0
+  jmp return
+
+no_energy:
+  jmp newmem
+  nop
+  nop
+return:
+registersymbol(no_energy)
+
+[DISABLE]
+
+no_energy:
+  db 66 89 BE A2 00 00 00
+
+unregistersymbol(no_energy)
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: "StarCraft.exe"+EB55F
+
+"StarCraft.exe"+EB540: 8B C6                 -  mov eax,esi
+"StarCraft.exe"+EB542: E8 29 63 FA FF        -  call StarCraft.exe+91870
+"StarCraft.exe"+EB547: 33 C9                 -  xor ecx,ecx
+"StarCraft.exe"+EB549: 66 8B 8E A2 00 00 00  -  mov cx,[esi+000000A2]
+"StarCraft.exe"+EB550: 0F B7 D1              -  movzx edx,cx
+"StarCraft.exe"+EB553: 3B D0                 -  cmp edx,eax
+"StarCraft.exe"+EB555: 74 51                 -  je StarCraft.exe+EB5A8
+"StarCraft.exe"+EB557: 66 83 FB 3F           -  cmp bx,3F
+"StarCraft.exe"+EB55B: 57                    -  push edi
+"StarCraft.exe"+EB55C: 8D 79 08              -  lea edi,[ecx+08]
+// ---------- INJECTING HERE ----------
+"StarCraft.exe"+EB55F: 66 89 BE A2 00 00 00  -  mov [esi+000000A2],di
+// ---------- DONE INJECTING  ----------
+"StarCraft.exe"+EB566: 75 14                 -  jne StarCraft.exe+EB57C
+"StarCraft.exe"+EB568: 80 7E 4D 6A           -  cmp byte ptr [esi+4D],6A
+"StarCraft.exe"+EB56C: 75 0E                 -  jne StarCraft.exe+EB57C
+"StarCraft.exe"+EB56E: 8A 46 4E              -  mov al,[esi+4E]
+"StarCraft.exe"+EB571: 84 C0                 -  test al,al
+"StarCraft.exe"+EB573: 75 07                 -  jne StarCraft.exe+EB57C
+"StarCraft.exe"+EB575: B8 00 32 00 00        -  mov eax,00003200
+"StarCraft.exe"+EB57A: EB 07                 -  jmp StarCraft.exe+EB583
+"StarCraft.exe"+EB57C: 8B C6                 -  mov eax,esi
+"StarCraft.exe"+EB57E: E8 ED 62 FA FF        -  call StarCraft.exe+91870
+}
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>10</ID>
+      <Description>"no energy protos"</Description>
+      <LastState/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>{ Game   : StarCraft.exe
+  Version: 
+  Date   : 2018-09-01
+  Author : Hipp
+
+  This script does blah blah blah
+}
+
+[ENABLE]
+
+aobscanmodule(NERG,StarCraft.exe,89 4E 60 7E 03) // should be unique
+alloc(newmem,$1000)
+
+label(code)
+label(return)
+
+newmem:
+
+code:
+  mov dword ptr[esi+60],0
+  jle StarCraft.exe+EC2F0
+  jmp return
+
+NERG:
+  jmp newmem
+return:
+registersymbol(NERG)
+
+[DISABLE]
+
+NERG:
+  db 89 4E 60 7E 03
+
+unregistersymbol(NERG)
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: "StarCraft.exe"+EC2E8
+
+"StarCraft.exe"+EC2C7: 8A 88 B0 47 66 00        -  mov cl,[eax+StarCraft.exe+2647B0]
+"StarCraft.exe"+EC2CD: 84 C9                    -  test cl,cl
+"StarCraft.exe"+EC2CF: 74 2D                    -  je StarCraft.exe+EC2FE
+"StarCraft.exe"+EC2D1: 0F B7 04 45 00 0E 66 00  -  movzx eax,word ptr [eax*2+StarCraft.exe+260E00]
+"StarCraft.exe"+EC2D9: 8B 4E 60                 -  mov ecx,[esi+60]
+"StarCraft.exe"+EC2DC: C1 E0 08                 -  shl eax,08
+"StarCraft.exe"+EC2DF: 3B C8                    -  cmp ecx,eax
+"StarCraft.exe"+EC2E1: 74 1B                    -  je StarCraft.exe+EC2FE
+"StarCraft.exe"+EC2E3: 83 C1 07                 -  add ecx,07
+"StarCraft.exe"+EC2E6: 3B C8                    -  cmp ecx,eax
+// ---------- INJECTING HERE ----------
+"StarCraft.exe"+EC2E8: 89 4E 60                 -  mov [esi+60],ecx
+"StarCraft.exe"+EC2EB: 7E 03                    -  jle StarCraft.exe+EC2F0
+// ---------- DONE INJECTING  ----------
+"StarCraft.exe"+EC2ED: 89 46 60                 -  mov [esi+60],eax
+"StarCraft.exe"+EC2F0: 8B 46 0C                 -  mov eax,[esi+0C]
+"StarCraft.exe"+EC2F3: F6 40 0E 08              -  test byte ptr [eax+0E],08
+"StarCraft.exe"+EC2F7: 74 05                    -  je StarCraft.exe+EC2FE
+"StarCraft.exe"+EC2F9: E8 32 B1 FA FF           -  call StarCraft.exe+97430
+"StarCraft.exe"+EC2FE: 66 8B 46 64              -  mov ax,[esi+64]
+"StarCraft.exe"+EC302: 66 3D 25 00              -  cmp ax,0025
+"StarCraft.exe"+EC306: 74 06                    -  je StarCraft.exe+EC30E
+"StarCraft.exe"+EC308: 66 3D 36 00              -  cmp ax,0036
+"StarCraft.exe"+EC30C: 75 0E                    -  jne StarCraft.exe+EC31C
+}
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>13</ID>
+      <Description>"fast build"</Description>
+      <LastState/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>{ Game   : StarCraft.exe
+  Version: 
+  Date   : 2018-09-01
+  Author : Hipp
+
+  This script does blah blah blah
+}
+
+[ENABLE]
+StarCraft.exe+67353:
+ jg StarCraft.exe+67358
+StarCraft.exe+546E0:
+ jne StarCraft.exe+5471D
+
+
+aobscanmodule(fast_build,StarCraft.exe,66 89 86 AC 00 00 00 B8) // should be unique
+alloc(newmem,$1000)
+
+label(code)
+label(return)
+
+newmem:
+
+code:
+  mov word ptr[esi+000000AC],0
+  jmp return
+
+fast_build:
+  jmp newmem
+  nop
+  nop
+return:
+registersymbol(fast_build)
+
+[DISABLE]
+StarCraft.exe+67353:
+ jle StarCraft.exe+67358
+
+StarCraft.exe+546E0:
+ je StarCraft.exe+5471D
+
+
+fast_build:
+  db 66 89 86 AC 00 00 00
+
+unregistersymbol(fast_build)
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: "StarCraft.exe"+679EE
+
+"StarCraft.exe"+679C7: 83 C0 F0                    -  add eax,-10
+"StarCraft.exe"+679CA: 66 85 C0                    -  test ax,ax
+"StarCraft.exe"+679CD: 66 89 86 AC 00 00 00        -  mov [esi+000000AC],ax
+"StarCraft.exe"+679D4: 0F 8D 8B 00 00 00           -  jnl StarCraft.exe+67A65
+"StarCraft.exe"+679DA: 66 C7 86 AC 00 00 00 00 00  -  mov word ptr [esi+000000AC],0000
+"StarCraft.exe"+679E3: B8 01 00 00 00              -  mov eax,00000001
+"StarCraft.exe"+679E8: 5E                          -  pop esi
+"StarCraft.exe"+679E9: 5D                          -  pop ebp
+"StarCraft.exe"+679EA: C2 04 00                    -  ret 0004
+"StarCraft.exe"+679ED: 48                          -  dec eax
+// ---------- INJECTING HERE ----------
+"StarCraft.exe"+679EE: 66 89 86 AC 00 00 00        -  mov [esi+000000AC],ax
+// ---------- DONE INJECTING  ----------
+"StarCraft.exe"+679F5: B8 01 00 00 00              -  mov eax,00000001
+"StarCraft.exe"+679FA: 5E                          -  pop esi
+"StarCraft.exe"+679FB: 5D                          -  pop ebp
+"StarCraft.exe"+679FC: C2 04 00                    -  ret 0004
+"StarCraft.exe"+679FF: 8B 45 08                    -  mov eax,[ebp+08]
+"StarCraft.exe"+67A02: 85 C0                       -  test eax,eax
+"StarCraft.exe"+67A04: 8B C6                       -  mov eax,esi
+"StarCraft.exe"+67A06: 74 13                       -  je StarCraft.exe+67A1B
+"StarCraft.exe"+67A08: E8 E3 87 03 00              -  call StarCraft.exe+A01F0
+"StarCraft.exe"+67A0D: E8 1E 72 03 00              -  call StarCraft.exe+9EC30
+}
+</AssemblerScript>
+      <Hotkeys>
+        <Hotkey>
+          <Action>Toggle Activation</Action>
+          <Keys>
+            <Key>221</Key>
+          </Keys>
+          <ID>0</ID>
+        </Hotkey>
+      </Hotkeys>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>14</ID>
+      <Description>"обнуление ресурсов"</Description>
+      <LastState/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>{ Game   : StarCraft.exe
+  Version: 
+  Date   : 2019-11-29
+  Author : Hipp
+
+  обнуляет ресурсы на карте
+}
+
+[ENABLE]
+
+aobscanmodule(zero_res,StarCraft.exe,66 89 86 D0 00 00 00) // should be unique
+alloc(newmem,$1000)
+
+label(code)
+label(return)
+
+newmem:
+  mov ax,08
+code:
+  mov [esi+000000D0],ax
+  jmp return
+
+zero_res:
+  jmp newmem
+  nop 2
+return:
+registersymbol(zero_res)
+
+[DISABLE]
+
+zero_res:
+  db 66 89 86 D0 00 00 00
+
+unregistersymbol(zero_res)
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: "StarCraft.exe"+69667
+
+"StarCraft.exe"+6964E: CC                          -  int 3 
+"StarCraft.exe"+6964F: CC                          -  int 3 
+"StarCraft.exe"+69650: 56                          -  push esi
+"StarCraft.exe"+69651: 8B F0                       -  mov esi,eax
+"StarCraft.exe"+69653: 33 C0                       -  xor eax,eax
+"StarCraft.exe"+69655: 66 8B 86 D0 00 00 00        -  mov ax,[esi+000000D0]
+"StarCraft.exe"+6965C: 66 3D 08 00                 -  cmp ax,0008
+"StarCraft.exe"+69660: 72 4A                       -  jb StarCraft.exe+696AC
+"StarCraft.exe"+69662: 83 C0 F8                    -  add eax,-08
+"StarCraft.exe"+69665: 84 C9                       -  test cl,cl
+// ---------- INJECTING HERE ----------
+"StarCraft.exe"+69667: 66 89 86 D0 00 00 00        -  mov [esi+000000D0],ax
+// ---------- DONE INJECTING  ----------
+"StarCraft.exe"+6966E: 74 1B                       -  je StarCraft.exe+6968B
+"StarCraft.exe"+69670: 66 85 C0                    -  test ax,ax
+"StarCraft.exe"+69673: 74 0B                       -  je StarCraft.exe+69680
+"StarCraft.exe"+69675: 8B CE                       -  mov ecx,esi
+"StarCraft.exe"+69677: E8 B4 F1 FF FF              -  call StarCraft.exe+68830
+"StarCraft.exe"+6967C: B0 08                       -  mov al,08
+"StarCraft.exe"+6967E: 5E                          -  pop esi
+"StarCraft.exe"+6967F: C3                          -  ret 
+"StarCraft.exe"+69680: 8B C6                       -  mov eax,esi
+"StarCraft.exe"+69682: E8 89 C0 00 00              -  call StarCraft.exe+75710
+}
+</AssemblerScript>
+    </CheatEntry>
+  </CheatEntries>
+  <CheatCodes>
+    <CodeEntry>
+      <Description>Изменение mov [esi+08],ecx</Description>
+      <AddressString>StarCraft.exe+67347</AddressString>
+      <Before>
+        <Byte>F0</Byte>
+        <Byte>0F</Byte>
+        <Byte>B7</Byte>
+        <Byte>46</Byte>
+        <Byte>64</Byte>
+      </Before>
+      <Actual>
+        <Byte>89</Byte>
+        <Byte>4E</Byte>
+        <Byte>08</Byte>
+      </Actual>
+      <After>
+        <Byte>8B</Byte>
+        <Byte>04</Byte>
+        <Byte>85</Byte>
+        <Byte>50</Byte>
+        <Byte>23</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry>
+      <Description>Изменение sub [esi+000000A2],ax</Description>
+      <AddressString>StarCraft.exe+64FB5</AddressString>
+      <Before>
+        <Byte>25</Byte>
+        <Byte>88</Byte>
+        <Byte>63</Byte>
+        <Byte>65</Byte>
+        <Byte>00</Byte>
+      </Before>
+      <Actual>
+        <Byte>66</Byte>
+        <Byte>29</Byte>
+        <Byte>86</Byte>
+        <Byte>A2</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>8B</Byte>
+        <Byte>CE</Byte>
+        <Byte>E8</Byte>
+        <Byte>DD</Byte>
+        <Byte>03</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry>
+      <Description>Изменение je 004673BD</Description>
+      <AddressString>StarCraft.exe+67378</AddressString>
+      <Before>
+        <Byte>DC</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+        <Byte>01</Byte>
+      </Before>
+      <Actual>
+        <Byte>74</Byte>
+        <Byte>43</Byte>
+      </Actual>
+      <After>
+        <Byte>8B</Byte>
+        <Byte>56</Byte>
+        <Byte>0C</Byte>
+        <Byte>8B</Byte>
+        <Byte>42</Byte>
+      </After>
+    </CodeEntry>
+  </CheatCodes>
+  <UserdefinedSymbols>
+    <SymbolEntry>
+      <Name>pRes</Name>
+      <Address>04BD0000</Address>
+    </SymbolEntry>
+  </UserdefinedSymbols>
+  <Structures StructVersion="2">
+    <Structure Name="безымянная структура" AutoFill="0" AutoCreate="1" DefaultHex="0" AutoDestroy="0" DoNotSaveLocal="0" RLECompression="1" AutoCreateStructsize="4096">
+      <Elements>
+        <Element Offset="0" Vartype="Pointer" Bytesize="4" DisplayMethod="Целое без знака">
+          <Structure Name="Автоматически создано из 00610748" AutoFill="0" AutoCreate="1" DefaultHex="0" AutoDestroy="0" DoNotSaveLocal="0" RLECompression="1" AutoCreateStructsize="4096">
+            <Elements>
+              <Element Offset="0" Vartype="Pointer" Bytesize="4" RLECount="2" DisplayMethod="Целое без знака"/>
+              <Element Offset="8" Vartype="4 Bytes" Bytesize="4" DisplayMethod="Целое без знака"/>
+              <Element Offset="12" Vartype="Pointer" Bytesize="4" DisplayMethod="Целое без знака"/>
+              <Element Offset="16" Vartype="4 Bytes" Bytesize="4" RLECount="4" DisplayMethod="Целое без знака"/>
+              <Element Offset="32" Vartype="Byte" Bytesize="1" DisplayMethod="Целое без знака"/>
+              <Element Offset="33" Vartype="String" Bytesize="5" DisplayMethod="Целое без знака"/>
+              <Element Offset="38" Vartype="Byte" Bytesize="1" RLECount="2" DisplayMethod="Целое без знака"/>
+              <Element Offset="40" Vartype="4 Bytes" Bytesize="4" DisplayMethod="Целое без знака"/>
+              <Element Offset="44" Vartype="Pointer" Bytesize="4" DisplayMethod="Целое без знака"/>
+              <Element Offset="48" Vartype="4 Bytes" Bytesize="4" RLECount="14" DisplayMethod="Целое без знака"/>
+              <Element Offset="104" Vartype="Pointer" Bytesize="4" RLECount="2" DisplayMethod="Целое без знака"/>
+              <Element Offset="112" Vartype="4 Bytes" Bytesize="4" RLECount="10" DisplayMethod="Целое без знака"/>
+              <Element Offset="152" Vartype="Pointer" Bytesize="4" RLECount="2" DisplayMethod="Целое без знака"/>
+              <Element Offset="160" Vartype="4 Bytes" Bytesize="4" RLECount="3" DisplayMethod="Целое без знака"/>
+              <Element Offset="172" Vartype="Pointer" Bytesize="4" DisplayMethod="Целое без знака"/>
+              <Element Offset="176" Vartype="4 Bytes" Bytesize="4" RLECount="28" DisplayMethod="Целое без знака"/>
+              <Element Offset="288" Vartype="Pointer" Bytesize="4" DisplayMethod="Целое без знака"/>
+              <Element Offset="292" Vartype="4 Bytes" Bytesize="4" RLECount="5" DisplayMethod="Целое без знака"/>
+              <Element Offset="312" Vartype="Pointer" Bytesize="4" DisplayMethod="Целое без знака"/>
+              <Element Offset="316" Vartype="4 Bytes" Bytesize="4" RLECount="5" DisplayMethod="Целое без знака"/>
+              <Element Offset="336" Vartype="Pointer" Bytesize="4" RLECount="2" DisplayMethod="Целое без знака"/>
+              <Element Offset="344" Vartype="4 Bytes" Bytesize="4" DisplayMethod="Целое без знака"/>
+              <Element Offset="348" Vartype="Pointer" Bytesize="4" DisplayMethod="Целое без знака"/>
+              <Element Offset="352" Vartype="4 Bytes" Bytesize="4" RLECount="4" DisplayMethod="Целое без знака"/>
+              <Element Offset="368" Vartype="Byte" Bytesize="1" DisplayMethod="Целое без знака"/>
+              <Element Offset="369" Vartype="String" Bytesize="5" DisplayMethod="Целое без знака"/>
+              <Element Offset="374" Vartype="Byte" Bytesize="1" RLECount="2" DisplayMethod="Целое без знака"/>
+              <Element Offset="376" Vartype="4 Bytes" Bytesize="4" DisplayMethod="Целое без знака"/>
+              <Element Offset="380" Vartype="Pointer" Bytesize="4" DisplayMethod="Целое без знака"/>
+              <Element Offset="384" Vartype="4 Bytes" Bytesize="4" RLECount="14" DisplayMethod="Целое без знака"/>
+              <Element Offset="440" Vartype="Pointer" Bytesize="4" RLECount="2" DisplayMethod="Целое без знака"/>
+              <Element Offset="448" Vartype="4 Bytes" Bytesize="4" RLECount="10" DisplayMethod="Целое без знака"/>
+              <Element Offset="488" Vartype="Pointer" Bytesize="4" RLECount="2" DisplayMethod="Целое без знака"/>
+              <Element Offset="496" Vartype="4 Bytes" Bytesize="4" RLECount="3" DisplayMethod="Целое без знака"/>
+              <Element Offset="508" Vartype="Pointer" Bytesize="4" DisplayMethod="Целое без знака"/>
+              <Element Offset="512" Vartype="4 Bytes" Bytesize="4" RLECount="28" DisplayMethod="Целое без знака"/>
+              <Element Offset="624" Vartype="Pointer" Bytesize="4" DisplayMethod="Целое без знака"/>
+              <Element Offset="628" Vartype="4 Bytes" Bytesize="4" RLECount="5" DisplayMethod="Целое без знака"/>
+              <Element Offset="648" Vartype="Pointer" Bytesize="4" DisplayMethod="Целое без знака"/>
+              <Element Offset="652" Vartype="4 Bytes" Bytesize="4" RLECount="5" DisplayMethod="Целое без знака"/>
+              <Element Offset="672" Vartype="Pointer" Bytesize="4" RLECount="4" DisplayMethod="Целое без знака"/>
+              <Element Offset="688" Vartype="4 Bytes" Bytesize="4" RLECount="7" DisplayMethod="Целое без знака"/>
+              <Element Offset="716" Vartype="Pointer" Bytesize="4" DisplayMethod="Целое без знака"/>
+              <Element Offset="720" Vartype="4 Bytes" Bytesize="4" RLECount="14" DisplayMethod="Целое без знака"/>
+              <Element Offset="776" Vartype="Pointer" Bytesize="4" RLECount="2" DisplayMethod="Целое без знака"/>
+              <Element Offset="784" Vartype="4 Bytes" Bytesize="4" RLECount="10" DisplayMethod="Целое без знака"/>
+              <Element Offset="824" Vartype="Pointer" Bytesize="4" RLECount="2" DisplayMethod="Целое без знака"/>
+              <Element Offset="832" Vartype="4 Bytes" Bytesize="4" RLECount="3" DisplayMethod="Целое без знака"/>
+              <Element Offset="844" Vartype="Pointer" Bytesize="4" DisplayMethod="Целое без знака"/>
+              <Element Offset="848" Vartype="4 Bytes" Bytesize="4" RLECount="28" DisplayMethod="Целое без знака"/>
+              <Element Offset="960" Vartype="Pointer" Bytesize="4" DisplayMethod="Целое без знака"/>
+              <Element Offset="964" Vartype="4 Bytes" Bytesize="4" RLECount="5" DisplayMethod="Целое без знака"/>
+              <Element Offset="984" Vartype="Pointer" Bytesize="4" DisplayMethod="Целое без знака"/>
+              <Element Offset="988" Vartype="4 Bytes" Bytesize="4" RLECount="8" DisplayMethod="Целое без знака"/>
+              <Element Offset="1020" Vartype="Pointer" Bytesize="4" DisplayMethod="Целое без знака"/>
+              <Element Offset="1024" Vartype="4 Bytes" Bytesize="4" RLECount="3" DisplayMethod="Целое без знака"/>
+              <Element Offset="1036" Vartype="Double" Bytesize="8" DisplayMethod="Целое без знака"/>
+              <Element Offset="1044" Vartype="4 Bytes" Bytesize="4" RLECount="8" DisplayMethod="Целое без знака"/>
+              <Element Offset="1076" Vartype="Double" Bytesize="8" DisplayMethod="Целое без знака"/>
+              <Element Offset="1084" Vartype="4 Bytes" Bytesize="4" RLECount="7" DisplayMethod="Целое без знака"/>
+              <Element Offset="1112" Vartype="Pointer" Bytesize="4" RLECount="3" DisplayMethod="Целое без знака"/>
+              <Element Offset="1124" Vartype="4 Bytes" Bytesize="4" RLECount="8" DisplayMethod="Целое без знака"/>
+              <Element Offset="1156" Vartype="Pointer" Bytesize="4" RLECount="3" DisplayMethod="Целое без знака"/>
+              <Element Offset="1168" Vartype="4 Bytes" Bytesize="4" RLECount="3" DisplayMethod="Целое без знака"/>
+              <Element Offset="1180" Vartype="Pointer" Bytesize="4" DisplayMethod="Целое без знака"/>
+              <Element Offset="1184" Vartype="4 Bytes" Bytesize="4" RLECount="28" DisplayMethod="Целое без знака"/>
+              <Element Offset="1296" Vartype="Pointer" Bytesize="4" DisplayMethod="Целое без знака"/>
+              <Element Offset="1300" Vartype="4 Bytes" Bytesize="4" RLECount="11" DisplayMethod="Целое без знака"/>
+              <Element Offset="1344" Vartype="Pointer" Bytesize="4" RLECount="2" DisplayMethod="Целое без знака"/>
+              <Element Offset="1352" Vartype="4 Bytes" Bytesize="4" DisplayMethod="Целое без знака"/>
+              <Element Offset="1356" Vartype="Pointer" Bytesize="4" DisplayMethod="Целое без знака"/>
+              <Element Offset="1360" Vartype="4 Bytes" Bytesize="4" RLECount="3" DisplayMethod="Целое без знака"/>
+              <Element Offset="1372" Vartype="Double" Bytesize="8" DisplayMethod="Целое без знака"/>
+              <Element Offset="1380" Vartype="4 Bytes" Bytesize="4" RLECount="8" DisplayMethod="Целое без знака"/>
+              <Element Offset="1412" Vartype="Double" Bytesize="8" DisplayMethod="Целое без знака"/>
+              <Element Offset="1420" Vartype="4 Bytes" Bytesize="4" RLECount="7" DisplayMethod="Целое без знака"/>
+              <Element Offset="1448" Vartype="Pointer" Bytesize="4" RLECount="3" DisplayMethod="Целое без знака"/>
+              <Element Offset="1460" Vartype="4 Bytes" Bytesize="4" RLECount="5" DisplayMethod="Целое без знака"/>
+              <Element Offset="1480" Vartype="Pointer" Bytesize="4" DisplayMethod="Целое без знака"/>
+              <Element Offset="1484" Vartype="4 Bytes" Bytesize="4" RLECount="3" DisplayMethod="Целое без знака"/>
+              <Element Offset="1496" Vartype="Pointer" Bytesize="4" RLECount="2" DisplayMethod="Целое без знака"/>
+              <Element Offset="1504" Vartype="4 Bytes" Bytesize="4" RLECount="3" DisplayMethod="Целое без знака"/>
+              <Element Offset="1516" Vartype="Pointer" Bytesize="4" DisplayMethod="Целое без знака"/>
+              <Element Offset="1520" Vartype="4 Bytes" Bytesize="4" RLECount="28" DisplayMethod="Целое без знака"/>
+              <Element Offset="1632" Vartype="Pointer" Bytesize="4" DisplayMethod="Целое без знака"/>
+              <Element Offset="1636" Vartype="4 Bytes" Bytesize="4" RLECount="5" DisplayMethod="Целое без знака"/>
+              <Element Offset="1656" Vartype="Pointer" Bytesize="4" DisplayMethod="Целое без знака"/>
+              <Element Offset="1660" Vartype="4 Bytes" Bytesize="4" RLECount="5" DisplayMethod="Целое без знака"/>
+              <Element Offset="1680" Vartype="Pointer" Bytesize="4" RLECount="2" DisplayMethod="Целое без знака"/>
+              <Element Offset="1688" Vartype="4 Bytes" Bytesize="4" DisplayMethod="Целое без знака"/>
+              <Element Offset="1692" Vartype="Pointer" Bytesize="4" DisplayMethod="Целое без знака"/>
+              <Element Offset="1696" Vartype="4 Bytes" Bytesize="4" RLECount="22" DisplayMethod="Целое без знака"/>
+              <Element Offset="1784" Vartype="Pointer" Bytesize="4" RLECount="2" DisplayMethod="Целое без знака"/>
+              <Element Offset="1792" Vartype="4 Bytes" Bytesize="4" RLECount="10" DisplayMethod="Целое без знака"/>
+              <Element Offset="1832" Vartype="Pointer" Bytesize="4" RLECount="2" DisplayMethod="Целое без знака"/>
+              <Element Offset="1840" Vartype="4 Bytes" Bytesize="4" RLECount="3" DisplayMethod="Целое без знака"/>
+              <Element Offset="1852" Vartype="Pointer" Bytesize="4" DisplayMethod="Целое без знака"/>
+              <Element Offset="1856" Vartype="4 Bytes" Bytesize="4" RLECount="28" DisplayMethod="Целое без знака"/>
+              <Element Offset="1968" Vartype="Pointer" Bytesize="4" DisplayMethod="Целое без знака"/>
+              <Element Offset="1972" Vartype="4 Bytes" Bytesize="4" RLECount="5" DisplayMethod="Целое без знака"/>
+              <Element Offset="1992" Vartype="Pointer" Bytesize="4" DisplayMethod="Целое без знака"/>
+              <Element Offset="1996" Vartype="4 Bytes" Bytesize="4" RLECount="5" DisplayMethod="Целое без знака"/>
+              <Element Offset="2016" Vartype="Pointer" Bytesize="4" RLECount="2" DisplayMethod="Целое без знака"/>
+              <Element Offset="2024" Vartype="4 Bytes" Bytesize="4" DisplayMethod="Целое без знака"/>
+              <Element Offset="2028" Vartype="Pointer" Bytesize="4" DisplayMethod="Целое без знака"/>
+              <Element Offset="2032" Vartype="4 Bytes" Bytesize="4" RLECount="7" DisplayMethod="Целое без знака"/>
+              <Element Offset="2060" Vartype="Pointer" Bytesize="4" DisplayMethod="Целое без знака"/>
+              <Element Offset="2064" Vartype="4 Bytes" Bytesize="4" RLECount="5" DisplayMethod="Целое без знака"/>
+              <Element Offset="2084" Vartype="Double" Bytesize="8" DisplayMethod="Целое без знака"/>
+              <Element Offset="2092" Vartype="4 Bytes" Bytesize="4" RLECount="7" DisplayMethod="Целое без знака"/>
+              <Element Offset="2120" Vartype="Pointer" Bytesize="4" RLECount="2" DisplayMethod="Целое без знака"/>
+              <Element Offset="2128" Vartype="4 Bytes" Bytesize="4" RLECount="10" DisplayMethod="Целое без знака"/>
+              <Element Offset="2168" Vartype="Pointer" Bytesize="4" RLECount="2" DisplayMethod="Целое без знака"/>
+              <Element Offset="2176" Vartype="4 Bytes" Bytesize="4" DisplayMethod="Целое без знака"/>
+              <Element Offset="2180" Vartype="Pointer" Bytesize="4" DisplayMethod="Целое без знака"/>
+              <Element Offset="2184" Vartype="4 Bytes" Bytesize="4" DisplayMethod="Целое без знака"/>
+              <Element Offset="2188" Vartype="Pointer" Bytesize="4" DisplayMethod="Целое без знака"/>
+              <Element Offset="2192" Vartype="4 Bytes" Bytesize="4" RLECount="28" DisplayMethod="Целое без знака"/>
+              <Element Offset="2304" Vartype="Pointer" Bytesize="4" DisplayMethod="Целое без знака"/>
+              <Element Offset="2308" Vartype="4 Bytes" Bytesize="4" RLECount="5" DisplayMethod="Целое без знака"/>
+              <Element Offset="2328" Vartype="Pointer" Bytesize="4" DisplayMethod="Целое без знака"/>
+              <Element Offset="2332" Vartype="4 Bytes" Bytesize="4" RLECount="5" DisplayMethod="Целое без знака"/>
+              <Element Offset="2352" Vartype="Pointer" Bytesize="4" RLECount="2" DisplayMethod="Целое без знака"/>
+              <Element Offset="2360" Vartype="4 Bytes" Bytesize="4" DisplayMethod="Целое без знака"/>
+              <Element Offset="2364" Vartype="Pointer" Bytesize="4" DisplayMethod="Целое без знака"/>
+              <Element Offset="2368" Vartype="4 Bytes" Bytesize="4" RLECount="4" DisplayMethod="Целое без знака"/>
+              <Element Offset="2384" Vartype="Pointer" Bytesize="4" RLECount="2" DisplayMethod="Целое без знака"/>
+              <Element Offset="2392" Vartype="4 Bytes" Bytesize="4" RLECount="16" DisplayMethod="Целое без знака"/>
+              <Element Offset="2456" Vartype="Pointer" Bytesize="4" RLECount="2" DisplayMethod="Целое без знака"/>
+              <Element Offset="2464" Vartype="4 Bytes" Bytesize="4" RLECount="6" DisplayMethod="Целое без знака"/>
+              <Element Offset="2488" Vartype="Pointer" Bytesize="4" DisplayMethod="Целое без знака"/>
+              <Element Offset="2492" Vartype="4 Bytes" Bytesize="4" RLECount="3" DisplayMethod="Целое без знака"/>
+              <Element Offset="2504" Vartype="Pointer" Bytesize="4" RLECount="2" DisplayMethod="Целое без знака"/>
+              <Element Offset="2512" Vartype="4 Bytes" Bytesize="4" DisplayMethod="Целое без знака"/>
+              <Element Offset="2516" Vartype="Pointer" Bytesize="4" DisplayMethod="Целое без знака"/>
+              <Element Offset="2520" Vartype="4 Bytes" Bytesize="4" DisplayMethod="Целое без знака"/>
+              <Element Offset="2524" Vartype="Pointer" Bytesize="4" DisplayMethod="Целое без знака"/>
+              <Element Offset="2528" Vartype="4 Bytes" Bytesize="4" RLECount="28" DisplayMethod="Целое без знака"/>
+              <Element Offset="2640" Vartype="Pointer" Bytesize="4" DisplayMethod="Целое без знака"/>
+              <Element Offset="2644" Vartype="4 Bytes" Bytesize="4" RLECount="5" DisplayMethod="Целое без знака"/>
+              <Element Offset="2664" Vartype="Pointer" Bytesize="4" DisplayMethod="Целое без знака"/>
+              <Element Offset="2668" Vartype="4 Bytes" Bytesize="4" RLECount="5" DisplayMethod="Целое без знака"/>
+              <Element Offset="2688" Vartype="Pointer" Bytesize="4" RLECount="2" DisplayMethod="Целое без знака"/>
+              <Element Offset="2696" Vartype="4 Bytes" Bytesize="4" DisplayMethod="Целое без знака"/>
+              <Element Offset="2700" Vartype="Pointer" Bytesize="4" DisplayMethod="Целое без знака"/>
+              <Element Offset="2704" Vartype="4 Bytes" Bytesize="4" RLECount="4" DisplayMethod="Целое без знака"/>
+              <Element Offset="2720" Vartype="Byte" Bytesize="1" DisplayMethod="Целое без знака"/>
+              <Element Offset="2721" Vartype="String" Bytesize="5" DisplayMethod="Целое без знака"/>
+              <Element Offset="2726" Vartype="Byte" Bytesize="1" RLECount="2" DisplayMethod="Целое без знака"/>
+              <Element Offset="2728" Vartype="4 Bytes" Bytesize="4" RLECount="8" DisplayMethod="Целое без знака"/>
+              <Element Offset="2760" Vartype="Pointer" Bytesize="4" DisplayMethod="Целое без знака"/>
+              <Element Offset="2764" Vartype="4 Bytes" Bytesize="4" RLECount="7" DisplayMethod="Целое без знака"/>
+              <Element Offset="2792" Vartype="Pointer" Bytesize="4" RLECount="2" DisplayMethod="Целое без знака"/>
+              <Element Offset="2800" Vartype="4 Bytes" Bytesize="4" RLECount="10" DisplayMethod="Целое без знака"/>
+              <Element Offset="2840" Vartype="Pointer" Bytesize="4" RLECount="2" DisplayMethod="Целое без знака"/>
+              <Element Offset="2848" Vartype="4 Bytes" Bytesize="4" RLECount="3" DisplayMethod="Целое без знака"/>
+              <Element Offset="2860" Vartype="Pointer" Bytesize="4" DisplayMethod="Целое без знака"/>
+              <Element Offset="2864" Vartype="4 Bytes" Bytesize="4" RLECount="28" DisplayMethod="Целое без знака"/>
+              <Element Offset="2976" Vartype="Pointer" Bytesize="4" DisplayMethod="Целое без знака"/>
+              <Element Offset="2980" Vartype="4 Bytes" Bytesize="4" RLECount="4" DisplayMethod="Целое без знака"/>
+              <Element Offset="2996" Vartype="Pointer" Bytesize="4" RLECount="2" DisplayMethod="Целое без знака"/>
+              <Element Offset="3004" Vartype="4 Bytes" Bytesize="4" RLECount="5" DisplayMethod="Целое без знака"/>
+              <Element Offset="3024" Vartype="Pointer" Bytesize="4" RLECount="2" DisplayMethod="Целое без знака"/>
+              <Element Offset="3032" Vartype="4 Bytes" Bytesize="4" DisplayMethod="Целое без знака"/>
+              <Element Offset="3036" Vartype="Pointer" Bytesize="4" DisplayMethod="Целое без знака"/>
+              <Element Offset="3040" Vartype="4 Bytes" Bytesize="4" RLECount="4" DisplayMethod="Целое без знака"/>
+              <Element Offset="3056" Vartype="Byte" Bytesize="1" DisplayMethod="Целое без знака"/>
+              <Element Offset="3057" Vartype="String" Bytesize="5" DisplayMethod="Целое без знака"/>
+              <Element Offset="3062" Vartype="Byte" Bytesize="1" RLECount="2" DisplayMethod="Целое без знака"/>
+              <Element Offset="3064" Vartype="4 Bytes" Bytesize="4" RLECount="16" DisplayMethod="Целое без знака"/>
+              <Element Offset="3128" Vartype="Pointer" Bytesize="4" RLECount="2" DisplayMethod="Целое без знака"/>
+              <Element Offset="3136" Vartype="4 Bytes" Bytesize="4" RLECount="10" DisplayMethod="Целое без знака"/>
+              <Element Offset="3176" Vartype="Pointer" Bytesize="4" RLECount="2" DisplayMethod="Целое без знака"/>
+              <Element Offset="3184" Vartype="4 Bytes" Bytesize="4" RLECount="3" DisplayMethod="Целое без знака"/>
+              <Element Offset="3196" Vartype="Pointer" Bytesize="4" DisplayMethod="Целое без знака"/>
+              <Element Offset="3200" Vartype="4 Bytes" Bytesize="4" RLECount="28" DisplayMethod="Целое без знака"/>
+              <Element Offset="3312" Vartype="Pointer" Bytesize="4" DisplayMethod="Целое без знака"/>
+              <Element Offset="3316" Vartype="4 Bytes" Bytesize="4" RLECount="4" DisplayMethod="Целое без знака"/>
+              <Element Offset="3332" Vartype="Pointer" Bytesize="4" RLECount="2" DisplayMethod="Целое без знака"/>
+              <Element Offset="3340" Vartype="4 Bytes" Bytesize="4" RLECount="5" DisplayMethod="Целое без знака"/>
+              <Element Offset="3360" Vartype="Pointer" Bytesize="4" RLECount="4" DisplayMethod="Целое без знака"/>
+              <Element Offset="3376" Vartype="4 Bytes" Bytesize="4" RLECount="7" DisplayMethod="Целое без знака"/>
+              <Element Offset="3404" Vartype="Pointer" Bytesize="4" DisplayMethod="Целое без знака"/>
+              <Element Offset="3408" Vartype="4 Bytes" Bytesize="4" RLECount="14" DisplayMethod="Целое без знака"/>
+              <Element Offset="3464" Vartype="Pointer" Bytesize="4" DisplayMethod="Целое без знака"/>
+              <Element Offset="3468" Vartype="4 Bytes" Bytesize="4" RLECount="11" DisplayMethod="Целое без знака"/>
+              <Element Offset="3512" Vartype="Pointer" Bytesize="4" RLECount="2" DisplayMethod="Целое без знака"/>
+              <Element Offset="3520" Vartype="4 Bytes" Bytesize="4" RLECount="3" DisplayMethod="Целое без знака"/>
+              <Element Offset="3532" Vartype="Pointer" Bytesize="4" DisplayMethod="Целое без знака"/>
+              <Element Offset="3536" Vartype="4 Bytes" Bytesize="4" RLECount="28" DisplayMethod="Целое без знака"/>
+              <Element Offset="3648" Vartype="Pointer" Bytesize="4" DisplayMethod="Целое без знака"/>
+              <Element Offset="3652" Vartype="4 Bytes" Bytesize="4" RLECount="5" DisplayMethod="Целое без знака"/>
+              <Element Offset="3672" Vartype="Pointer" Bytesize="4" DisplayMethod="Целое без знака"/>
+              <Element Offset="3676" Vartype="4 Bytes" Bytesize="4" RLECount="5" DisplayMethod="Целое без знака"/>
+              <Element Offset="3696" Vartype="Pointer" Bytesize="4" RLECount="4" DisplayMethod="Целое без знака"/>
+              <Element Offset="3712" Vartype="4 Bytes" Bytesize="4" RLECount="22" DisplayMethod="Целое без знака"/>
+              <Element Offset="3800" Vartype="Pointer" Bytesize="4" RLECount="2" DisplayMethod="Целое без знака"/>
+              <Element Offset="3808" Vartype="4 Bytes" Bytesize="4" RLECount="10" DisplayMethod="Целое без знака"/>
+              <Element Offset="3848" Vartype="Pointer" Bytesize="4" RLECount="2" DisplayMethod="Целое без знака"/>
+              <Element Offset="3856" Vartype="4 Bytes" Bytesize="4" RLECount="3" DisplayMethod="Целое без знака"/>
+              <Element Offset="3868" Vartype="Pointer" Bytesize="4" DisplayMethod="Целое без знака"/>
+              <Element Offset="3872" Vartype="4 Bytes" Bytesize="4" RLECount="28" DisplayMethod="Целое без знака"/>
+              <Element Offset="3984" Vartype="Pointer" Bytesize="4" DisplayMethod="Целое без знака"/>
+              <Element Offset="3988" Vartype="4 Bytes" Bytesize="4" RLECount="4" DisplayMethod="Целое без знака"/>
+              <Element Offset="4004" Vartype="Pointer" Bytesize="4" RLECount="2" DisplayMethod="Целое без знака"/>
+              <Element Offset="4012" Vartype="4 Bytes" Bytesize="4" RLECount="5" DisplayMethod="Целое без знака"/>
+              <Element Offset="4032" Vartype="Pointer" Bytesize="4" RLECount="2" DisplayMethod="Целое без знака"/>
+              <Element Offset="4040" Vartype="4 Bytes" Bytesize="4" DisplayMethod="Целое без знака"/>
+              <Element Offset="4044" Vartype="Pointer" Bytesize="4" DisplayMethod="Целое без знака"/>
+              <Element Offset="4048" Vartype="4 Bytes" Bytesize="4" RLECount="12" DisplayMethod="Целое без знака"/>
+            </Elements>
+          </Structure>
+        </Element>
+        <Element Offset="4" Vartype="4 Bytes" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="9" Vartype="2 Bytes" Bytesize="2" DisplayMethod="Целое без знака"/>
+        <Element Offset="12" Vartype="4 Bytes" Bytesize="4" RLECount="40" DisplayMethod="Целое без знака"/>
+        <Element Offset="173" Vartype="4 Bytes" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="176" Vartype="4 Bytes" Bytesize="4" RLECount="5" DisplayMethod="Целое без знака"/>
+        <Element Offset="196" Vartype="Pointer" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="200" Vartype="4 Bytes" Bytesize="4" RLECount="2" DisplayMethod="Целое без знака"/>
+        <Element Offset="208" Vartype="Pointer" Bytesize="4" RLECount="2" DisplayMethod="Целое без знака"/>
+        <Element Offset="216" Vartype="4 Bytes" Bytesize="4" RLECount="2" DisplayMethod="Целое без знака"/>
+        <Element Offset="224" Vartype="Pointer" Bytesize="4" RLECount="2" DisplayMethod="Целое без знака"/>
+        <Element Offset="232" Vartype="4 Bytes" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="236" Vartype="Pointer" Bytesize="4" RLECount="2" DisplayMethod="Целое без знака"/>
+        <Element Offset="244" Vartype="4 Bytes" Bytesize="4" RLECount="38" DisplayMethod="Целое без знака"/>
+        <Element Offset="396" Vartype="Pointer" Bytesize="4" RLECount="3" DisplayMethod="Целое без знака"/>
+        <Element Offset="408" Vartype="4 Bytes" Bytesize="4" RLECount="2" DisplayMethod="Целое без знака"/>
+        <Element Offset="416" Vartype="Pointer" Bytesize="4" RLECount="20" DisplayMethod="Целое без знака"/>
+        <Element Offset="496" Vartype="4 Bytes" Bytesize="4" RLECount="2" DisplayMethod="Целое без знака"/>
+        <Element Offset="504" Vartype="Pointer" Bytesize="4" RLECount="286" DisplayMethod="Целое без знака"/>
+        <Element Offset="1648" Vartype="4 Bytes" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="1652" Vartype="Pointer" Bytesize="4" RLECount="56" DisplayMethod="Целое без знака"/>
+        <Element Offset="1876" Vartype="4 Bytes" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="1880" Vartype="Pointer" Bytesize="4" RLECount="313" DisplayMethod="Целое без знака"/>
+        <Element Offset="3132" Vartype="4 Bytes" Bytesize="4" RLECount="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="3148" Vartype="String" Bytesize="28" DisplayMethod="Целое без знака"/>
+        <Element Offset="3176" Vartype="4 Bytes" Bytesize="4" RLECount="60" DisplayMethod="Целое без знака"/>
+        <Element Offset="3416" Vartype="Pointer" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="3420" Vartype="4 Bytes" Bytesize="4" RLECount="169" DisplayMethod="Целое без знака"/>
+      </Elements>
+    </Structure>
+  </Structures>
+  <Comments>build StarCraft.exe+57227
+</Comments>
+</CheatTable>

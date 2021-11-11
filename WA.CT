@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CheatTable CheatEngineTableVersion="29">
+  <CheatEntries>
+    <CheatEntry>
+      <ID>0</ID>
+      <Description>"Нет описания"</Description>
+      <LastState Value="100" RealAddress="09A95F8C"/>
+      <VariableType>4 Bytes</VariableType>
+      <Address>09A95F8C</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>1</ID>
+      <Description>"Нет описания"</Description>
+      <LastState Value="100" RealAddress="09A96028"/>
+      <VariableType>4 Bytes</VariableType>
+      <Address>09A96028</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>2</ID>
+      <Description>"Нет описания"</Description>
+      <LastState Value="100" RealAddress="09A960C4"/>
+      <VariableType>4 Bytes</VariableType>
+      <Address>09A960C4</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>3</ID>
+      <Description>"Нет описания"</Description>
+      <LastState Value="100" RealAddress="09A96160"/>
+      <VariableType>4 Bytes</VariableType>
+      <Address>09A96160</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>4</ID>
+      <Description>"Нет описания"</Description>
+      <LastState Value="100" RealAddress="09A964A8"/>
+      <VariableType>4 Bytes</VariableType>
+      <Address>09A964A8</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>5</ID>
+      <Description>"Нет описания"</Description>
+      <LastState Value="4" RealAddress="09A96544"/>
+      <VariableType>4 Bytes</VariableType>
+      <Address>09A96544</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>6</ID>
+      <Description>"Нет описания"</Description>
+      <LastState Value="100" RealAddress="09A965E0"/>
+      <VariableType>4 Bytes</VariableType>
+      <Address>09A965E0</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>7</ID>
+      <Description>"Нет описания"</Description>
+      <LastState Value="1" RealAddress="09A9667C"/>
+      <VariableType>4 Bytes</VariableType>
+      <Address>09A9667C</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>8</ID>
+      <Description>"Скрипт автоассемблера"</Description>
+      <LastState Activated="1"/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>{ Game   : WA.exe (остановлен)
+  Version: 
+  Date   : 2021-10-06
+  Author : Hipp
+
+  This script does blah blah blah
+}
+
+define(address,"WA.exe"+114841)
+define(bytes,8B 84 10 EC 40 00 00)
+
+[ENABLE]
+
+assert(address,bytes)
+alloc(newmem,$1000)
+
+label(code)
+label(return)
+
+newmem:
+  push ebx
+  mov ebx,[eax+edx+00004108]
+  cmp ebx,9870658D
+  je iam
+pre_jump:
+  pop ebx
+code:
+  mov eax,[eax+edx+000040EC]
+  jmp return
+
+iam:
+  mov ebx,64
+  mov [eax+edx+000040EC],ebx
+  jmp pre_jump
+address:
+  jmp newmem
+  nop 2
+return:
+
+[DISABLE]
+
+address:
+  db bytes
+  // mov eax,[eax+edx+000040EC]
+
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: "WA.exe"+114841
+
+"WA.exe"+11480C: 7C 4E                          -  jl WA.exe+11485C
+"WA.exe"+11480E: C7 81 80 01 00 00 00 00 00 00  -  mov [ecx+00000180],00000000
+"WA.exe"+114818: C7 81 84 01 00 00 00 00 00 00  -  mov [ecx+00000184],00000000
+"WA.exe"+114822: EB 38                          -  jmp WA.exe+11485C
+"WA.exe"+114824: 8B 81 FC 00 00 00              -  mov eax,[ecx+000000FC]
+"WA.exe"+11482A: 8B 91 00 01 00 00              -  mov edx,[ecx+00000100]
+"WA.exe"+114830: 69 C0 1C 05 00 00              -  imul eax,eax,0000051C
+"WA.exe"+114836: 69 D2 9C 00 00 00              -  imul edx,edx,0000009C
+"WA.exe"+11483C: 03 C2                          -  add eax,edx
+"WA.exe"+11483E: 8B 51 2C                       -  mov edx,[ecx+2C]
+// ---------- INJECTING HERE ----------
+"WA.exe"+114841: 8B 84 10 EC 40 00 00           -  mov eax,[eax+edx+000040EC]
+// ---------- DONE INJECTING  ----------
+"WA.exe"+114848: 0F BF 91 7A 01 00 00           -  movsx edx,word ptr [ecx+0000017A]
+"WA.exe"+11484F: 3B C2                          -  cmp eax,edx
+"WA.exe"+114851: 7E 09                          -  jle WA.exe+11485C
+"WA.exe"+114853: C1 E0 10                       -  shl eax,10
+"WA.exe"+114856: 89 81 7C 01 00 00              -  mov [ecx+0000017C],eax
+"WA.exe"+11485C: 8B B9 78 01 00 00              -  mov edi,[ecx+00000178]
+"WA.exe"+114862: 8B B1 7C 01 00 00              -  mov esi,[ecx+0000017C]
+"WA.exe"+114868: 3B FE                          -  cmp edi,esi
+"WA.exe"+11486A: 74 6D                          -  je WA.exe+1148D9
+"WA.exe"+11486C: 8B C6                          -  mov eax,esi
+}
+</AssemblerScript>
+    </CheatEntry>
+  </CheatEntries>
+  <UserdefinedSymbols/>
+  <Structures StructVersion="2">
+    <Structure Name="hero" AutoFill="0" AutoCreate="1" DefaultHex="0" AutoDestroy="0" DoNotSaveLocal="0" RLECompression="1" AutoCreateStructsize="4096">
+      <Elements>
+        <Element Offset="0" Vartype="4 Bytes" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="4" Vartype="Pointer" Bytesize="4" RLECount="6" DisplayMethod="Целое без знака"/>
+        <Element Offset="28" Vartype="4 Bytes" Bytesize="4" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="32" Vartype="Pointer" Bytesize="4" RLECount="2" DisplayMethod="Целое без знака"/>
+        <Element Offset="40" Vartype="4 Bytes" Bytesize="4" RLECount="2" DisplayMethod="Целое без знака"/>
+        <Element Offset="48" Vartype="Pointer" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="52" Vartype="4 Bytes" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="56" Vartype="Pointer" Bytesize="4" RLECount="32" DisplayMethod="Целое без знака"/>
+        <Element Offset="184" Vartype="4 Bytes" Bytesize="4" RLECount="32" DisplayMethod="Целое без знака"/>
+        <Element Offset="312" Vartype="Pointer" Bytesize="4" RLECount="3" DisplayMethod="Целое без знака"/>
+        <Element Offset="324" Vartype="4 Bytes" Bytesize="4" RLECount="2" DisplayMethod="Целое без знака"/>
+        <Element Offset="332" Vartype="Pointer" Bytesize="4" RLECount="136" DisplayMethod="Целое без знака"/>
+        <Element Offset="876" Vartype="4 Bytes" Bytesize="4" RLECount="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="892" Vartype="Pointer" Bytesize="4" RLECount="21" DisplayMethod="Целое без знака"/>
+        <Element Offset="976" Vartype="4 Bytes" Bytesize="4" RLECount="19" DisplayMethod="Целое без знака"/>
+        <Element Offset="1052" Vartype="Pointer" Bytesize="4" RLECount="2" DisplayMethod="Целое без знака"/>
+        <Element Offset="1060" Vartype="4 Bytes" Bytesize="4" RLECount="17" DisplayMethod="Целое без знака"/>
+        <Element Offset="1128" Vartype="Pointer" Bytesize="4" RLECount="46" DisplayMethod="Целое без знака"/>
+        <Element Offset="1312" Vartype="4 Bytes" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="1316" Vartype="Pointer" Bytesize="4" RLECount="5" DisplayMethod="Целое без знака"/>
+        <Element Offset="1336" Vartype="4 Bytes" Bytesize="4" RLECount="2" DisplayMethod="Целое без знака"/>
+        <Element Offset="1344" Vartype="Pointer" Bytesize="4" RLECount="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="1360" Vartype="4 Bytes" Bytesize="4" RLECount="29" DisplayMethod="Целое без знака"/>
+        <Element Offset="1476" Vartype="Pointer" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="1480" Vartype="4 Bytes" Bytesize="4" RLECount="3" DisplayMethod="Целое без знака"/>
+        <Element Offset="1492" Vartype="Pointer" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="1496" Vartype="4 Bytes" Bytesize="4" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="1500" Vartype="4 Bytes" Bytesize="4" RLECount="4100" DisplayMethod="Целое без знака"/>
+        <Element Offset="17900" Vartype="Float" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="17904" Vartype="4 Bytes" Bytesize="4" RLECount="3" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="17916" Vartype="4 Bytes" Bytesize="4" RLECount="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="17932" Vartype="4 Bytes" Bytesize="4" RLECount="2" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="17940" Vartype="4 Bytes" Bytesize="4" RLECount="7" DisplayMethod="Целое без знака"/>
+        <Element Offset="17968" Vartype="4 Bytes" Bytesize="4" RLECount="3" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="17980" Vartype="4 Bytes" Bytesize="4" RLECount="33" DisplayMethod="Целое без знака"/>
+        <Element Offset="18112" Vartype="4 Bytes" Bytesize="4" RLECount="2" DisplayMethod="Шестнадцатеричный"/>
+        <Element Offset="18120" Vartype="4 Bytes" Bytesize="4" RLECount="32" DisplayMethod="Целое без знака"/>
+      </Elements>
+    </Structure>
+  </Structures>
+</CheatTable>

@@ -1,0 +1,606 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CheatTable CheatEngineTableVersion="26">
+  <CheatEntries>
+    <CheatEntry>
+      <ID>0</ID>
+      <Description>"inf_ammo"</Description>
+      <LastState Activated="1"/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>[ENABLE]
+crimsonland.exe+1779A:
+db 90 90 90 90
+
+
+ 
+ 
+[DISABLE]
+crimsonland.exe+1779A:
+fsub dword ptr [esp+20]
+
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>1</ID>
+      <Description>"inf health"</Description>
+      <LastState Activated="1"/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>[ENABLE]
+crimsonland.exe+26285:
+  db 90 90 90 90 90 90
+
+crimsonland.exe+21CAE:
+  db 90 90 90 90 90 90
+
+ 
+ 
+[DISABLE]
+crimsonland.exe+26285:
+  fsubr dword ptr [edi+crimsonland.exe+908EC]
+
+crimsonland.exe+21CAE:
+  fsub dword ptr [crimsonland.exe+6F260] { [10.00] }
+
+
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>2</ID>
+      <Description>"4 Bytes"</Description>
+      <VariableType>4 Bytes</VariableType>
+      <Address>490974</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>3</ID>
+      <Description>"exp"</Description>
+      <LastState Activated="1"/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>{ Game   : crimsonland.exe
+  Version: 
+  Date   : 2017-08-10
+  Author : Hipp
+
+  This script does blah blah blah
+}
+
+[ENABLE]
+
+aobscanmodule(exp,crimsonland.exe,A3 74 09 49 00 D9) // should be unique
+alloc(newmem,$1000)
+
+label(code)
+label(return)
+
+newmem:
+
+code:
+  mov [crimsonland.exe+90974],eax
+  add [crimsonland.exe+90974],#1000
+  jmp return
+
+exp:
+  jmp newmem
+return:
+registersymbol(exp)
+
+[DISABLE]
+
+exp:
+  db A3 74 09 49 00
+
+unregistersymbol(exp)
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: "crimsonland.exe"+1EE59
+
+"crimsonland.exe"+1EE31: 85 C0                          -  test eax,eax
+"crimsonland.exe"+1EE33: 7E 16                          -  jle crimsonland.exe+1EE4B
+"crimsonland.exe"+1EE35: D9 43 64                       -  fld dword ptr [ebx+64]
+"crimsonland.exe"+1EE38: D8 0D 50 F3 46 00              -  fmul dword ptr [crimsonland.exe+6F350]
+"crimsonland.exe"+1EE3E: E8 B1 46 03 00                 -  call crimsonland.exe+534F4
+"crimsonland.exe"+1EE43: 01 05 74 09 49 00              -  add [crimsonland.exe+90974],eax
+"crimsonland.exe"+1EE49: EB 13                          -  jmp crimsonland.exe+1EE5E
+"crimsonland.exe"+1EE4B: DB 05 74 09 49 00              -  fild dword ptr [crimsonland.exe+90974]
+"crimsonland.exe"+1EE51: D8 43 64                       -  fadd dword ptr [ebx+64]
+"crimsonland.exe"+1EE54: E8 9B 46 03 00                 -  call crimsonland.exe+534F4
+// ---------- INJECTING HERE ----------
+"crimsonland.exe"+1EE59: A3 74 09 49 00                 -  mov [crimsonland.exe+90974],eax
+// ---------- DONE INJECTING  ----------
+"crimsonland.exe"+1EE5E: D9 05 3C 70 48 00              -  fld dword ptr [crimsonland.exe+8703C]
+"crimsonland.exe"+1EE64: D8 1D 28 F2 46 00              -  fcomp dword ptr [crimsonland.exe+6F228]
+"crimsonland.exe"+1EE6A: DF E0                          -  fnstsw ax
+"crimsonland.exe"+1EE6C: F6 C4 41                       -  test ah,41
+"crimsonland.exe"+1EE6F: 75 34                          -  jne crimsonland.exe+1EEA5
+"crimsonland.exe"+1EE71: 8B 04 B5 80 09 49 00           -  mov eax,[esi*4+crimsonland.exe+90980]
+"crimsonland.exe"+1EE78: 85 C0                          -  test eax,eax
+"crimsonland.exe"+1EE7A: 7E 16                          -  jle crimsonland.exe+1EE92
+"crimsonland.exe"+1EE7C: D9 43 64                       -  fld dword ptr [ebx+64]
+"crimsonland.exe"+1EE7F: D8 0D 50 F3 46 00              -  fmul dword ptr [crimsonland.exe+6F350]
+}
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>4</ID>
+      <Description>"OHK"</Description>
+      <LastState Activated="1"/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>{ Game   : crimsonland.exe
+  Version: 
+  Date   : 2017-08-10
+  Author : Hipp
+
+  This script does blah blah blah
+}
+
+[ENABLE]
+
+aobscanmodule(OHK,crimsonland.exe,D9 9E 74 BF 49 00 D9) // should be unique
+alloc(newmem,$1000)
+alloc(var_ohk,$4)
+
+label(code)
+label(return)
+var_ohk:
+dd (float)0
+
+newmem:
+  fld dword ptr [var_ohk]
+code:
+  fstp dword ptr [esi+crimsonland.exe+9BF74]
+  jmp return
+
+OHK:
+  jmp newmem
+  nop
+return:
+registersymbol(OHK)
+
+[DISABLE]
+
+OHK:
+  db D9 9E 74 BF 49 00
+
+unregistersymbol(OHK)
+dealloc(newmem)
+dealloc(var_ohk)
+
+{
+// ORIGINAL CODE - INJECTION POINT: "crimsonland.exe"+20C2B
+
+"crimsonland.exe"+20C03: 83 C4 04              -  add esp,04
+"crimsonland.exe"+20C06: 85 C0                 -  test eax,eax
+"crimsonland.exe"+20C08: 74 13                 -  je crimsonland.exe+20C1D
+"crimsonland.exe"+20C0A: D9 44 24 24           -  fld dword ptr [esp+24]
+"crimsonland.exe"+20C0E: D8 0D 40 F3 46 00     -  fmul dword ptr [crimsonland.exe+6F340]
+"crimsonland.exe"+20C14: D9 5C 24 24           -  fstp dword ptr [esp+24]
+"crimsonland.exe"+20C18: E8 C9 2F 03 00        -  call crimsonland.exe+53BE6
+"crimsonland.exe"+20C1D: D9 86 74 BF 49 00     -  fld dword ptr [esi+crimsonland.exe+9BF74]
+"crimsonland.exe"+20C23: D8 64 24 24           -  fsub dword ptr [esp+24]
+"crimsonland.exe"+20C27: 8B 5C 24 2C           -  mov ebx,[esp+2C]
+// ---------- INJECTING HERE ----------
+"crimsonland.exe"+20C2B: D9 9E 74 BF 49 00     -  fstp dword ptr [esi+crimsonland.exe+9BF74]
+// ---------- DONE INJECTING  ----------
+"crimsonland.exe"+20C31: D9 86 6C BF 49 00     -  fld dword ptr [esi+crimsonland.exe+9BF6C]
+"crimsonland.exe"+20C37: D8 23                 -  fsub dword ptr [ebx]
+"crimsonland.exe"+20C39: D9 9E 6C BF 49 00     -  fstp dword ptr [esi+crimsonland.exe+9BF6C]
+"crimsonland.exe"+20C3F: D9 86 70 BF 49 00     -  fld dword ptr [esi+crimsonland.exe+9BF70]
+"crimsonland.exe"+20C45: D8 63 04              -  fsub dword ptr [ebx+04]
+"crimsonland.exe"+20C48: D9 9E 70 BF 49 00     -  fstp dword ptr [esi+crimsonland.exe+9BF70]
+"crimsonland.exe"+20C4E: D9 86 74 BF 49 00     -  fld dword ptr [esi+crimsonland.exe+9BF74]
+"crimsonland.exe"+20C54: D8 1D 28 F2 46 00     -  fcomp dword ptr [crimsonland.exe+6F228]
+"crimsonland.exe"+20C5A: DF E0                 -  fnstsw ax
+"crimsonland.exe"+20C5C: F6 C4 41              -  test ah,41
+}
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>10</ID>
+      <Description>"скорострельность"</Description>
+      <LastState Activated="1"/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>[ENABLE]
+crimsonland.exe+AF0F:
+
+ db 90 90 90 90 90 90
+
+ 
+ 
+[DISABLE]
+crimsonland.exe+AF0F:
+  fsub dword ptr [crimsonland.exe+80858] { [0.00] }
+
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>11</ID>
+      <Description>"реакция"</Description>
+      <LastState/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>[ENABLE]
+crimsonland.exe+AF59:
+  db 90 90 90 90 90 90
+ 
+ 
+[DISABLE]
+crimsonland.exe+AF59:
+ fsub dword ptr [crimsonland.exe+80858]
+
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>5</ID>
+      <Description Activated="1">"pirocenetic"</Description>
+      <VariableType>4 Bytes</VariableType>
+      <Address>crimsonland.exe+90998</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>7</ID>
+      <Description Activated="1">"radiation"</Description>
+      <VariableType>4 Bytes</VariableType>
+      <Address>crimsonland.exe+909B4</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>9</ID>
+      <Description Activated="1">"monster vision"</Description>
+      <VariableType>4 Bytes</VariableType>
+      <Address>crimsonland.exe+909F8</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>8</ID>
+      <Description Activated="1">"telekenetic"</Description>
+      <VariableType>4 Bytes</VariableType>
+      <Address>crimsonland.exe+909D0</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>6</ID>
+      <Description>"Нет описания"</Description>
+      <VariableType>Float</VariableType>
+      <Address>004908EC</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>12</ID>
+      <Description>"Нет описания"</Description>
+      <VariableType>Float</VariableType>
+      <Address>crimsonland.exe+8702C</Address>
+    </CheatEntry>
+  </CheatEntries>
+  <CheatCodes>
+    <CodeEntry>
+      <Description>Изменение jle crimsonland.exe+B12E</Description>
+      <Address>0040B0E6</Address>
+      <ModuleName>crimsonland.exe</ModuleName>
+      <ModuleNameOffset>B0E6</ModuleNameOffset>
+      <Before>
+        <Byte>09</Byte>
+        <Byte>49</Byte>
+        <Byte>00</Byte>
+        <Byte>3B</Byte>
+        <Byte>C1</Byte>
+      </Before>
+      <Actual>
+        <Byte>7E</Byte>
+        <Byte>46</Byte>
+      </Actual>
+      <After>
+        <Byte>A1</Byte>
+        <Byte>C4</Byte>
+        <Byte>6F</Byte>
+        <Byte>48</Byte>
+        <Byte>00</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry>
+      <Description>Изменение fsub dword ptr [crimsonland.exe+80858]</Description>
+      <Address>0040AF0F</Address>
+      <ModuleName>crimsonland.exe</ModuleName>
+      <ModuleNameOffset>AF0F</ModuleNameOffset>
+      <Before>
+        <Byte>05</Byte>
+        <Byte>34</Byte>
+        <Byte>70</Byte>
+        <Byte>48</Byte>
+        <Byte>00</Byte>
+      </Before>
+      <Actual>
+        <Byte>D8</Byte>
+        <Byte>25</Byte>
+        <Byte>58</Byte>
+        <Byte>08</Byte>
+        <Byte>48</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>D9</Byte>
+        <Byte>1D</Byte>
+        <Byte>34</Byte>
+        <Byte>70</Byte>
+        <Byte>48</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry>
+      <Description>Изменение fsub dword ptr [crimsonland.exe+80858]</Description>
+      <Address>0040AF59</Address>
+      <ModuleName>crimsonland.exe</ModuleName>
+      <ModuleNameOffset>AF59</ModuleNameOffset>
+      <Before>
+        <Byte>05</Byte>
+        <Byte>2C</Byte>
+        <Byte>70</Byte>
+        <Byte>48</Byte>
+        <Byte>00</Byte>
+      </Before>
+      <Actual>
+        <Byte>D8</Byte>
+        <Byte>25</Byte>
+        <Byte>58</Byte>
+        <Byte>08</Byte>
+        <Byte>48</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>C6</Byte>
+        <Byte>05</Byte>
+        <Byte>26</Byte>
+        <Byte>70</Byte>
+        <Byte>48</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry>
+      <Description>Изменение je crimsonland.exe+1ABE6</Description>
+      <Address>0041ABBD</Address>
+      <ModuleName>crimsonland.exe</ModuleName>
+      <ModuleNameOffset>1ABBD</ModuleNameOffset>
+      <Before>
+        <Byte>DF</Byte>
+        <Byte>E0</Byte>
+        <Byte>F6</Byte>
+        <Byte>C4</Byte>
+        <Byte>41</Byte>
+      </Before>
+      <Actual>
+        <Byte>74</Byte>
+        <Byte>27</Byte>
+      </Actual>
+      <After>
+        <Byte>8B</Byte>
+        <Byte>46</Byte>
+        <Byte>10</Byte>
+        <Byte>85</Byte>
+        <Byte>C0</Byte>
+      </After>
+    </CodeEntry>
+  </CheatCodes>
+  <UserdefinedSymbols/>
+  <Structures StructVersion="2">
+    <Structure Name="player" AutoFill="0" AutoCreate="1" DefaultHex="0" AutoDestroy="0" DoNotSaveLocal="0" RLECompression="1" AutoCreateStructsize="4096">
+      <Elements>
+        <Element Offset="0" Vartype="4 Bytes" Bytesize="4" RLECount="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="16" Vartype="Float" Bytesize="4" RLECount="3" DisplayMethod="Целое без знака"/>
+        <Element Offset="28" Vartype="4 Bytes" Bytesize="4" RLECount="2" DisplayMethod="Целое без знака"/>
+        <Element Offset="36" Vartype="Float" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="40" Vartype="4 Bytes" Bytesize="4" RLECount="3" DisplayMethod="Целое без знака"/>
+        <Element Offset="52" Vartype="Float" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="56" Vartype="4 Bytes" Bytesize="4" RLECount="6" DisplayMethod="Целое без знака"/>
+        <Element Offset="80" Vartype="Float" Bytesize="4" RLECount="2" DisplayMethod="Целое без знака"/>
+        <Element Offset="88" Vartype="Double" Bytesize="8" DisplayMethod="Целое без знака"/>
+        <Element Offset="96" Vartype="4 Bytes" Bytesize="4" RLECount="12" DisplayMethod="Целое без знака"/>
+        <Element Offset="144" Vartype="Double" Bytesize="8" DisplayMethod="Целое без знака"/>
+        <Element Offset="152" Vartype="4 Bytes" Bytesize="4" RLECount="136" DisplayMethod="Целое без знака"/>
+        <Element Offset="696" Vartype="Float" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="700" Vartype="4 Bytes" Bytesize="4" RLECount="2" DisplayMethod="Целое без знака"/>
+        <Element Offset="708" Vartype="Float" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="712" Vartype="4 Bytes" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="716" Vartype="Float" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="720" Vartype="4 Bytes" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="724" Vartype="Double" Bytesize="8" DisplayMethod="Целое без знака"/>
+        <Element Offset="732" Vartype="4 Bytes" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="736" Vartype="Float" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="740" Vartype="4 Bytes" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="744" Vartype="Float" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="748" Vartype="4 Bytes" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="752" Vartype="Double" Bytesize="8" DisplayMethod="Целое без знака"/>
+        <Element Offset="760" Vartype="4 Bytes" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="764" Vartype="Double" Bytesize="8" DisplayMethod="Целое без знака"/>
+        <Element Offset="772" Vartype="4 Bytes" Bytesize="4" RLECount="3" DisplayMethod="Целое без знака"/>
+        <Element Offset="784" Vartype="Float" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="788" Vartype="4 Bytes" Bytesize="4" RLECount="3" DisplayMethod="Целое без знака"/>
+        <Element Offset="800" Vartype="Double" Bytesize="8" DisplayMethod="Целое без знака"/>
+        <Element Offset="808" Vartype="Float" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="812" Vartype="4 Bytes" Bytesize="4" RLECount="17" DisplayMethod="Целое без знака"/>
+        <Element Offset="880" Vartype="Float" Bytesize="4" RLECount="3" DisplayMethod="Целое без знака"/>
+        <Element Offset="892" Vartype="4 Bytes" Bytesize="4" RLECount="2" DisplayMethod="Целое без знака"/>
+        <Element Offset="900" Vartype="Float" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="904" Vartype="4 Bytes" Bytesize="4" RLECount="3" DisplayMethod="Целое без знака"/>
+        <Element Offset="916" Vartype="Float" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="920" Vartype="4 Bytes" Bytesize="4" RLECount="8" DisplayMethod="Целое без знака"/>
+        <Element Offset="952" Vartype="Double" Bytesize="8" DisplayMethod="Целое без знака"/>
+        <Element Offset="960" Vartype="4 Bytes" Bytesize="4" RLECount="153" DisplayMethod="Целое без знака"/>
+        <Element Offset="1572" Vartype="Float" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="1576" Vartype="4 Bytes" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="1580" Vartype="Float" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="1584" Vartype="4 Bytes" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="1588" Vartype="Double" Bytesize="8" DisplayMethod="Целое без знака"/>
+        <Element Offset="1596" Vartype="4 Bytes" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="1600" Vartype="Float" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="1604" Vartype="4 Bytes" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="1608" Vartype="Float" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="1612" Vartype="4 Bytes" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="1616" Vartype="Double" Bytesize="8" DisplayMethod="Целое без знака"/>
+        <Element Offset="1624" Vartype="4 Bytes" Bytesize="4" RLECount="6" DisplayMethod="Целое без знака"/>
+        <Element Offset="1648" Vartype="Float" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="1652" Vartype="4 Bytes" Bytesize="4" RLECount="3" DisplayMethod="Целое без знака"/>
+        <Element Offset="1664" Vartype="Double" Bytesize="8" DisplayMethod="Целое без знака"/>
+        <Element Offset="1672" Vartype="Float" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="1676" Vartype="4 Bytes" Bytesize="4" RLECount="19" DisplayMethod="Целое без знака"/>
+        <Element Offset="1752" Vartype="Float" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="1756" Vartype="4 Bytes" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="1760" Vartype="Float" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="1764" Vartype="4 Bytes" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="1768" Vartype="Float" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="1772" Vartype="4 Bytes" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="1776" Vartype="Float" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="1780" Vartype="4 Bytes" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="1784" Vartype="Float" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="1788" Vartype="4 Bytes" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="1792" Vartype="Float" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="1796" Vartype="4 Bytes" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="1800" Vartype="Float" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="1804" Vartype="Double" Bytesize="8" RLECount="8" DisplayMethod="Целое без знака"/>
+        <Element Offset="1868" Vartype="4 Bytes" Bytesize="4" RLECount="7" DisplayMethod="Целое без знака"/>
+        <Element Offset="1896" Vartype="Float" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="1900" Vartype="4 Bytes" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="1904" Vartype="Float" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="1908" Vartype="4 Bytes" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="1912" Vartype="Float" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="1916" Vartype="Double" Bytesize="8" RLECount="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="1948" Vartype="4 Bytes" Bytesize="4" RLECount="2" DisplayMethod="Целое без знака"/>
+        <Element Offset="1956" Vartype="Float" Bytesize="4" RLECount="15" DisplayMethod="Целое без знака"/>
+        <Element Offset="2016" Vartype="4 Bytes" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="2020" Vartype="Float" Bytesize="4" RLECount="15" DisplayMethod="Целое без знака"/>
+        <Element Offset="2080" Vartype="4 Bytes" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="2084" Vartype="Float" Bytesize="4" RLECount="15" DisplayMethod="Целое без знака"/>
+        <Element Offset="2144" Vartype="Double" Bytesize="8" DisplayMethod="Целое без знака"/>
+        <Element Offset="2152" Vartype="Float" Bytesize="4" RLECount="14" DisplayMethod="Целое без знака"/>
+        <Element Offset="2208" Vartype="Double" Bytesize="8" DisplayMethod="Целое без знака"/>
+        <Element Offset="2216" Vartype="Float" Bytesize="4" RLECount="14" DisplayMethod="Целое без знака"/>
+        <Element Offset="2272" Vartype="Double" Bytesize="8" DisplayMethod="Целое без знака"/>
+        <Element Offset="2280" Vartype="Float" Bytesize="4" RLECount="14" DisplayMethod="Целое без знака"/>
+        <Element Offset="2336" Vartype="Double" Bytesize="8" DisplayMethod="Целое без знака"/>
+        <Element Offset="2344" Vartype="Float" Bytesize="4" RLECount="14" DisplayMethod="Целое без знака"/>
+        <Element Offset="2400" Vartype="4 Bytes" Bytesize="4" RLECount="2" DisplayMethod="Целое без знака"/>
+        <Element Offset="2408" Vartype="Float" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="2412" Vartype="Double" Bytesize="8" RLECount="2" DisplayMethod="Целое без знака"/>
+        <Element Offset="2428" Vartype="4 Bytes" Bytesize="4" RLECount="2" DisplayMethod="Целое без знака"/>
+        <Element Offset="2436" Vartype="Float" Bytesize="4" RLECount="7" DisplayMethod="Целое без знака"/>
+        <Element Offset="2464" Vartype="Double" Bytesize="8" DisplayMethod="Целое без знака"/>
+        <Element Offset="2472" Vartype="Float" Bytesize="4" RLECount="6" DisplayMethod="Целое без знака"/>
+        <Element Offset="2496" Vartype="Double" Bytesize="8" DisplayMethod="Целое без знака"/>
+        <Element Offset="2504" Vartype="Float" Bytesize="4" RLECount="6" DisplayMethod="Целое без знака"/>
+        <Element Offset="2528" Vartype="4 Bytes" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="2532" Vartype="Double" Bytesize="8" DisplayMethod="Целое без знака"/>
+        <Element Offset="2540" Vartype="4 Bytes" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="2544" Vartype="Double" Bytesize="8" DisplayMethod="Целое без знака"/>
+        <Element Offset="2552" Vartype="Float" Bytesize="4" RLECount="2" DisplayMethod="Целое без знака"/>
+        <Element Offset="2560" Vartype="4 Bytes" Bytesize="4" RLECount="2" DisplayMethod="Целое без знака"/>
+        <Element Offset="2568" Vartype="Double" Bytesize="8" DisplayMethod="Целое без знака"/>
+        <Element Offset="2576" Vartype="Float" Bytesize="4" RLECount="8" DisplayMethod="Целое без знака"/>
+        <Element Offset="2608" Vartype="Double" Bytesize="8" DisplayMethod="Целое без знака"/>
+        <Element Offset="2616" Vartype="Float" Bytesize="4" RLECount="8" DisplayMethod="Целое без знака"/>
+        <Element Offset="2648" Vartype="Double" Bytesize="8" DisplayMethod="Целое без знака"/>
+        <Element Offset="2656" Vartype="Float" Bytesize="4" RLECount="8" DisplayMethod="Целое без знака"/>
+        <Element Offset="2688" Vartype="4 Bytes" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="2692" Vartype="Float" Bytesize="4" RLECount="9" DisplayMethod="Целое без знака"/>
+        <Element Offset="2728" Vartype="Double" Bytesize="8" DisplayMethod="Целое без знака"/>
+        <Element Offset="2736" Vartype="Float" Bytesize="4" RLECount="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="2752" Vartype="Byte" Bytesize="1" RLECount="12" DisplayMethod="Целое без знака"/>
+        <Element Offset="2764" Vartype="Float" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="2768" Vartype="Double" Bytesize="8" DisplayMethod="Целое без знака"/>
+        <Element Offset="2776" Vartype="Float" Bytesize="4" RLECount="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="2792" Vartype="Byte" Bytesize="1" RLECount="12" DisplayMethod="Целое без знака"/>
+        <Element Offset="2804" Vartype="Float" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="2808" Vartype="4 Bytes" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="2812" Vartype="Float" Bytesize="4" RLECount="5" DisplayMethod="Целое без знака"/>
+        <Element Offset="2832" Vartype="String" Bytesize="12" DisplayMethod="Целое без знака"/>
+        <Element Offset="2844" Vartype="Float" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="2848" Vartype="Double" Bytesize="8" DisplayMethod="Целое без знака"/>
+        <Element Offset="2856" Vartype="Float" Bytesize="4" RLECount="8" DisplayMethod="Целое без знака"/>
+        <Element Offset="2888" Vartype="Double" Bytesize="8" DisplayMethod="Целое без знака"/>
+        <Element Offset="2896" Vartype="Float" Bytesize="4" RLECount="8" DisplayMethod="Целое без знака"/>
+        <Element Offset="2928" Vartype="Double" Bytesize="8" DisplayMethod="Целое без знака"/>
+        <Element Offset="2936" Vartype="Float" Bytesize="4" RLECount="8" DisplayMethod="Целое без знака"/>
+        <Element Offset="2968" Vartype="Double" Bytesize="8" DisplayMethod="Целое без знака"/>
+        <Element Offset="2976" Vartype="Float" Bytesize="4" RLECount="8" DisplayMethod="Целое без знака"/>
+        <Element Offset="3008" Vartype="Double" Bytesize="8" DisplayMethod="Целое без знака"/>
+        <Element Offset="3016" Vartype="Float" Bytesize="4" RLECount="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="3032" Vartype="Byte" Bytesize="1" RLECount="2" DisplayMethod="Целое без знака"/>
+        <Element Offset="3034" Vartype="2 Bytes" Bytesize="2" DisplayMethod="Целое без знака"/>
+        <Element Offset="3036" Vartype="Byte" Bytesize="1" RLECount="2" DisplayMethod="Целое без знака"/>
+        <Element Offset="3038" Vartype="2 Bytes" Bytesize="2" DisplayMethod="Целое без знака"/>
+        <Element Offset="3040" Vartype="Byte" Bytesize="1" RLECount="2" DisplayMethod="Целое без знака"/>
+        <Element Offset="3042" Vartype="2 Bytes" Bytesize="2" DisplayMethod="Целое без знака"/>
+        <Element Offset="3044" Vartype="Float" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="3048" Vartype="4 Bytes" Bytesize="4" RLECount="5" DisplayMethod="Целое без знака"/>
+        <Element Offset="3068" Vartype="Double" Bytesize="8" DisplayMethod="Целое без знака"/>
+        <Element Offset="3076" Vartype="Float" Bytesize="4" RLECount="3" DisplayMethod="Целое без знака"/>
+        <Element Offset="3088" Vartype="4 Bytes" Bytesize="4" RLECount="5" DisplayMethod="Целое без знака"/>
+        <Element Offset="3108" Vartype="Double" Bytesize="8" DisplayMethod="Целое без знака"/>
+        <Element Offset="3116" Vartype="Float" Bytesize="4" RLECount="3" DisplayMethod="Целое без знака"/>
+        <Element Offset="3128" Vartype="4 Bytes" Bytesize="4" RLECount="5" DisplayMethod="Целое без знака"/>
+        <Element Offset="3148" Vartype="Double" Bytesize="8" DisplayMethod="Целое без знака"/>
+        <Element Offset="3156" Vartype="Float" Bytesize="4" RLECount="3" DisplayMethod="Целое без знака"/>
+        <Element Offset="3168" Vartype="4 Bytes" Bytesize="4" RLECount="5" DisplayMethod="Целое без знака"/>
+        <Element Offset="3188" Vartype="Double" Bytesize="8" DisplayMethod="Целое без знака"/>
+        <Element Offset="3196" Vartype="Float" Bytesize="4" RLECount="3" DisplayMethod="Целое без знака"/>
+        <Element Offset="3208" Vartype="4 Bytes" Bytesize="4" RLECount="5" DisplayMethod="Целое без знака"/>
+        <Element Offset="3228" Vartype="Double" Bytesize="8" DisplayMethod="Целое без знака"/>
+        <Element Offset="3236" Vartype="Float" Bytesize="4" RLECount="3" DisplayMethod="Целое без знака"/>
+        <Element Offset="3248" Vartype="4 Bytes" Bytesize="4" RLECount="5" DisplayMethod="Целое без знака"/>
+        <Element Offset="3268" Vartype="Double" Bytesize="8" DisplayMethod="Целое без знака"/>
+        <Element Offset="3276" Vartype="Float" Bytesize="4" RLECount="3" DisplayMethod="Целое без знака"/>
+        <Element Offset="3288" Vartype="4 Bytes" Bytesize="4" RLECount="5" DisplayMethod="Целое без знака"/>
+        <Element Offset="3308" Vartype="Double" Bytesize="8" DisplayMethod="Целое без знака"/>
+        <Element Offset="3316" Vartype="Float" Bytesize="4" RLECount="3" DisplayMethod="Целое без знака"/>
+        <Element Offset="3328" Vartype="4 Bytes" Bytesize="4" RLECount="5" DisplayMethod="Целое без знака"/>
+        <Element Offset="3348" Vartype="Double" Bytesize="8" DisplayMethod="Целое без знака"/>
+        <Element Offset="3356" Vartype="Float" Bytesize="4" RLECount="3" DisplayMethod="Целое без знака"/>
+        <Element Offset="3368" Vartype="4 Bytes" Bytesize="4" RLECount="5" DisplayMethod="Целое без знака"/>
+        <Element Offset="3388" Vartype="Double" Bytesize="8" DisplayMethod="Целое без знака"/>
+        <Element Offset="3396" Vartype="Float" Bytesize="4" RLECount="3" DisplayMethod="Целое без знака"/>
+        <Element Offset="3408" Vartype="4 Bytes" Bytesize="4" RLECount="5" DisplayMethod="Целое без знака"/>
+        <Element Offset="3428" Vartype="Double" Bytesize="8" DisplayMethod="Целое без знака"/>
+        <Element Offset="3436" Vartype="Float" Bytesize="4" RLECount="3" DisplayMethod="Целое без знака"/>
+        <Element Offset="3448" Vartype="4 Bytes" Bytesize="4" RLECount="5" DisplayMethod="Целое без знака"/>
+        <Element Offset="3468" Vartype="Double" Bytesize="8" DisplayMethod="Целое без знака"/>
+        <Element Offset="3476" Vartype="Float" Bytesize="4" RLECount="3" DisplayMethod="Целое без знака"/>
+        <Element Offset="3488" Vartype="4 Bytes" Bytesize="4" RLECount="5" DisplayMethod="Целое без знака"/>
+        <Element Offset="3508" Vartype="Double" Bytesize="8" DisplayMethod="Целое без знака"/>
+        <Element Offset="3516" Vartype="Float" Bytesize="4" RLECount="3" DisplayMethod="Целое без знака"/>
+        <Element Offset="3528" Vartype="4 Bytes" Bytesize="4" RLECount="5" DisplayMethod="Целое без знака"/>
+        <Element Offset="3548" Vartype="Double" Bytesize="8" DisplayMethod="Целое без знака"/>
+        <Element Offset="3556" Vartype="Float" Bytesize="4" RLECount="3" DisplayMethod="Целое без знака"/>
+        <Element Offset="3568" Vartype="4 Bytes" Bytesize="4" RLECount="5" DisplayMethod="Целое без знака"/>
+        <Element Offset="3588" Vartype="Double" Bytesize="8" DisplayMethod="Целое без знака"/>
+        <Element Offset="3596" Vartype="Float" Bytesize="4" RLECount="3" DisplayMethod="Целое без знака"/>
+        <Element Offset="3608" Vartype="4 Bytes" Bytesize="4" RLECount="5" DisplayMethod="Целое без знака"/>
+        <Element Offset="3628" Vartype="Double" Bytesize="8" DisplayMethod="Целое без знака"/>
+        <Element Offset="3636" Vartype="Float" Bytesize="4" RLECount="3" DisplayMethod="Целое без знака"/>
+        <Element Offset="3648" Vartype="4 Bytes" Bytesize="4" RLECount="5" DisplayMethod="Целое без знака"/>
+        <Element Offset="3668" Vartype="Double" Bytesize="8" DisplayMethod="Целое без знака"/>
+        <Element Offset="3676" Vartype="Float" Bytesize="4" RLECount="3" DisplayMethod="Целое без знака"/>
+        <Element Offset="3688" Vartype="4 Bytes" Bytesize="4" RLECount="5" DisplayMethod="Целое без знака"/>
+        <Element Offset="3708" Vartype="Double" Bytesize="8" DisplayMethod="Целое без знака"/>
+        <Element Offset="3716" Vartype="Float" Bytesize="4" RLECount="3" DisplayMethod="Целое без знака"/>
+        <Element Offset="3728" Vartype="4 Bytes" Bytesize="4" RLECount="5" DisplayMethod="Целое без знака"/>
+        <Element Offset="3748" Vartype="Double" Bytesize="8" DisplayMethod="Целое без знака"/>
+        <Element Offset="3756" Vartype="Float" Bytesize="4" RLECount="3" DisplayMethod="Целое без знака"/>
+        <Element Offset="3768" Vartype="4 Bytes" Bytesize="4" RLECount="5" DisplayMethod="Целое без знака"/>
+        <Element Offset="3788" Vartype="Double" Bytesize="8" DisplayMethod="Целое без знака"/>
+        <Element Offset="3796" Vartype="Float" Bytesize="4" RLECount="3" DisplayMethod="Целое без знака"/>
+        <Element Offset="3808" Vartype="4 Bytes" Bytesize="4" RLECount="5" DisplayMethod="Целое без знака"/>
+        <Element Offset="3828" Vartype="Double" Bytesize="8" DisplayMethod="Целое без знака"/>
+        <Element Offset="3836" Vartype="Float" Bytesize="4" RLECount="3" DisplayMethod="Целое без знака"/>
+        <Element Offset="3848" Vartype="4 Bytes" Bytesize="4" RLECount="5" DisplayMethod="Целое без знака"/>
+        <Element Offset="3868" Vartype="Double" Bytesize="8" DisplayMethod="Целое без знака"/>
+        <Element Offset="3876" Vartype="Float" Bytesize="4" RLECount="3" DisplayMethod="Целое без знака"/>
+        <Element Offset="3888" Vartype="4 Bytes" Bytesize="4" RLECount="5" DisplayMethod="Целое без знака"/>
+        <Element Offset="3908" Vartype="Double" Bytesize="8" DisplayMethod="Целое без знака"/>
+        <Element Offset="3916" Vartype="Float" Bytesize="4" RLECount="3" DisplayMethod="Целое без знака"/>
+        <Element Offset="3928" Vartype="4 Bytes" Bytesize="4" RLECount="5" DisplayMethod="Целое без знака"/>
+        <Element Offset="3948" Vartype="Double" Bytesize="8" DisplayMethod="Целое без знака"/>
+        <Element Offset="3956" Vartype="Float" Bytesize="4" RLECount="3" DisplayMethod="Целое без знака"/>
+        <Element Offset="3968" Vartype="4 Bytes" Bytesize="4" RLECount="5" DisplayMethod="Целое без знака"/>
+        <Element Offset="3988" Vartype="Double" Bytesize="8" DisplayMethod="Целое без знака"/>
+        <Element Offset="3996" Vartype="Float" Bytesize="4" RLECount="3" DisplayMethod="Целое без знака"/>
+        <Element Offset="4008" Vartype="4 Bytes" Bytesize="4" RLECount="5" DisplayMethod="Целое без знака"/>
+        <Element Offset="4028" Vartype="Double" Bytesize="8" DisplayMethod="Целое без знака"/>
+        <Element Offset="4036" Vartype="Float" Bytesize="4" RLECount="3" DisplayMethod="Целое без знака"/>
+        <Element Offset="4048" Vartype="4 Bytes" Bytesize="4" RLECount="5" DisplayMethod="Целое без знака"/>
+        <Element Offset="4068" Vartype="Double" Bytesize="8" DisplayMethod="Целое без знака"/>
+        <Element Offset="4076" Vartype="Float" Bytesize="4" RLECount="3" DisplayMethod="Целое без знака"/>
+        <Element Offset="4088" Vartype="4 Bytes" Bytesize="4" RLECount="2" DisplayMethod="Целое без знака"/>
+      </Elements>
+    </Structure>
+  </Structures>
+  <Comments>Информация об этой таблице:
+</Comments>
+</CheatTable>

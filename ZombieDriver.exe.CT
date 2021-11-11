@@ -1,0 +1,325 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CheatTable CheatEngineTableVersion="29">
+  <CheatEntries>
+    <CheatEntry>
+      <ID>0</ID>
+      <Description>"live"</Description>
+      <LastState Activated="1"/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>{ Game   : ZombieDriver.exe
+  Version: 
+  Date   : 2019-10-21
+  Author : Hipp
+
+  This script does blah blah blah
+}
+
+[ENABLE]
+
+aobscanmodule(live,ZombieDriver.exe,F3 0F 5C C8 0F 2F D1) // should be unique
+alloc(newmem,$1000)
+
+label(code)
+label(return)
+
+newmem:
+  movss xmm0,[var_1]
+code:
+  subss xmm1,xmm0
+  comiss xmm2,xmm1
+  jmp return
+var_1:
+  dd 00
+live:
+  jmp newmem
+  nop 2
+return:
+registersymbol(live)
+
+[DISABLE]
+
+live:
+  db F3 0F 5C C8 0F 2F D1
+
+unregistersymbol(live)
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: "ZombieDriver.exe"+FABB8
+
+"ZombieDriver.exe"+FAB89: 75 54                    -  jne ZombieDriver.exe+FABDF
+"ZombieDriver.exe"+FAB8B: F3 0F 10 8D D0 01 00 00  -  movss xmm1,[ebp+000001D0]
+"ZombieDriver.exe"+FAB93: F3 0F 10 44 24 58        -  movss xmm0,[esp+58]
+"ZombieDriver.exe"+FAB99: F3 0F 5C C1              -  subss xmm0,xmm1
+"ZombieDriver.exe"+FAB9D: 39 5C 24 60              -  cmp [esp+60],ebx
+"ZombieDriver.exe"+FABA1: 74 10                    -  je ZombieDriver.exe+FABB3
+"ZombieDriver.exe"+FABA3: F3 0F 10 8D 0C 02 00 00  -  movss xmm1,[ebp+0000020C]
+"ZombieDriver.exe"+FABAB: F3 0F 59 C8              -  mulss xmm1,xmm0
+"ZombieDriver.exe"+FABAF: F3 0F 5C C1              -  subss xmm0,xmm1
+"ZombieDriver.exe"+FABB3: F3 0F 10 4D 34           -  movss xmm1,[ebp+34]
+// ---------- INJECTING HERE ----------
+"ZombieDriver.exe"+FABB8: F3 0F 5C C8              -  subss xmm1,xmm0
+"ZombieDriver.exe"+FABBC: 0F 2F D1                 -  comiss xmm2,xmm1
+// ---------- DONE INJECTING  ----------
+"ZombieDriver.exe"+FABBF: F3 0F 11 4D 34           -  movss [ebp+34],xmm1
+"ZombieDriver.exe"+FABC4: 76 05                    -  jna ZombieDriver.exe+FABCB
+"ZombieDriver.exe"+FABC6: F3 0F 11 55 34           -  movss [ebp+34],xmm2
+"ZombieDriver.exe"+FABCB: F3 0F 10 45 38           -  movss xmm0,[ebp+38]
+"ZombieDriver.exe"+FABD0: F3 0F 10 4D 34           -  movss xmm1,[ebp+34]
+"ZombieDriver.exe"+FABD5: 0F 2F C8                 -  comiss xmm1,xmm0
+"ZombieDriver.exe"+FABD8: 76 05                    -  jna ZombieDriver.exe+FABDF
+"ZombieDriver.exe"+FABDA: F3 0F 11 45 34           -  movss [ebp+34],xmm0
+"ZombieDriver.exe"+FABDF: F3 0F 10 45 34           -  movss xmm0,[ebp+34]
+"ZombieDriver.exe"+FABE4: 0F 2F D0                 -  comiss xmm2,xmm0
+}
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>3</ID>
+      <Description>"money"</Description>
+      <LastState Activated="1"/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>[ENABLE]
+ZombieDriver.exe+88F9C:
+ add [esi+0C],eax
+
+ 
+[DISABLE]
+ZombieDriver.exe+88F9C:
+ sub [esi+0C],eax
+
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>5</ID>
+      <Description>"moding"</Description>
+      <LastState/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>{ Game   : ZombieDriver.exe
+  Version: 
+  Date   : 2019-10-21
+  Author : Hipp
+
+  This script does blah blah blah
+}
+
+[ENABLE]
+
+aobscanmodule(moding,ZombieDriver.exe,89 4E 24 D9 6C 24 36) // should be unique
+alloc(newmem,$1000)
+
+label(code)
+label(return)
+
+newmem:
+  mov ecx,8
+code:
+  mov [esi+24],ecx
+  fldcw [esp+36]
+  jmp return
+
+moding:
+  jmp newmem
+  nop 2
+return:
+registersymbol(moding)
+
+[DISABLE]
+
+moding:
+  db 89 4E 24 D9 6C 24 36
+
+unregistersymbol(moding)
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: "ZombieDriver.exe"+B6ECE
+
+"ZombieDriver.exe"+B6EA5: DD 1C 24           -  fstp qword ptr [esp]
+"ZombieDriver.exe"+B6EA8: E8 CB E6 08 00     -  call ZombieDriver.exe+145578
+"ZombieDriver.exe"+B6EAD: D9 7C 24 3E        -  fnstcw [esp+3E]
+"ZombieDriver.exe"+B6EB1: 83 C4 08           -  add esp,08
+"ZombieDriver.exe"+B6EB4: 0F B7 44 24 36     -  movzx eax,word ptr [esp+36]
+"ZombieDriver.exe"+B6EB9: 0D 00 0C 00 00     -  or eax,00000C00
+"ZombieDriver.exe"+B6EBE: 89 44 24 38        -  mov [esp+38],eax
+"ZombieDriver.exe"+B6EC2: D9 6C 24 38        -  fldcw [esp+38]
+"ZombieDriver.exe"+B6EC6: DF 7C 24 38        -  fistp qword ptr [esp+38]
+"ZombieDriver.exe"+B6ECA: 8B 4C 24 38        -  mov ecx,[esp+38]
+// ---------- INJECTING HERE ----------
+"ZombieDriver.exe"+B6ECE: 89 4E 24           -  mov [esi+24],ecx
+"ZombieDriver.exe"+B6ED1: D9 6C 24 36        -  fldcw [esp+36]
+// ---------- DONE INJECTING  ----------
+"ZombieDriver.exe"+B6ED5: 8B E5              -  mov esp,ebp
+"ZombieDriver.exe"+B6ED7: 5D                 -  pop ebp
+"ZombieDriver.exe"+B6ED8: C2 04 00           -  ret 0004
+"ZombieDriver.exe"+B6EDB: CC                 -  int 3 
+"ZombieDriver.exe"+B6EDC: CC                 -  int 3 
+"ZombieDriver.exe"+B6EDD: CC                 -  int 3 
+"ZombieDriver.exe"+B6EDE: CC                 -  int 3 
+"ZombieDriver.exe"+B6EDF: CC                 -  int 3 
+"ZombieDriver.exe"+B6EE0: 55                 -  push ebp
+"ZombieDriver.exe"+B6EE1: 8B EC              -  mov ebp,esp
+}
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>6</ID>
+      <Description>"ammo"</Description>
+      <LastState Activated="1"/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>{ Game   : ZombieDriver.exe
+  Version: 
+  Date   : 2019-10-21
+  Author : Hipp
+
+  This script does blah blah blah
+}
+
+[ENABLE]
+
+aobscanmodule(guns,ZombieDriver.exe,8B 68 10 8D 4C 24 74) // should be unique
+alloc(newmem,$1000)
+
+label(code)
+label(return)
+
+newmem:
+  mov dword ptr [eax+10],00000096
+code:
+  mov ebp,[eax+10]
+  lea ecx,[esp+74]
+  jmp return
+
+guns:
+  jmp newmem
+  nop 2
+return:
+registersymbol(guns)
+
+[DISABLE]
+
+guns:
+  db 8B 68 10 8D 4C 24 74
+
+unregistersymbol(guns)
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: "ZombieDriver.exe"+7B54E
+
+"ZombieDriver.exe"+7B52B: 8D 4C 24 14                       -  lea ecx,[esp+14]
+"ZombieDriver.exe"+7B52F: FF 15 1C 41 58 01                 -  call dword ptr [ZombieDriver.exe+1C411C]
+"ZombieDriver.exe"+7B535: 8B 0D C8 4A 62 01                 -  mov ecx,[ZombieDriver.exe+264AC8]
+"ZombieDriver.exe"+7B53B: 8B 41 64                          -  mov eax,[ecx+64]
+"ZombieDriver.exe"+7B53E: 8B 48 38                          -  mov ecx,[eax+38]
+"ZombieDriver.exe"+7B541: 8B 11                             -  mov edx,[ecx]
+"ZombieDriver.exe"+7B543: 8B 42 08                          -  mov eax,[edx+08]
+"ZombieDriver.exe"+7B546: FF D0                             -  call eax
+"ZombieDriver.exe"+7B548: 8B 40 08                          -  mov eax,[eax+08]
+"ZombieDriver.exe"+7B54B: 8B 40 28                          -  mov eax,[eax+28]
+// ---------- INJECTING HERE ----------
+"ZombieDriver.exe"+7B54E: 8B 68 10                          -  mov ebp,[eax+10]
+"ZombieDriver.exe"+7B551: 8D 4C 24 74                       -  lea ecx,[esp+74]
+// ---------- DONE INJECTING  ----------
+"ZombieDriver.exe"+7B555: FF 15 24 41 58 01                 -  call dword ptr [ZombieDriver.exe+1C4124]
+"ZombieDriver.exe"+7B55B: C7 84 24 B8 00 00 00 03 00 00 00  -  mov [esp+000000B8],00000003
+"ZombieDriver.exe"+7B566: 83 FD 0A                          -  cmp ebp,0A
+"ZombieDriver.exe"+7B569: 7D 07                             -  jnl ZombieDriver.exe+7B572
+"ZombieDriver.exe"+7B56B: 68 38 6B 5A 01                    -  push ZombieDriver.exe+1E6B38
+"ZombieDriver.exe"+7B570: EB 0A                             -  jmp ZombieDriver.exe+7B57C
+"ZombieDriver.exe"+7B572: 83 FD 64                          -  cmp ebp,64
+"ZombieDriver.exe"+7B575: 7D 0F                             -  jnl ZombieDriver.exe+7B586
+"ZombieDriver.exe"+7B577: 68 3C 6B 5A 01                    -  push ZombieDriver.exe+1E6B3C
+"ZombieDriver.exe"+7B57C: 8D 4C 24 78                       -  lea ecx,[esp+78]
+}
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>8</ID>
+      <Description>"live survivors"</Description>
+      <LastState Activated="1"/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>[ENABLE]
+ZombieDriver.exe+71C93:
+db 90 90 90 90 90 90 90 90
+
+ 
+[DISABLE]
+ZombieDriver.exe+71C93:
+ subss xmm0,[ZombieDriver.exe+1CE6F0]
+
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>9</ID>
+      <Description>"Скрипт автоассемблера"</Description>
+      <LastState/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>{ Game   : ZombieDriver.exe
+  Version: 
+  Date   : 2019-10-21
+  Author : Hipp
+
+  This script does blah blah blah
+}
+
+[ENABLE]
+
+aobscanmodule(passanger,ZombieDriver.exe,8B 80 40 01 00 00) // should be unique
+alloc(newmem,$1000)
+
+label(code)
+label(return)
+
+newmem:
+  mov dword ptr [eax+00000140],32
+code:
+  mov eax,[eax+00000140]
+  jmp return
+
+passanger:
+  jmp newmem
+  nop
+return:
+registersymbol(passanger)
+
+[DISABLE]
+
+passanger:
+  db 8B 80 40 01 00 00
+
+unregistersymbol(passanger)
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: "ZombieDriver.exe"+7B256
+
+"ZombieDriver.exe"+7B22B: C7 84 24 D0 00 00 00 FF FF FF FF  -  mov [esp+000000D0],FFFFFFFF
+"ZombieDriver.exe"+7B236: 8D 4C 24 38                       -  lea ecx,[esp+38]
+"ZombieDriver.exe"+7B23A: FF 15 1C 41 58 01                 -  call dword ptr [ZombieDriver.exe+1C411C]
+"ZombieDriver.exe"+7B240: 8B 0D C8 4A 62 01                 -  mov ecx,[ZombieDriver.exe+264AC8]
+"ZombieDriver.exe"+7B246: 8B 41 64                          -  mov eax,[ecx+64]
+"ZombieDriver.exe"+7B249: 8B 48 38                          -  mov ecx,[eax+38]
+"ZombieDriver.exe"+7B24C: 8B 11                             -  mov edx,[ecx]
+"ZombieDriver.exe"+7B24E: 8B 42 08                          -  mov eax,[edx+08]
+"ZombieDriver.exe"+7B251: FF D0                             -  call eax
+"ZombieDriver.exe"+7B253: 8B 40 04                          -  mov eax,[eax+04]
+// ---------- INJECTING HERE ----------
+"ZombieDriver.exe"+7B256: 8B 80 40 01 00 00                 -  mov eax,[eax+00000140]
+// ---------- DONE INJECTING  ----------
+"ZombieDriver.exe"+7B25C: 8B 3D 08 55 58 01                 -  mov edi,[ZombieDriver.exe+1C5508]
+"ZombieDriver.exe"+7B262: 6A 00                             -  push 00
+"ZombieDriver.exe"+7B264: 6A 20                             -  push 20
+"ZombieDriver.exe"+7B266: 6A 00                             -  push 00
+"ZombieDriver.exe"+7B268: 50                                -  push eax
+"ZombieDriver.exe"+7B269: 8D 4C 24 20                       -  lea ecx,[esp+20]
+"ZombieDriver.exe"+7B26D: 51                                -  push ecx
+"ZombieDriver.exe"+7B26E: FF D7                             -  call edi
+"ZombieDriver.exe"+7B270: 83 C4 14                          -  add esp,14
+"ZombieDriver.exe"+7B273: 8B D8                             -  mov ebx,eax
+}
+</AssemblerScript>
+    </CheatEntry>
+  </CheatEntries>
+  <UserdefinedSymbols/>
+</CheatTable>

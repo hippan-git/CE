@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CheatTable CheatEngineTableVersion="26">
+  <CheatEntries>
+    <CheatEntry>
+      <ID>0</ID>
+      <Description>"ammo"</Description>
+      <LastState Activated="1"/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>[ENABLE]
+qagamex86.dll+34100:
+ add [eax],edx
+
+ 
+[DISABLE]
+qagamex86.dll+34100:
+  sub [eax],edx
+
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>3</ID>
+      <Description>"ohk+inf"</Description>
+      <LastState Activated="1"/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>{ Game   : WolfSP.exe
+  Version: 
+  Date   : 2018-05-09
+  Author : Hipp
+
+  This script does blah blah blah
+}
+
+[ENABLE]
+
+aobscanmodule(health,qagamex86.dll,89 86 D8 03 00 00 74) // should be unique
+alloc(newmem,$1000)
+
+label(code)
+label(return)
+// qagamex86.dll+53EF58
+newmem:
+  push edx
+  lea edx,[esi+3d8]
+  cmp edx,2053EF58
+  jne code
+  mov [esi+000003D8],#100
+  pop edx
+  jmp return
+code:
+  mov [esi+000003D8],0
+  pop edx
+  jmp return
+
+health:
+  jmp newmem
+  nop
+return:
+registersymbol(health)
+
+[DISABLE]
+
+health:
+  db 89 86 D8 03 00 00
+
+unregistersymbol(health)
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: "qagamex86.dll"+44194
+
+"qagamex86.dll"+44168: 8B 86 A8 02 00 00              -  mov eax,[esi+000002A8]
+"qagamex86.dll"+4416E: 8B 4C 24 40                    -  mov ecx,[esp+40]
+"qagamex86.dll"+44172: 89 88 08 07 00 00              -  mov [eax+00000708],ecx
+"qagamex86.dll"+44178: EB 04                          -  jmp qagamex86.dll+4417E
+"qagamex86.dll"+4417A: 8B 4C 24 40                    -  mov ecx,[esp+40]
+"qagamex86.dll"+4417E: 3B FA                          -  cmp edi,edx
+"qagamex86.dll"+44180: 0F 84 5C 01 00 00              -  je qagamex86.dll+442E2
+"qagamex86.dll"+44186: 8B 86 D8 03 00 00              -  mov eax,[esi+000003D8]
+"qagamex86.dll"+4418C: 2B C7                          -  sub eax,edi
+"qagamex86.dll"+4418E: 39 96 A8 02 00 00              -  cmp [esi+000002A8],edx
+// ---------- INJECTING HERE ----------
+"qagamex86.dll"+44194: 89 86 D8 03 00 00              -  mov [esi+000003D8],eax
+// ---------- DONE INJECTING  ----------
+"qagamex86.dll"+4419A: 74 23                          -  je qagamex86.dll+441BF
+"qagamex86.dll"+4419C: 83 F9 20                       -  cmp ecx,20
+"qagamex86.dll"+4419F: 74 1E                          -  je qagamex86.dll+441BF
+"qagamex86.dll"+441A1: 3B 6C 24 28                    -  cmp ebp,[esp+28]
+"qagamex86.dll"+441A5: 75 18                          -  jne qagamex86.dll+441BF
+"qagamex86.dll"+441A7: 83 F8 D8                       -  cmp eax,-28
+"qagamex86.dll"+441AA: 7F 13                          -  jg qagamex86.dll+441BF
+"qagamex86.dll"+441AC: 83 BE 60 04 00 00 03           -  cmp dword ptr [esi+00000460],03
+"qagamex86.dll"+441B3: 74 0A                          -  je qagamex86.dll+441BF
+"qagamex86.dll"+441B5: C7 86 D8 03 00 00 D9 FF FF FF  -  mov [esi+000003D8],FFFFFFD9
+}
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>2</ID>
+      <Description>"Нет описания"</Description>
+      <ShowAsHex>1</ShowAsHex>
+      <VariableType>Float</VariableType>
+      <Address>20544D60</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>4</ID>
+      <Description>"health"</Description>
+      <VariableType>4 Bytes</VariableType>
+      <Address>qagamex86.dll+53EF58</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>5</ID>
+      <Description>"mega jump"</Description>
+      <LastState/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>[ENABLE]
+qagamex86.dll+364E6:
+ mov [eax+28],(float)1200
+
+ 
+ 
+[DISABLE]
+qagamex86.dll+364E6:
+ mov [eax+28],(float)240
+
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>6</ID>
+      <Description>"Нет описания"</Description>
+      <VariableType>4 Bytes</VariableType>
+      <Address>204F4D40</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>7</ID>
+      <Description>"текущее оружие"</Description>
+      <VariableType>4 Bytes</VariableType>
+      <Address>cgamex86.dll+5B81AC</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>8</ID>
+      <Description>"weapon"</Description>
+      <VariableType>4 Bytes</VariableType>
+      <Address>qagamex86.dll+4F4E54</Address>
+      <Hotkeys>
+        <Hotkey>
+          <Action>Increase Value</Action>
+          <Keys>
+            <Key>74</Key>
+          </Keys>
+          <Value>1</Value>
+          <ID>0</ID>
+        </Hotkey>
+      </Hotkeys>
+    </CheatEntry>
+  </CheatEntries>
+  <CheatCodes>
+    <CodeEntry>
+      <Description>Изменение sub eax,edi</Description>
+      <Address>2004418C</Address>
+      <ModuleName>qagamex86.dll</ModuleName>
+      <ModuleNameOffset>4418C</ModuleNameOffset>
+      <Before>
+        <Byte>86</Byte>
+        <Byte>D8</Byte>
+        <Byte>03</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+      </Before>
+      <Actual>
+        <Byte>2B</Byte>
+        <Byte>C7</Byte>
+      </Actual>
+      <After>
+        <Byte>39</Byte>
+        <Byte>96</Byte>
+        <Byte>A8</Byte>
+        <Byte>02</Byte>
+        <Byte>00</Byte>
+      </After>
+    </CodeEntry>
+  </CheatCodes>
+  <UserdefinedSymbols/>
+  <Comments>2097150 -- значение на оружие</Comments>
+</CheatTable>

@@ -1,0 +1,617 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CheatTable CheatEngineTableVersion="29">
+  <CheatEntries>
+    <CheatEntry>
+      <ID>2</ID>
+      <Description>"health"</Description>
+      <LastState Value="100" RealAddress="08783B6C"/>
+      <VariableType>Float</VariableType>
+      <Address>"hw.dll"+007BBD9C</Address>
+      <Offsets>
+        <Offset>1E0</Offset>
+      </Offsets>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>15</ID>
+      <Description>"energy"</Description>
+      <LastState Value="0" RealAddress="08783BC8"/>
+      <VariableType>Float</VariableType>
+      <Address>"hw.dll"+007BBD9C</Address>
+      <Offsets>
+        <Offset>23c</Offset>
+      </Offsets>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>7</ID>
+      <Description>"velocity"</Description>
+      <LastState Value="-3.029874351E-9" RealAddress="08783A34"/>
+      <VariableType>Float</VariableType>
+      <Address>"hw.dll"+007BBD9C</Address>
+      <Offsets>
+        <Offset>a8</Offset>
+      </Offsets>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>18</ID>
+      <Description>"inf ammo"</Description>
+      <LastState Activated="1"/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>[ENABLE]
+opfor.dll+EA7C1:// - sub ecx,edi
+  db 90 90
+opfor.dll+CA3EC:// - dec ebx  sniper
+  db 90
+opfor.dll+C920B:// - dec eax  shotgun
+  db 90
+opfor.dll+680CD:// - dec edx shotgun
+  db 90
+
+opfor.dll+50941:// - dec edx  granade
+  db 90
+opfor.dll+76B43:// granade minigun
+  db 90
+opfor.dll+BF000:// radio bomb
+  db 90
+opfor.dll+E0F14:// laser bomb
+   db 90
+opfor.dll+2AB89: //gaus
+  db 83 C1 00
+opfor.dll+2B222://gaus teleport
+ db 83 C2 00
+opfor.dll+D297A://bugs
+  db 90
+
+[DISABLE]
+opfor.dll+EA7C1:
+ sub ecx,edi
+opfor.dll+CA3EC:
+ dec ebx
+opfor.dll+C920B:
+ dec eax
+opfor.dll+50941:
+ dec edx
+opfor.dll+76B43:
+ dec ecx
+opfor.dll+BF000:
+ dec ecx
+opfor.dll+E0F14:
+ dec ecx
+opfor.dll+2AB89:
+ add ecx,-14
+opfor.dll+2B222:
+ add edx,-3C { 196 }
+opfor.dll+D297A:
+ dec ecx
+opfor.dll+680CD:
+ dec edx
+
+
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>17</ID>
+      <Description>"OHK"</Description>
+      <LastState Activated="1"/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>{ Game   : hl.exe
+  Version: 
+  Date   : 2019-04-01
+  Author : Hipp
+
+  This script does blah blah blah
+}
+
+[ENABLE]
+
+aobscanmodule(OHK,opfor.dll,D8 64 24 64 D9 98 60 01 00 00) // should be unique
+alloc(newmem,$1000)
+
+label(code)
+label(return)
+
+newmem:
+push ebx
+  mov ebx,["hw.dll"+007BBD9C]
+  lea ebx,[ebx+80]
+  cmp ebx,eax
+  pop ebx
+  je return
+code:
+  fsub dword ptr [esp+64]
+
+  fstp dword ptr [eax+00000160]
+  mov [eax+00000160],(float)0
+  jmp return
+OHK:
+  jmp newmem
+  nop
+  nop
+  nop
+  nop
+  nop
+return:
+registersymbol(OHK)
+
+[DISABLE]
+
+OHK:
+  db D8 64 24 64 D9 98 60 01 00 00
+
+unregistersymbol(OHK)
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: "opfor.dll"+1F47D
+
+"opfor.dll"+1F459: D9 5C 24 38                    -  fstp dword ptr [esp+38]
+"opfor.dll"+1F45D: 8B 4C 24 38                    -  mov ecx,[esp+38]
+"opfor.dll"+1F461: D8 40 08                       -  fadd dword ptr [eax+08]
+"opfor.dll"+1F464: 89 10                          -  mov [eax],edx
+"opfor.dll"+1F466: 89 48 04                       -  mov [eax+04],ecx
+"opfor.dll"+1F469: D9 5C 24 3C                    -  fstp dword ptr [esp+3C]
+"opfor.dll"+1F46D: 8B 54 24 3C                    -  mov edx,[esp+3C]
+"opfor.dll"+1F471: 89 50 08                       -  mov [eax+08],edx
+"opfor.dll"+1F474: 8B 46 04                       -  mov eax,[esi+04]
+"opfor.dll"+1F477: D9 80 60 01 00 00              -  fld dword ptr [eax+00000160]
+// ---------- INJECTING HERE ----------
+"opfor.dll"+1F47D: D8 64 24 64                    -  fsub dword ptr [esp+64]
+"opfor.dll"+1F481: D9 98 60 01 00 00              -  fstp dword ptr [eax+00000160]
+// ---------- DONE INJECTING  ----------
+"opfor.dll"+1F487: 83 BE 78 01 00 00 06           -  cmp dword ptr [esi+00000178],06
+"opfor.dll"+1F48E: 75 1B                          -  jne opfor.dll+1F4AB
+"opfor.dll"+1F490: 8B 86 FC 00 00 00              -  mov eax,[esi+000000FC]
+"opfor.dll"+1F496: 80 CC 01                       -  or ah,01
+"opfor.dll"+1F499: 89 86 FC 00 00 00              -  mov [esi+000000FC],eax
+"opfor.dll"+1F49F: 33 C0                          -  xor eax,eax
+"opfor.dll"+1F4A1: 5F                             -  pop edi
+"opfor.dll"+1F4A2: 5E                             -  pop esi
+"opfor.dll"+1F4A3: 5D                             -  pop ebp
+"opfor.dll"+1F4A4: 5B                             -  pop ebx
+}
+</AssemblerScript>
+      <CheatEntries>
+        <CheatEntry>
+          <ID>19</ID>
+          <Description>"box"</Description>
+          <LastState Activated="1"/>
+          <VariableType>Auto Assembler Script</VariableType>
+          <AssemblerScript>{ Game   : hl.exe
+  Version: 
+  Date   : 2019-04-01
+  Author : Hipp
+
+  This script does blah blah blah
+}
+
+[ENABLE]
+
+aobscanmodule(ohk_box,opfor.dll,D9 80 60 01 00 00 D8 E1) // should be unique
+alloc(newmem,$1000)
+
+label(code)
+label(return)
+
+newmem:
+  mov [eax+00000160],(float)1
+code:
+
+  fld dword ptr [eax+00000160]
+  jmp return
+
+ohk_box:
+  jmp newmem
+  nop
+return:
+registersymbol(ohk_box)
+
+[DISABLE]
+
+ohk_box:
+  db D9 80 60 01 00 00
+
+unregistersymbol(ohk_box)
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: "opfor.dll"+37F5E
+
+"opfor.dll"+37F36: D8 C9                    -  fmul st(0),st(1)
+"opfor.dll"+37F38: D9 5C 24 20              -  fstp dword ptr [esp+20]
+"opfor.dll"+37F3C: DD D8                    -  fstp st(0)
+"opfor.dll"+37F3E: 8B 44 24 18              -  mov eax,[esp+18]
+"opfor.dll"+37F42: 8B 4C 24 1C              -  mov ecx,[esp+1C]
+"opfor.dll"+37F46: 8B 54 24 20              -  mov edx,[esp+20]
+"opfor.dll"+37F4A: A3 D8 14 FC 1D           -  mov [opfor.dll+1514D8],eax
+"opfor.dll"+37F4F: 89 0D DC 14 FC 1D        -  mov [opfor.dll+1514DC],ecx
+"opfor.dll"+37F55: 89 15 E0 14 FC 1D        -  mov [opfor.dll+1514E0],edx
+"opfor.dll"+37F5B: 8B 46 04                 -  mov eax,[esi+04]
+// ---------- INJECTING HERE ----------
+"opfor.dll"+37F5E: D9 80 60 01 00 00        -  fld dword ptr [eax+00000160]
+// ---------- DONE INJECTING  ----------
+"opfor.dll"+37F64: D8 E1                    -  fsub st(0),st(1)
+"opfor.dll"+37F66: D9 98 60 01 00 00        -  fstp dword ptr [eax+00000160]
+"opfor.dll"+37F6C: 8B 46 04                 -  mov eax,[esi+04]
+"opfor.dll"+37F6F: DD D8                    -  fstp st(0)
+"opfor.dll"+37F71: D9 80 60 01 00 00        -  fld dword ptr [eax+00000160]
+"opfor.dll"+37F77: D8 1D B0 25 F7 1D        -  fcomp dword ptr [opfor.dll+1025B0]
+"opfor.dll"+37F7D: DF E0                    -  fnstsw ax
+"opfor.dll"+37F7F: F6 C4 41                 -  test ah,41
+"opfor.dll"+37F82: 74 1C                    -  je opfor.dll+37FA0
+"opfor.dll"+37F84: 8B 16                    -  mov edx,[esi]
+}
+</AssemblerScript>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>20</ID>
+          <Description>"пушки"</Description>
+          <LastState Activated="1"/>
+          <VariableType>Auto Assembler Script</VariableType>
+          <AssemblerScript>{ Game   : hl.exe
+  Version: 
+  Date   : 2019-04-01
+  Author : Hipp
+
+  This script does blah blah blah
+}
+
+[ENABLE]
+
+aobscanmodule(ohk_tech,opfor.dll,D9 80 60 01 00 00 D8 64 24 10) // should be unique
+alloc(newmem,$1000)
+
+label(code)
+label(return)
+
+newmem:
+  mov [eax+00000160],(float)1
+code:
+  fld dword ptr [eax+00000160]
+  jmp return
+
+ohk_tech:
+  jmp newmem
+  nop
+return:
+registersymbol(ohk_tech)
+
+[DISABLE]
+
+ohk_tech:
+  db D9 80 60 01 00 00
+
+unregistersymbol(ohk_tech)
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: "opfor.dll"+E35CB
+
+"opfor.dll"+E35A5: 33 D2                 -  xor edx,edx
+"opfor.dll"+E35A7: 3B C2                 -  cmp eax,edx
+"opfor.dll"+E35A9: 75 1D                 -  jne opfor.dll+E35C8
+"opfor.dll"+E35AB: C7 46 14 A0 23 B4 1D  -  mov [esi+14],opfor.dll+E23A0
+"opfor.dll"+E35B2: 89 56 1C              -  mov [esi+1C],edx
+"opfor.dll"+E35B5: A1 24 17 BB 1D        -  mov eax,[opfor.dll+151724]
+"opfor.dll"+E35BA: D9 00                 -  fld dword ptr [eax]
+"opfor.dll"+E35BC: DC 05 80 25 B6 1D     -  fadd qword ptr [opfor.dll+102580]
+"opfor.dll"+E35C2: D9 99 04 01 00 00     -  fstp dword ptr [ecx+00000104]
+"opfor.dll"+E35C8: 8B 46 04              -  mov eax,[esi+04]
+// ---------- INJECTING HERE ----------
+"opfor.dll"+E35CB: D9 80 60 01 00 00     -  fld dword ptr [eax+00000160]
+// ---------- DONE INJECTING  ----------
+"opfor.dll"+E35D1: D8 64 24 10           -  fsub dword ptr [esp+10]
+"opfor.dll"+E35D5: D9 98 60 01 00 00     -  fstp dword ptr [eax+00000160]
+"opfor.dll"+E35DB: 8B 4E 04              -  mov ecx,[esi+04]
+"opfor.dll"+E35DE: D9 81 60 01 00 00     -  fld dword ptr [ecx+00000160]
+"opfor.dll"+E35E4: D8 1D B0 25 B6 1D     -  fcomp dword ptr [opfor.dll+1025B0]
+"opfor.dll"+E35EA: DF E0                 -  fnstsw ax
+"opfor.dll"+E35EC: F6 C4 41              -  test ah,41
+"opfor.dll"+E35EF: 74 64                 -  je opfor.dll+E3655
+"opfor.dll"+E35F1: 89 91 60 01 00 00     -  mov [ecx+00000160],edx
+"opfor.dll"+E35F7: 8B 4E 04              -  mov ecx,[esi+04]
+}
+</AssemblerScript>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>21</ID>
+          <Description>"hellicopter"</Description>
+          <LastState Activated="1"/>
+          <VariableType>Auto Assembler Script</VariableType>
+          <AssemblerScript>{ Game   : hl.exe
+  Version: 
+  Date   : 2019-04-02
+  Author : Hipp
+
+  This script does blah blah blah
+}
+
+[ENABLE]
+
+
+aobscanmodule(helli,opfor.dll,D9 80 60 01 00 00 D8 64 24 38) // should be unique
+alloc(newmem,$1000)
+
+label(code)
+label(return)
+
+newmem:
+  mov [eax+00000160],(float)1
+code:
+  fld dword ptr [eax+00000160]
+  jmp return
+
+helli:
+  jmp newmem
+  nop
+return:
+registersymbol(helli)
+
+[DISABLE]
+
+helli:
+  db D9 80 60 01 00 00
+
+unregistersymbol(helli)
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: "opfor.dll"+17E29
+
+"opfor.dll"+17E0F: 8B 4F 04                       -  mov ecx,[edi+04]
+"opfor.dll"+17E12: 8B 10                          -  mov edx,[eax]
+"opfor.dll"+17E14: 83 C1 20                       -  add ecx,20
+"opfor.dll"+17E17: 89 11                          -  mov [ecx],edx
+"opfor.dll"+17E19: 8B 50 04                       -  mov edx,[eax+04]
+"opfor.dll"+17E1C: 89 51 04                       -  mov [ecx+04],edx
+"opfor.dll"+17E1F: 8B 40 08                       -  mov eax,[eax+08]
+"opfor.dll"+17E22: 89 41 08                       -  mov [ecx+08],eax
+"opfor.dll"+17E25: 8B 47 04                       -  mov eax,[edi+04]
+"opfor.dll"+17E28: 5E                             -  pop esi
+// ---------- INJECTING HERE ----------
+"opfor.dll"+17E29: D9 80 60 01 00 00              -  fld dword ptr [eax+00000160]
+// ---------- DONE INJECTING  ----------
+"opfor.dll"+17E2F: D8 64 24 38                    -  fsub dword ptr [esp+38]
+"opfor.dll"+17E33: D9 98 60 01 00 00              -  fstp dword ptr [eax+00000160]
+"opfor.dll"+17E39: 8B 4F 04                       -  mov ecx,[edi+04]
+"opfor.dll"+17E3C: D9 81 60 01 00 00              -  fld dword ptr [ecx+00000160]
+"opfor.dll"+17E42: D8 1D B0 25 B6 1D              -  fcomp dword ptr [opfor.dll+1025B0]
+"opfor.dll"+17E48: DF E0                          -  fnstsw ax
+"opfor.dll"+17E4A: F6 C4 41                       -  test ah,41
+"opfor.dll"+17E4D: 74 14                          -  je opfor.dll+17E63
+"opfor.dll"+17E4F: 8B 17                          -  mov edx,[edi]
+"opfor.dll"+17E51: 6A 00                          -  push 00
+}
+</AssemblerScript>
+        </CheatEntry>
+      </CheatEntries>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>6</ID>
+      <Description>"super jump"</Description>
+      <LastState/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>{ Game   : hl.exe
+  Version: 
+  Date   : 2018-10-29
+  Author : Hipp
+
+  This script does blah blah blah
+}
+
+[ENABLE]
+
+aobscanmodule(jump,hw.dll,89 82 A8 00 00 00 8B) // should be unique
+alloc(newmem,$1000)
+alloc(flag1,$4)
+alloc(flag2,$4)
+
+label(code)
+label(return)
+label(slow_down)
+label(decrem)
+label(func)
+
+
+newmem:
+  cmp eax,0
+  je code
+  cmp [decrem],1
+  mov  dword ptr[decrem],0
+  je slow_down
+  jmp code
+  {mov [flag1],eax
+  mov [flag2],(float)0
+  fld dword ptr [flag1]
+  fld dword ptr [flag2]
+  fcomip st,st(1)
+  jl code
+
+  mov [flag1],eax
+  mov [flag2],(float)1.5
+
+  fmul dword ptr [flag2]
+  fstp dword ptr [flag1]
+  mov eax,[flag1]
+  jmp code
+}
+slow_down:
+  mov eax,(float)1500
+
+code:
+
+  mov [edx+000000A8],eax
+  cmp eax,0
+  je func
+  jmp return
+
+func:
+mov dword ptr [decrem],1
+jmp return
+
+decrem:
+dw #10
+
+
+jump:
+  jmp newmem
+  nop
+return:
+
+registersymbol(jump)
+registersymbol(decrem)
+
+[DISABLE]
+
+jump:
+  db 89 82 A8 00 00 00
+unregistersymbol(decrem)
+unregistersymbol(jump)
+dealloc(newmem)
+dealloc(flag1)
+dealloc(flag2)
+
+{
+// ORIGINAL CODE - INJECTION POINT: "hw.dll"+C1E88
+
+"hw.dll"+C1E51: 83 C4 0C              -  add esp,0C
+"hw.dll"+C1E54: E9 1F FF FF FF        -  jmp hw.dll+C1D78
+"hw.dll"+C1E59: 8B 0D 9C BD 1D 05     -  mov ecx,[hw.dll+7BBD9C]
+"hw.dll"+C1E5F: 8B 95 74 FF FF FF     -  mov edx,[ebp-0000008C]
+"hw.dll"+C1E65: 89 91 A0 00 00 00     -  mov [ecx+000000A0],edx
+"hw.dll"+C1E6B: A1 9C BD 1D 05        -  mov eax,[hw.dll+7BBD9C]
+"hw.dll"+C1E70: 8B 8D 78 FF FF FF     -  mov ecx,[ebp-00000088]
+"hw.dll"+C1E76: 89 88 A4 00 00 00     -  mov [eax+000000A4],ecx
+"hw.dll"+C1E7C: 8B 15 9C BD 1D 05     -  mov edx,[hw.dll+7BBD9C]
+"hw.dll"+C1E82: 8B 85 7C FF FF FF     -  mov eax,[ebp-00000084]
+// ---------- INJECTING HERE ----------
+"hw.dll"+C1E88: 89 82 A8 00 00 00     -  mov [edx+000000A8],eax
+// ---------- DONE INJECTING  ----------
+"hw.dll"+C1E8E: 8B 0D 3C 34 4A 05     -  mov ecx,[hw.dll+A8343C]
+"hw.dll"+C1E94: DD 81 B8 25 00 00     -  fld qword ptr [ecx+000025B8]
+"hw.dll"+C1E9A: D9 1D E0 D0 1E 05     -  fstp dword ptr [hw.dll+7CD0E0]
+"hw.dll"+C1EA0: 8B 55 FC              -  mov edx,[ebp-04]
+"hw.dll"+C1EA3: 89 15 E4 D0 1E 05     -  mov [hw.dll+7CD0E4],edx
+"hw.dll"+C1EA9: A1 9C BD 1D 05        -  mov eax,[hw.dll+7BBD9C]
+"hw.dll"+C1EAE: 50                    -  push eax
+"hw.dll"+C1EAF: FF 15 40 B6 1D 05     -  call dword ptr [hw.dll+7BB640]
+"hw.dll"+C1EB5: 83 C4 04              -  add esp,04
+"hw.dll"+C1EB8: 8B 0D 9C BD 1D 05     -  mov ecx,[hw.dll+7BBD9C]
+}
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>8</ID>
+      <Description>"Нет описания"</Description>
+      <VariableType>4 Bytes</VariableType>
+      <Address>decrem</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>22</ID>
+      <Description>"x"</Description>
+      <LastState Value="958.8493652" RealAddress="08783A14"/>
+      <VariableType>Float</VariableType>
+      <Address>hw.dll+7BBD9C</Address>
+      <Offsets>
+        <Offset>88</Offset>
+      </Offsets>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>24</ID>
+      <Description>"y"</Description>
+      <LastState Value="1570.08313" RealAddress="08783A18"/>
+      <VariableType>Float</VariableType>
+      <Address>hw.dll+7BBD9C</Address>
+      <Offsets>
+        <Offset>8c</Offset>
+      </Offsets>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>23</ID>
+      <Description>"z"</Description>
+      <LastState Value="-816.6640625" RealAddress="08783A1C"/>
+      <VariableType>Float</VariableType>
+      <Address>hw.dll+7BBD9C</Address>
+      <Offsets>
+        <Offset>90</Offset>
+      </Offsets>
+    </CheatEntry>
+  </CheatEntries>
+  <UserdefinedSymbols/>
+  <Structures StructVersion="2">
+    <Structure Name="безымянная структура" AutoFill="0" AutoCreate="1" DefaultHex="0" AutoDestroy="0" DoNotSaveLocal="0" RLECompression="1" AutoCreateStructsize="4096">
+      <Elements>
+        <Element Offset="0" Vartype="4 Bytes" Bytesize="4" RLECount="2" DisplayMethod="Целое без знака"/>
+        <Element Offset="8" Vartype="Pointer" Bytesize="4" RLECount="2" DisplayMethod="Целое без знака"/>
+        <Element Offset="16" Vartype="4 Bytes" Bytesize="4" RLECount="9" DisplayMethod="Целое без знака"/>
+        <Element Offset="52" Vartype="Pointer" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="56" Vartype="4 Bytes" Bytesize="4" RLECount="17" DisplayMethod="Целое без знака"/>
+        <Element Offset="124" Vartype="Pointer" Bytesize="4" RLECount="2" DisplayMethod="Целое без знака"/>
+        <Element Offset="132" Vartype="4 Bytes" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="136" Vartype="Float" Bytesize="4" RLECount="3" DisplayMethod="Целое без знака"/>
+        <Element Offset="148" Vartype="4 Bytes" Bytesize="4" RLECount="5" DisplayMethod="Целое без знака"/>
+        <Element Offset="168" Vartype="Float" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="172" Vartype="4 Bytes" Bytesize="4" RLECount="6" DisplayMethod="Целое без знака"/>
+        <Element Offset="196" Vartype="Float" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="200" Vartype="4 Bytes" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="204" Vartype="Double" Bytesize="8" DisplayMethod="Целое без знака"/>
+        <Element Offset="212" Vartype="Float" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="216" Vartype="4 Bytes" Bytesize="4" RLECount="7" DisplayMethod="Целое без знака"/>
+        <Element Offset="244" Vartype="Float" Bytesize="4" RLECount="2" DisplayMethod="Целое без знака"/>
+        <Element Offset="252" Vartype="4 Bytes" Bytesize="4" RLECount="15" DisplayMethod="Целое без знака"/>
+        <Element Offset="312" Vartype="Pointer" Bytesize="4" RLECount="3" DisplayMethod="Целое без знака"/>
+        <Element Offset="324" Vartype="Float" Bytesize="4" RLECount="15" DisplayMethod="Целое без знака"/>
+        <Element Offset="384" Vartype="4 Bytes" Bytesize="4" RLECount="6" DisplayMethod="Целое без знака"/>
+        <Element Offset="408" Vartype="Double" Bytesize="8" DisplayMethod="Целое без знака"/>
+        <Element Offset="416" Vartype="Float" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="420" Vartype="4 Bytes" Bytesize="4" RLECount="3" DisplayMethod="Целое без знака"/>
+        <Element Offset="432" Vartype="Float" Bytesize="4" RLECount="3" DisplayMethod="Целое без знака"/>
+        <Element Offset="444" Vartype="4 Bytes" Bytesize="4" RLECount="9" DisplayMethod="Целое без знака"/>
+        <Element Offset="480" Vartype="Float" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="484" Vartype="4 Bytes" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="488" Vartype="Double" Bytesize="8" DisplayMethod="Целое без знака"/>
+        <Element Offset="496" Vartype="4 Bytes" Bytesize="4" RLECount="3" DisplayMethod="Целое без знака"/>
+        <Element Offset="508" Vartype="Float" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="512" Vartype="4 Bytes" Bytesize="4" RLECount="2" DisplayMethod="Целое без знака"/>
+        <Element Offset="520" Vartype="Pointer" Bytesize="4" RLECount="2" DisplayMethod="Целое без знака"/>
+        <Element Offset="528" Vartype="4 Bytes" Bytesize="4" RLECount="3" DisplayMethod="Целое без знака"/>
+        <Element Offset="540" Vartype="Pointer" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="544" Vartype="4 Bytes" Bytesize="4" RLECount="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="560" Vartype="Float" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="564" Vartype="4 Bytes" Bytesize="4" RLECount="2" DisplayMethod="Целое без знака"/>
+        <Element Offset="572" Vartype="Float" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="576" Vartype="4 Bytes" Bytesize="4" RLECount="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="592" Vartype="Pointer" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="596" Vartype="4 Bytes" Bytesize="4" RLECount="2" DisplayMethod="Целое без знака"/>
+        <Element Offset="604" Vartype="Double" Bytesize="8" DisplayMethod="Целое без знака"/>
+        <Element Offset="612" Vartype="4 Bytes" Bytesize="4" RLECount="6" DisplayMethod="Целое без знака"/>
+        <Element Offset="636" Vartype="Float" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="640" Vartype="4 Bytes" Bytesize="4" RLECount="2" DisplayMethod="Целое без знака"/>
+        <Element Offset="648" Vartype="Pointer" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="652" Vartype="4 Bytes" Bytesize="4" RLECount="69" DisplayMethod="Целое без знака"/>
+        <Element Offset="928" Vartype="Pointer" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="932" Vartype="4 Bytes" Bytesize="4" RLECount="65" DisplayMethod="Целое без знака"/>
+        <Element Offset="1192" Vartype="Float" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="1196" Vartype="4 Bytes" Bytesize="4" RLECount="64" DisplayMethod="Целое без знака"/>
+        <Element Offset="1452" Vartype="Pointer" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="1456" Vartype="4 Bytes" Bytesize="4" RLECount="69" DisplayMethod="Целое без знака"/>
+        <Element Offset="1732" Vartype="Pointer" Bytesize="4" RLECount="2" DisplayMethod="Целое без знака"/>
+        <Element Offset="1740" Vartype="4 Bytes" Bytesize="4" RLECount="101" DisplayMethod="Целое без знака"/>
+        <Element Offset="2144" Vartype="Pointer" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="2148" Vartype="4 Bytes" Bytesize="4" RLECount="27" DisplayMethod="Целое без знака"/>
+        <Element Offset="2256" Vartype="Pointer" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="2260" Vartype="4 Bytes" Bytesize="4" RLECount="69" DisplayMethod="Целое без знака"/>
+        <Element Offset="2536" Vartype="Pointer" Bytesize="4" RLECount="2" DisplayMethod="Целое без знака"/>
+        <Element Offset="2544" Vartype="4 Bytes" Bytesize="4" RLECount="101" DisplayMethod="Целое без знака"/>
+        <Element Offset="2948" Vartype="Pointer" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="2952" Vartype="4 Bytes" Bytesize="4" RLECount="27" DisplayMethod="Целое без знака"/>
+        <Element Offset="3060" Vartype="Pointer" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="3064" Vartype="4 Bytes" Bytesize="4" RLECount="69" DisplayMethod="Целое без знака"/>
+        <Element Offset="3340" Vartype="Pointer" Bytesize="4" RLECount="2" DisplayMethod="Целое без знака"/>
+        <Element Offset="3348" Vartype="4 Bytes" Bytesize="4" RLECount="101" DisplayMethod="Целое без знака"/>
+        <Element Offset="3752" Vartype="Pointer" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="3756" Vartype="4 Bytes" Bytesize="4" RLECount="27" DisplayMethod="Целое без знака"/>
+        <Element Offset="3864" Vartype="Pointer" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="3868" Vartype="4 Bytes" Bytesize="4" RLECount="57" DisplayMethod="Целое без знака"/>
+      </Elements>
+    </Structure>
+  </Structures>
+</CheatTable>

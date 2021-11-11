@@ -1,0 +1,1125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CheatTable CheatEngineTableVersion="29">
+  <CheatEntries>
+    <CheatEntry>
+      <ID>0</ID>
+      <Description>"кол монстр"</Description>
+      <LastState Activated="1"/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>[DISABLE]
+h3hota HD.exe+49E1D:
+  sub eax,edx
+
+ 
+ 
+[ENABLE]
+h3hota HD.exe+49E1D:
+//db 90 90
+  add eax,edx
+
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>2</ID>
+      <Description>"build"</Description>
+      <LastState Activated="1"/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>[ENABLE]
+h3hota HD.exe+612F5:
+jmp "h3hota HD.exe"+61305 { -&gt;h3hota HD.exe+61305 }
+
+ 
+[DISABLE]
+h3hota HD.exe+612F5:
+je "h3hota HD.exe"+61305 { -&gt;h3hota HD.exe+61305 }
+
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>34</ID>
+      <Description>"move"</Description>
+      <LastState Activated="1"/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>{ Game   : h3hota HD.exe
+  Version: 
+  Date   : 2020-05-08
+  Author : Hipp
+
+  This script does blah blah blah
+}
+
+[ENABLE]
+
+aobscanmodule(move,hota.dll,8B 7D 4D 8B 5D 49) // should be unique
+alloc(newmem,$1000)
+
+label(code)
+label(return)
+
+newmem:
+  mov dword ptr [ebp+4d],#5000
+code:
+  mov edi,[ebp+4D]
+  mov ebx,[ebp+49]
+  jmp return
+
+move:
+  jmp newmem
+  nop
+return:
+registersymbol(move)
+
+[DISABLE]
+
+move:
+  db 8B 7D 4D 8B 5D 49
+
+unregistersymbol(move)
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: "hota.dll"+102EA
+
+"hota.dll"+102CF: CC                 -  int 3 
+"hota.dll"+102D0: 83 EC 08           -  sub esp,08
+"hota.dll"+102D3: 8B 0D FC CC 69 00  -  mov ecx,["h3hota HD.exe"+29CCFC]
+"hota.dll"+102D9: 53                 -  push ebx
+"hota.dll"+102DA: 55                 -  push ebp
+"hota.dll"+102DB: 8B 6C 24 14        -  mov ebp,[esp+14]
+"hota.dll"+102DF: 56                 -  push esi
+"hota.dll"+102E0: 57                 -  push edi
+"hota.dll"+102E1: C6 44 24 1C 00     -  mov byte ptr [esp+1C],00
+"hota.dll"+102E6: 0F BE 45 22        -  movsx eax,byte ptr [ebp+22]
+// ---------- INJECTING HERE ----------
+"hota.dll"+102EA: 8B 7D 4D           -  mov edi,[ebp+4D]
+"hota.dll"+102ED: 8B 5D 49           -  mov ebx,[ebp+49]
+// ---------- DONE INJECTING  ----------
+"hota.dll"+102F0: 69 F0 68 01 00 00  -  imul esi,eax,00000168
+"hota.dll"+102F6: A1 38 95 69 00     -  mov eax,["h3hota HD.exe"+299538]
+"hota.dll"+102FB: 03 F0              -  add esi,eax
+"hota.dll"+102FD: B8 40 AA 4B 00     -  mov eax,"h3hota HD.exe"+BAA40
+"hota.dll"+10302: FF D0              -  call eax
+"hota.dll"+10304: 84 C0              -  test al,al
+"hota.dll"+10306: 75 2E              -  jne hota.dll+10336
+"hota.dll"+10308: A1 FC CC 69 00     -  mov eax,["h3hota HD.exe"+29CCFC]
+"hota.dll"+1030D: 8A 8E B2 0B 02 00  -  mov cl,[esi+00020BB2]
+"hota.dll"+10313: 8A 80 E2 00 00 00  -  mov al,[eax+000000E2]
+}
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>37</ID>
+      <Description>"inf move for all"</Description>
+      <LastState/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>[ENABLE]
+h3hota HD.exe+80AA8:
+ db 90 90
+
+[DISABLE]
+h3hota HD.exe+80AA8:
+ sub edx,ecx
+
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>28</ID>
+      <Description>"resource"</Description>
+      <LastState/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>{ Game   : h3hota HD.exe
+  Version: 
+  Date   : 2018-03-30
+  Author : Hipp
+
+  This script does blah blah blah
+}
+
+[ENABLE]
+
+aobscanmodule(resource,h3hota HD.exe,8B 8C 83 9C 00 00 00) // should be unique
+alloc(newmem,$1000)
+
+label(code)
+label(return)
+label(gold)
+label(res)
+
+newmem:
+  cmp eax,06
+  je gold
+res:
+  mov dword ptr [ebx+eax*4+0000009C],#100
+
+code:
+  mov ecx,[ebx+eax*4+0000009C]
+  jmp return
+gold:
+  cmp dword ptr [ebx+eax*4+0000009C],#100000
+  jg code
+  mov dword ptr [ebx+eax*4+0000009C],#100000
+  jmp code
+resource:
+  jmp newmem
+  nop
+  nop
+return:
+registersymbol(resource)
+
+[DISABLE]
+
+resource:
+  db 8B 8C 83 9C 00 00 00
+
+unregistersymbol(resource)
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: "h3hota HD.exe"+1591A7
+
+"h3hota HD.exe"+159184: 8D 0C 80              -  lea ecx,[eax+eax*4]
+"h3hota HD.exe"+159187: 50                    -  push eax
+"h3hota HD.exe"+159188: 89 7D FC              -  mov [ebp-04],edi
+"h3hota HD.exe"+15918B: 8D 0C C9              -  lea ecx,[ecx+ecx*8]
+"h3hota HD.exe"+15918E: 8D 9C CA D0 0A 02 00  -  lea ebx,[edx+ecx*8+00020AD0]
+"h3hota HD.exe"+159195: 8B 4F 70              -  mov ecx,[edi+70]
+"h3hota HD.exe"+159198: E8 33 70 EF FF        -  call "h3hota HD.exe"+501D0
+"h3hota HD.exe"+15919D: BE 18 10 64 00        -  mov esi,"h3hota HD.exe"+241018
+"h3hota HD.exe"+1591A2: 83 C7 38              -  add edi,38
+"h3hota HD.exe"+1591A5: 8B 06                 -  mov eax,[esi]
+// ---------- INJECTING HERE ----------
+"h3hota HD.exe"+1591A7: 8B 8C 83 9C 00 00 00  -  mov ecx,[ebx+eax*4+0000009C]
+// ---------- DONE INJECTING  ----------
+"h3hota HD.exe"+1591AE: 51                    -  push ecx
+"h3hota HD.exe"+1591AF: 68 1C 0A 66 00        -  push "h3hota HD.exe"+260A1C
+"h3hota HD.exe"+1591B4: 68 28 74 69 00        -  push "h3hota HD.exe"+297428
+"h3hota HD.exe"+1591B9: E8 20 E8 0B 00        -  call "h3hota HD.exe"+2179DE
+"h3hota HD.exe"+1591BE: 8B 0F                 -  mov ecx,[edi]
+"h3hota HD.exe"+1591C0: 83 C4 0C              -  add esp,0C
+"h3hota HD.exe"+1591C3: 8B 11                 -  mov edx,[ecx]
+"h3hota HD.exe"+1591C5: 68 28 74 69 00        -  push "h3hota HD.exe"+297428
+"h3hota HD.exe"+1591CA: FF 52 34              -  call dword ptr [edx+34]
+"h3hota HD.exe"+1591CD: 83 C6 04              -  add esi,04
+}
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>29</ID>
+      <Description>"all_art"</Description>
+      <LastState/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>{ Game   : h3hota HD.exe
+  Version: 
+  Date   : 2018-03-30
+  Author : Hipp
+
+  This script does blah blah blah
+}
+
+[ENABLE]
+
+
+aobscanmodule(all_art,h3hota HD.exe,8B 84 F0 D4 01 00 00) // should be unique
+alloc(newmem,$1000)
+
+
+label(code)
+label(return)
+label(metka)
+
+
+
+newmem:
+  push ebx
+  push ecx
+  push esi
+  xor esi,esi
+  mov ecx,#88
+  mov ebx,#56
+// 144 max
+metka:
+  mov [eax+esi*8+000001D4],ebx
+  inc esi
+  inc ebx
+  loop metka
+  pop esi
+  pop ecx
+  pop ebx
+code:
+  mov eax,[eax+esi*8+000001D4]
+  jmp return
+
+all_art:
+  jmp newmem
+  nop
+  nop
+return:
+registersymbol(all_art)
+
+[DISABLE]
+
+all_art:
+  db 8B 84 F0 D4 01 00 00
+
+unregistersymbol(all_art)
+dealloc(newmem)
+
+
+{
+// ORIGINAL CODE - INJECTION POINT: "h3hota HD.exe"+DB49C
+
+"h3hota HD.exe"+DB477: 89 7D F4              -  mov [ebp-0C],edi
+"h3hota HD.exe"+DB47A: 89 7D F8              -  mov [ebp-08],edi
+"h3hota HD.exe"+DB47D: 89 7D FC              -  mov [ebp-04],edi
+"h3hota HD.exe"+DB480: C7 45 E0 00 02 00 00  -  mov [ebp-20],00000200
+"h3hota HD.exe"+DB487: 33 F6                 -  xor esi,esi
+"h3hota HD.exe"+DB489: BB 04 00 00 00        -  mov ebx,00000004
+"h3hota HD.exe"+DB48E: A1 70 8B 69 00        -  mov eax,["h3hota HD.exe"+298B70]
+"h3hota HD.exe"+DB493: 8D 4E 28              -  lea ecx,[esi+28]
+"h3hota HD.exe"+DB496: 89 7D CC              -  mov [ebp-34],edi
+"h3hota HD.exe"+DB499: 89 7D D0              -  mov [ebp-30],edi
+// ---------- INJECTING HERE ----------
+"h3hota HD.exe"+DB49C: 8B 84 F0 D4 01 00 00  -  mov eax,[eax+esi*8+000001D4]
+// ---------- DONE INJECTING  ----------
+"h3hota HD.exe"+DB4A3: 89 7D D4              -  mov [ebp-2C],edi
+"h3hota HD.exe"+DB4A6: 83 F8 FF              -  cmp eax,-01
+"h3hota HD.exe"+DB4A9: 89 7D DC              -  mov [ebp-24],edi
+"h3hota HD.exe"+DB4AC: C7 45 C0 00 02 00 00  -  mov [ebp-40],00000200
+"h3hota HD.exe"+DB4B3: 89 4D C8              -  mov [ebp-38],ecx
+"h3hota HD.exe"+DB4B6: 75 09                 -  jne "h3hota HD.exe"+DB4C1
+"h3hota HD.exe"+DB4B8: C7 45 C4 06 00 00 00  -  mov [ebp-3C],00000006
+"h3hota HD.exe"+DB4BF: EB 1C                 -  jmp "h3hota HD.exe"+DB4DD
+"h3hota HD.exe"+DB4C1: 8B 0D C8 8A 69 00     -  mov ecx,["h3hota HD.exe"+298AC8]
+"h3hota HD.exe"+DB4C7: 8D 55 C0              -  lea edx,[ebp-40]
+}
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>15</ID>
+      <Description>"artefact"</Description>
+      <LastState/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>{ Game   : h3hota HD.exe
+  Version: 
+  Date   : 2017-08-06
+  Author : Hipp
+
+  This script does blah blah blah
+}
+
+[ENABLE]
+
+aobscanmodule(artefact,h3hota HD.exe,8B 84 F1 D4 01 00 00) // should be unique
+alloc(newmem,$1000)
+alloc(var_art,$4)
+
+
+label(code)
+label(return)
+var_art:
+  db 02
+
+newmem:
+  push ebx
+  mov ebx,[var_art] // 143 max
+  mov [ecx+esi*8+000001D4],ebx
+  pop ebx
+code:
+  mov eax,[ecx+esi*8+000001D4]
+  jmp return
+
+artefact:
+  jmp newmem
+  nop
+  nop
+return:
+registersymbol(artefact)
+registersymbol(var_art)
+
+
+[DISABLE]
+
+artefact:
+  db 8B 84 F1 D4 01 00 00
+
+unregistersymbol(artefact)
+unregistersymbol(var_art)
+dealloc(newmem)
+dealloc(var_art)
+
+
+{
+// ORIGINAL CODE - INJECTION POINT: "h3hota HD.exe"+DE2E7
+
+"h3hota HD.exe"+DE2C0: FF 52 14              -  call dword ptr [edx+14]
+"h3hota HD.exe"+DE2C3: A1 D8 8A 69 00        -  mov eax,["h3hota HD.exe"+298AD8]
+"h3hota HD.exe"+DE2C8: 8B 0D B0 92 69 00     -  mov ecx,["h3hota HD.exe"+2992B0]
+"h3hota HD.exe"+DE2CE: 6A 04                 -  push 04
+"h3hota HD.exe"+DE2D0: 50                    -  push eax
+"h3hota HD.exe"+DE2D1: E8 CA EB 02 00        -  call "h3hota HD.exe"+10CEA0
+"h3hota HD.exe"+DE2D6: E9 DE F2 FF FF        -  jmp "h3hota HD.exe"+DD5B9
+"h3hota HD.exe"+DE2DB: 8B 0D 70 8B 69 00     -  mov ecx,["h3hota HD.exe"+298B70]
+"h3hota HD.exe"+DE2E1: 8D 70 D8              -  lea esi,[eax-28]
+"h3hota HD.exe"+DE2E4: 83 CF FF              -  or edi,-01
+// ---------- INJECTING HERE ----------
+"h3hota HD.exe"+DE2E7: 8B 84 F1 D4 01 00 00  -  mov eax,[ecx+esi*8+000001D4]
+// ---------- DONE INJECTING  ----------
+"h3hota HD.exe"+DE2EE: 89 45 EC              -  mov [ebp-14],eax
+"h3hota HD.exe"+DE2F1: 8B 94 F1 D8 01 00 00  -  mov edx,[ecx+esi*8+000001D8]
+"h3hota HD.exe"+DE2F8: 89 55 F0              -  mov [ebp-10],edx
+"h3hota HD.exe"+DE2FB: 8B 15 D8 8A 69 00     -  mov edx,["h3hota HD.exe"+298AD8]
+"h3hota HD.exe"+DE301: 3B D7                 -  cmp edx,edi
+"h3hota HD.exe"+DE303: 0F 85 91 01 00 00     -  jne "h3hota HD.exe"+DE49A
+"h3hota HD.exe"+DE309: 3B C7                 -  cmp eax,edi
+"h3hota HD.exe"+DE30B: 0F 84 A8 F2 FF FF     -  je "h3hota HD.exe"+DD5B9
+"h3hota HD.exe"+DE311: 84 DB                 -  test bl,bl
+"h3hota HD.exe"+DE313: 0F 84 B3 00 00 00     -  je "h3hota HD.exe"+DE3CC
+}
+</AssemblerScript>
+      <CheatEntries>
+        <CheatEntry>
+          <ID>32</ID>
+          <Description>"тек арт"</Description>
+          <VariableType>4 Bytes</VariableType>
+          <Address>"h3hota HD.exe"+298B70</Address>
+          <Offsets>
+            <Offset>1d4</Offset>
+          </Offsets>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>33</ID>
+          <Description>"тек монстр"</Description>
+          <VariableType>4 Bytes</VariableType>
+          <Address>"h3hota HD.exe"+298B70</Address>
+          <Offsets>
+            <Offset>91</Offset>
+          </Offsets>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>16</ID>
+          <Description>"num_art"</Description>
+          <VariableType>4 Bytes</VariableType>
+          <Address>var_art</Address>
+          <Hotkeys>
+            <Hotkey>
+              <Action>Decrease Value</Action>
+              <Keys>
+                <Key>17</Key>
+                <Key>74</Key>
+              </Keys>
+              <Value>1</Value>
+              <ID>0</ID>
+            </Hotkey>
+            <Hotkey>
+              <Action>Increase Value</Action>
+              <Keys>
+                <Key>16</Key>
+                <Key>74</Key>
+              </Keys>
+              <Value>1</Value>
+              <ID>1</ID>
+            </Hotkey>
+          </Hotkeys>
+        </CheatEntry>
+      </CheatEntries>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>19</ID>
+      <Description>"inf_mana"</Description>
+      <LastState/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>[ENABLE]
+h3hota HD.exe+D9561:
+  db 90 90 90 90
+h3hota HD.exe+19D223:
+  db 90 90
+h3hota HD.exe+19D74D:
+  db 90 90
+ 
+ 
+[DISABLE]
+h3hota HD.exe+D9561:
+  mov [ecx+18],dx
+h3hota HD.exe+19D223:
+  jg "h3hota HD.exe"+19D234
+h3hota HD.exe+19D74D:
+  jg "h3hota HD.exe"+19D762 { -&gt;h3hota HD.exe+19D762 }
+
+
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>25</ID>
+      <Description>"all_magic"</Description>
+      <LastState/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>{ Game   : h3hota HD.exe
+  Version: 
+  Date   : 2017-08-23
+  Author : Hipp
+
+  This script does blah blah blah
+}
+
+[ENABLE]
+
+aobscanmodule(all_magic,h3hota HD.exe,8A 84 39 30 04 00 00 84 C0 74) // should be unique
+alloc(newmem,$1000)
+
+label(code)
+label(return)
+
+newmem:
+  mov byte ptr [ecx+edi+00000430],1
+
+code:
+  mov al,[ecx+edi+00000430]
+  jmp return
+
+all_magic:
+  jmp newmem
+  nop
+  nop
+return:
+registersymbol(all_magic)
+
+[DISABLE]
+
+all_magic:
+  db 8A 84 39 30 04 00 00
+
+unregistersymbol(all_magic)
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: "h3hota HD.exe"+19CD5B
+
+"h3hota HD.exe"+19CD3D: 8D 4D BC              -  lea ecx,[ebp-44]
+"h3hota HD.exe"+19CD40: 89 45 C8              -  mov [ebp-38],eax
+"h3hota HD.exe"+19CD43: E8 D8 78 E9 FF        -  call "h3hota HD.exe"+34620
+"h3hota HD.exe"+19CD48: 8D 0C 40              -  lea ecx,[eax+eax*2]
+"h3hota HD.exe"+19CD4B: 89 7D C0              -  mov [ebp-40],edi
+"h3hota HD.exe"+19CD4E: 8D 14 8F              -  lea edx,[edi+ecx*4]
+"h3hota HD.exe"+19CD51: 33 FF                 -  xor edi,edi
+"h3hota HD.exe"+19CD53: 89 55 C4              -  mov [ebp-3C],edx
+"h3hota HD.exe"+19CD56: 33 DB                 -  xor ebx,ebx
+"h3hota HD.exe"+19CD58: 8B 4E 64              -  mov ecx,[esi+64]
+// ---------- INJECTING HERE ----------
+"h3hota HD.exe"+19CD5B: 8A 84 39 30 04 00 00  -  mov al,[ecx+edi+00000430]
+// ---------- DONE INJECTING  ----------
+"h3hota HD.exe"+19CD62: 84 C0                 -  test al,al
+"h3hota HD.exe"+19CD64: 74 50                 -  je "h3hota HD.exe"+19CDB6
+"h3hota HD.exe"+19CD66: 8B 15 A8 7F 68 00     -  mov edx,["h3hota HD.exe"+287FA8]
+"h3hota HD.exe"+19CD6C: 8B 44 13 1C           -  mov eax,[ebx+edx+1C]
+"h3hota HD.exe"+19CD70: 85 46 70              -  test [esi+70],eax
+"h3hota HD.exe"+19CD73: 74 41                 -  je "h3hota HD.exe"+19CDB6
+"h3hota HD.exe"+19CD75: 8B 54 13 0C           -  mov edx,[ebx+edx+0C]
+"h3hota HD.exe"+19CD79: 85 56 74              -  test [esi+74],edx
+"h3hota HD.exe"+19CD7C: 74 38                 -  je "h3hota HD.exe"+19CDB6
+"h3hota HD.exe"+19CD7E: 50                    -  push eax
+}
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>20</ID>
+      <Description>"inf_magic"</Description>
+      <LastState/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>[ENABLE]
+h3hota HD.exe+1A0306:
+ mov [ebx+ecx*4+000054B4],00000000
+
+ 
+ 
+[DISABLE]
+h3hota HD.exe+1A0306:
+ mov [ebx+ecx*4+000054B4],00000001
+
+</AssemblerScript>
+      <CheatEntries>
+        <CheatEntry>
+          <ID>22</ID>
+          <Description>"button"</Description>
+          <LastState/>
+          <VariableType>Auto Assembler Script</VariableType>
+          <AssemblerScript>{ Game   : h3hota HD.exe
+  Version: 
+  Date   : 2017-08-06
+  Author : Hipp
+
+  This script does blah blah blah
+}
+
+[ENABLE]
+
+aobscanmodule(inf_magic,h3hota HD.exe,F6 46 16 02 0F 84 6A FE FF FF) // should be unique
+alloc(newmem,$1000)
+
+label(code)
+label(return)
+
+newmem:
+  mov byte ptr [esi+16],06
+code:
+  test byte ptr [esi+16],02
+  je "h3hota HD.exe"+1FEB0E
+  jmp return
+
+inf_magic:
+  jmp newmem
+  nop
+  nop
+  nop
+  nop
+  nop
+return:
+registersymbol(inf_magic)
+
+[DISABLE]
+
+inf_magic:
+  db F6 46 16 02 0F 84 6A FE FF FF
+
+unregistersymbol(inf_magic)
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: "h3hota HD.exe"+1FEC9A
+
+"h3hota HD.exe"+1FEC7D: 39 48 08           -  cmp [eax+08],ecx
+"h3hota HD.exe"+1FEC80: 0F 85 88 FE FF FF  -  jne "h3hota HD.exe"+1FEB0E
+"h3hota HD.exe"+1FEC86: 66 8B 50 18        -  mov dx,[eax+18]
+"h3hota HD.exe"+1FEC8A: 5F                 -  pop edi
+"h3hota HD.exe"+1FEC8B: 66 89 56 1C        -  mov [esi+1C],dx
+"h3hota HD.exe"+1FEC8F: 5E                 -  pop esi
+"h3hota HD.exe"+1FEC90: B8 01 00 00 00     -  mov eax,00000001
+"h3hota HD.exe"+1FEC95: 5B                 -  pop ebx
+"h3hota HD.exe"+1FEC96: 5D                 -  pop ebp
+"h3hota HD.exe"+1FEC97: C2 04 00           -  ret 0004
+// ---------- INJECTING HERE ----------
+"h3hota HD.exe"+1FEC9A: F6 46 16 02        -  test byte ptr [esi+16],02
+"h3hota HD.exe"+1FEC9E: 0F 84 6A FE FF FF  -  je "h3hota HD.exe"+1FEB0E
+// ---------- DONE INJECTING  ----------
+"h3hota HD.exe"+1FECA4: 8B 7E 04           -  mov edi,[esi+04]
+"h3hota HD.exe"+1FECA7: 66 8B 48 04        -  mov cx,[eax+04]
+"h3hota HD.exe"+1FECAB: 66 8B 50 08        -  mov dx,[eax+08]
+"h3hota HD.exe"+1FECAF: 66 2B 4F 18        -  sub cx,[edi+18]
+"h3hota HD.exe"+1FECB3: 66 2B 57 1C        -  sub dx,[edi+1C]
+"h3hota HD.exe"+1FECB7: 66 8B 7E 18        -  mov di,[esi+18]
+"h3hota HD.exe"+1FECBB: 66 3B CF           -  cmp cx,di
+"h3hota HD.exe"+1FECBE: 0F 8C 4A FE FF FF  -  jl "h3hota HD.exe"+1FEB0E
+"h3hota HD.exe"+1FECC4: 66 3B 56 1A        -  cmp dx,[esi+1A]
+"h3hota HD.exe"+1FECC8: 0F 8C 40 FE FF FF  -  jl "h3hota HD.exe"+1FEB0E
+}
+</AssemblerScript>
+        </CheatEntry>
+      </CheatEntries>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>5</ID>
+      <Description>"День"</Description>
+      <VariableType>Byte</VariableType>
+      <Address>"h3hota HD.exe"+299538</Address>
+      <Offsets>
+        <Offset>1f63e</Offset>
+      </Offsets>
+      <Hotkeys>
+        <Hotkey>
+          <Action>Set Value</Action>
+          <Keys>
+            <Key>187</Key>
+          </Keys>
+          <Value>7</Value>
+          <ID>0</ID>
+        </Hotkey>
+      </Hotkeys>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>24</ID>
+      <Description>"Характеристики на бой"</Description>
+      <LastState Activated="1"/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>{ Game   : h3hota HD.exe
+  Version: 
+  Date   : 2017-08-08
+  Author : Hipp
+
+  This script does blah blah blah
+}
+
+[ENABLE]
+
+aobscanmodule(char,h3hota HD.exe,8B 81 C4 00 00 00) // should be unique
+alloc(newmem,$1000)
+registersymbol(char)
+label(code)
+label(return)
+
+newmem:
+  push edx
+  mov edx,[var_char]
+  mov [ecx+c0],edx //здоровье
+  mov [ecx+c4],edx //скорость
+  mov [ecx+c8],edx //атака
+  mov [ecx+cc],edx  //защита
+  mov [ecx+d0],edx  //урон
+  mov [ecx+d4],edx  //урон
+  pop edx
+code:
+  mov eax,[ecx+000000C4]
+  jmp return
+var_char:
+  dd #500
+char:
+  jmp newmem
+  nop
+return:
+
+registersymbol(var_char)
+[DISABLE]
+
+char:
+  db 8B 81 C4 00 00 00
+
+unregistersymbol(char)
+unregistersymbol(var_char)
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: "h3hota HD.exe"+489FA
+
+"h3hota HD.exe"+489EA: 90                    -  nop 
+"h3hota HD.exe"+489EB: 90                    -  nop 
+"h3hota HD.exe"+489EC: 90                    -  nop 
+"h3hota HD.exe"+489ED: 90                    -  nop 
+"h3hota HD.exe"+489EE: 90                    -  nop 
+"h3hota HD.exe"+489EF: 90                    -  nop 
+"h3hota HD.exe"+489F0: 55                    -  push ebp
+"h3hota HD.exe"+489F1: 8B EC                 -  mov ebp,esp
+"h3hota HD.exe"+489F3: 51                    -  push ecx
+"h3hota HD.exe"+489F4: 8B 91 70 02 00 00     -  mov edx,[ecx+00000270]
+// ---------- INJECTING HERE ----------
+"h3hota HD.exe"+489FA: 8B 81 C4 00 00 00     -  mov eax,[ecx+000000C4]
+// ---------- DONE INJECTING  ----------
+"h3hota HD.exe"+48A00: 85 D2                 -  test edx,edx
+"h3hota HD.exe"+48A02: 89 45 FC              -  mov [ebp-04],eax
+"h3hota HD.exe"+48A05: 74 30                 -  je "h3hota HD.exe"+48A37
+"h3hota HD.exe"+48A07: 8B 81 84 00 00 00     -  mov eax,[ecx+00000084]
+"h3hota HD.exe"+48A0D: C1 E8 06              -  shr eax,06
+"h3hota HD.exe"+48A10: A8 01                 -  test al,01
+"h3hota HD.exe"+48A12: 74 06                 -  je "h3hota HD.exe"+48A1A
+"h3hota HD.exe"+48A14: 33 C0                 -  xor eax,eax
+"h3hota HD.exe"+48A16: 8B E5                 -  mov esp,ebp
+"h3hota HD.exe"+48A18: 5D                    -  pop ebp
+}
+</AssemblerScript>
+      <Hotkeys>
+        <Hotkey>
+          <Action>Activate</Action>
+          <Keys>
+            <Key>72</Key>
+          </Keys>
+          <ID>0</ID>
+        </Hotkey>
+        <Hotkey>
+          <Action>Deactivate</Action>
+          <Keys>
+            <Key>16</Key>
+            <Key>72</Key>
+          </Keys>
+          <ID>1</ID>
+        </Hotkey>
+      </Hotkeys>
+      <CheatEntries>
+        <CheatEntry>
+          <ID>35</ID>
+          <Description>"Нет описания"</Description>
+          <VariableType>4 Bytes</VariableType>
+          <Address>var_char</Address>
+        </CheatEntry>
+      </CheatEntries>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>18</ID>
+      <Description>"inf_monster in town"</Description>
+      <LastState/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>[ENABLE]
+HD_HOTA.dll+5FC7:
+  db 90 90 90 90 90 //        - mov [ecx+eax*2+16],dx
+
+h3hota HD.exe+15107C:
+  db 90 90 90
+
+[DISABLE]
+HD_HOTA.dll+5FC7:
+  mov [ecx+eax*2+16],dx
+
+h3hota HD.exe+15107C:
+  sub [eax],cx
+
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>12</ID>
+      <Description>"mul_monster"</Description>
+      <LastState/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>{ Game   : h3hota HD.exe
+  Version: 
+  Date   : 2017-08-06
+  Author : Hipp
+
+  This script does blah blah blah
+}
+
+[ENABLE]
+
+aobscanmodule(mul_monster,h3hota HD.exe,8B 4D EC 8B 19) // should be unique
+alloc(newmem,$1000)
+
+label(code)
+label(return)
+
+newmem:
+
+code:
+  mov ecx,[ebp-14]
+  add [ecx],#100
+  mov ebx,[ecx]
+  jmp return
+
+mul_monster:
+  jmp newmem
+return:
+registersymbol(mul_monster)
+
+[DISABLE]
+
+mul_monster:
+  db 8B 4D EC 8B 19
+
+unregistersymbol(mul_monster)
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: "h3hota HD.exe"+12F617
+
+"h3hota HD.exe"+12F5FB: 8D 55 D4                          -  lea edx,[ebp-2C]
+"h3hota HD.exe"+12F5FE: 52                                -  push edx
+"h3hota HD.exe"+12F5FF: 6A 01                             -  push 01
+"h3hota HD.exe"+12F601: 50                                -  push eax
+"h3hota HD.exe"+12F602: E8 C9 EC 0C 00                    -  call "h3hota HD.exe"+1FE2D0
+"h3hota HD.exe"+12F607: 8B 45 08                          -  mov eax,[ebp+08]
+"h3hota HD.exe"+12F60A: 83 B8 0E 01 00 00 02              -  cmp dword ptr [eax+0000010E],02
+"h3hota HD.exe"+12F611: 7C 04                             -  jl "h3hota HD.exe"+12F617
+"h3hota HD.exe"+12F613: 33 DB                             -  xor ebx,ebx
+"h3hota HD.exe"+12F615: EB 05                             -  jmp "h3hota HD.exe"+12F61C
+// ---------- INJECTING HERE ----------
+"h3hota HD.exe"+12F617: 8B 4D EC                          -  mov ecx,[ebp-14]
+"h3hota HD.exe"+12F61A: 8B 19                             -  mov ebx,[ecx]
+// ---------- DONE INJECTING  ----------
+"h3hota HD.exe"+12F61C: 8D 4D 9C                          -  lea ecx,[ebp-64]
+"h3hota HD.exe"+12F61F: C7 85 48 FF FF FF 14 BB 63 00     -  mov [ebp-000000B8],"h3hota HD.exe"+23BB14
+"h3hota HD.exe"+12F629: E8 62 1C F2 FF                    -  call "h3hota HD.exe"+51290
+"h3hota HD.exe"+12F62E: 8B 4D E0                          -  mov ecx,[ebp-20]
+"h3hota HD.exe"+12F631: C7 45 9C F0 56 64 00              -  mov [ebp-64],"h3hota HD.exe"+2456F0
+"h3hota HD.exe"+12F638: 83 C9 02                          -  or ecx,02
+"h3hota HD.exe"+12F63B: 89 4D E0                          -  mov [ebp-20],ecx
+"h3hota HD.exe"+12F63E: 8B 95 48 FF FF FF                 -  mov edx,[ebp-000000B8]
+"h3hota HD.exe"+12F644: 8D 8D 4C FF FF FF                 -  lea ecx,[ebp-000000B4]
+"h3hota HD.exe"+12F64A: 6A 00                             -  push 00
+}
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>27</ID>
+      <Description>"character"</Description>
+      <LastState/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>{ Game   : h3hota HD.exe
+  Version: 
+  Date   : 2018-03-30
+  Author : Hipp
+
+  This script does blah blah blah
+}
+
+[ENABLE]
+
+aobscanmodule(character,h3hota HD.exe,8A 8C 08 76 04 00 00) // should be unique
+alloc(newmem,$1000)
+
+label(code)
+label(return)
+label(writeeax)
+
+newmem:
+  push eax
+  xor eax,eax
+  call writeeax
+  inc eax
+  call writeeax
+  inc eax
+  call writeeax
+  inc eax
+  call writeeax
+  pop eax
+code:
+  mov cl,[eax+ecx+00000476]
+  jmp return
+writeeax:
+  mov byte ptr [eax+ecx+00000476],#99
+  ret
+character:
+  jmp newmem
+  nop
+  nop
+return:
+registersymbol(character)
+
+[DISABLE]
+
+character:
+  db 8A 8C 08 76 04 00 00
+
+unregistersymbol(character)
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: "h3hota HD.exe"+DD870
+
+"h3hota HD.exe"+DD83C: 8D 48 FE              -  lea ecx,[eax-02]
+"h3hota HD.exe"+DD83F: 81 F9 89 00 00 00     -  cmp ecx,00000089
+"h3hota HD.exe"+DD845: 0F 87 21 0F 00 00     -  ja "h3hota HD.exe"+DE76C
+"h3hota HD.exe"+DD84B: 33 D2                 -  xor edx,edx
+"h3hota HD.exe"+DD84D: 8A 91 F4 E8 4D 00     -  mov dl,[ecx+"h3hota HD.exe"+DE8F4]
+"h3hota HD.exe"+DD853: FF 24 95 AC E8 4D 00  -  jmp dword ptr [edx*4+"h3hota HD.exe"+DE8AC]
+"h3hota HD.exe"+DD85A: 83 3D D8 8A 69 00 FF  -  cmp dword ptr ["h3hota HD.exe"+298AD8],-01
+"h3hota HD.exe"+DD861: 0F 85 52 FD FF FF     -  jne "h3hota HD.exe"+DD5B9
+"h3hota HD.exe"+DD867: 8B 0D 70 8B 69 00     -  mov ecx,["h3hota HD.exe"+298B70]
+"h3hota HD.exe"+DD86D: 83 C0 CE              -  add eax,-32
+// ---------- INJECTING HERE ----------
+"h3hota HD.exe"+DD870: 8A 8C 08 76 04 00 00  -  mov cl,[eax+ecx+00000476]
+// ---------- DONE INJECTING  ----------
+"h3hota HD.exe"+DD877: 80 F9 63              -  cmp cl,63
+"h3hota HD.exe"+DD87A: 7E 07                 -  jle "h3hota HD.exe"+DD883
+"h3hota HD.exe"+DD87C: B9 63 00 00 00        -  mov ecx,00000063
+"h3hota HD.exe"+DD881: EB 11                 -  jmp "h3hota HD.exe"+DD894
+"h3hota HD.exe"+DD883: 84 C9                 -  test cl,cl
+"h3hota HD.exe"+DD885: 7E 05                 -  jle "h3hota HD.exe"+DD88C
+"h3hota HD.exe"+DD887: 0F BE C9              -  movsx ecx,cl
+"h3hota HD.exe"+DD88A: EB 08                 -  jmp "h3hota HD.exe"+DD894
+"h3hota HD.exe"+DD88C: 33 C9                 -  xor ecx,ecx
+"h3hota HD.exe"+DD88E: 83 F8 02              -  cmp eax,02
+}
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>7</ID>
+      <Description>"Experience"</Description>
+      <LastState/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>{ Game   : h3hota HD.exe
+  Version: 
+  Date   : 2017-08-05
+  Author : Hipp
+
+  This script does blah blah blah
+}
+
+[ENABLE]
+
+aobscanmodule(Exper,h3hota HD.exe,8B 52 51 52 51) // should be unique
+alloc(newmem,$1000)
+
+label(code)
+label(return)
+
+newmem:
+  add [edx+51],#10000
+code:
+  mov edx,[edx+51]
+  push edx
+  push ecx
+  jmp return
+
+Exper:
+  jmp newmem
+return:
+registersymbol(Exper)
+
+[DISABLE]
+
+Exper:
+  db 8B 52 51 52 51
+
+unregistersymbol(Exper)
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: "h3hota HD.exe"+DDBAE
+
+"h3hota HD.exe"+DDB8D: DD 45 E4                 -  fld qword ptr [ebp-1C]
+"h3hota HD.exe"+DDB90: DC 0D 20 AC 63 00        -  fmul qword ptr ["h3hota HD.exe"+23AC20]
+"h3hota HD.exe"+DDB96: E8 F9 A3 13 00           -  call "h3hota HD.exe"+217F94
+"h3hota HD.exe"+DDB9B: 03 F0                    -  add esi,eax
+"h3hota HD.exe"+DDB9D: 4F                       -  dec edi
+"h3hota HD.exe"+DDB9E: 89 45 08                 -  mov [ebp+08],eax
+"h3hota HD.exe"+DDBA1: 75 E4                    -  jne "h3hota HD.exe"+DDB87
+"h3hota HD.exe"+DDBA3: 8B 45 F0                 -  mov eax,[ebp-10]
+"h3hota HD.exe"+DDBA6: 8B CE                    -  mov ecx,esi
+"h3hota HD.exe"+DDBA8: 8B 15 70 8B 69 00        -  mov edx,["h3hota HD.exe"+298B70]
+// ---------- INJECTING HERE ----------
+"h3hota HD.exe"+DDBAE: 8B 52 51                 -  mov edx,[edx+51]
+"h3hota HD.exe"+DDBB1: 52                       -  push edx
+"h3hota HD.exe"+DDBB2: 51                       -  push ecx
+// ---------- DONE INJECTING  ----------
+"h3hota HD.exe"+DDBB3: 50                       -  push eax
+"h3hota HD.exe"+DDBB4: A1 C4 5D 6A 00           -  mov eax,["h3hota HD.exe"+2A5DC4]
+"h3hota HD.exe"+DDBB9: 8B 48 20                 -  mov ecx,[eax+20]
+"h3hota HD.exe"+DDBBC: 8B 51 0C                 -  mov edx,[ecx+0C]
+"h3hota HD.exe"+DDBBF: 52                       -  push edx
+"h3hota HD.exe"+DDBC0: 68 28 74 69 00           -  push "h3hota HD.exe"+297428
+"h3hota HD.exe"+DDBC5: E8 14 9E 13 00           -  call "h3hota HD.exe"+2179DE
+"h3hota HD.exe"+DDBCA: 83 C4 14                 -  add esp,14
+"h3hota HD.exe"+DDBCD: E9 72 FE FF FF           -  jmp "h3hota HD.exe"+DDA44
+"h3hota HD.exe"+DDBD2: 8D 78 BC                 -  lea edi,[eax-44]
+}
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>8</ID>
+      <Description>"Урон"</Description>
+      <LastState/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>{ Game   : h3hota HD.exe
+  Version: 
+  Date   : 2017-08-06
+  Author : Hipp
+
+  This script does blah blah blah
+}
+
+[ENABLE]
+
+aobscanmodule(uron,h3hota HD.exe,8B 51 4C 89 55 FC) // should be unique
+alloc(newmem,$1000)
+
+label(code)
+label(return)
+
+newmem:
+
+code:
+  mov edx,#1000
+  mov [ebp-04],edx
+  jmp return
+
+uron:
+  jmp newmem
+  nop
+return:
+registersymbol(uron)
+
+[DISABLE]
+
+uron:
+  db 8B 51 4C 89 55 FC
+
+unregistersymbol(uron)
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: "h3hota HD.exe"+42EC1
+
+"h3hota HD.exe"+42EA8: 2B C2                 -  sub eax,edx
+"h3hota HD.exe"+42EAA: D1 F8                 -  sar eax,1
+"h3hota HD.exe"+42EAC: 89 45 F8              -  mov [ebp-08],eax
+"h3hota HD.exe"+42EAF: 83 F8 01              -  cmp eax,01
+"h3hota HD.exe"+42EB2: 8D 45 FC              -  lea eax,[ebp-04]
+"h3hota HD.exe"+42EB5: 7C 03                 -  jl "h3hota HD.exe"+42EBA
+"h3hota HD.exe"+42EB7: 8D 45 F8              -  lea eax,[ebp-08]
+"h3hota HD.exe"+42EBA: 8B 10                 -  mov edx,[eax]
+"h3hota HD.exe"+42EBC: 89 55 FC              -  mov [ebp-04],edx
+"h3hota HD.exe"+42EBF: EB 06                 -  jmp "h3hota HD.exe"+42EC7
+// ---------- INJECTING HERE ----------
+"h3hota HD.exe"+42EC1: 8B 51 4C              -  mov edx,[ecx+4C]
+"h3hota HD.exe"+42EC4: 89 55 FC              -  mov [ebp-04],edx
+// ---------- DONE INJECTING  ----------
+"h3hota HD.exe"+42EC7: 8B 41 34              -  mov eax,[ecx+34]
+"h3hota HD.exe"+42ECA: 53                    -  push ebx
+"h3hota HD.exe"+42ECB: 56                    -  push esi
+"h3hota HD.exe"+42ECC: 3D 92 00 00 00        -  cmp eax,00000092
+"h3hota HD.exe"+42ED1: 57                    -  push edi
+"h3hota HD.exe"+42ED2: 0F 85 80 00 00 00     -  jne "h3hota HD.exe"+42F58
+"h3hota HD.exe"+42ED8: 8B 81 88 02 00 00     -  mov eax,[ecx+00000288]
+"h3hota HD.exe"+42EDE: 85 C0                 -  test eax,eax
+"h3hota HD.exe"+42EE0: 74 0F                 -  je "h3hota HD.exe"+42EF1
+"h3hota HD.exe"+42EE2: 8B B1 F4 00 00 00     -  mov esi,[ecx+000000F4]
+}
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>30</ID>
+      <Description>"no monsters"</Description>
+      <LastState/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>[ENABLE]
+h3hota HD.exe+1C0227:// - add [ecx],ax
+
+db 90 90 90
+ 
+ 
+[DISABLE]
+h3hota HD.exe+1C0227:
+ add [ecx],ax
+
+</AssemblerScript>
+    </CheatEntry>
+  </CheatEntries>
+  <UserdefinedSymbols/>
+  <Structures StructVersion="2">
+    <Structure Name="hero" AutoFill="0" AutoCreate="1" DefaultHex="0" AutoDestroy="0" DoNotSaveLocal="0" RLECompression="1" AutoCreateStructsize="4096">
+      <Elements>
+        <Element Offset="0" Vartype="Byte" Bytesize="1" DisplayMethod="Целое без знака"/>
+        <Element Offset="1" Vartype="2 Bytes" Bytesize="2" DisplayMethod="Целое без знака"/>
+        <Element Offset="3" Vartype="Byte" Bytesize="1" RLECount="3" DisplayMethod="Целое без знака"/>
+        <Element Offset="6" Vartype="4 Bytes" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="10" Vartype="Pointer" Bytesize="4" RLECount="3" DisplayMethod="Целое без знака"/>
+        <Element Offset="22" Vartype="4 Bytes" Bytesize="4" RLECount="15" DisplayMethod="Целое без знака"/>
+        <Element Offset="81" Vartype="4 Bytes" Bytesize="4" Description="опыт" DisplayMethod="Целое без знака"/>
+        <Element Offset="86" Vartype="4 Bytes" Bytesize="4" RLECount="21" DisplayMethod="Целое без знака"/>
+        <Element Offset="170" Vartype="Pointer" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="174" Vartype="4 Bytes" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="178" Vartype="Pointer" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="182" Vartype="4 Bytes" Bytesize="4" RLECount="61" DisplayMethod="Целое без знака"/>
+        <Element Offset="426" Vartype="Pointer" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="430" Vartype="4 Bytes" Bytesize="4" RLECount="9" DisplayMethod="Целое без знака"/>
+        <Element Offset="466" Vartype="Pointer" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="470" Vartype="4 Bytes" Bytesize="4" RLECount="169" DisplayMethod="Целое без знака"/>
+        <Element Offset="1146" Vartype="Pointer" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="1150" Vartype="4 Bytes" Bytesize="4" RLECount="11" DisplayMethod="Целое без знака"/>
+        <Element Offset="1194" Vartype="Pointer" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="1198" Vartype="4 Bytes" Bytesize="4" RLECount="10" DisplayMethod="Целое без знака"/>
+        <Element Offset="1238" Vartype="Pointer" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="1242" Vartype="4 Bytes" Bytesize="4" RLECount="317" DisplayMethod="Целое без знака"/>
+        <Element Offset="2510" Vartype="Pointer" Bytesize="4" RLECount="3" DisplayMethod="Целое без знака"/>
+        <Element Offset="2522" Vartype="4 Bytes" Bytesize="4" RLECount="61" DisplayMethod="Целое без знака"/>
+        <Element Offset="2766" Vartype="Pointer" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="2770" Vartype="4 Bytes" Bytesize="4" RLECount="179" DisplayMethod="Целое без знака"/>
+        <Element Offset="3486" Vartype="Pointer" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="3490" Vartype="4 Bytes" Bytesize="4" RLECount="11" DisplayMethod="Целое без знака"/>
+        <Element Offset="3534" Vartype="Pointer" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="3538" Vartype="4 Bytes" Bytesize="4" RLECount="10" DisplayMethod="Целое без знака"/>
+        <Element Offset="3578" Vartype="Pointer" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="3582" Vartype="4 Bytes" Bytesize="4" RLECount="35" DisplayMethod="Целое без знака"/>
+        <Element Offset="3722" Vartype="Pointer" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="3726" Vartype="4 Bytes" Bytesize="4" RLECount="92" DisplayMethod="Целое без знака"/>
+        <Element Offset="4094" Vartype="2 Bytes" Bytesize="2" DisplayMethod="Целое без знака"/>
+      </Elements>
+    </Structure>
+  </Structures>
+  <Comments>h3hota HD.exe+E21DC - читает навыки
+</Comments>
+</CheatTable>

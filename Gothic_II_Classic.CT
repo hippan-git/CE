@@ -1,0 +1,600 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CheatTable CheatEngineTableVersion="26">
+  <CheatEntries>
+    <CheatEntry>
+      <ID>1</ID>
+      <Description>"Edu_point"</Description>
+      <VariableType>4 Bytes</VariableType>
+      <Address>Gothic_II_Classic.exe+4C0664</Address>
+      <Offsets>
+        <Offset>3a8</Offset>
+      </Offsets>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>19</ID>
+      <Description>"Exp"</Description>
+      <VariableType>4 Bytes</VariableType>
+      <Address>Gothic_II_Classic.exe+4C0664</Address>
+      <Offsets>
+        <Offset>3a0</Offset>
+      </Offsets>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>6</ID>
+      <Description>"health"</Description>
+      <VariableType>4 Bytes</VariableType>
+      <Address>Gothic_II_Classic.exe+4C0664</Address>
+      <Offsets>
+        <Offset>1a4</Offset>
+      </Offsets>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>14</ID>
+      <Description>"max health"</Description>
+      <VariableType>4 Bytes</VariableType>
+      <Address>Gothic_II_Classic.exe+4C0664</Address>
+      <Offsets>
+        <Offset>1a8</Offset>
+      </Offsets>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>13</ID>
+      <Description>"mana"</Description>
+      <VariableType>4 Bytes</VariableType>
+      <Address>Gothic_II_Classic.exe+4C0664</Address>
+      <Offsets>
+        <Offset>1ac</Offset>
+      </Offsets>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>7</ID>
+      <Description>"strength"</Description>
+      <VariableType>4 Bytes</VariableType>
+      <Address>Gothic_II_Classic.exe+4C0664</Address>
+      <Offsets>
+        <Offset>1b4</Offset>
+      </Offsets>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>8</ID>
+      <Description>"dex"</Description>
+      <VariableType>4 Bytes</VariableType>
+      <Address>Gothic_II_Classic.exe+4C0664</Address>
+      <Offsets>
+        <Offset>1b8</Offset>
+      </Offsets>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>9</ID>
+      <Description>"одноручное оружие"</Description>
+      <VariableType>4 Bytes</VariableType>
+      <Address>Gothic_II_Classic.exe+4C0664</Address>
+      <Offsets>
+        <Offset>1c8</Offset>
+      </Offsets>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>10</ID>
+      <Description>"двуручное"</Description>
+      <VariableType>4 Bytes</VariableType>
+      <Address>Gothic_II_Classic.exe+4C0664</Address>
+      <Offsets>
+        <Offset>1cc</Offset>
+      </Offsets>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>11</ID>
+      <Description>"лук"</Description>
+      <VariableType>4 Bytes</VariableType>
+      <Address>Gothic_II_Classic.exe+4C0664</Address>
+      <Offsets>
+        <Offset>1d0</Offset>
+      </Offsets>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>12</ID>
+      <Description>"арбалет"</Description>
+      <VariableType>4 Bytes</VariableType>
+      <Address>Gothic_II_Classic.exe+4C0664</Address>
+      <Offsets>
+        <Offset>1d4</Offset>
+      </Offsets>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>24</ID>
+      <Description>"flag"</Description>
+      <LastState/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>{ Game   : Gothic_II_Classic.exe
+  Version: 
+  Date   : 2018-11-01
+  Author : Hipp
+
+  This script does blah blah blah
+}
+
+[ENABLE]
+
+aobscanmodule(rs_flag,Gothic_II_Classic.exe,85 81 A0 01 00 00) // should be unique
+alloc(newmem,$1000)
+
+label(code)
+label(return)
+
+newmem:
+  mov byte ptr [ecx+000001A0],0
+code:
+  test [ecx+000001A0],eax
+  jmp return
+
+rs_flag:
+  jmp newmem
+  nop
+return:
+registersymbol(rs_flag)
+
+[DISABLE]
+
+rs_flag:
+  db 85 81 A0 01 00 00
+
+unregistersymbol(rs_flag)
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: "Gothic_II_Classic.exe"+2D2534
+
+"Gothic_II_Classic.exe"+2D2527: 90                    -  nop 
+"Gothic_II_Classic.exe"+2D2528: 90                    -  nop 
+"Gothic_II_Classic.exe"+2D2529: 90                    -  nop 
+"Gothic_II_Classic.exe"+2D252A: 90                    -  nop 
+"Gothic_II_Classic.exe"+2D252B: 90                    -  nop 
+"Gothic_II_Classic.exe"+2D252C: 90                    -  nop 
+"Gothic_II_Classic.exe"+2D252D: 90                    -  nop 
+"Gothic_II_Classic.exe"+2D252E: 90                    -  nop 
+"Gothic_II_Classic.exe"+2D252F: 90                    -  nop 
+"Gothic_II_Classic.exe"+2D2530: 8B 44 24 04           -  mov eax,[esp+04]
+// ---------- INJECTING HERE ----------
+"Gothic_II_Classic.exe"+2D2534: 85 81 A0 01 00 00     -  test [ecx+000001A0],eax
+// ---------- DONE INJECTING  ----------
+"Gothic_II_Classic.exe"+2D253A: B8 00 00 00 00        -  mov eax,00000000
+"Gothic_II_Classic.exe"+2D253F: 0F 9F C0              -  setg al
+"Gothic_II_Classic.exe"+2D2542: C2 04 00              -  ret 0004
+"Gothic_II_Classic.exe"+2D2545: 90                    -  nop 
+"Gothic_II_Classic.exe"+2D2546: 90                    -  nop 
+"Gothic_II_Classic.exe"+2D2547: 90                    -  nop 
+"Gothic_II_Classic.exe"+2D2548: 90                    -  nop 
+"Gothic_II_Classic.exe"+2D2549: 90                    -  nop 
+"Gothic_II_Classic.exe"+2D254A: 90                    -  nop 
+"Gothic_II_Classic.exe"+2D254B: 90                    -  nop 
+}
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>4</ID>
+      <Description>"inf_inventory"</Description>
+      <LastState Activated="1"/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>{ Game   : Gothic_II_Classic.exe
+  Version: 
+  Date   : 2017-08-30
+  Author : Hipp
+
+  This script does blah blah blah
+}
+
+[ENABLE]
+Gothic_II_Classic.exe+758F9:
+ nop
+
+
+Gothic_II_Classic.exe+2AF3DE:
+  db 90 90
+
+aobscanmodule(inf_inventary,Gothic_II_Classic.exe,8B B9 18 03 00 00) // should be unique
+alloc(newmem,$1000)
+
+label(code)
+label(return)
+
+newmem:
+  cmp [ecx+00000318],01
+  jne code
+  inc [ecx+00000318]
+
+code:
+  mov edi,[ecx+00000318]
+  jmp return
+
+inf_inventary:
+  jmp newmem
+  nop
+return:
+registersymbol(inf_inventary)
+
+[DISABLE]
+
+inf_inventary:
+  db 8B B9 18 03 00 00
+
+unregistersymbol(inf_inventary)
+dealloc(newmem)
+Gothic_II_Classic.exe+2AF3DE:
+ sub edx,ebx
+
+Gothic_II_Classic.exe+758F9:
+  dec ecx
+
+
+{
+// ORIGINAL CODE - INJECTION POINT: "Gothic_II_Classic.exe"+2AA223
+
+"Gothic_II_Classic.exe"+2AA200: 52                                -  push edx
+"Gothic_II_Classic.exe"+2AA201: 50                                -  push eax
+"Gothic_II_Classic.exe"+2AA202: E8 A9 D8 09 00                    -  call Gothic_II_Classic.exe+347AB0
+"Gothic_II_Classic.exe"+2AA207: 8B 8D 80 00 00 00                 -  mov ecx,[ebp+00000080]
+"Gothic_II_Classic.exe"+2AA20D: 57                                -  push edi
+"Gothic_II_Classic.exe"+2AA20E: 56                                -  push esi
+"Gothic_II_Classic.exe"+2AA20F: E8 8C DA 09 00                    -  call Gothic_II_Classic.exe+347CA0
+"Gothic_II_Classic.exe"+2AA214: 8B 8D 80 00 00 00                 -  mov ecx,[ebp+00000080]
+"Gothic_II_Classic.exe"+2AA21A: E8 21 04 0A 00                    -  call Gothic_II_Classic.exe+34A640
+"Gothic_II_Classic.exe"+2AA21F: 8B 4C 24 24                       -  mov ecx,[esp+24]
+// ---------- INJECTING HERE ----------
+"Gothic_II_Classic.exe"+2AA223: 8B B9 18 03 00 00                 -  mov edi,[ecx+00000318]
+// ---------- DONE INJECTING  ----------
+"Gothic_II_Classic.exe"+2AA229: 33 F6                             -  xor esi,esi
+"Gothic_II_Classic.exe"+2AA22B: 83 FF 01                          -  cmp edi,01
+"Gothic_II_Classic.exe"+2AA22E: 0F 8E 74 01 00 00                 -  jng Gothic_II_Classic.exe+2AA3A8
+"Gothic_II_Classic.exe"+2AA234: 8A 54 24 13                       -  mov dl,[esp+13]
+"Gothic_II_Classic.exe"+2AA238: 56                                -  push esi
+"Gothic_II_Classic.exe"+2AA239: 8D 8C 24 9C 00 00 00              -  lea ecx,[esp+0000009C]
+"Gothic_II_Classic.exe"+2AA240: 88 94 24 9C 00 00 00              -  mov [esp+0000009C],dl
+"Gothic_II_Classic.exe"+2AA247: E8 34 90 D5 FF                    -  call Gothic_II_Classic.exe+3280
+"Gothic_II_Classic.exe"+2AA24C: 6A 0A                             -  push 0A
+"Gothic_II_Classic.exe"+2AA24E: 8D 84 24 C0 00 00 00              -  lea eax,[esp+000000C0]
+}
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>15</ID>
+      <Description>"inf_health"</Description>
+      <LastState Activated="1"/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>{ Game   : Gothic_II_Classic.exe
+  Version: 
+  Date   : 2017-08-30
+  Author : Hipp
+
+  This script does blah blah blah
+}
+
+[ENABLE]
+
+aobscanmodule(inf_health,Gothic_II_Classic.exe,01 94 81 A4 01 00 00) // should be unique
+alloc(newmem,$1000)
+
+label(code)
+label(return)
+label(befor_exit)
+
+
+newmem:
+  pushf
+  cmp [Gothic_II_Classic.exe+4C0664],ecx
+  je befor_exit
+  mov [ecx+eax*4+000001A4],1
+
+code:
+  add [ecx+eax*4+000001A4],edx
+  popf
+  jmp return
+befor_exit:
+  test eax,eax
+  jne code
+  popf
+  jmp return
+
+
+inf_health:
+  jmp newmem
+  nop
+  nop
+
+return:
+registersymbol(inf_health)
+
+[DISABLE]
+
+inf_health:
+  db 01 94 81 A4 01 00 00
+
+unregistersymbol(inf_health)
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: "Gothic_II_Classic.exe"+2D1BC6
+
+"Gothic_II_Classic.exe"+2D1BA7: 75 6F                             -  jne Gothic_II_Classic.exe+2D1C18
+"Gothic_II_Classic.exe"+2D1BA9: 85 D2                             -  test edx,edx
+"Gothic_II_Classic.exe"+2D1BAB: 74 6B                             -  je Gothic_II_Classic.exe+2D1C18
+"Gothic_II_Classic.exe"+2D1BAD: 8B 44 24 04                       -  mov eax,[esp+04]
+"Gothic_II_Classic.exe"+2D1BB1: 85 C0                             -  test eax,eax
+"Gothic_II_Classic.exe"+2D1BB3: 75 11                             -  jne Gothic_II_Classic.exe+2D1BC6
+"Gothic_II_Classic.exe"+2D1BB5: F6 81 A0 01 00 00 02              -  test byte ptr [ecx+000001A0],02
+"Gothic_II_Classic.exe"+2D1BBC: 7E 08                             -  jle Gothic_II_Classic.exe+2D1BC6
+"Gothic_II_Classic.exe"+2D1BBE: 81 FA 19 FC FF FF                 -  cmp edx,FFFFFC19
+"Gothic_II_Classic.exe"+2D1BC4: 75 52                             -  jne Gothic_II_Classic.exe+2D1C18
+// ---------- INJECTING HERE ----------
+"Gothic_II_Classic.exe"+2D1BC6: 01 94 81 A4 01 00 00              -  add [ecx+eax*4+000001A4],edx
+// ---------- DONE INJECTING  ----------
+"Gothic_II_Classic.exe"+2D1BCD: 79 0B                             -  jns Gothic_II_Classic.exe+2D1BDA
+"Gothic_II_Classic.exe"+2D1BCF: C7 84 81 A4 01 00 00 00 00 00 00  -  mov [ecx+eax*4+000001A4],00000000
+"Gothic_II_Classic.exe"+2D1BDA: 83 F8 02                          -  cmp eax,02
+"Gothic_II_Classic.exe"+2D1BDD: 75 1C                             -  jne Gothic_II_Classic.exe+2D1BFB
+"Gothic_II_Classic.exe"+2D1BDF: 8B 81 B0 01 00 00                 -  mov eax,[ecx+000001B0]
+"Gothic_II_Classic.exe"+2D1BE5: 39 81 AC 01 00 00                 -  cmp [ecx+000001AC],eax
+"Gothic_II_Classic.exe"+2D1BEB: 7E 26                             -  jle Gothic_II_Classic.exe+2D1C13
+"Gothic_II_Classic.exe"+2D1BED: 89 81 AC 01 00 00                 -  mov [ecx+000001AC],eax
+"Gothic_II_Classic.exe"+2D1BF3: E8 08 02 00 00                    -  call Gothic_II_Classic.exe+2D1E00
+"Gothic_II_Classic.exe"+2D1BF8: C2 08 00                          -  ret 0008
+}
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>18</ID>
+      <Description>"inf_mana"</Description>
+      <LastState Activated="1"/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>{ Game   : Gothic_II_Classic.exe
+  Version: 
+  Date   : 2017-08-30
+  Author : Hipp
+
+  This script does blah blah blah
+}
+
+[ENABLE]
+
+aobscanmodule(inf_mana,Gothic_II_Classic.exe,8B 84 81 A4 01 00 00) // should be unique
+alloc(newmem,$1000)
+alloc(var_man,$4)
+
+
+label(code)
+label(return)
+
+newmem:
+  cmp [Gothic_II_Classic.exe+4C0664],ecx
+  jne code
+  cmp eax,2
+  jne code
+  push ebx
+  inc eax
+  mov ebx,[ecx+eax*4+000001A4] //сохранение максимального значения
+  dec eax
+  mov [ecx+eax*4+000001A4],ebx
+  pop ebx
+
+code:
+  mov eax,[ecx+eax*4+000001A4]
+  jmp return
+
+inf_mana:
+  jmp newmem
+  nop
+  nop
+return:
+registersymbol(inf_mana)
+
+[DISABLE]
+
+inf_mana:
+  db 8B 84 81 A4 01 00 00
+
+unregistersymbol(inf_mana)
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: "Gothic_II_Classic.exe"+2D1B54
+
+"Gothic_II_Classic.exe"+2D1B40: B9 08 00 00 00                    -  mov ecx,00000008
+"Gothic_II_Classic.exe"+2D1B45: F3 A5                             - repe  movsd 
+"Gothic_II_Classic.exe"+2D1B47: 5F                                -  pop edi
+"Gothic_II_Classic.exe"+2D1B48: 5E                                -  pop esi
+"Gothic_II_Classic.exe"+2D1B49: C2 04 00                          -  ret 0004
+"Gothic_II_Classic.exe"+2D1B4C: 90                                -  nop 
+"Gothic_II_Classic.exe"+2D1B4D: 90                                -  nop 
+"Gothic_II_Classic.exe"+2D1B4E: 90                                -  nop 
+"Gothic_II_Classic.exe"+2D1B4F: 90                                -  nop 
+"Gothic_II_Classic.exe"+2D1B50: 8B 44 24 04                       -  mov eax,[esp+04]
+// ---------- INJECTING HERE ----------
+"Gothic_II_Classic.exe"+2D1B54: 8B 84 81 A4 01 00 00              -  mov eax,[ecx+eax*4+000001A4]
+// ---------- DONE INJECTING  ----------
+"Gothic_II_Classic.exe"+2D1B5B: C2 04 00                          -  ret 0004
+"Gothic_II_Classic.exe"+2D1B5E: 90                                -  nop 
+"Gothic_II_Classic.exe"+2D1B5F: 90                                -  nop 
+"Gothic_II_Classic.exe"+2D1B60: 8B 44 24 04                       -  mov eax,[esp+04]
+"Gothic_II_Classic.exe"+2D1B64: 8B 84 81 C4 01 00 00              -  mov eax,[ecx+eax*4+000001C4]
+"Gothic_II_Classic.exe"+2D1B6B: C2 04 00                          -  ret 0004
+"Gothic_II_Classic.exe"+2D1B6E: 90                                -  nop 
+"Gothic_II_Classic.exe"+2D1B6F: 90                                -  nop 
+"Gothic_II_Classic.exe"+2D1B70: 8B 44 24 08                       -  mov eax,[esp+08]
+"Gothic_II_Classic.exe"+2D1B74: 8B 54 24 04                       -  mov edx,[esp+04]
+}
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>20</ID>
+      <Description>"Нет описания"</Description>
+      <VariableType>Float</VariableType>
+      <Address>16FD86CC</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>21</ID>
+      <Description>"Нет описания"</Description>
+      <VariableType>Float</VariableType>
+      <Address>16FD8708</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>22</ID>
+      <Description>"super jump"</Description>
+      <LastState/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>{ Game   : Gothic_II_Classic.exe
+  Version: 
+  Date   : 2017-12-31
+  Author : Hipp
+
+  This script does blah blah blah
+}
+
+[ENABLE]
+
+alloc(newmem,$1000)
+alloc(sjf,$16)
+alloc(sj2,$1000)
+
+label(code)
+label(code2)
+label(return)
+
+sj2:
+
+code2:
+  mov [ecx+04],(float)100000
+  fstp dword ptr [esp+08]
+  jmp Gothic_II_Classic.exe+1B0BE9
+
+newmem:
+  mov [sjf],(float)80000
+  fld dword ptr [sjf]
+code:
+  fstp dword ptr [ecx-38]
+  fld dword ptr [eax+08]
+  jmp return
+
+"Gothic_II_Classic.exe"+1B035E:
+  jmp newmem
+  nop
+//Gothic_II_Classic.exe+1B0BE9 - 8B 44 24 08
+
+"Gothic_II_Classic.exe"+1B0BE2:
+  jmp sj2
+  nop
+  nop
+
+return:
+
+
+[DISABLE]
+
+"Gothic_II_Classic.exe"+1B0BE2:
+ db 89 51 04 D9 5C 24 08
+
+"Gothic_II_Classic.exe"+1B035E:
+  db D9 59 C8 D9 40 08
+
+
+dealloc(newmem)
+dealloc(sjf,$16)
+
+{
+// ORIGINAL CODE - INJECTION POINT: "Gothic_II_Classic.exe"+1B035E
+
+"Gothic_II_Classic.exe"+1B033A: 83 C4 0C           -  add esp,0C
+"Gothic_II_Classic.exe"+1B033D: C2 08 00           -  ret 0008
+"Gothic_II_Classic.exe"+1B0340: 83 EC 0C           -  sub esp,0C
+"Gothic_II_Classic.exe"+1B0343: D9 81 80 00 00 00  -  fld dword ptr [ecx+00000080]
+"Gothic_II_Classic.exe"+1B0349: 8B 44 24 10        -  mov eax,[esp+10]
+"Gothic_II_Classic.exe"+1B034D: D8 00              -  fadd dword ptr [eax]
+"Gothic_II_Classic.exe"+1B034F: 81 C1 BC 00 00 00  -  add ecx,000000BC
+"Gothic_II_Classic.exe"+1B0355: D9 59 C4           -  fstp dword ptr [ecx-3C]
+"Gothic_II_Classic.exe"+1B0358: D9 40 04           -  fld dword ptr [eax+04]
+"Gothic_II_Classic.exe"+1B035B: D8 41 C8           -  fadd dword ptr [ecx-38]
+// ---------- INJECTING HERE ----------
+"Gothic_II_Classic.exe"+1B035E: D9 59 C8           -  fstp dword ptr [ecx-38]
+"Gothic_II_Classic.exe"+1B0361: D9 40 08           -  fld dword ptr [eax+08]
+// ---------- DONE INJECTING  ----------
+"Gothic_II_Classic.exe"+1B0364: D8 41 CC           -  fadd dword ptr [ecx-34]
+"Gothic_II_Classic.exe"+1B0367: D9 59 CC           -  fstp dword ptr [ecx-34]
+"Gothic_II_Classic.exe"+1B036A: D9 81 48 FF FF FF  -  fld dword ptr [ecx-000000B8]
+"Gothic_II_Classic.exe"+1B0370: D9 C0              -  fld st(0)
+"Gothic_II_Classic.exe"+1B0372: D8 49 C4           -  fmul dword ptr [ecx-3C]
+"Gothic_II_Classic.exe"+1B0375: D9 5C 24 00        -  fstp dword ptr [esp+00]
+"Gothic_II_Classic.exe"+1B0379: 8B 44 24 00        -  mov eax,[esp+00]
+"Gothic_II_Classic.exe"+1B037D: D9 C0              -  fld st(0)
+"Gothic_II_Classic.exe"+1B037F: D8 49 C8           -  fmul dword ptr [ecx-38]
+"Gothic_II_Classic.exe"+1B0382: D9 5C 24 04        -  fstp dword ptr [esp+04]
+}
+</AssemblerScript>
+    </CheatEntry>
+  </CheatEntries>
+  <UserdefinedSymbols/>
+  <Structures StructVersion="2">
+    <Structure Name="безымянная структура" AutoFill="0" AutoCreate="1" DefaultHex="0" AutoDestroy="0" DoNotSaveLocal="0" RLECompression="1" AutoCreateStructsize="4096">
+      <Elements>
+        <Element Offset="0" Vartype="Pointer" Bytesize="4" RLECount="2" PointerSize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="8" Vartype="4 Bytes" Bytesize="4" RLECount="6" DisplayMethod="Целое без знака"/>
+        <Element Offset="32" Vartype="Float" Bytesize="4" RLECount="7" DisplayMethod="Целое без знака"/>
+        <Element Offset="60" Vartype="4 Bytes" Bytesize="4" RLECount="24" DisplayMethod="Целое без знака"/>
+        <Element Offset="156" Vartype="Pointer" Bytesize="4" RLECount="2" PointerSize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="164" Vartype="4 Bytes" Bytesize="4" RLECount="2" DisplayMethod="Целое без знака"/>
+        <Element Offset="172" Vartype="Pointer" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="176" Vartype="4 Bytes" Bytesize="4" RLECount="14" DisplayMethod="Целое без знака"/>
+        <Element Offset="232" Vartype="Pointer" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="236" Vartype="4 Bytes" Bytesize="4" RLECount="12" DisplayMethod="Целое без знака"/>
+        <Element Offset="284" Vartype="Pointer" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="288" Vartype="4 Bytes" Bytesize="4" RLECount="2" DisplayMethod="Целое без знака"/>
+        <Element Offset="296" Vartype="Float" Bytesize="4" RLECount="8" DisplayMethod="Целое без знака"/>
+        <Element Offset="328" Vartype="Byte" Bytesize="1" RLECount="5" DisplayMethod="Целое без знака"/>
+        <Element Offset="333" Vartype="String" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="337" Vartype="Byte" Bytesize="1" RLECount="3" DisplayMethod="Целое без знака"/>
+        <Element Offset="340" Vartype="Float" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="344" Vartype="Byte" Bytesize="1" RLECount="8" DisplayMethod="Целое без знака"/>
+        <Element Offset="352" Vartype="4 Bytes" Bytesize="4" RLECount="7" DisplayMethod="Целое без знака"/>
+        <Element Offset="380" Vartype="Float" Bytesize="4" RLECount="2" DisplayMethod="Целое без знака"/>
+        <Element Offset="388" Vartype="4 Bytes" Bytesize="4" RLECount="12" DisplayMethod="Целое без знака"/>
+        <Element Offset="436" Vartype="Float" Bytesize="4" RLECount="3" DisplayMethod="Целое без знака"/>
+        <Element Offset="448" Vartype="4 Bytes" Bytesize="4" RLECount="22" DisplayMethod="Целое без знака"/>
+        <Element Offset="536" Vartype="Byte" Bytesize="1" DisplayMethod="Целое без знака"/>
+        <Element Offset="537" Vartype="String" Bytesize="5" DisplayMethod="Целое без знака"/>
+        <Element Offset="542" Vartype="Byte" Bytesize="1" RLECount="2" DisplayMethod="Целое без знака"/>
+        <Element Offset="544" Vartype="4 Bytes" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="548" Vartype="Float" Bytesize="4" RLECount="28" DisplayMethod="Целое без знака"/>
+        <Element Offset="660" Vartype="4 Bytes" Bytesize="4" RLECount="3" DisplayMethod="Целое без знака"/>
+        <Element Offset="672" Vartype="Float" Bytesize="4" RLECount="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="688" Vartype="4 Bytes" Bytesize="4" RLECount="3" DisplayMethod="Целое без знака"/>
+        <Element Offset="700" Vartype="Float" Bytesize="4" RLECount="2" DisplayMethod="Целое без знака"/>
+        <Element Offset="708" Vartype="Double" Bytesize="8" DisplayMethod="Целое без знака"/>
+        <Element Offset="716" Vartype="Float" Bytesize="4" RLECount="2" DisplayMethod="Целое без знака"/>
+        <Element Offset="724" Vartype="Double" Bytesize="8" DisplayMethod="Целое без знака"/>
+        <Element Offset="732" Vartype="Float" Bytesize="4" RLECount="2" DisplayMethod="Целое без знака"/>
+        <Element Offset="740" Vartype="Double" Bytesize="8" DisplayMethod="Целое без знака"/>
+        <Element Offset="748" Vartype="Float" Bytesize="4" RLECount="2" DisplayMethod="Целое без знака"/>
+        <Element Offset="756" Vartype="Double" Bytesize="8" DisplayMethod="Целое без знака"/>
+        <Element Offset="764" Vartype="Float" Bytesize="4" RLECount="2" DisplayMethod="Целое без знака"/>
+        <Element Offset="772" Vartype="Double" Bytesize="8" DisplayMethod="Целое без знака"/>
+        <Element Offset="780" Vartype="Float" Bytesize="4" RLECount="2" DisplayMethod="Целое без знака"/>
+        <Element Offset="788" Vartype="Double" Bytesize="8" DisplayMethod="Целое без знака"/>
+        <Element Offset="796" Vartype="Float" Bytesize="4" RLECount="2" DisplayMethod="Целое без знака"/>
+        <Element Offset="804" Vartype="Double" Bytesize="8" DisplayMethod="Целое без знака"/>
+        <Element Offset="812" Vartype="Float" Bytesize="4" RLECount="2" DisplayMethod="Целое без знака"/>
+        <Element Offset="820" Vartype="Double" Bytesize="8" DisplayMethod="Целое без знака"/>
+        <Element Offset="828" Vartype="Float" Bytesize="4" RLECount="2" DisplayMethod="Целое без знака"/>
+        <Element Offset="836" Vartype="Double" Bytesize="8" DisplayMethod="Целое без знака"/>
+        <Element Offset="844" Vartype="Float" Bytesize="4" RLECount="2" DisplayMethod="Целое без знака"/>
+        <Element Offset="852" Vartype="Double" Bytesize="8" DisplayMethod="Целое без знака"/>
+        <Element Offset="860" Vartype="4 Bytes" Bytesize="4" RLECount="512" DisplayMethod="Целое без знака"/>
+        <Element Offset="2908" Vartype="Float" Bytesize="4" RLECount="2" DisplayMethod="Целое без знака"/>
+        <Element Offset="2916" Vartype="Double" Bytesize="8" DisplayMethod="Целое без знака"/>
+        <Element Offset="2924" Vartype="4 Bytes" Bytesize="4" RLECount="3" DisplayMethod="Целое без знака"/>
+        <Element Offset="2936" Vartype="Float" Bytesize="4" RLECount="2" DisplayMethod="Целое без знака"/>
+        <Element Offset="2944" Vartype="Double" Bytesize="8" DisplayMethod="Целое без знака"/>
+        <Element Offset="2952" Vartype="4 Bytes" Bytesize="4" RLECount="6" DisplayMethod="Целое без знака"/>
+        <Element Offset="2976" Vartype="Float" Bytesize="4" RLECount="2" DisplayMethod="Целое без знака"/>
+        <Element Offset="2984" Vartype="Byte" Bytesize="1" RLECount="8" DisplayMethod="Целое без знака"/>
+        <Element Offset="2992" Vartype="4 Bytes" Bytesize="4" RLECount="276" DisplayMethod="Целое без знака"/>
+      </Elements>
+    </Structure>
+  </Structures>
+</CheatTable>

@@ -1,0 +1,820 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CheatTable CheatEngineTableVersion="29">
+  <CheatEntries>
+    <CheatEntry>
+      <ID>1</ID>
+      <Description>"resource"</Description>
+      <LastState Activated="1"/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>{ Game   : h4mod.exe
+  Version: 
+  Date   : 2018-05-22
+  Author : Hipp
+
+  This script does blah blah blah
+}
+
+[ENABLE]
+
+h4mod.exe+3E3D88:
+ add [ecx+eax*4+000000C8],edx
+
+
+aobscanmodule(resource,h4mod.exe,8B 18 2B DF 89 18) // should be unique
+alloc(newmem,$1000)
+
+label(code)
+label(return)
+
+newmem:
+
+code:
+  mov ebx,[eax]
+  //mov edi,0
+  add ebx,edi
+  mov [eax],ebx
+  jmp return
+
+resource:
+  jmp newmem
+  nop
+return:
+registersymbol(resource)
+
+[DISABLE]
+
+h4mod.exe+3E3D88:
+  sub [ecx+eax*4+000000C8],edx
+
+
+resource:
+  db 8B 18 2B DF 89 18
+
+unregistersymbol(resource)
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: "h4mod.exe"+3E3DB7
+
+"h4mod.exe"+3E3D9E: 90                                -  nop 
+"h4mod.exe"+3E3D9F: 90                                -  nop 
+"h4mod.exe"+3E3DA0: 8B 54 24 04                       -  mov edx,[esp+04]
+"h4mod.exe"+3E3DA4: 53                                -  push ebx
+"h4mod.exe"+3E3DA5: 8D 81 C8 00 00 00                 -  lea eax,[ecx+000000C8]
+"h4mod.exe"+3E3DAB: 56                                -  push esi
+"h4mod.exe"+3E3DAC: 57                                -  push edi
+"h4mod.exe"+3E3DAD: 2B D0                             -  sub edx,eax
+"h4mod.exe"+3E3DAF: BE 07 00 00 00                    -  mov esi,00000007
+"h4mod.exe"+3E3DB4: 8B 3C 02                          -  mov edi,[edx+eax]
+// ---------- INJECTING HERE ----------
+"h4mod.exe"+3E3DB7: 8B 18                             -  mov ebx,[eax]
+"h4mod.exe"+3E3DB9: 2B DF                             -  sub ebx,edi
+"h4mod.exe"+3E3DBB: 89 18                             -  mov [eax],ebx
+// ---------- DONE INJECTING  ----------
+"h4mod.exe"+3E3DBD: 83 C0 04                          -  add eax,04
+"h4mod.exe"+3E3DC0: 4E                                -  dec esi
+"h4mod.exe"+3E3DC1: 75 F1                             -  jne h4mod.exe+3E3DB4
+"h4mod.exe"+3E3DC3: E8 C8 FD FF FF                    -  call h4mod.exe+3E3B90
+"h4mod.exe"+3E3DC8: 5F                                -  pop edi
+"h4mod.exe"+3E3DC9: 5E                                -  pop esi
+"h4mod.exe"+3E3DCA: 5B                                -  pop ebx
+"h4mod.exe"+3E3DCB: C2 04 00                          -  ret 0004
+"h4mod.exe"+3E3DCE: 90                                -  nop 
+"h4mod.exe"+3E3DCF: 90                                -  nop 
+}
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>20</ID>
+      <Description>"max unit"</Description>
+      <LastState/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>{ Game   : h4mod.exe
+  Version: 
+  Date   : 2018-07-27
+  Author : Hipp
+
+  This script does blah blah blah
+}
+
+[ENABLE]
+
+aobscanmodule(max_unit,h4mod.exe,8B 51 18 8B 41 0C 56) // should be unique
+alloc(newmem,$1000)
+
+label(code)
+label(return)
+
+newmem:
+  mov [ecx+18],#999
+code:
+  mov edx,[ecx+18]
+  mov eax,[ecx+0C]
+  jmp return
+
+max_unit:
+  jmp newmem
+  nop
+return:
+registersymbol(max_unit)
+
+[DISABLE]
+
+max_unit:
+  db 8B 51 18 8B 41 0C
+
+unregistersymbol(max_unit)
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: "h4mod.exe"+CBB1
+
+"h4mod.exe"+CB96: 40                       -  inc eax
+"h4mod.exe"+CB97: 00 90 90 90 90 90        -  add [eax-6F6F6F70],dl
+"h4mod.exe"+CB9D: 90                       -  nop 
+"h4mod.exe"+CB9E: 90                       -  nop 
+"h4mod.exe"+CB9F: 90                       -  nop 
+"h4mod.exe"+CBA0: 51                       -  push ecx
+"h4mod.exe"+CBA1: 8B 54 24 10              -  mov edx,[esp+10]
+"h4mod.exe"+CBA5: C7 44 24 00 00 00 00 00  -  mov [esp+00],00000000
+"h4mod.exe"+CBAD: 85 D2                    -  test edx,edx
+"h4mod.exe"+CBAF: 7D 03                    -  jnl h4mod.exe+CBB4
+// ---------- INJECTING HERE ----------
+"h4mod.exe"+CBB1: 8B 51 18                 -  mov edx,[ecx+18]
+"h4mod.exe"+CBB4: 8B 41 0C                 -  mov eax,[ecx+0C]
+// ---------- DONE INJECTING  ----------
+"h4mod.exe"+CBB7: 56                       -  push esi
+"h4mod.exe"+CBB8: 8B 74 24 0C              -  mov esi,[esp+0C]
+"h4mod.exe"+CBBC: 52                       -  push edx
+"h4mod.exe"+CBBD: 8B 54 24 14              -  mov edx,[esp+14]
+"h4mod.exe"+CBC1: 8D 48 08                 -  lea ecx,[eax+08]
+"h4mod.exe"+CBC4: 52                       -  push edx
+"h4mod.exe"+CBC5: 56                       -  push esi
+"h4mod.exe"+CBC6: 8B 01                    -  mov eax,[ecx]
+"h4mod.exe"+CBC8: FF 50 38                 -  call dword ptr [eax+38]
+"h4mod.exe"+CBCB: 8B C6                    -  mov eax,esi
+}
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>21</ID>
+      <Description>"min unit"</Description>
+      <LastState/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>{ Game   : h4mod.exe
+  Version: 
+  Date   : 2018-07-27
+  Author : Hipp
+
+  This script does blah blah blah
+}
+
+[ENABLE]
+
+aobscanmodule(min_unit,h4mod.exe,8B 51 18 8B 41 0C 56) // should be unique
+alloc(newmem,$1000)
+
+label(code)
+label(return)
+
+newmem:
+  mov dword ptr[ecx+18],1
+code:
+  mov edx,[ecx+18]
+  mov eax,[ecx+0C]
+  jmp return
+
+min_unit:
+  jmp newmem
+  nop
+return:
+registersymbol(min_unit)
+
+[DISABLE]
+
+min_unit:
+  db 8B 51 18 8B 41 0C
+
+unregistersymbol(min_unit)
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: "h4mod.exe"+CBB1
+
+"h4mod.exe"+CB96: 40                       -  inc eax
+"h4mod.exe"+CB97: 00 90 90 90 90 90        -  add [eax-6F6F6F70],dl
+"h4mod.exe"+CB9D: 90                       -  nop 
+"h4mod.exe"+CB9E: 90                       -  nop 
+"h4mod.exe"+CB9F: 90                       -  nop 
+"h4mod.exe"+CBA0: 51                       -  push ecx
+"h4mod.exe"+CBA1: 8B 54 24 10              -  mov edx,[esp+10]
+"h4mod.exe"+CBA5: C7 44 24 00 00 00 00 00  -  mov [esp+00],00000000
+"h4mod.exe"+CBAD: 85 D2                    -  test edx,edx
+"h4mod.exe"+CBAF: 7D 03                    -  jnl h4mod.exe+CBB4
+// ---------- INJECTING HERE ----------
+"h4mod.exe"+CBB1: 8B 51 18                 -  mov edx,[ecx+18]
+"h4mod.exe"+CBB4: 8B 41 0C                 -  mov eax,[ecx+0C]
+// ---------- DONE INJECTING  ----------
+"h4mod.exe"+CBB7: 56                       -  push esi
+"h4mod.exe"+CBB8: 8B 74 24 0C              -  mov esi,[esp+0C]
+"h4mod.exe"+CBBC: 52                       -  push edx
+"h4mod.exe"+CBBD: 8B 54 24 14              -  mov edx,[esp+14]
+"h4mod.exe"+CBC1: 8D 48 08                 -  lea ecx,[eax+08]
+"h4mod.exe"+CBC4: 52                       -  push edx
+"h4mod.exe"+CBC5: 56                       -  push esi
+"h4mod.exe"+CBC6: 8B 01                    -  mov eax,[ecx]
+"h4mod.exe"+CBC8: FF 50 38                 -  call dword ptr [eax+38]
+"h4mod.exe"+CBCB: 8B C6                    -  mov eax,esi
+}
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>10</ID>
+      <Description>"move"</Description>
+      <LastState/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>{ Game   : h4mod.exe
+  Version: 
+  Date   : 2018-05-22
+  Author : Hipp
+
+  This script does blah blah blah
+}
+
+[ENABLE]
+
+
+aobscanmodule(movement,h4mod.exe,24 D8 46 70 D9 56 70) // should be unique
+alloc(newmem,$1000)
+alloc(var_1,$4)
+
+label(code)
+label(return)
+
+newmem:
+
+code:
+  {mov [var_1],(float)1
+  fld dword ptr [var_1]}
+  fabs
+  fadd dword ptr [esi+70]
+  fst dword ptr [esi+70]
+  jmp return
+
+movement+01:
+  jmp newmem
+  nop
+return:
+registersymbol(movement)
+
+[DISABLE]
+
+movement+01:
+  db D8 46 70 D9 56 70
+
+unregistersymbol(movement)
+dealloc(newmem)
+dealloc(var_1)
+
+{
+// ORIGINAL CODE - INJECTION POINT: "h4mod.exe"+241DD7
+
+"h4mod.exe"+241DBB: FF 92 B0 00 00 00        -  call dword ptr [edx+000000B0]
+"h4mod.exe"+241DC1: 84 C0                    -  test al,al
+"h4mod.exe"+241DC3: 75 2C                    -  jne h4mod.exe+241DF1
+"h4mod.exe"+241DC5: 8B 44 24 1C              -  mov eax,[esp+1C]
+"h4mod.exe"+241DC9: 8B CE                    -  mov ecx,esi
+"h4mod.exe"+241DCB: 50                       -  push eax
+"h4mod.exe"+241DCC: 55                       -  push ebp
+"h4mod.exe"+241DCD: 53                       -  push ebx
+"h4mod.exe"+241DCE: E8 ED F3 00 00           -  call h4mod.exe+2511C0
+"h4mod.exe"+241DD3: DA 7C 24 24              -  fidivr [esp+24]
+// ---------- INJECTING HERE ----------
+"h4mod.exe"+241DD7: D8 46 70                 -  fadd dword ptr [esi+70]
+"h4mod.exe"+241DDA: D9 56 70                 -  fst dword ptr [esi+70]
+// ---------- DONE INJECTING  ----------
+"h4mod.exe"+241DDD: DC 1D 48 06 97 00        -  fcomp qword ptr [h4mod.exe+570648]
+"h4mod.exe"+241DE3: DF E0                    -  fnstsw ax
+"h4mod.exe"+241DE5: F6 C4 01                 -  test ah,01
+"h4mod.exe"+241DE8: 74 07                    -  je h4mod.exe+241DF1
+"h4mod.exe"+241DEA: C7 46 70 00 00 00 00     -  mov [esi+70],00000000
+"h4mod.exe"+241DF1: 8B 44 24 10              -  mov eax,[esp+10]
+"h4mod.exe"+241DF5: 83 C7 04                 -  add edi,04
+"h4mod.exe"+241DF8: 48                       -  dec eax
+"h4mod.exe"+241DF9: 89 44 24 10              -  mov [esp+10],eax
+"h4mod.exe"+241DFD: 75 A9                    -  jne h4mod.exe+241DA8
+}
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>17</ID>
+      <Description>"move2"</Description>
+      <LastState/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>{ Game   : h4mod.exe
+  Version: 
+  Date   : 2018-05-22
+  Author : Hipp
+
+  This script does blah blah blah
+}
+
+[ENABLE]
+
+aobscanmodule(move,h4mod.exe,D9 46 70 D8 C9) // should be unique
+alloc(newmem,$1000)
+
+
+label(code)
+label(return)
+
+newmem:
+
+code:
+  mov [var_2],(float)10
+
+  fld dword ptr [esi+70]
+  fadd dword ptr [var_2]
+  fst dword ptr [esi+70]
+  fmul st(0),st(1)
+  jmp return
+var_2:
+  dd 0
+move:
+  jmp newmem
+return:
+registersymbol(move)
+
+[DISABLE]
+
+move:
+  db D9 46 70 D8 C9
+
+unregistersymbol(move)
+dealloc(newmem)
+
+
+{
+// ORIGINAL CODE - INJECTION POINT: "h4mod.exe"+241E96
+
+"h4mod.exe"+241E7A: FF 92 B0 00 00 00        -  call dword ptr [edx+000000B0]
+"h4mod.exe"+241E80: 84 C0                    -  test al,al
+"h4mod.exe"+241E82: 75 34                    -  jne h4mod.exe+241EB8
+"h4mod.exe"+241E84: 8B 44 24 18              -  mov eax,[esp+18]
+"h4mod.exe"+241E88: 8B 4C 24 1C              -  mov ecx,[esp+1C]
+"h4mod.exe"+241E8C: 50                       -  push eax
+"h4mod.exe"+241E8D: 51                       -  push ecx
+"h4mod.exe"+241E8E: 55                       -  push ebp
+"h4mod.exe"+241E8F: 8B CE                    -  mov ecx,esi
+"h4mod.exe"+241E91: E8 2A F3 00 00           -  call h4mod.exe+2511C0
+// ---------- INJECTING HERE ----------
+"h4mod.exe"+241E96: D9 46 70                 -  fld dword ptr [esi+70]
+"h4mod.exe"+241E99: D8 C9                    -  fmul st(0),st(1)
+// ---------- DONE INJECTING  ----------
+"h4mod.exe"+241E9B: DC 05 90 0A 97 00        -  fadd qword ptr [h4mod.exe+570A90]
+"h4mod.exe"+241EA1: E8 BE E2 29 00           -  call h4mod.exe+4E0164
+"h4mod.exe"+241EA6: 84 DB                    -  test bl,bl
+"h4mod.exe"+241EA8: DD D8                    -  fstp st(0)
+"h4mod.exe"+241EAA: 75 06                    -  jne h4mod.exe+241EB2
+"h4mod.exe"+241EAC: 39 44 24 24              -  cmp [esp+24],eax
+"h4mod.exe"+241EB0: 7E 04                    -  jle h4mod.exe+241EB6
+"h4mod.exe"+241EB2: 89 44 24 24              -  mov [esp+24],eax
+"h4mod.exe"+241EB6: 32 DB                    -  xor bl,bl
+"h4mod.exe"+241EB8: 8B 44 24 10              -  mov eax,[esp+10]
+}
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>25</ID>
+      <Description>"monster in town"</Description>
+      <LastState/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>[ENABLE]
+h4mod.exe+4944EB:
+ add edx,ecx
+
+ 
+ 
+[DISABLE]
+h4mod.exe+4944EB:
+ db 90 90
+
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>2</ID>
+      <Description>"inf monster"</Description>
+      <LastState/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>[ENABLE]
+h4mod.exe+23DD4A:
+ add edx,eax
+ 
+ 
+[DISABLE]
+h4mod.exe+23DD4A:
+ sub edx,eax
+
+
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>22</ID>
+      <Description>"Нет описания"</Description>
+      <VariableType>Byte</VariableType>
+      <Address>0B25314c</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>23</ID>
+      <Description>"build"</Description>
+      <LastState Activated="1"/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>{ Game   : h4mod.exe
+  Version: 
+  Date   : 2018-07-27
+  Author : Hipp
+
+  This script does blah blah blah
+}
+
+[ENABLE]
+
+aobscanmodule(build,h4mod.exe,8A 91 20 01 00 00) // should be unique
+alloc(newmem,$1000)
+
+label(code)
+label(return)
+
+newmem:
+  mov byte ptr [ecx+00000120],0
+code:
+  mov dl,[ecx+00000120]
+  jmp return
+
+build:
+  jmp newmem
+  nop
+return:
+registersymbol(build)
+
+[DISABLE]
+
+build:
+  db 8A 91 20 01 00 00
+
+unregistersymbol(build)
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: "h4mod.exe"+494260
+
+"h4mod.exe"+494256: 90                    -  nop 
+"h4mod.exe"+494257: 90                    -  nop 
+"h4mod.exe"+494258: 90                    -  nop 
+"h4mod.exe"+494259: 90                    -  nop 
+"h4mod.exe"+49425A: 90                    -  nop 
+"h4mod.exe"+49425B: 90                    -  nop 
+"h4mod.exe"+49425C: 90                    -  nop 
+"h4mod.exe"+49425D: 90                    -  nop 
+"h4mod.exe"+49425E: 90                    -  nop 
+"h4mod.exe"+49425F: 90                    -  nop 
+// ---------- INJECTING HERE ----------
+"h4mod.exe"+494260: 8A 91 20 01 00 00     -  mov dl,[ecx+00000120]
+// ---------- DONE INJECTING  ----------
+"h4mod.exe"+494266: 32 C0                 -  xor al,al
+"h4mod.exe"+494268: 3A C2                 -  cmp al,dl
+"h4mod.exe"+49426A: 1B C0                 -  sbb eax,eax
+"h4mod.exe"+49426C: F7 D8                 -  neg eax
+"h4mod.exe"+49426E: C3                    -  ret 
+"h4mod.exe"+49426F: 90                    -  nop 
+"h4mod.exe"+494270: 53                    -  push ebx
+"h4mod.exe"+494271: 56                    -  push esi
+"h4mod.exe"+494272: 57                    -  push edi
+"h4mod.exe"+494273: 8B 7C 24 10           -  mov edi,[esp+10]
+}
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>24</ID>
+      <Description>"exp"</Description>
+      <LastState/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>{ Game   : h4mod.exe
+  Version: 
+  Date   : 2018-07-27
+  Author : Hipp
+
+  This script does blah blah blah
+}
+
+[ENABLE]
+
+aobscanmodule(exp,h4mod.exe,03 EA 3B DF 89 A9 30 06 00 00) // should be unique
+alloc(newmem,$1000)
+
+label(code)
+label(return)
+label(v_exp)
+registersymbol(v_exp)
+newmem:
+
+code:
+  add ebp,[v_exp]
+  cmp ebx,edi
+  mov [ecx+00000630],ebp
+  jmp return
+v_exp:
+  dd 000003e8
+exp:
+  jmp newmem
+  nop
+  nop
+  nop
+  nop
+  nop
+return:
+registersymbol(exp)
+
+[DISABLE]
+
+exp:
+  db 03 EA 3B DF 89 A9 30 06 00 00
+unregistersymbol(v_exp)
+unregistersymbol(exp)
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: "h4mod.exe"+241560
+
+"h4mod.exe"+24153B: 74 43                 -  je h4mod.exe+241580
+"h4mod.exe"+24153D: 8B 44 24 1C           -  mov eax,[esp+1C]
+"h4mod.exe"+241541: 8B 50 04              -  mov edx,[eax+04]
+"h4mod.exe"+241544: 8B 4A 04              -  mov ecx,[edx+04]
+"h4mod.exe"+241547: 8B 54 01 04           -  mov edx,[ecx+eax+04]
+"h4mod.exe"+24154B: 8D 4C 01 04           -  lea ecx,[ecx+eax+04]
+"h4mod.exe"+24154F: FF 52 1C              -  call dword ptr [edx+1C]
+"h4mod.exe"+241552: 8B 4C 34 74           -  mov ecx,[esp+esi+74]
+"h4mod.exe"+241556: 8B 54 34 58           -  mov edx,[esp+esi+58]
+"h4mod.exe"+24155A: 8B A9 30 06 00 00     -  mov ebp,[ecx+00000630]
+// ---------- INJECTING HERE ----------
+"h4mod.exe"+241560: 03 EA                 -  add ebp,edx
+"h4mod.exe"+241562: 3B DF                 -  cmp ebx,edi
+"h4mod.exe"+241564: 89 A9 30 06 00 00     -  mov [ecx+00000630],ebp
+// ---------- DONE INJECTING  ----------
+"h4mod.exe"+24156A: 74 14                 -  je h4mod.exe+241580
+"h4mod.exe"+24156C: 8B 54 24 18           -  mov edx,[esp+18]
+"h4mod.exe"+241570: 3B D7                 -  cmp edx,edi
+"h4mod.exe"+241572: 74 0C                 -  je h4mod.exe+241580
+"h4mod.exe"+241574: 3B C7                 -  cmp eax,edi
+"h4mod.exe"+241576: 74 08                 -  je h4mod.exe+241580
+"h4mod.exe"+241578: 52                    -  push edx
+"h4mod.exe"+241579: 53                    -  push ebx
+"h4mod.exe"+24157A: 50                    -  push eax
+"h4mod.exe"+24157B: E8 00 A7 0E 00        -  call h4mod.exe+32BC80
+}
+</AssemblerScript>
+      <CheatEntries>
+        <CheatEntry>
+          <ID>26</ID>
+          <Description>"Нет описания"</Description>
+          <VariableType>4 Bytes</VariableType>
+          <Address>v_exp</Address>
+        </CheatEntry>
+      </CheatEntries>
+    </CheatEntry>
+  </CheatEntries>
+  <CheatCodes>
+    <CodeEntry>
+      <Description>Изменение sub ecx,eax</Description>
+      <AddressString>h4mod.exe+4944DE</AddressString>
+      <Before>
+        <Byte>BE</Byte>
+        <Byte>30</Byte>
+        <Byte>01</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+      </Before>
+      <Actual>
+        <Byte>2B</Byte>
+        <Byte>C8</Byte>
+      </Actual>
+      <After>
+        <Byte>F7</Byte>
+        <Byte>D9</Byte>
+        <Byte>8D</Byte>
+        <Byte>0C</Byte>
+        <Byte>89</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry>
+      <Description>Изменение add edx,ecx</Description>
+      <AddressString>h4mod.exe+4944EB</AddressString>
+      <Before>
+        <Byte>0C</Byte>
+        <Byte>89</Byte>
+        <Byte>C1</Byte>
+        <Byte>E1</Byte>
+        <Byte>02</Byte>
+      </Before>
+      <Actual>
+        <Byte>03</Byte>
+        <Byte>D1</Byte>
+      </Actual>
+      <After>
+        <Byte>89</Byte>
+        <Byte>94</Byte>
+        <Byte>BE</Byte>
+        <Byte>30</Byte>
+        <Byte>01</Byte>
+      </After>
+    </CodeEntry>
+  </CheatCodes>
+  <UserdefinedSymbols>
+    <SymbolEntry>
+      <Name>pRes</Name>
+      <Address>04BD0000</Address>
+    </SymbolEntry>
+  </UserdefinedSymbols>
+  <Structures StructVersion="2">
+    <Structure Name="безымянная структура" AutoFill="0" AutoCreate="1" DefaultHex="0" AutoDestroy="0" DoNotSaveLocal="0" RLECompression="1" AutoCreateStructsize="4096">
+      <Elements>
+        <Element Offset="0" Vartype="Pointer" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="4" Vartype="4 Bytes" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="8" Vartype="Pointer" Bytesize="4" RLECount="2" DisplayMethod="Целое без знака"/>
+        <Element Offset="16" Vartype="4 Bytes" Bytesize="4" RLECount="24" DisplayMethod="Целое без знака"/>
+        <Element Offset="112" Vartype="Float" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="116" Vartype="4 Bytes" Bytesize="4" RLECount="15" DisplayMethod="Целое без знака"/>
+        <Element Offset="176" Vartype="Pointer" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="180" Vartype="4 Bytes" Bytesize="4" RLECount="25" DisplayMethod="Целое без знака"/>
+        <Element Offset="280" Vartype="Pointer" Bytesize="4" RLECount="3" DisplayMethod="Целое без знака"/>
+        <Element Offset="292" Vartype="4 Bytes" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="296" Vartype="Pointer" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="300" Vartype="4 Bytes" Bytesize="4" RLECount="3" DisplayMethod="Целое без знака"/>
+        <Element Offset="312" Vartype="Pointer" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="316" Vartype="4 Bytes" Bytesize="4" RLECount="3" DisplayMethod="Целое без знака"/>
+        <Element Offset="328" Vartype="Pointer" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="332" Vartype="4 Bytes" Bytesize="4" RLECount="3" DisplayMethod="Целое без знака"/>
+        <Element Offset="344" Vartype="Pointer" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="348" Vartype="4 Bytes" Bytesize="4" RLECount="3" DisplayMethod="Целое без знака"/>
+        <Element Offset="360" Vartype="Pointer" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="364" Vartype="4 Bytes" Bytesize="4" RLECount="22" DisplayMethod="Целое без знака"/>
+        <Element Offset="452" Vartype="Pointer" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="456" Vartype="4 Bytes" Bytesize="4" RLECount="22" DisplayMethod="Целое без знака"/>
+        <Element Offset="544" Vartype="Pointer" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="548" Vartype="4 Bytes" Bytesize="4" RLECount="22" DisplayMethod="Целое без знака"/>
+        <Element Offset="636" Vartype="Pointer" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="640" Vartype="4 Bytes" Bytesize="4" RLECount="22" DisplayMethod="Целое без знака"/>
+        <Element Offset="728" Vartype="Pointer" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="732" Vartype="4 Bytes" Bytesize="4" RLECount="22" DisplayMethod="Целое без знака"/>
+        <Element Offset="820" Vartype="Pointer" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="824" Vartype="4 Bytes" Bytesize="4" RLECount="22" DisplayMethod="Целое без знака"/>
+        <Element Offset="912" Vartype="Pointer" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="916" Vartype="4 Bytes" Bytesize="4" RLECount="22" DisplayMethod="Целое без знака"/>
+        <Element Offset="1004" Vartype="Pointer" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="1008" Vartype="4 Bytes" Bytesize="4" RLECount="22" DisplayMethod="Целое без знака"/>
+        <Element Offset="1096" Vartype="Pointer" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="1100" Vartype="4 Bytes" Bytesize="4" RLECount="22" DisplayMethod="Целое без знака"/>
+        <Element Offset="1188" Vartype="Pointer" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="1192" Vartype="4 Bytes" Bytesize="4" RLECount="22" DisplayMethod="Целое без знака"/>
+        <Element Offset="1280" Vartype="Pointer" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="1284" Vartype="4 Bytes" Bytesize="4" RLECount="25" DisplayMethod="Целое без знака"/>
+        <Element Offset="1384" Vartype="Pointer" Bytesize="4" RLECount="3" DisplayMethod="Целое без знака"/>
+        <Element Offset="1396" Vartype="4 Bytes" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="1400" Vartype="Pointer" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="1404" Vartype="4 Bytes" Bytesize="4" RLECount="3" DisplayMethod="Целое без знака"/>
+        <Element Offset="1416" Vartype="Pointer" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="1420" Vartype="4 Bytes" Bytesize="4" RLECount="3" DisplayMethod="Целое без знака"/>
+        <Element Offset="1432" Vartype="Pointer" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="1436" Vartype="4 Bytes" Bytesize="4" RLECount="3" DisplayMethod="Целое без знака"/>
+        <Element Offset="1448" Vartype="Pointer" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="1452" Vartype="4 Bytes" Bytesize="4" RLECount="3" DisplayMethod="Целое без знака"/>
+        <Element Offset="1464" Vartype="Pointer" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="1468" Vartype="4 Bytes" Bytesize="4" RLECount="9" DisplayMethod="Целое без знака"/>
+        <Element Offset="1504" Vartype="Pointer" Bytesize="4" RLECount="3" DisplayMethod="Целое без знака"/>
+        <Element Offset="1516" Vartype="4 Bytes" Bytesize="4" RLECount="14" DisplayMethod="Целое без знака"/>
+        <Element Offset="1572" Vartype="Pointer" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="1576" Vartype="4 Bytes" Bytesize="4" RLECount="6" DisplayMethod="Целое без знака"/>
+        <Element Offset="1600" Vartype="Pointer" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="1604" Vartype="4 Bytes" Bytesize="4" RLECount="26" DisplayMethod="Целое без знака"/>
+        <Element Offset="1708" Vartype="Pointer" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="1712" Vartype="4 Bytes" Bytesize="4" RLECount="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="1728" Vartype="Pointer" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="1732" Vartype="4 Bytes" Bytesize="4" RLECount="65" DisplayMethod="Целое без знака"/>
+        <Element Offset="1992" Vartype="Pointer" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="1996" Vartype="4 Bytes" Bytesize="4" RLECount="10" DisplayMethod="Целое без знака"/>
+        <Element Offset="2036" Vartype="Pointer" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="2040" Vartype="4 Bytes" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="2044" Vartype="Pointer" Bytesize="4" RLECount="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="2060" Vartype="4 Bytes" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="2064" Vartype="Pointer" Bytesize="4" RLECount="3" DisplayMethod="Целое без знака"/>
+        <Element Offset="2076" Vartype="4 Bytes" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="2080" Vartype="Pointer" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="2084" Vartype="4 Bytes" Bytesize="4" RLECount="2" DisplayMethod="Целое без знака"/>
+        <Element Offset="2092" Vartype="Pointer" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="2096" Vartype="4 Bytes" Bytesize="4" RLECount="7" DisplayMethod="Целое без знака"/>
+        <Element Offset="2124" Vartype="Pointer" Bytesize="4" RLECount="2" DisplayMethod="Целое без знака"/>
+        <Element Offset="2132" Vartype="4 Bytes" Bytesize="4" RLECount="6" DisplayMethod="Целое без знака"/>
+        <Element Offset="2156" Vartype="Pointer" Bytesize="4" RLECount="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="2172" Vartype="4 Bytes" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="2176" Vartype="Pointer" Bytesize="4" RLECount="7" DisplayMethod="Целое без знака"/>
+        <Element Offset="2204" Vartype="4 Bytes" Bytesize="4" RLECount="11" DisplayMethod="Целое без знака"/>
+        <Element Offset="2248" Vartype="Pointer" Bytesize="4" RLECount="3" DisplayMethod="Целое без знака"/>
+        <Element Offset="2260" Vartype="4 Bytes" Bytesize="4" RLECount="10" DisplayMethod="Целое без знака"/>
+        <Element Offset="2300" Vartype="Pointer" Bytesize="4" RLECount="2" DisplayMethod="Целое без знака"/>
+        <Element Offset="2308" Vartype="4 Bytes" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="2312" Vartype="Pointer" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="2316" Vartype="4 Bytes" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="2320" Vartype="Pointer" Bytesize="4" RLECount="3" DisplayMethod="Целое без знака"/>
+        <Element Offset="2332" Vartype="4 Bytes" Bytesize="4" RLECount="21" DisplayMethod="Целое без знака"/>
+        <Element Offset="2416" Vartype="Pointer" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="2420" Vartype="4 Bytes" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="2424" Vartype="Pointer" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="2428" Vartype="4 Bytes" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="2432" Vartype="Pointer" Bytesize="4" RLECount="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="2448" Vartype="4 Bytes" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="2452" Vartype="Pointer" Bytesize="4" RLECount="3" DisplayMethod="Целое без знака"/>
+        <Element Offset="2464" Vartype="4 Bytes" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="2468" Vartype="Pointer" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="2472" Vartype="4 Bytes" Bytesize="4" RLECount="2" DisplayMethod="Целое без знака"/>
+        <Element Offset="2480" Vartype="Pointer" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="2484" Vartype="4 Bytes" Bytesize="4" RLECount="7" DisplayMethod="Целое без знака"/>
+        <Element Offset="2512" Vartype="Pointer" Bytesize="4" RLECount="2" DisplayMethod="Целое без знака"/>
+        <Element Offset="2520" Vartype="4 Bytes" Bytesize="4" RLECount="6" DisplayMethod="Целое без знака"/>
+        <Element Offset="2544" Vartype="Pointer" Bytesize="4" RLECount="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="2560" Vartype="4 Bytes" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="2564" Vartype="Pointer" Bytesize="4" RLECount="7" DisplayMethod="Целое без знака"/>
+        <Element Offset="2592" Vartype="4 Bytes" Bytesize="4" RLECount="11" DisplayMethod="Целое без знака"/>
+        <Element Offset="2636" Vartype="Pointer" Bytesize="4" RLECount="3" DisplayMethod="Целое без знака"/>
+        <Element Offset="2648" Vartype="4 Bytes" Bytesize="4" RLECount="10" DisplayMethod="Целое без знака"/>
+        <Element Offset="2688" Vartype="Pointer" Bytesize="4" RLECount="2" DisplayMethod="Целое без знака"/>
+        <Element Offset="2696" Vartype="4 Bytes" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="2700" Vartype="Pointer" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="2704" Vartype="4 Bytes" Bytesize="4" RLECount="25" DisplayMethod="Целое без знака"/>
+        <Element Offset="2804" Vartype="Pointer" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="2808" Vartype="4 Bytes" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="2812" Vartype="Pointer" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="2816" Vartype="4 Bytes" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="2820" Vartype="Pointer" Bytesize="4" RLECount="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="2836" Vartype="4 Bytes" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="2840" Vartype="Pointer" Bytesize="4" RLECount="3" DisplayMethod="Целое без знака"/>
+        <Element Offset="2852" Vartype="4 Bytes" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="2856" Vartype="Pointer" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="2860" Vartype="4 Bytes" Bytesize="4" RLECount="2" DisplayMethod="Целое без знака"/>
+        <Element Offset="2868" Vartype="Pointer" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="2872" Vartype="4 Bytes" Bytesize="4" RLECount="7" DisplayMethod="Целое без знака"/>
+        <Element Offset="2900" Vartype="Pointer" Bytesize="4" RLECount="2" DisplayMethod="Целое без знака"/>
+        <Element Offset="2908" Vartype="4 Bytes" Bytesize="4" RLECount="6" DisplayMethod="Целое без знака"/>
+        <Element Offset="2932" Vartype="Pointer" Bytesize="4" RLECount="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="2948" Vartype="4 Bytes" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="2952" Vartype="Pointer" Bytesize="4" RLECount="7" DisplayMethod="Целое без знака"/>
+        <Element Offset="2980" Vartype="4 Bytes" Bytesize="4" RLECount="11" DisplayMethod="Целое без знака"/>
+        <Element Offset="3024" Vartype="Pointer" Bytesize="4" RLECount="3" DisplayMethod="Целое без знака"/>
+        <Element Offset="3036" Vartype="4 Bytes" Bytesize="4" RLECount="10" DisplayMethod="Целое без знака"/>
+        <Element Offset="3076" Vartype="Pointer" Bytesize="4" RLECount="2" DisplayMethod="Целое без знака"/>
+        <Element Offset="3084" Vartype="4 Bytes" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="3088" Vartype="Pointer" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="3092" Vartype="4 Bytes" Bytesize="4" RLECount="25" DisplayMethod="Целое без знака"/>
+        <Element Offset="3192" Vartype="Pointer" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="3196" Vartype="4 Bytes" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="3200" Vartype="Pointer" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="3204" Vartype="4 Bytes" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="3208" Vartype="Pointer" Bytesize="4" RLECount="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="3224" Vartype="4 Bytes" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="3228" Vartype="Pointer" Bytesize="4" RLECount="3" DisplayMethod="Целое без знака"/>
+        <Element Offset="3240" Vartype="4 Bytes" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="3244" Vartype="Pointer" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="3248" Vartype="4 Bytes" Bytesize="4" RLECount="2" DisplayMethod="Целое без знака"/>
+        <Element Offset="3256" Vartype="Pointer" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="3260" Vartype="4 Bytes" Bytesize="4" RLECount="7" DisplayMethod="Целое без знака"/>
+        <Element Offset="3288" Vartype="Pointer" Bytesize="4" RLECount="2" DisplayMethod="Целое без знака"/>
+        <Element Offset="3296" Vartype="4 Bytes" Bytesize="4" RLECount="6" DisplayMethod="Целое без знака"/>
+        <Element Offset="3320" Vartype="Pointer" Bytesize="4" RLECount="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="3336" Vartype="4 Bytes" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="3340" Vartype="Pointer" Bytesize="4" RLECount="7" DisplayMethod="Целое без знака"/>
+        <Element Offset="3368" Vartype="4 Bytes" Bytesize="4" RLECount="11" DisplayMethod="Целое без знака"/>
+        <Element Offset="3412" Vartype="Pointer" Bytesize="4" RLECount="3" DisplayMethod="Целое без знака"/>
+        <Element Offset="3424" Vartype="4 Bytes" Bytesize="4" RLECount="10" DisplayMethod="Целое без знака"/>
+        <Element Offset="3464" Vartype="Pointer" Bytesize="4" RLECount="2" DisplayMethod="Целое без знака"/>
+        <Element Offset="3472" Vartype="4 Bytes" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="3476" Vartype="Pointer" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="3480" Vartype="4 Bytes" Bytesize="4" RLECount="25" DisplayMethod="Целое без знака"/>
+        <Element Offset="3580" Vartype="Pointer" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="3584" Vartype="4 Bytes" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="3588" Vartype="Pointer" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="3592" Vartype="4 Bytes" Bytesize="4" RLECount="52" DisplayMethod="Целое без знака"/>
+        <Element Offset="3800" Vartype="Byte" Bytesize="1" RLECount="3" DisplayMethod="Целое без знака"/>
+        <Element Offset="3803" Vartype="2 Bytes" Bytesize="2" DisplayMethod="Целое без знака"/>
+        <Element Offset="3805" Vartype="Byte" Bytesize="1" DisplayMethod="Целое без знака"/>
+        <Element Offset="3806" Vartype="2 Bytes" Bytesize="2" DisplayMethod="Целое без знака"/>
+        <Element Offset="3808" Vartype="4 Bytes" Bytesize="4" RLECount="44" DisplayMethod="Целое без знака"/>
+        <Element Offset="3984" Vartype="Pointer" Bytesize="4" DisplayMethod="Целое без знака"/>
+        <Element Offset="3988" Vartype="4 Bytes" Bytesize="4" RLECount="23" DisplayMethod="Целое без знака"/>
+        <Element Offset="4080" Vartype="Pointer" Bytesize="4" RLECount="4" DisplayMethod="Целое без знака"/>
+      </Elements>
+    </Structure>
+  </Structures>
+  <Comments>h4mod.exe+3063AA - атефакт
+h4mod.exe+CBB1 - кол. в пачкепри бое
+количество в городе хратится в умноженное на 700
+</Comments>
+</CheatTable>
