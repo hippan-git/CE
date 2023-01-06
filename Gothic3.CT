@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<CheatTable CheatEngineTableVersion="29">
+<CheatTable CheatEngineTableVersion="42">
   <CheatEntries>
     <CheatEntry>
       <ID>1</ID>
@@ -26,9 +26,21 @@
       </Offsets>
     </CheatEntry>
     <CheatEntry>
+      <ID>19</ID>
+      <Description>"выносливость"</Description>
+      <ShowAsSigned>0</ShowAsSigned>
+      <VariableType>4 Bytes</VariableType>
+      <Address>Script.dll+66E00</Address>
+      <Offsets>
+        <Offset>-c</Offset>
+        <Offset>4</Offset>
+        <Offset>a4</Offset>
+        <Offset>a8</Offset>
+      </Offsets>
+    </CheatEntry>
+    <CheatEntry>
       <ID>18</ID>
       <Description>"max mana"</Description>
-      <LastState Activated="1"/>
       <VariableType>Auto Assembler Script</VariableType>
       <AssemblerScript>{ Game   : Gothic3.exe
   Version: 
@@ -125,10 +137,11 @@ dealloc(newmem)
     <CheatEntry>
       <ID>13</ID>
       <Description>"древние знания"</Description>
+      <ShowAsSigned>0</ShowAsSigned>
       <VariableType>4 Bytes</VariableType>
       <Address>Script.dll+66E00</Address>
       <Offsets>
-        <Offset>28</Offset>
+        <Offset>2c</Offset>
         <Offset>4</Offset>
         <Offset>44</Offset>
         <Offset>a8</Offset>
@@ -137,7 +150,6 @@ dealloc(newmem)
     <CheatEntry>
       <ID>2</ID>
       <Description>"быстрая панель"</Description>
-      <LastState/>
       <VariableType>Auto Assembler Script</VariableType>
       <AssemblerScript>{ Game   : Gothic3.exe
   Version: 
@@ -221,7 +233,6 @@ dealloc(newmem)
     <CheatEntry>
       <ID>3</ID>
       <Description>"inv"</Description>
-      <LastState/>
       <VariableType>Auto Assembler Script</VariableType>
       <AssemblerScript>{
 при передачи предметов сундук или NPC
@@ -243,11 +254,19 @@ Game.dll+B6FD5:
 // sub [ebx+3C],ebp
 
 </AssemblerScript>
+      <Hotkeys>
+        <Hotkey>
+          <Action>Toggle Activation</Action>
+          <Keys>
+            <Key>73</Key>
+          </Keys>
+          <ID>0</ID>
+        </Hotkey>
+      </Hotkeys>
     </CheatEntry>
     <CheatEntry>
       <ID>7</ID>
       <Description>"востановление"</Description>
-      <LastState/>
       <VariableType>Auto Assembler Script</VariableType>
       <AssemblerScript>{ Game   : Gothic3.exe
   Version: 
@@ -322,7 +341,6 @@ dealloc(newmem)
     <CheatEntry>
       <ID>15</ID>
       <Description>"OHK"</Description>
-      <LastState/>
       <VariableType>Auto Assembler Script</VariableType>
       <AssemblerScript>{ Game   : Gothic3.exe (остановлен)
   Version: 
@@ -407,7 +425,6 @@ dealloc(newmem)
     <CheatEntry>
       <ID>16</ID>
       <Description>"repair"</Description>
-      <LastState Activated="1"/>
       <VariableType>Auto Assembler Script</VariableType>
       <AssemblerScript>{ Game   : Gothic3.exe
   Version: 

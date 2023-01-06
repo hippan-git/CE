@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CheatTable CheatEngineTableVersion="29">
+  <CheatEntries>
+    <CheatEntry>
+      <ID>0</ID>
+      <Description>"Скрипт автоассемблера"</Description>
+      <LastState/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>{ Game   : ig2_AddOn.exe
+  Version: 
+  Date   : 2022-01-22
+  Author : Hipp
+
+  This script does blah blah blah
+}
+
+[ENABLE]
+
+aobscanmodule(inc_prod,ig2_AddOn.exe,FE 44 B0 01 8B 03 8B 40 2C FF D0 0F B6 C0 50 E8 5F) // should be unique
+alloc(newmem,$1000)
+
+label(code)
+label(return)
+
+newmem:
+
+code:
+  inc byte ptr [eax+esi*4+01]
+  //inject
+  mov byte ptr [eax+esi*4+01],10
+  //end inject
+  mov eax,[ebx]
+  jmp return
+
+inc_prod:
+  jmp newmem
+  nop
+return:
+registersymbol(inc_prod)
+
+[DISABLE]
+
+inc_prod:
+  db FE 44 B0 01 8B 03
+
+unregistersymbol(inc_prod)
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: "ig2_AddOn.exe"+23072D
+
+"ig2_AddOn.exe"+230710: 8B C7                 -  mov eax,edi
+"ig2_AddOn.exe"+230712: 8B 53 40              -  mov edx,[ebx+40]
+"ig2_AddOn.exe"+230715: C1 E0 04              -  shl eax,04
+"ig2_AddOn.exe"+230718: 03 C7                 -  add eax,edi
+"ig2_AddOn.exe"+23071A: 0F B6 4C B2 01        -  movzx ecx,byte ptr [edx+esi*4+01]
+"ig2_AddOn.exe"+23071F: 03 C8                 -  add ecx,eax
+"ig2_AddOn.exe"+230721: 8B 45 0C              -  mov eax,[ebp+0C]
+"ig2_AddOn.exe"+230724: 89 44 8A 04           -  mov [edx+ecx*4+04],eax
+"ig2_AddOn.exe"+230728: 8B CB                 -  mov ecx,ebx
+"ig2_AddOn.exe"+23072A: 8B 43 40              -  mov eax,[ebx+40]
+// ---------- INJECTING HERE ----------
+"ig2_AddOn.exe"+23072D: FE 44 B0 01           -  inc byte ptr [eax+esi*4+01]
+"ig2_AddOn.exe"+230731: 8B 03                 -  mov eax,[ebx]
+// ---------- DONE INJECTING  ----------
+"ig2_AddOn.exe"+230733: 8B 40 2C              -  mov eax,[eax+2C]
+"ig2_AddOn.exe"+230736: FF D0                 -  call eax
+"ig2_AddOn.exe"+230738: 0F B6 C0              -  movzx eax,al
+"ig2_AddOn.exe"+23073B: 50                    -  push eax
+"ig2_AddOn.exe"+23073C: E8 5F 45 F9 FF        -  call ig2_AddOn.exe+1C4CA0
+"ig2_AddOn.exe"+230741: 83 C4 04              -  add esp,04
+"ig2_AddOn.exe"+230744: 83 B8 B5 00 00 00 00  -  cmp dword ptr [eax+000000B5],00
+"ig2_AddOn.exe"+23074B: 0F 84 92 01 00 00     -  je ig2_AddOn.exe+2308E3
+"ig2_AddOn.exe"+230751: 8B 03                 -  mov eax,[ebx]
+"ig2_AddOn.exe"+230753: 8B CB                 -  mov ecx,ebx
+}
+</AssemblerScript>
+      <Hotkeys>
+        <Hotkey>
+          <Action>Toggle Activation</Action>
+          <Keys>
+            <Key>219</Key>
+          </Keys>
+          <ID>0</ID>
+        </Hotkey>
+      </Hotkeys>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>1</ID>
+      <Description>"Нет описания"</Description>
+      <VariableType>Byte</VariableType>
+      <Address>083CE4CD</Address>
+    </CheatEntry>
+  </CheatEntries>
+  <UserdefinedSymbols/>
+  <Comments>ig2_AddOn.exe+231F52 - dec [esi+eax+01]
+отнимание со склада
+</Comments>
+</CheatTable>

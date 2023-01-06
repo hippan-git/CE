@@ -1,0 +1,307 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CheatTable CheatEngineTableVersion="42">
+  <CheatEntries>
+    <CheatEntry>
+      <ID>22</ID>
+      <Description>"money"</Description>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>{ Game   : Sims2EP9.exe
+  Version: 
+  Date   : 2022-01-12
+  Author : Hipp
+
+  This script does blah blah blah
+}
+
+[ENABLE]
+
+aobscanmodule(money,Sims2EP9.exe,01 86 8C 00 00 00 C7) // should be unique
+alloc(newmem,$1000)
+
+label(code)
+label(return)
+
+newmem:
+  test eax,eax
+  jg code
+  neg eax
+  shl eax, 4
+code:
+  add [esi+0000008C],eax
+  jmp return
+
+money:
+  jmp newmem
+  nop
+return:
+registersymbol(money)
+
+[DISABLE]
+
+money:
+  db 01 86 8C 00 00 00
+
+unregistersymbol(money)
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: "Sims2EP9.exe"+472EC8
+
+"Sims2EP9.exe"+472EAE: 64 89 25 00 00 00 00           -  mov fs:[00000000],esp
+"Sims2EP9.exe"+472EB5: 83 EC 0C                       -  sub esp,0C
+"Sims2EP9.exe"+472EB8: 53                             -  push ebx
+"Sims2EP9.exe"+472EB9: 55                             -  push ebp
+"Sims2EP9.exe"+472EBA: 56                             -  push esi
+"Sims2EP9.exe"+472EBB: 8B F1                          -  mov esi,ecx
+"Sims2EP9.exe"+472EBD: 8B 86 90 00 00 00              -  mov eax,[esi+00000090]
+"Sims2EP9.exe"+472EC3: 85 C0                          -  test eax,eax
+"Sims2EP9.exe"+472EC5: 57                             -  push edi
+"Sims2EP9.exe"+472EC6: 74 10                          -  je Sims2EP9.exe+472ED8
+// ---------- INJECTING HERE ----------
+"Sims2EP9.exe"+472EC8: 01 86 8C 00 00 00              -  add [esi+0000008C],eax
+// ---------- DONE INJECTING  ----------
+"Sims2EP9.exe"+472ECE: C7 86 90 00 00 00 00 00 00 00  -  mov [esi+00000090],00000000
+"Sims2EP9.exe"+472ED8: E8 86 6B F2 FF                 -  call Sims2EP9.exe+399A63
+"Sims2EP9.exe"+472EDD: 8B 10                          -  mov edx,[eax]
+"Sims2EP9.exe"+472EDF: 8B C8                          -  mov ecx,eax
+"Sims2EP9.exe"+472EE1: FF 92 DC 00 00 00              -  call dword ptr [edx+000000DC]
+"Sims2EP9.exe"+472EE7: 8B F8                          -  mov edi,eax
+"Sims2EP9.exe"+472EE9: 8B 86 A8 00 00 00              -  mov eax,[esi+000000A8]
+"Sims2EP9.exe"+472EEF: 8B 2F                          -  mov ebp,[edi]
+"Sims2EP9.exe"+472EF1: 50                             -  push eax
+"Sims2EP9.exe"+472EF2: 8B CF                          -  mov ecx,edi
+}
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>24</ID>
+      <Description>"Интересы"</Description>
+      <Options moManualExpandCollapse="1"/>
+      <GroupHeader>1</GroupHeader>
+      <CheatEntries>
+        <CheatEntry>
+          <ID>23</ID>
+          <Description>"политика"</Description>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>2 Bytes</VariableType>
+          <Address>2D9A8CF2</Address>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>25</ID>
+          <Description>"финансы"</Description>
+          <VariableType>2 Bytes</VariableType>
+          <Address>2D9A8CF4</Address>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>26</ID>
+          <Description>"Эклология"</Description>
+          <VariableType>2 Bytes</VariableType>
+          <Address>2D9A8CF6</Address>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>27</ID>
+          <Description>"Преступность"</Description>
+          <VariableType>2 Bytes</VariableType>
+          <Address>2D9A8CF8</Address>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>28</ID>
+          <Description>"развлечения"</Description>
+          <VariableType>2 Bytes</VariableType>
+          <Address>2D9A8CFA</Address>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>29</ID>
+          <Description>"Культура"</Description>
+          <VariableType>2 Bytes</VariableType>
+          <Address>2D9A8CFC</Address>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>30</ID>
+          <Description>"Еда"</Description>
+          <VariableType>2 Bytes</VariableType>
+          <Address>2D9A8CFE</Address>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>31</ID>
+          <Description>"Здоровье"</Description>
+          <VariableType>2 Bytes</VariableType>
+          <Address>2D9A8D00</Address>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>32</ID>
+          <Description>"Мода"</Description>
+          <VariableType>2 Bytes</VariableType>
+          <Address>2D9A8D02</Address>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>33</ID>
+          <Description>"Спорт"</Description>
+          <VariableType>2 Bytes</VariableType>
+          <Address>2D9A8D04</Address>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>34</ID>
+          <Description>"Мистика"</Description>
+          <VariableType>2 Bytes</VariableType>
+          <Address>2D9A8D06</Address>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>35</ID>
+          <Description>"Путешествия"</Description>
+          <VariableType>2 Bytes</VariableType>
+          <Address>2D9A8D08</Address>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>36</ID>
+          <Description>"Работа"</Description>
+          <VariableType>2 Bytes</VariableType>
+          <Address>2D9A8D0A</Address>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>37</ID>
+          <Description>"Погода"</Description>
+          <VariableType>2 Bytes</VariableType>
+          <Address>2D9A8D0C</Address>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>38</ID>
+          <Description>"Животные"</Description>
+          <VariableType>2 Bytes</VariableType>
+          <Address>2D9A8D0E</Address>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>39</ID>
+          <Description>"Учеба"</Description>
+          <VariableType>2 Bytes</VariableType>
+          <Address>2D9A8D10</Address>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>40</ID>
+          <Description>"Игрушки"</Description>
+          <VariableType>2 Bytes</VariableType>
+          <Address>2D9A8D12</Address>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>41</ID>
+          <Description>"Фантастика"</Description>
+          <VariableType>2 Bytes</VariableType>
+          <Address>2D9A8D14</Address>
+        </CheatEntry>
+      </CheatEntries>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>50</ID>
+      <Description>"Потребности"</Description>
+      <Options moManualExpandCollapse="1"/>
+      <GroupHeader>1</GroupHeader>
+      <CheatEntries>
+        <CheatEntry>
+          <ID>42</ID>
+          <Description>"Нет описания"</Description>
+          <VariableType>Float</VariableType>
+          <Address>2D56BF8C</Address>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>43</ID>
+          <Description>"Нет описания"</Description>
+          <VariableType>Float</VariableType>
+          <Address>2D56BF88</Address>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>44</ID>
+          <Description>"Нет описания"</Description>
+          <VariableType>Float</VariableType>
+          <Address>2D56BF90</Address>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>45</ID>
+          <Description>"Нет описания"</Description>
+          <VariableType>Float</VariableType>
+          <Address>2D56BF94</Address>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>46</ID>
+          <Description>"Нет описания"</Description>
+          <VariableType>Float</VariableType>
+          <Address>2D56BF84</Address>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>47</ID>
+          <Description>"Нет описания"</Description>
+          <VariableType>Float</VariableType>
+          <Address>2D56BFAC</Address>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>48</ID>
+          <Description>"Нет описания"</Description>
+          <VariableType>Float</VariableType>
+          <Address>2D56BFA8</Address>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>49</ID>
+          <Description>"Нет описания"</Description>
+          <VariableType>Float</VariableType>
+          <Address>2D56BFA4</Address>
+        </CheatEntry>
+      </CheatEntries>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>58</ID>
+      <Description>"Навыки"</Description>
+      <Options moManualExpandCollapse="1"/>
+      <GroupHeader>1</GroupHeader>
+      <CheatEntries>
+        <CheatEntry>
+          <ID>51</ID>
+          <Description>"кулинария"</Description>
+          <VariableType>2 Bytes</VariableType>
+          <Address>2D9A8C0E</Address>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>52</ID>
+          <Description>"Техника"</Description>
+          <VariableType>2 Bytes</VariableType>
+          <Address>2D9A8C12</Address>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>53</ID>
+          <Description>"обояние"</Description>
+          <VariableType>2 Bytes</VariableType>
+          <Address>2D9A8C10</Address>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>54</ID>
+          <Description>"Нет описания"</Description>
+          <VariableType>2 Bytes</VariableType>
+          <Address>2D9A8C1C</Address>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>55</ID>
+          <Description>"Нет описания"</Description>
+          <VariableType>2 Bytes</VariableType>
+          <Address>2D9A8C1E</Address>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>56</ID>
+          <Description>"Нет описания"</Description>
+          <VariableType>2 Bytes</VariableType>
+          <Address>2D9A8C18</Address>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>57</ID>
+          <Description>"Нет описания"</Description>
+          <VariableType>2 Bytes</VariableType>
+          <Address>2D9A8C0C</Address>
+        </CheatEntry>
+      </CheatEntries>
+    </CheatEntry>
+  </CheatEntries>
+  <UserdefinedSymbols/>
+  <Comments>Sims2EP9.exe+4BC80E - fld dword ptr [esi+edi*4+08] - обращение к параметрам
+Sims2EP9.exe+4DD094 - mov ax,[ecx+eax*2+0000039E]
+обоащается к навыкам и не только один раз на паузе при переключения на навыки
+Sims2EP9.exe+512DE6 - mov eax,[ecx+eax*4]
+обращается к отношениям при просмотре их +08 долгосрочные
+</Comments>
+</CheatTable>

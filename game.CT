@@ -1,24 +1,48 @@
 <?xml version="1.0" encoding="utf-8"?>
-<CheatTable CheatEngineTableVersion="26">
+<CheatTable CheatEngineTableVersion="42">
   <CheatEntries>
     <CheatEntry>
       <ID>1</ID>
       <Description>"money"</Description>
-      <LastState Activated="1"/>
       <VariableType>Auto Assembler Script</VariableType>
       <AssemblerScript>[ENABLE]
-Game.exe+E53A9:
+game.exe+E48F9:
 db 29 C8
 
 [DISABLE]
-Game.exe+E53A9:
+game.exe+E48F9:
 db 2B C7
 </AssemblerScript>
     </CheatEntry>
     <CheatEntry>
+      <ID>17</ID>
+      <Description>"resource"</Description>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>[ENABLE]
+game.exe+E53A9:
+ add eax,edi
+
+ 
+ 
+[DISABLE]
+game.exe+E53A9:
+ sub eax,edi
+
+</AssemblerScript>
+      <Hotkeys>
+        <Hotkey>
+          <Action>Toggle Activation</Action>
+          <Keys>
+            <Key>17</Key>
+            <Key>82</Key>
+          </Keys>
+          <ID>0</ID>
+        </Hotkey>
+      </Hotkeys>
+    </CheatEntry>
+    <CheatEntry>
       <ID>14</ID>
       <Description>"zero money"</Description>
-      <LastState/>
       <VariableType>Auto Assembler Script</VariableType>
       <AssemblerScript>{ Game   : game.exe
   Version: 
@@ -57,7 +81,8 @@ unregistersymbol(zero_money)
 dealloc(newmem)
 
 {
-// ORIGINAL CODE - INJECTION POINT: "game.exe"+E514D
+// ORIGINAL CODE - INJECTION POINT: game.exe+E469D
+
 
 "game.exe"+E511E: 8B 44 24 0C        -  mov eax,[esp+0C]
 "game.exe"+E5122: 8B 0D 34 0B AC 00  -  mov ecx,[game.exe+6C0B34]
@@ -88,7 +113,6 @@ dealloc(newmem)
     <CheatEntry>
       <ID>4</ID>
       <Description>"fast build"</Description>
-      <LastState Activated="1"/>
       <VariableType>Auto Assembler Script</VariableType>
       <AssemblerScript>[ENABLE]
 Game.exe+B9367:
@@ -100,11 +124,20 @@ db 80 7E 59 00 75 02 B2 36 89 56 24 EB 6B
 Game.exe+B9367:
 db 89 56 24
 </AssemblerScript>
+      <Hotkeys>
+        <Hotkey>
+          <Action>Toggle Activation</Action>
+          <Keys>
+            <Key>17</Key>
+            <Key>70</Key>
+          </Keys>
+          <ID>0</ID>
+        </Hotkey>
+      </Hotkeys>
     </CheatEntry>
     <CheatEntry>
       <ID>15</ID>
       <Description>"no reload"</Description>
-      <LastState/>
       <VariableType>Auto Assembler Script</VariableType>
       <AssemblerScript>[ENABLE]
 Game.exe+29E9A0:
@@ -118,7 +151,6 @@ db 8A 51
     <CheatEntry>
       <ID>10</ID>
       <Description>"immortal"</Description>
-      <LastState Activated="1"/>
       <VariableType>Auto Assembler Script</VariableType>
       <AssemblerScript>[ENABLE]
 Game.exe+2A4FB5:
@@ -128,11 +160,20 @@ db 89 76 6C 84 C0 75
 Game.exe+2A4FB5:
 db 8A 46 77 84 C0 74
 </AssemblerScript>
+      <Hotkeys>
+        <Hotkey>
+          <Action>Toggle Activation</Action>
+          <Keys>
+            <Key>17</Key>
+            <Key>73</Key>
+          </Keys>
+          <ID>0</ID>
+        </Hotkey>
+      </Hotkeys>
     </CheatEntry>
     <CheatEntry>
       <ID>8</ID>
       <Description>"pro unit tech"</Description>
-      <LastState/>
       <VariableType>Auto Assembler Script</VariableType>
       <AssemblerScript>[ENABLE]
 Game.exe+2DAE7F:
@@ -146,7 +187,6 @@ db 8A
     <CheatEntry>
       <ID>9</ID>
       <Description>"map"</Description>
-      <LastState Activated="1"/>
       <VariableType>Auto Assembler Script</VariableType>
       <AssemblerScript>[ENABLE]
 Game.exe+F3054:
@@ -156,35 +196,29 @@ db 73 32
 Game.exe+F3054:
 db 74 2E
 </AssemblerScript>
+      <Hotkeys>
+        <Hotkey>
+          <Action>Toggle Activation</Action>
+          <Keys>
+            <Key>17</Key>
+            <Key>77</Key>
+          </Keys>
+          <ID>0</ID>
+        </Hotkey>
+      </Hotkeys>
     </CheatEntry>
     <CheatEntry>
-      <ID>11</ID>
+      <ID>16</ID>
       <Description>"Нет описания"</Description>
-      <LastState Value="108" RealAddress="097801AC"/>
+      <ShowAsSigned>0</ShowAsSigned>
       <VariableType>4 Bytes</VariableType>
-      <Address>097801AC</Address>
-    </CheatEntry>
-    <CheatEntry>
-      <ID>12</ID>
-      <Description>"Нет описания"</Description>
-      <LastState Value="2506261862" RealAddress="0C99C2D4"/>
-      <VariableType>4 Bytes</VariableType>
-      <Address>0C99C2D4</Address>
-    </CheatEntry>
-    <CheatEntry>
-      <ID>13</ID>
-      <Description>"Нет описания"</Description>
-      <LastState Value="0" RealAddress="0976A214"/>
-      <VariableType>4 Bytes</VariableType>
-      <Address>0976A214</Address>
+      <Address>05D9F2F0+77</Address>
     </CheatEntry>
   </CheatEntries>
   <CheatCodes>
     <CodeEntry>
       <Description>Изменение sub eax,edi</Description>
-      <Address>004E48F9</Address>
-      <ModuleName>game.exe</ModuleName>
-      <ModuleNameOffset>E48F9</ModuleNameOffset>
+      <AddressString>game.exe+E48F9</AddressString>
       <Before>
         <Byte>12</Byte>
         <Byte>7E</Byte>

@@ -201,18 +201,6 @@ dealloc(newmem)
       </Offsets>
     </CheatEntry>
     <CheatEntry>
-      <ID>16</ID>
-      <Description>"Anders"</Description>
-      <VariableType>Float</VariableType>
-      <Address>24CD6F8C</Address>
-    </CheatEntry>
-    <CheatEntry>
-      <ID>17</ID>
-      <Description>"Orgen"</Description>
-      <VariableType>Float</VariableType>
-      <Address>2602563C</Address>
-    </CheatEntry>
-    <CheatEntry>
       <ID>21</ID>
       <Description>"вихрь ГГ"</Description>
       <VariableType>Float</VariableType>
@@ -234,6 +222,12 @@ dealloc(newmem)
         <Offset>34</Offset>
         <Offset>3FC</Offset>
       </Offsets>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>24</ID>
+      <Description>"Нет описания"</Description>
+      <VariableType>Float</VariableType>
+      <Address>2DF8B310</Address>
     </CheatEntry>
   </CheatEntries>
   <UserdefinedSymbols/>

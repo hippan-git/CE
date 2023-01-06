@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CheatTable CheatEngineTableVersion="42">
+  <CheatEntries>
+    <CheatEntry>
+      <ID>3</ID>
+      <Description>"teleport"</Description>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>{ Game   : minetest.exe
+  Version:
+  Date   : 2022-10-10
+  Author : Hipp
+
+  This script does blah blah blah
+}
+
+[ENABLE]
+
+aobscanmodule(teleport,minetest.exe,F3 0F 7E 86 FC 02 00 00) // should be unique
+alloc(newmem,$1000,teleport)
+
+label(code)
+label(return)
+label(flag)
+label(position)
+label(read_coords)
+label(write_coords)
+registersymbol(flag)
+registersymbol(position)
+newmem:
+
+cmp byte ptr [flag],0
+	je code
+read_coords:
+	cmp byte ptr [flag],2
+	je write_coords
+	push rax
+	mov eax,[rsi+000002FC]
+	mov dword ptr [position],eax
+	mov eax,[rsi+00000300]
+	mov dword ptr [position+4],eax
+	mov eax,[rsi+00000304]
+	mov dword ptr [position+8],eax
+	pop rax
+	mov byte ptr [flag],0
+	jmp code
+
+write_coords:
+	push rax
+	mov eax,[position]
+	mov [rsi+2fc],eax
+	mov eax,[position+4]
+	mov [rsi+300],eax
+	mov eax,[position+8]
+	mov [rsi+304],eax
+	pop rax
+	mov byte ptr [flag],0
+
+code:
+  movq xmm0,[rsi+000002FC]
+  jmp return
+
+flag:
+	db 00
+
+position:
+	dd 00 00 00
+
+teleport:
+  jmp newmem
+  nop 3
+return:
+registersymbol(teleport)
+
+[DISABLE]
+
+teleport:
+  db F3 0F 7E 86 FC 02 00 00
+
+unregistersymbol(teleport)
+unregistersymbol(flag)
+unregistersymbol(position)
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: minetest.exe+5EEE9E
+
+minetest.exe+5EEE69: 0F 84 69 04 00 00        - je minetest.exe+5EF2D8
+minetest.exe+5EEE6F: F3 0F 10 74 24 24        - movss xmm6,[rsp+24]
+minetest.exe+5EEE75: 0F 2F 73 70              - comiss xmm6,[rbx+70]
+minetest.exe+5EEE79: 0F 85 59 04 00 00        - jne minetest.exe+5EF2D8
+minetest.exe+5EEE7F: 4C 8B 93 58 01 00 00     - mov r10,[rbx+00000158]
+minetest.exe+5EEE86: 4C 89 E9                 - mov rcx,r13
+minetest.exe+5EEE89: 49 8B B2 30 02 00 00     - mov rsi,[r10+00000230]
+minetest.exe+5EEE90: 48 89 F2                 - mov rdx,rsi
+minetest.exe+5EEE93: E8 F8 48 AA FF           - call minetest.exe+93790
+minetest.exe+5EEE98: F3 0F 7E 64 24 60        - movq xmm4,[rsp+60]
+// ---------- INJECTING HERE ----------
+minetest.exe+5EEE9E: F3 0F 7E 86 FC 02 00 00  - movq xmm0,[rsi+000002FC]
+// ---------- DONE INJECTING  ----------
+minetest.exe+5EEEA6: F3 0F 10 8E 04 03 00 00  - movss xmm1,[rsi+00000304]
+minetest.exe+5EEEAE: F3 0F 58 4C 24 68        - addss xmm1,[rsp+68]
+minetest.exe+5EEEB4: 48 8D B3 B8 00 00 00     - lea rsi,[rbx+000000B8]
+minetest.exe+5EEEBB: 0F 58 C4                 - addps xmm0,xmm4
+minetest.exe+5EEEBE: 80 BB C4 00 00 00 00     - cmp byte ptr [rbx+000000C4],00
+minetest.exe+5EEEC5: F3 0F 11 4C 24 48        - movss [rsp+48],xmm1
+minetest.exe+5EEECB: 0F 28 D8                 - movaps xmm3,xmm0
+minetest.exe+5EEECE: 0F 13 44 24 40           - movlps [rsp+40],xmm0
+minetest.exe+5EEED3: 0F C6 DB E5              - shufps xmm3,xmm3,-1B
+minetest.exe+5EEED7: 0F 84 43 04 00 00        - je minetest.exe+5EF320
+}
+</AssemblerScript>
+      <CheatEntries>
+        <CheatEntry>
+          <ID>0</ID>
+          <Description>"flag"</Description>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>Byte</VariableType>
+          <Address>flag</Address>
+          <Hotkeys>
+            <Hotkey>
+              <Action>Set Value</Action>
+              <Keys>
+                <Key>16</Key>
+                <Key>186</Key>
+              </Keys>
+              <Value>1</Value>
+              <ID>0</ID>
+            </Hotkey>
+            <Hotkey>
+              <Action>Set Value</Action>
+              <Keys>
+                <Key>16</Key>
+                <Key>222</Key>
+              </Keys>
+              <Value>2</Value>
+              <ID>1</ID>
+            </Hotkey>
+          </Hotkeys>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>4</ID>
+          <Description>"x pos"</Description>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>Float</VariableType>
+          <Address>position</Address>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>1</ID>
+          <Description>"y pos"</Description>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>Float</VariableType>
+          <Address>position+4</Address>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>2</ID>
+          <Description>"z pos"</Description>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>Float</VariableType>
+          <Address>position+8</Address>
+        </CheatEntry>
+      </CheatEntries>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>9</ID>
+      <Description>"health"</Description>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>[ENABLE]
+minetest.exe+3075A6:
+ db 90 90 90 90 90 90 90 90 90
+
+ 
+[DISABLE]
+minetest.exe+3075A6:
+ mov [r12+000000C0],bx
+
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>11</ID>
+      <Description>"inventary"</Description>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>[ENABLE]
+minetest.exe+432560:
+ jg minetest.exe+4325D8
+// нет лимита ресурсам
+ 
+ 
+[DISABLE]
+minetest.exe+432560:
+ jna minetest.exe+4325D8
+
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>10</ID>
+      <Description>"Нет описания"</Description>
+      <VariableType>4 Bytes</VariableType>
+      <Address>0E984560</Address>
+    </CheatEntry>
+  </CheatEntries>
+  <UserdefinedSymbols/>
+  <Comments>minetest.exe+42CBFB - mov [rdi+20],r10w - пишет в инвентарь
+minetest.exe+3075A6 - mov [r12+000000C0],bx - отнимает здоровье
+minetest.exe+5EEE9E - movq xmm0,[rsi+000002FC] - x pos
+</Comments>
+</CheatTable>

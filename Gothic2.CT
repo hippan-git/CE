@@ -82,6 +82,88 @@ dealloc(newmem)
 "Gothic2.exe"+32FFC8: C2 08 00                          -  ret 0008
 }
 </AssemblerScript>
+      <Hotkeys>
+        <Hotkey>
+          <Action>Toggle Activation</Action>
+          <Keys>
+            <Key>16</Key>
+            <Key>74</Key>
+          </Keys>
+          <ID>0</ID>
+        </Hotkey>
+      </Hotkeys>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>24</ID>
+      <Description>"flags"</Description>
+      <LastState/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>{ Game   : Gothic2.exe
+  Version: 
+  Date   : 2018-10-04
+  Author : Hipp
+
+  устанавливает флаг бессмертия
+  0 - смертен
+  2 - бессмертен
+}
+
+[ENABLE]
+
+aobscanmodule(flags,Gothic2.exe,85 81 B4 01 00 00) // should be unique
+alloc(newmem,$1000)
+
+label(code)
+label(return)
+
+newmem:
+  mov byte ptr [ecx+000001B4],0
+code:
+  test [ecx+000001B4],eax
+  jmp return
+
+flags:
+  jmp newmem
+  nop
+return:
+registersymbol(flags)
+
+[DISABLE]
+
+flags:
+  db 85 81 B4 01 00 00
+
+unregistersymbol(flags)
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: "Gothic2.exe"+3309E4
+
+"Gothic2.exe"+3309D7: 90                       -  nop 
+"Gothic2.exe"+3309D8: 90                       -  nop 
+"Gothic2.exe"+3309D9: 90                       -  nop 
+"Gothic2.exe"+3309DA: 90                       -  nop 
+"Gothic2.exe"+3309DB: 90                       -  nop 
+"Gothic2.exe"+3309DC: 90                       -  nop 
+"Gothic2.exe"+3309DD: 90                       -  nop 
+"Gothic2.exe"+3309DE: 90                       -  nop 
+"Gothic2.exe"+3309DF: 90                       -  nop 
+"Gothic2.exe"+3309E0: 8B 44 24 04              -  mov eax,[esp+04]
+// ---------- INJECTING HERE ----------
+"Gothic2.exe"+3309E4: 85 81 B4 01 00 00        -  test [ecx+000001B4],eax
+// ---------- DONE INJECTING  ----------
+"Gothic2.exe"+3309EA: B8 00 00 00 00           -  mov eax,00000000
+"Gothic2.exe"+3309EF: 0F 9F C0                 -  setg al
+"Gothic2.exe"+3309F2: C2 04 00                 -  ret 0004
+"Gothic2.exe"+3309F5: 90                       -  nop 
+"Gothic2.exe"+3309F6: 90                       -  nop 
+"Gothic2.exe"+3309F7: 90                       -  nop 
+"Gothic2.exe"+3309F8: 90                       -  nop 
+"Gothic2.exe"+3309F9: 90                       -  nop 
+"Gothic2.exe"+3309FA: 90                       -  nop 
+"Gothic2.exe"+3309FB: 90                       -  nop 
+}
+</AssemblerScript>
     </CheatEntry>
     <CheatEntry>
       <ID>17</ID>
@@ -99,6 +181,91 @@ Gothic2.exe+391C20:
 Gothic2.exe+391C20:
  sub [edi],eax
 
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>26</ID>
+      <Description>"inventary_addon"</Description>
+      <LastState/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>{ Game   : Gothic2.exe
+  Version: 
+  Date   : 2022-04-05
+  Author : Hipp
+
+  бесконечный инвентарь для DLC
+}
+
+[ENABLE]
+Gothic2.exe+76C98:
+ inc ecx
+
+
+Gothic2.exe+30CECE:
+  db 90 90
+
+aobscanmodule(inventary_addon,UNION_ADV_INVENTORY.DLL,10 8B 86 2C 03 00 00) // should be unique
+alloc(newmem,$1000)
+
+label(code)
+label(return)
+
+newmem:
+  cmp [esi+0000032c],01
+  jne code
+  inc [esi+0000032c]
+code:
+  mov eax,[esi+0000032C]
+  jmp return
+
+inventary_addon+01:
+  jmp newmem
+  nop
+return:
+registersymbol(inventary_addon)
+
+[DISABLE]
+
+Gothic2.exe+76C98:
+  dec ecx
+
+
+Gothic2.exe+30CECE:
+  sub edx,ebx
+
+inventary_addon+01:
+  db 8B 86 2C 03 00 00
+
+unregistersymbol(inventary_addon)
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: "UNION_ADV_INVENTORY.DLL"+3BCB2
+
+"UNION_ADV_INVENTORY.DLL"+3BC8F: 0F 45 C1              -  cmovne eax,ecx
+"UNION_ADV_INVENTORY.DLL"+3BC92: 8B CA                 -  mov ecx,edx
+"UNION_ADV_INVENTORY.DLL"+3BC94: 50                    -  push eax
+"UNION_ADV_INVENTORY.DLL"+3BC95: E8 06 D3 FC FF        -  call UNION_ADV_INVENTORY.DLL+8FA0
+"UNION_ADV_INVENTORY.DLL"+3BC9A: 8B 45 A4              -  mov eax,[ebp-5C]
+"UNION_ADV_INVENTORY.DLL"+3BC9D: 0F 57 C0              -  xorps xmm0,xmm0
+"UNION_ADV_INVENTORY.DLL"+3BCA0: 8B 4D 9C              -  mov ecx,[ebp-64]
+"UNION_ADV_INVENTORY.DLL"+3BCA3: 0F 11 45 AC           -  movups [ebp-54],xmm0
+"UNION_ADV_INVENTORY.DLL"+3BCA7: C7 45 BC 00 00 00 00  -  mov [ebp-44],00000000
+"UNION_ADV_INVENTORY.DLL"+3BCAE: 89 4C 87 10           -  mov [edi+eax*4+10],ecx
+// ---------- INJECTING HERE ----------
+"UNION_ADV_INVENTORY.DLL"+3BCB2: 8B 86 2C 03 00 00     -  mov eax,[esi+0000032C]
+// ---------- DONE INJECTING  ----------
+"UNION_ADV_INVENTORY.DLL"+3BCB8: 8B 0D D8 41 EA 6E     -  mov ecx,[UNION_ADV_INVENTORY.DLL+541D8]
+"UNION_ADV_INVENTORY.DLL"+3BCBE: 89 45 84              -  mov [ebp-7C],eax
+"UNION_ADV_INVENTORY.DLL"+3BCC1: C7 45 AC 2C 60 EA 6E  -  mov [ebp-54],UNION_ADV_INVENTORY.DLL+5602C
+"UNION_ADV_INVENTORY.DLL"+3BCC8: FF 55 98              -  call dword ptr [ebp-68]
+"UNION_ADV_INVENTORY.DLL"+3BCCB: 83 F8 04              -  cmp eax,04
+"UNION_ADV_INVENTORY.DLL"+3BCCE: 75 08                 -  jne UNION_ADV_INVENTORY.DLL+3BCD8
+"UNION_ADV_INVENTORY.DLL"+3BCD0: 8D 4D AC              -  lea ecx,[ebp-54]
+"UNION_ADV_INVENTORY.DLL"+3BCD3: E8 28 BE FC FF        -  call UNION_ADV_INVENTORY.DLL+7B00
+"UNION_ADV_INVENTORY.DLL"+3BCD8: C7 45 FC 28 00 00 00  -  mov [ebp-04],00000028
+"UNION_ADV_INVENTORY.DLL"+3BCDF: 80 3D 0A 31 EB 6E 00  -  cmp byte ptr [UNION_ADV_INVENTORY.DLL+6310A],00
+}
 </AssemblerScript>
     </CheatEntry>
     <CheatEntry>
@@ -200,7 +367,6 @@ dealloc(newmem)
     <CheatEntry>
       <ID>1</ID>
       <Description>"exp"</Description>
-      <LastState Value="738809" RealAddress="24198224"/>
       <VariableType>4 Bytes</VariableType>
       <Address>Gothic2.exe+6B2684</Address>
       <Offsets>
@@ -284,7 +450,6 @@ dealloc(newmem)
     <CheatEntry>
       <ID>13</ID>
       <Description>"очки обучения"</Description>
-      <LastState Value="39" RealAddress="2419822C"/>
       <VariableType>4 Bytes</VariableType>
       <Address>Gothic2.exe+6B2684</Address>
       <Offsets>
@@ -294,17 +459,22 @@ dealloc(newmem)
     <CheatEntry>
       <ID>8</ID>
       <Description>"жизнь"</Description>
-      <LastState Value="676" RealAddress="24197FB0"/>
       <VariableType>4 Bytes</VariableType>
       <Address>Gothic2.exe+6B2684</Address>
       <Offsets>
         <Offset>1b8</Offset>
       </Offsets>
+      <Hotkeys>
+        <Hotkey>
+          <Action>Toggle Activation</Action>
+          <Keys/>
+          <ID>0</ID>
+        </Hotkey>
+      </Hotkeys>
     </CheatEntry>
     <CheatEntry>
       <ID>7</ID>
       <Description>"макс жизнь"</Description>
-      <LastState Value="676" RealAddress="24197FB4"/>
       <VariableType>4 Bytes</VariableType>
       <Address>Gothic2.exe+6B2684</Address>
       <Offsets>
@@ -314,7 +484,6 @@ dealloc(newmem)
     <CheatEntry>
       <ID>3</ID>
       <Description>"сила"</Description>
-      <LastState Value="100" RealAddress="24197FC0"/>
       <VariableType>4 Bytes</VariableType>
       <Address>Gothic2.exe+6B2684</Address>
       <Offsets>
@@ -324,7 +493,6 @@ dealloc(newmem)
     <CheatEntry>
       <ID>4</ID>
       <Description>"ловкость"</Description>
-      <LastState Value="101" RealAddress="24197FC4"/>
       <VariableType>4 Bytes</VariableType>
       <Address>Gothic2.exe+6B2684</Address>
       <Offsets>
@@ -332,19 +500,8 @@ dealloc(newmem)
       </Offsets>
     </CheatEntry>
     <CheatEntry>
-      <ID>5</ID>
-      <Description>"макс мана"</Description>
-      <LastState Value="10" RealAddress="24197FBC"/>
-      <VariableType>4 Bytes</VariableType>
-      <Address>Gothic2.exe+6B2684</Address>
-      <Offsets>
-        <Offset>1c4</Offset>
-      </Offsets>
-    </CheatEntry>
-    <CheatEntry>
       <ID>6</ID>
       <Description>"мана"</Description>
-      <LastState Value="10" RealAddress="24197FB8"/>
       <VariableType>4 Bytes</VariableType>
       <Address>Gothic2.exe+6B2684</Address>
       <Offsets>
@@ -352,9 +509,17 @@ dealloc(newmem)
       </Offsets>
     </CheatEntry>
     <CheatEntry>
+      <ID>5</ID>
+      <Description>"макс мана"</Description>
+      <VariableType>4 Bytes</VariableType>
+      <Address>Gothic2.exe+6B2684</Address>
+      <Offsets>
+        <Offset>1c4</Offset>
+      </Offsets>
+    </CheatEntry>
+    <CheatEntry>
       <ID>9</ID>
       <Description>"одноручное"</Description>
-      <LastState Value="65" RealAddress="24197FD4"/>
       <VariableType>4 Bytes</VariableType>
       <Address>Gothic2.exe+6B2684</Address>
       <Offsets>
@@ -364,7 +529,6 @@ dealloc(newmem)
     <CheatEntry>
       <ID>10</ID>
       <Description>"двуручное"</Description>
-      <LastState Value="75" RealAddress="24197FD8"/>
       <VariableType>4 Bytes</VariableType>
       <Address>Gothic2.exe+6B2684</Address>
       <Offsets>
@@ -374,7 +538,6 @@ dealloc(newmem)
     <CheatEntry>
       <ID>11</ID>
       <Description>"лук"</Description>
-      <LastState Value="100" RealAddress="24197FDC"/>
       <VariableType>4 Bytes</VariableType>
       <Address>Gothic2.exe+6B2684</Address>
       <Offsets>
@@ -384,7 +547,6 @@ dealloc(newmem)
     <CheatEntry>
       <ID>21</ID>
       <Description>"flag"</Description>
-      <LastState Value="0" RealAddress="24197FAC"/>
       <VariableType>Byte</VariableType>
       <Address>Gothic2.exe+6B2684</Address>
       <Offsets>
@@ -394,7 +556,6 @@ dealloc(newmem)
     <CheatEntry>
       <ID>12</ID>
       <Description>"арбалет"</Description>
-      <LastState Value="10" RealAddress="24197FE0"/>
       <VariableType>4 Bytes</VariableType>
       <Address>Gothic2.exe+6B2684</Address>
       <Offsets>
@@ -404,81 +565,8 @@ dealloc(newmem)
     <CheatEntry>
       <ID>23</ID>
       <Description>"Нет описания"</Description>
-      <LastState Value="0" RealAddress="17968A34"/>
       <VariableType>Byte</VariableType>
       <Address>17968A34</Address>
-    </CheatEntry>
-    <CheatEntry>
-      <ID>24</ID>
-      <Description>"flags"</Description>
-      <LastState/>
-      <VariableType>Auto Assembler Script</VariableType>
-      <AssemblerScript>{ Game   : Gothic2.exe
-  Version: 
-  Date   : 2018-10-04
-  Author : Hipp
-
-  устанавливает флаг бессмертия
-  0 - смертен
-  2 - бессмертен
-}
-
-[ENABLE]
-
-aobscanmodule(flags,Gothic2.exe,85 81 B4 01 00 00) // should be unique
-alloc(newmem,$1000)
-
-label(code)
-label(return)
-
-newmem:
-  mov byte ptr [ecx+000001B4],0
-code:
-  test [ecx+000001B4],eax
-  jmp return
-
-flags:
-  jmp newmem
-  nop
-return:
-registersymbol(flags)
-
-[DISABLE]
-
-flags:
-  db 85 81 B4 01 00 00
-
-unregistersymbol(flags)
-dealloc(newmem)
-
-{
-// ORIGINAL CODE - INJECTION POINT: "Gothic2.exe"+3309E4
-
-"Gothic2.exe"+3309D7: 90                       -  nop 
-"Gothic2.exe"+3309D8: 90                       -  nop 
-"Gothic2.exe"+3309D9: 90                       -  nop 
-"Gothic2.exe"+3309DA: 90                       -  nop 
-"Gothic2.exe"+3309DB: 90                       -  nop 
-"Gothic2.exe"+3309DC: 90                       -  nop 
-"Gothic2.exe"+3309DD: 90                       -  nop 
-"Gothic2.exe"+3309DE: 90                       -  nop 
-"Gothic2.exe"+3309DF: 90                       -  nop 
-"Gothic2.exe"+3309E0: 8B 44 24 04              -  mov eax,[esp+04]
-// ---------- INJECTING HERE ----------
-"Gothic2.exe"+3309E4: 85 81 B4 01 00 00        -  test [ecx+000001B4],eax
-// ---------- DONE INJECTING  ----------
-"Gothic2.exe"+3309EA: B8 00 00 00 00           -  mov eax,00000000
-"Gothic2.exe"+3309EF: 0F 9F C0                 -  setg al
-"Gothic2.exe"+3309F2: C2 04 00                 -  ret 0004
-"Gothic2.exe"+3309F5: 90                       -  nop 
-"Gothic2.exe"+3309F6: 90                       -  nop 
-"Gothic2.exe"+3309F7: 90                       -  nop 
-"Gothic2.exe"+3309F8: 90                       -  nop 
-"Gothic2.exe"+3309F9: 90                       -  nop 
-"Gothic2.exe"+3309FA: 90                       -  nop 
-"Gothic2.exe"+3309FB: 90                       -  nop 
-}
-</AssemblerScript>
     </CheatEntry>
   </CheatEntries>
   <UserdefinedSymbols/>

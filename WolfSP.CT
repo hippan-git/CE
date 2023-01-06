@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<CheatTable CheatEngineTableVersion="26">
+<CheatTable CheatEngineTableVersion="42">
   <CheatEntries>
     <CheatEntry>
       <ID>0</ID>
       <Description>"ammo"</Description>
-      <LastState Activated="1"/>
       <VariableType>Auto Assembler Script</VariableType>
       <AssemblerScript>[ENABLE]
 qagamex86.dll+34100:
@@ -16,11 +15,20 @@ qagamex86.dll+34100:
   sub [eax],edx
 
 </AssemblerScript>
+      <Hotkeys>
+        <Hotkey>
+          <Action>Toggle Activation</Action>
+          <Keys>
+            <Key>17</Key>
+            <Key>97</Key>
+          </Keys>
+          <ID>0</ID>
+        </Hotkey>
+      </Hotkeys>
     </CheatEntry>
     <CheatEntry>
       <ID>3</ID>
       <Description>"ohk+inf"</Description>
-      <LastState Activated="1"/>
       <VariableType>Auto Assembler Script</VariableType>
       <AssemblerScript>{ Game   : WolfSP.exe
   Version: 
@@ -110,7 +118,6 @@ dealloc(newmem)
     <CheatEntry>
       <ID>5</ID>
       <Description>"mega jump"</Description>
-      <LastState/>
       <VariableType>Auto Assembler Script</VariableType>
       <AssemblerScript>[ENABLE]
 qagamex86.dll+364E6:
@@ -156,9 +163,7 @@ qagamex86.dll+364E6:
   <CheatCodes>
     <CodeEntry>
       <Description>Изменение sub eax,edi</Description>
-      <Address>2004418C</Address>
-      <ModuleName>qagamex86.dll</ModuleName>
-      <ModuleNameOffset>4418C</ModuleNameOffset>
+      <AddressString>qagamex86.dll+4418C</AddressString>
       <Before>
         <Byte>86</Byte>
         <Byte>D8</Byte>
@@ -180,5 +185,6 @@ qagamex86.dll+364E6:
     </CodeEntry>
   </CheatCodes>
   <UserdefinedSymbols/>
-  <Comments>2097150 -- значение на оружие</Comments>
+  <Comments>2097150 -- значение на оружие
+</Comments>
 </CheatTable>
