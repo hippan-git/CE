@@ -500,6 +500,16 @@ patriots.exe+3CE35C: 8B 82 E4 01 00 00  - mov eax,[edx+000001E4]
 patriots.exe+3CE362: 8B 4C 08 14        - mov ecx,[eax+ecx+14]
 }
 </AssemblerScript>
+      <Hotkeys>
+        <Hotkey>
+          <Action>Toggle Activation</Action>
+          <Keys>
+            <Key>17</Key>
+            <Key>83</Key>
+          </Keys>
+          <ID>0</ID>
+        </Hotkey>
+      </Hotkeys>
     </CheatEntry>
     <CheatEntry>
       <ID>21</ID>
@@ -515,6 +525,8 @@ patriots.exe+3CE362: 8B 4C 08 14        - mov ecx,[eax+ecx+14]
   6 - предательство
   1 - чудо света
   15 - переправка рекрутов
+  17 = начать с открытой картой
+  31 = тропа войны(казармы нонюшни)
   34 - советни Фуще заставить народы воевать
   35 - заставить объединиться с вами
 }
@@ -643,12 +655,6 @@ patriots.exe+2314DB:
       <Description>"timer2"</Description>
       <VariableType>4 Bytes</VariableType>
       <Address>patriots.exe+66D9EC</Address>
-    </CheatEntry>
-    <CheatEntry>
-      <ID>20</ID>
-      <Description>"No Description"</Description>
-      <VariableType>4 Bytes</VariableType>
-      <Address>0975ACD8</Address>
     </CheatEntry>
   </CheatEntries>
   <UserdefinedSymbols/>
@@ -1864,5 +1870,9 @@ patriots.exe+40D003 - mov edx,[edx+ecx+04]
 4040D81D - mov [ecx+14],edx
 patriots.exe+3ADAC3 - add ecx,[edx+eax+34]- обращается к бонусной карте
 40032353 - пишет в координаты
+обр к адресу влияющий на перемену эпохи
+401сс854 patriots.exe+1CC854 - mov ebx,[edx+000000DC]
+пишет по адресу влияющий на перемену эпохи
+40341d0b patriots.exe+341D0B - mov [ecx],eax
 </Comments>
 </CheatTable>

@@ -638,10 +638,10 @@ dealloc(newmem)
     </CheatEntry>
     <CheatEntry>
       <ID>17</ID>
-      <Description>"experience"</Description>
+      <Description>"experience + map"</Description>
       <VariableType>Auto Assembler Script</VariableType>
       <AssemblerScript>{ Game   : h3wog.exe
-  Version: 
+  Version:
   Date   : 2017-08-08
   Author : Hipp
 
@@ -658,11 +658,26 @@ label(return)
 
 newmem:
   add [edx+51],#10000 //добовляет к текущему опыту
- {характуристики
-  mov byte ptr [edx+476],#91
-  mov byte ptr [edx+477],#91
-  mov byte ptr [edx+478],#91
-  mov byte ptr [edx+479],#91}
+  pushad
+  mov esi,[699538]
+  mov esi,[esi+21614]
+  movsx eax,byte ptr[esi+01]
+  mov ecx,[6783c8]
+  push 00
+  push ecx
+  push eax
+  mov eax,[6783cc]
+  push 00
+  cdq
+  sar eax,1
+  push eax,
+  mov eax,ecx
+  mov ecx,[699538]
+  cdq
+  sar eax,1
+  push eax
+  call 49cdd0
+  popad
 code:
   mov edx,[edx+51]
   push edx

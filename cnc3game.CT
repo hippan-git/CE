@@ -336,6 +336,12 @@ dealloc(newmem)
 }
 </AssemblerScript>
     </CheatEntry>
+    <CheatEntry>
+      <ID>30</ID>
+      <Description>"Нет описания"</Description>
+      <VariableType>Float</VariableType>
+      <Address>0B9CC4C4</Address>
+    </CheatEntry>
   </CheatEntries>
   <UserdefinedSymbols/>
   <Structures StructVersion="2">
@@ -1926,6 +1932,12 @@ dealloc(newmem)
       </Elements>
     </Structure>
   </Structures>
+  <Comments>damage и не только
+cnc3game.dat+1F8A8C - movss [esi+08],xmm0
+sub damage
+0065CE48 - subss xmm0,[esi+08]
+
+</Comments>
   <DisassemblerComments>
     <DisassemblerComment>
       <Address>"cnc3game.dat"+3BB1E2</Address>

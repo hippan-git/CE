@@ -94,6 +94,17 @@ StarCraft.exe+E5761: 8B 1B                    - mov ebx,[ebx]
           <Offsets>
             <Offset>0</Offset>
           </Offsets>
+          <Hotkeys>
+            <Hotkey>
+              <Action>Set Value</Action>
+              <Keys>
+                <Key>17</Key>
+                <Key>82</Key>
+              </Keys>
+              <Value>8565</Value>
+              <ID>0</ID>
+            </Hotkey>
+          </Hotkeys>
         </CheatEntry>
         <CheatEntry>
           <ID>1</ID>
@@ -104,79 +115,274 @@ StarCraft.exe+E5761: 8B 1B                    - mov ebx,[ebx]
           <Offsets>
             <Offset>0</Offset>
           </Offsets>
+          <Hotkeys>
+            <Hotkey>
+              <Action>Set Value</Action>
+              <Keys>
+                <Key>17</Key>
+                <Key>82</Key>
+              </Keys>
+              <Value>8764</Value>
+              <ID>0</ID>
+            </Hotkey>
+          </Hotkeys>
         </CheatEntry>
       </CheatEntries>
     </CheatEntry>
     <CheatEntry>
-      <ID>2</ID>
-      <Description>"resource"</Description>
+      <ID>20</ID>
+      <Description>"character terran"</Description>
       <VariableType>Auto Assembler Script</VariableType>
       <AssemblerScript>{ Game   : StarCraft.exe
-  Version: 
-  Date   : 2018-08-31
+  Version:
+  Date   : 2022-08-03
   Author : Hipp
 
-  пишет в растущие минералы
+  This script does blah blah blah
 }
 
 [ENABLE]
 
-aobscanmodule(resource,StarCraft.exe,66 89 86 D0 00 00 00) // should be unique
+aobscanmodule(character,StarCraft.exe,56 73 0F 6B C0 2E 0F B7 C9 8A 84 08 B0 D2 58 00) // should be unique
 alloc(newmem,$1000)
 
 label(code)
 label(return)
-
+{$c}
+char *ammo;
+char *armor;
+const char val = 150;
+{$asm}
 newmem:
-  //mov ax,1
+{$ccode c_eax=eax, c_ecx=ecx}
+ammo = (char*)(c_eax+c_ecx+0x58d2b0);
+armor = ammo-7;
+for (int i = 0; i&lt;3; i++)
+	{
+		*(ammo+i) = val;
+		*(armor+i) = val;
+	}
+
+{$asm}
 code:
-  mov [esi+000000D0],ax
-  add [esi+d0],#100
+  mov al,[eax+ecx+0058D2B0]
   jmp return
 
-resource:
+character+09:
   jmp newmem
-  nop
-  nop
+  nop 2
 return:
-registersymbol(resource)
+registersymbol(character)
 
 [DISABLE]
 
-resource:
-  db 66 89 86 D0 00 00 00
+character+09:
+  db 8A 84 08 B0 D2 58 00
 
-unregistersymbol(resource)
+unregistersymbol(character)
 dealloc(newmem)
 
 {
-// ORIGINAL CODE - INJECTION POINT: "StarCraft.exe"+69667
+// ORIGINAL CODE - INJECTION POINT: 004257BE
 
-"StarCraft.exe"+6964E: CC                          -  int 3 
-"StarCraft.exe"+6964F: CC                          -  int 3 
-"StarCraft.exe"+69650: 56                          -  push esi
-"StarCraft.exe"+69651: 8B F0                       -  mov esi,eax
-"StarCraft.exe"+69653: 33 C0                       -  xor eax,eax
-"StarCraft.exe"+69655: 66 8B 86 D0 00 00 00        -  mov ax,[esi+000000D0]
-"StarCraft.exe"+6965C: 66 3D 08 00                 -  cmp ax,0008
-"StarCraft.exe"+69660: 72 4A                       -  jb StarCraft.exe+696AC
-"StarCraft.exe"+69662: 83 C0 F8                    -  add eax,-08
-"StarCraft.exe"+69665: 84 C9                       -  test cl,cl
+00425799: 0F B6 45 0C              - movzx eax,byte ptr [ebp+0C]
+0042579D: 66 0F B6 88 D0 71 65 00  - movzx cx,byte ptr [eax+006571D0]
+004257A5: 66 83 F9 2E              - cmp cx,2E
+004257A9: 89 45 F8                 - mov [ebp-08],eax
+004257AC: A1 48 72 59 00           - mov eax,[00597248]
+004257B1: 0F B6 40 4C              - movzx eax,byte ptr [eax+4C]
+004257B5: 56                       - push esi
+004257B6: 73 0F                    - jae 004257C7
+004257B8: 6B C0 2E                 - imul eax,eax,2E
+004257BB: 0F B7 C9                 - movzx ecx,cx
 // ---------- INJECTING HERE ----------
-"StarCraft.exe"+69667: 66 89 86 D0 00 00 00        -  mov [esi+000000D0],ax
+004257BE: 8A 84 08 B0 D2 58 00     - mov al,[eax+ecx+0058D2B0]
 // ---------- DONE INJECTING  ----------
-"StarCraft.exe"+6966E: 74 1B                       -  je StarCraft.exe+6968B
-"StarCraft.exe"+69670: 66 85 C0                    -  test ax,ax
-"StarCraft.exe"+69673: 74 0B                       -  je StarCraft.exe+69680
-"StarCraft.exe"+69675: 8B CE                       -  mov ecx,esi
-"StarCraft.exe"+69677: E8 B4 F1 FF FF              -  call StarCraft.exe+68830
-"StarCraft.exe"+6967C: B0 08                       -  mov al,08
-"StarCraft.exe"+6967E: 5E                          -  pop esi
-"StarCraft.exe"+6967F: C3                          -  ret 
-"StarCraft.exe"+69680: 8B C6                       -  mov eax,esi
-"StarCraft.exe"+69682: E8 89 C0 00 00              -  call StarCraft.exe+75710
+004257C5: EB 0D                    - jmp 004257D4
+004257C7: 6B C0 0F                 - imul eax,eax,0F
+004257CA: 0F B7 D1                 - movzx edx,cx
+004257CD: 8A 84 10 FE F2 58 00     - mov al,[eax+edx+0058F2FE]
+004257D4: 0F B7 4D 08              - movzx ecx,word ptr [ebp+08]
+004257D8: 0F B6 C0                 - movzx eax,al
+004257DB: 57                       - push edi
+004257DC: 8B 3C 8D 40 9F 51 00     - mov edi,[ecx*4+00519F40]
+004257E3: 50                       - push eax
+004257E4: 68 10 57 50 00           - push 00505710
 }
 </AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>24</ID>
+      <Description>"character zerg"</Description>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>{ Game   : StarCraft.exe
+  Version:
+  Date   : 2022-08-03
+  Author : Hipp
+
+  This script does blah blah blah
+}
+
+[ENABLE]
+
+aobscanmodule(character,StarCraft.exe,56 73 0F 6B C0 2E 0F B7 C9 8A 84 08 B0 D2 58 00) // should be unique
+alloc(newmem,$1000)
+
+label(code)
+label(return)
+{$c}
+char *ammo;
+char *armor;
+const char val = 150;
+{$asm}
+newmem:
+{$ccode c_eax=eax, c_ecx=ecx}
+ammo = (char*)(c_eax+c_ecx+0x58d2b0);
+armor = ammo-8;
+for (int i = 0; i&lt;3; i++)
+	{
+		*(ammo+i) = val;
+		*(armor+i) = val;
+	}
+*(ammo+0x10) = val;
+*(ammo-1) = val;
+*(ammo+0x11) = val;
+
+{$asm}
+code:
+  mov al,[eax+ecx+0058D2B0]
+  jmp return
+
+character+09:
+  jmp newmem
+  nop 2
+return:
+registersymbol(character)
+
+[DISABLE]
+
+character+09:
+  db 8A 84 08 B0 D2 58 00
+
+unregistersymbol(character)
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: 004257BE
+
+00425799: 0F B6 45 0C              - movzx eax,byte ptr [ebp+0C]
+0042579D: 66 0F B6 88 D0 71 65 00  - movzx cx,byte ptr [eax+006571D0]
+004257A5: 66 83 F9 2E              - cmp cx,2E
+004257A9: 89 45 F8                 - mov [ebp-08],eax
+004257AC: A1 48 72 59 00           - mov eax,[00597248]
+004257B1: 0F B6 40 4C              - movzx eax,byte ptr [eax+4C]
+004257B5: 56                       - push esi
+004257B6: 73 0F                    - jae 004257C7
+004257B8: 6B C0 2E                 - imul eax,eax,2E
+004257BB: 0F B7 C9                 - movzx ecx,cx
+// ---------- INJECTING HERE ----------
+004257BE: 8A 84 08 B0 D2 58 00     - mov al,[eax+ecx+0058D2B0]
+// ---------- DONE INJECTING  ----------
+004257C5: EB 0D                    - jmp 004257D4
+004257C7: 6B C0 0F                 - imul eax,eax,0F
+004257CA: 0F B7 D1                 - movzx edx,cx
+004257CD: 8A 84 10 FE F2 58 00     - mov al,[eax+edx+0058F2FE]
+004257D4: 0F B7 4D 08              - movzx ecx,word ptr [ebp+08]
+004257D8: 0F B6 C0                 - movzx eax,al
+004257DB: 57                       - push edi
+004257DC: 8B 3C 8D 40 9F 51 00     - mov edi,[ecx*4+00519F40]
+004257E3: 50                       - push eax
+004257E4: 68 10 57 50 00           - push 00505710
+}
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>27</ID>
+      <Description>"character protos"</Description>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>{ Game   : StarCraft.exe
+  Version:
+  Date   : 2022-08-03
+  Author : Hipp
+
+  This script does blah blah blah
+}
+
+[ENABLE]
+
+aobscanmodule(character,StarCraft.exe,56 73 0F 6B C0 2E 0F B7 C9 8A 84 08 B0 D2 58 00) // should be unique
+alloc(newmem,$1000)
+
+label(code)
+label(return)
+{$c}
+char *ammo;
+char *armor;
+const char val = 150;
+{$asm}
+newmem:
+{$ccode c_eax=eax, c_ecx=ecx}
+ammo = (char*)(c_eax+c_ecx+0x58d2b0);
+armor = ammo-7;
+for (int i = 0; i&lt;3; i++)
+	{
+		*(ammo+i) = val;
+		*(armor+i) = val;
+	}
+
+{$asm}
+code:
+  mov al,[eax+ecx+0058D2B0]
+  jmp return
+
+character+09:
+  jmp newmem
+  nop 2
+return:
+registersymbol(character)
+
+[DISABLE]
+
+character+09:
+  db 8A 84 08 B0 D2 58 00
+
+unregistersymbol(character)
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: 004257BE
+
+00425799: 0F B6 45 0C              - movzx eax,byte ptr [ebp+0C]
+0042579D: 66 0F B6 88 D0 71 65 00  - movzx cx,byte ptr [eax+006571D0]
+004257A5: 66 83 F9 2E              - cmp cx,2E
+004257A9: 89 45 F8                 - mov [ebp-08],eax
+004257AC: A1 48 72 59 00           - mov eax,[00597248]
+004257B1: 0F B6 40 4C              - movzx eax,byte ptr [eax+4C]
+004257B5: 56                       - push esi
+004257B6: 73 0F                    - jae 004257C7
+004257B8: 6B C0 2E                 - imul eax,eax,2E
+004257BB: 0F B7 C9                 - movzx ecx,cx
+// ---------- INJECTING HERE ----------
+004257BE: 8A 84 08 B0 D2 58 00     - mov al,[eax+ecx+0058D2B0]
+// ---------- DONE INJECTING  ----------
+004257C5: EB 0D                    - jmp 004257D4
+004257C7: 6B C0 0F                 - imul eax,eax,0F
+004257CA: 0F B7 D1                 - movzx edx,cx
+004257CD: 8A 84 10 FE F2 58 00     - mov al,[eax+edx+0058F2FE]
+004257D4: 0F B7 4D 08              - movzx ecx,word ptr [ebp+08]
+004257D8: 0F B6 C0                 - movzx eax,al
+004257DB: 57                       - push edi
+004257DC: 8B 3C 8D 40 9F 51 00     - mov edi,[ecx*4+00519F40]
+004257E3: 50                       - push eax
+004257E4: 68 10 57 50 00           - push 00505710
+}
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>36</ID>
+      <Description>"timer"</Description>
+      <VariableType>2 Bytes</VariableType>
+      <Address>StarCraft.exe+18D6F4</Address>
     </CheatEntry>
     <CheatEntry>
       <ID>13</ID>
@@ -356,6 +562,16 @@ StarCraft.exe+5D740: 81 FB 92 00 00 00     - cmp ebx,00000092
 StarCraft.exe+5D746: 74 CC                 - je StarCraft.exe+5D714
 }
 </AssemblerScript>
+          <Hotkeys>
+            <Hotkey>
+              <Action>Toggle Activation</Action>
+              <Keys>
+                <Key>17</Key>
+                <Key>70</Key>
+              </Keys>
+              <ID>0</ID>
+            </Hotkey>
+          </Hotkeys>
         </CheatEntry>
         <CheatEntry>
           <ID>26</ID>
@@ -381,6 +597,16 @@ StarCraft.exe+679BC:
  je StarCraft.exe+679FF
 
 </AssemblerScript>
+          <Hotkeys>
+            <Hotkey>
+              <Action>Toggle Activation</Action>
+              <Keys>
+                <Key>17</Key>
+                <Key>70</Key>
+              </Keys>
+              <ID>0</ID>
+            </Hotkey>
+          </Hotkeys>
         </CheatEntry>
       </CheatEntries>
     </CheatEntry>
@@ -554,10 +780,16 @@ dealloc(build_v)
     </CheatEntry>
     <CheatEntry>
       <ID>12</ID>
-      <Description>"показание"</Description>
+      <Description>"показание HP"</Description>
       <ShowAsSigned>0</ShowAsSigned>
       <VariableType>2 Bytes</VariableType>
       <Address>StarCraft.exe+2CA94D</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>33</ID>
+      <Description>"показания EN"</Description>
+      <VariableType>2 Bytes</VariableType>
+      <Address>StarCraft.exe+2CAC0C</Address>
     </CheatEntry>
     <CheatEntry>
       <ID>6</ID>
@@ -640,349 +872,27 @@ dealloc(newmem)
       <Description>"population"</Description>
       <VariableType>Auto Assembler Script</VariableType>
       <AssemblerScript>[ENABLE]
+//terran
 00488A3C:// - 73 11
   je 00488A4F
-
 StarCraft.exe+88A04:
   je StarCraft.exe+88A12
+//protos
+StarCraft.exe+88A7B:
+ je StarCraft.exe+88A88
+
 
 [DISABLE]
 00488A3C:// - 73 11
   jae 00488A4F
 StarCraft.exe+88A04:
   jae StarCraft.exe+88A12
-
-
-</AssemblerScript>
-    </CheatEntry>
-    <CheatEntry>
-      <ID>8</ID>
-      <Description>"ohk"</Description>
-      <VariableType>Auto Assembler Script</VariableType>
-      <AssemblerScript>{ Game   : StarCraft.exe
-  Version: 
-  Date   : 2018-08-31
-  Author : Hipp
-
-  This script does blah blah blah
-}
-
-[ENABLE]
-
-aobscanmodule(ohk,StarCraft.exe,89 43 08 6A 00) // should be unique
-alloc(newmem,$1000)
-
-label(code)
-label(return)
-label(iam)
+StarCraft.exe+88A7B://73 0b
+  jae StarCraft.exe+88A88
 
 
 
-newmem:
-  cmp [ebx+134],0
-  je iam
 
-
-code:
-  mov [ebx+08],1
-  //mov [ebx+08],eax
-  push 00
-  jmp return
-
-iam:
-  push 00
-  jmp return
-
-ohk:
-  jmp newmem
-return:
-registersymbol(ohk)
-
-[DISABLE]
-
-ohk:
-  db 89 43 08 6A 00
-
-unregistersymbol(ohk)
-dealloc(newmem)
-
-{
-// ORIGINAL CODE - INJECTION POINT: "StarCraft.exe"+798B9
-
-"StarCraft.exe"+798A5: 84 C9                 -  test cl,cl
-"StarCraft.exe"+798A7: 75 74                 -  jne StarCraft.exe+7991D
-"StarCraft.exe"+798A9: 8B CE                 -  mov ecx,esi
-"StarCraft.exe"+798AB: E8 10 C1 FF FF        -  call StarCraft.exe+759C0
-"StarCraft.exe"+798B0: 5E                    -  pop esi
-"StarCraft.exe"+798B1: 5F                    -  pop edi
-"StarCraft.exe"+798B2: 5B                    -  pop ebx
-"StarCraft.exe"+798B3: 5D                    -  pop ebp
-"StarCraft.exe"+798B4: C2 0C 00              -  ret 000C
-"StarCraft.exe"+798B7: 2B C7                 -  sub eax,edi
-// ---------- INJECTING HERE ----------
-"StarCraft.exe"+798B9: 89 43 08              -  mov [ebx+08],eax
-"StarCraft.exe"+798BC: 6A 00                 -  push 00
-// ---------- DONE INJECTING  ----------
-"StarCraft.exe"+798BE: 8B C3                 -  mov eax,ebx
-"StarCraft.exe"+798C0: E8 3B 7F FB FF        -  call StarCraft.exe+31800
-"StarCraft.exe"+798C5: 66 89 83 38 01 00 00  -  mov [ebx+00000138],ax
-"StarCraft.exe"+798CC: 6A 01                 -  push 01
-"StarCraft.exe"+798CE: 8B C3                 -  mov eax,ebx
-"StarCraft.exe"+798D0: E8 2B 7F FB FF        -  call StarCraft.exe+31800
-"StarCraft.exe"+798D5: 66 89 83 3A 01 00 00  -  mov [ebx+0000013A],ax
-"StarCraft.exe"+798DC: F6 83 DC 00 00 00 01  -  test byte ptr [ebx+000000DC],01
-"StarCraft.exe"+798E3: 74 1F                 -  je StarCraft.exe+79904
-"StarCraft.exe"+798E5: 8B 4B 0C              -  mov ecx,[ebx+0C]
-}
-</AssemblerScript>
-    </CheatEntry>
-    <CheatEntry>
-      <ID>20</ID>
-      <Description>"character terran"</Description>
-      <VariableType>Auto Assembler Script</VariableType>
-      <AssemblerScript>{ Game   : StarCraft.exe
-  Version:
-  Date   : 2022-08-03
-  Author : Hipp
-
-  This script does blah blah blah
-}
-
-[ENABLE]
-
-aobscanmodule(character,StarCraft.exe,56 73 0F 6B C0 2E 0F B7 C9 8A 84 08 B0 D2 58 00) // should be unique
-alloc(newmem,$1000)
-
-label(code)
-label(return)
-{$c}
-char *ammo;
-char *armor;
-const char val = 150;
-{$asm}
-newmem:
-{$ccode c_eax=eax, c_ecx=ecx}
-ammo = (char*)(c_eax+c_ecx+0x58d2b0);
-armor = ammo-7;
-for (int i = 0; i&lt;3; i++)
-	{
-		*(ammo+i) = val;
-		*(armor+i) = val;
-	}
-
-{$asm}
-code:
-  mov al,[eax+ecx+0058D2B0]
-  jmp return
-
-character+09:
-  jmp newmem
-  nop 2
-return:
-registersymbol(character)
-
-[DISABLE]
-
-character+09:
-  db 8A 84 08 B0 D2 58 00
-
-unregistersymbol(character)
-dealloc(newmem)
-
-{
-// ORIGINAL CODE - INJECTION POINT: 004257BE
-
-00425799: 0F B6 45 0C              - movzx eax,byte ptr [ebp+0C]
-0042579D: 66 0F B6 88 D0 71 65 00  - movzx cx,byte ptr [eax+006571D0]
-004257A5: 66 83 F9 2E              - cmp cx,2E
-004257A9: 89 45 F8                 - mov [ebp-08],eax
-004257AC: A1 48 72 59 00           - mov eax,[00597248]
-004257B1: 0F B6 40 4C              - movzx eax,byte ptr [eax+4C]
-004257B5: 56                       - push esi
-004257B6: 73 0F                    - jae 004257C7
-004257B8: 6B C0 2E                 - imul eax,eax,2E
-004257BB: 0F B7 C9                 - movzx ecx,cx
-// ---------- INJECTING HERE ----------
-004257BE: 8A 84 08 B0 D2 58 00     - mov al,[eax+ecx+0058D2B0]
-// ---------- DONE INJECTING  ----------
-004257C5: EB 0D                    - jmp 004257D4
-004257C7: 6B C0 0F                 - imul eax,eax,0F
-004257CA: 0F B7 D1                 - movzx edx,cx
-004257CD: 8A 84 10 FE F2 58 00     - mov al,[eax+edx+0058F2FE]
-004257D4: 0F B7 4D 08              - movzx ecx,word ptr [ebp+08]
-004257D8: 0F B6 C0                 - movzx eax,al
-004257DB: 57                       - push edi
-004257DC: 8B 3C 8D 40 9F 51 00     - mov edi,[ecx*4+00519F40]
-004257E3: 50                       - push eax
-004257E4: 68 10 57 50 00           - push 00505710
-}
-</AssemblerScript>
-    </CheatEntry>
-    <CheatEntry>
-      <ID>27</ID>
-      <Description>"character protos"</Description>
-      <VariableType>Auto Assembler Script</VariableType>
-      <AssemblerScript>{ Game   : StarCraft.exe
-  Version:
-  Date   : 2022-08-03
-  Author : Hipp
-
-  This script does blah blah blah
-}
-
-[ENABLE]
-
-aobscanmodule(character,StarCraft.exe,56 73 0F 6B C0 2E 0F B7 C9 8A 84 08 B0 D2 58 00) // should be unique
-alloc(newmem,$1000)
-
-label(code)
-label(return)
-{$c}
-char *ammo;
-char *armor;
-const char val = 150;
-{$asm}
-newmem:
-{$ccode c_eax=eax, c_ecx=ecx}
-ammo = (char*)(c_eax+c_ecx+0x58d2b0);
-armor = ammo-7;
-for (int i = 0; i&lt;3; i++)
-	{
-		*(ammo+i) = val;
-		*(armor+i) = val;
-	}
-
-{$asm}
-code:
-  mov al,[eax+ecx+0058D2B0]
-  jmp return
-
-character+09:
-  jmp newmem
-  nop 2
-return:
-registersymbol(character)
-
-[DISABLE]
-
-character+09:
-  db 8A 84 08 B0 D2 58 00
-
-unregistersymbol(character)
-dealloc(newmem)
-
-{
-// ORIGINAL CODE - INJECTION POINT: 004257BE
-
-00425799: 0F B6 45 0C              - movzx eax,byte ptr [ebp+0C]
-0042579D: 66 0F B6 88 D0 71 65 00  - movzx cx,byte ptr [eax+006571D0]
-004257A5: 66 83 F9 2E              - cmp cx,2E
-004257A9: 89 45 F8                 - mov [ebp-08],eax
-004257AC: A1 48 72 59 00           - mov eax,[00597248]
-004257B1: 0F B6 40 4C              - movzx eax,byte ptr [eax+4C]
-004257B5: 56                       - push esi
-004257B6: 73 0F                    - jae 004257C7
-004257B8: 6B C0 2E                 - imul eax,eax,2E
-004257BB: 0F B7 C9                 - movzx ecx,cx
-// ---------- INJECTING HERE ----------
-004257BE: 8A 84 08 B0 D2 58 00     - mov al,[eax+ecx+0058D2B0]
-// ---------- DONE INJECTING  ----------
-004257C5: EB 0D                    - jmp 004257D4
-004257C7: 6B C0 0F                 - imul eax,eax,0F
-004257CA: 0F B7 D1                 - movzx edx,cx
-004257CD: 8A 84 10 FE F2 58 00     - mov al,[eax+edx+0058F2FE]
-004257D4: 0F B7 4D 08              - movzx ecx,word ptr [ebp+08]
-004257D8: 0F B6 C0                 - movzx eax,al
-004257DB: 57                       - push edi
-004257DC: 8B 3C 8D 40 9F 51 00     - mov edi,[ecx*4+00519F40]
-004257E3: 50                       - push eax
-004257E4: 68 10 57 50 00           - push 00505710
-}
-</AssemblerScript>
-    </CheatEntry>
-    <CheatEntry>
-      <ID>24</ID>
-      <Description>"character zerg"</Description>
-      <VariableType>Auto Assembler Script</VariableType>
-      <AssemblerScript>{ Game   : StarCraft.exe
-  Version:
-  Date   : 2022-08-03
-  Author : Hipp
-
-  This script does blah blah blah
-}
-
-[ENABLE]
-
-aobscanmodule(character,StarCraft.exe,56 73 0F 6B C0 2E 0F B7 C9 8A 84 08 B0 D2 58 00) // should be unique
-alloc(newmem,$1000)
-
-label(code)
-label(return)
-{$c}
-char *ammo;
-char *armor;
-const char val = 150;
-{$asm}
-newmem:
-{$ccode c_eax=eax, c_ecx=ecx}
-ammo = (char*)(c_eax+c_ecx+0x58d2b0);
-armor = ammo-8;
-for (int i = 0; i&lt;3; i++)
-	{
-		*(ammo+i) = val;
-		*(armor+i) = val;
-	}
-*(ammo+0x10) = val;
-*(ammo-1) = val;
-*(ammo+0x11) = val;
-
-{$asm}
-code:
-  mov al,[eax+ecx+0058D2B0]
-  jmp return
-
-character+09:
-  jmp newmem
-  nop 2
-return:
-registersymbol(character)
-
-[DISABLE]
-
-character+09:
-  db 8A 84 08 B0 D2 58 00
-
-unregistersymbol(character)
-dealloc(newmem)
-
-{
-// ORIGINAL CODE - INJECTION POINT: 004257BE
-
-00425799: 0F B6 45 0C              - movzx eax,byte ptr [ebp+0C]
-0042579D: 66 0F B6 88 D0 71 65 00  - movzx cx,byte ptr [eax+006571D0]
-004257A5: 66 83 F9 2E              - cmp cx,2E
-004257A9: 89 45 F8                 - mov [ebp-08],eax
-004257AC: A1 48 72 59 00           - mov eax,[00597248]
-004257B1: 0F B6 40 4C              - movzx eax,byte ptr [eax+4C]
-004257B5: 56                       - push esi
-004257B6: 73 0F                    - jae 004257C7
-004257B8: 6B C0 2E                 - imul eax,eax,2E
-004257BB: 0F B7 C9                 - movzx ecx,cx
-// ---------- INJECTING HERE ----------
-004257BE: 8A 84 08 B0 D2 58 00     - mov al,[eax+ecx+0058D2B0]
-// ---------- DONE INJECTING  ----------
-004257C5: EB 0D                    - jmp 004257D4
-004257C7: 6B C0 0F                 - imul eax,eax,0F
-004257CA: 0F B7 D1                 - movzx edx,cx
-004257CD: 8A 84 10 FE F2 58 00     - mov al,[eax+edx+0058F2FE]
-004257D4: 0F B7 4D 08              - movzx ecx,word ptr [ebp+08]
-004257D8: 0F B6 C0                 - movzx eax,al
-004257DB: 57                       - push edi
-004257DC: 8B 3C 8D 40 9F 51 00     - mov edi,[ecx*4+00519F40]
-004257E3: 50                       - push eax
-004257E4: 68 10 57 50 00           - push 00505710
-}
 </AssemblerScript>
     </CheatEntry>
     <CheatEntry>
@@ -1056,6 +966,91 @@ dealloc(newmem)
 </AssemblerScript>
     </CheatEntry>
     <CheatEntry>
+      <ID>34</ID>
+      <Description>"select energy"</Description>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>{ Game   : StarCraft.exe
+  Version: 
+  Date   : 2023-05-02
+  Author : Hipp
+
+  This script does blah blah blah
+}
+
+[ENABLE]
+
+aobscanmodule(select_energy,StarCraft.exe,F1 8B 48 08 89 0D * * * * 66 0F B6 90 A3 00 00 00) // should be unique
+alloc(newmem,$1000)
+
+label(code)
+label(return)
+label(s_en)
+newmem:
+  mov [s_en],eax
+code:
+  movzx dx,byte ptr [eax+000000A3]
+  jmp return
+
+s_en:
+  db 00 00
+
+select_energy+0A:
+  jmp newmem
+  nop 3
+return:
+registersymbol(select_energy)
+registersymbol(s_en)
+[DISABLE]
+
+select_energy+0A:
+  db 66 0F B6 90 A3 00 00 00
+
+unregistersymbol(select_energy)
+unregistersymbol(s_en)
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: 00426F62
+
+00426F4C: C3                       - ret 
+00426F4D: CC                       - int 3 
+00426F4E: CC                       - int 3 
+00426F4F: CC                       - int 3 
+00426F50: A1 48 72 59 00           - mov eax,[00597248]
+00426F55: 53                       - push ebx
+00426F56: 56                       - push esi
+00426F57: 8B F1                    - mov esi,ecx
+00426F59: 8B 48 08                 - mov ecx,[eax+08]
+00426F5C: 89 0D 4C A9 6C 00        - mov [006CA94C],ecx
+// ---------- INJECTING HERE ----------
+00426F62: 66 0F B6 90 A3 00 00 00  - movzx dx,byte ptr [eax+000000A3]
+// ---------- DONE INJECTING  ----------
+00426F6A: 8B 40 60                 - mov eax,[eax+60]
+00426F6D: C1 F8 08                 - sar eax,08
+00426F70: 66 89 15 0C AC 6C 00     - mov [006CAC0C],dx
+00426F77: A3 EC A9 6C 00           - mov [006CA9EC],eax
+00426F7C: E8 6F D9 FF FF           - call 004248F0
+00426F81: A0 E5 C1 68 00           - mov al,[0068C1E5]
+00426F86: B3 02                    - mov bl,02
+00426F88: 3A C3                    - cmp al,bl
+00426F8A: 74 1B                    - je 00426FA7
+00426F8C: 8B C6                    - mov eax,esi
+}
+</AssemblerScript>
+      <CheatEntries>
+        <CheatEntry>
+          <ID>35</ID>
+          <Description>"Нет описания"</Description>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>2 Bytes</VariableType>
+          <Address>s_en</Address>
+          <Offsets>
+            <Offset>a3</Offset>
+          </Offsets>
+        </CheatEntry>
+      </CheatEntries>
+    </CheatEntry>
+    <CheatEntry>
       <ID>9</ID>
       <Description>"no energy"</Description>
       <VariableType>Auto Assembler Script</VariableType>
@@ -1064,7 +1059,7 @@ dealloc(newmem)
   Date   : 2018-09-01
   Author : Hipp
 
-  This script does blah blah blah
+  Энергия хранится в занчение * 256
 }
 
 [ENABLE]
@@ -1079,7 +1074,7 @@ label(var_en)
 newmem:
   push eax
   mov ax,[esi+a2]
-  add ax,[var_en]
+  imul ax,[var_en]
 
 code:
   mov word ptr[esi+000000A2],ax
@@ -1087,7 +1082,7 @@ code:
   jmp return
 
 var_en:
-  db 64 00
+  db 00 00
 
 no_energy:
   jmp newmem
@@ -1135,6 +1130,16 @@ dealloc(newmem)
 "StarCraft.exe"+EB57E: E8 ED 62 FA FF        -  call StarCraft.exe+91870
 }
 </AssemblerScript>
+      <Hotkeys>
+        <Hotkey>
+          <Action>Toggle Activation</Action>
+          <Keys>
+            <Key>17</Key>
+            <Key>69</Key>
+          </Keys>
+          <ID>0</ID>
+        </Hotkey>
+      </Hotkeys>
       <CheatEntries>
         <CheatEntry>
           <ID>31</ID>
@@ -1230,134 +1235,169 @@ dealloc(newmem)
       </CheatEntries>
     </CheatEntry>
     <CheatEntry>
-      <ID>18</ID>
-      <Description>"Нет описания"</Description>
-      <VariableType>4 Bytes</VariableType>
-      <Address>0057F0F0</Address>
+      <ID>37</ID>
+      <Description>"minerals"</Description>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>{ Game   : StarCraft.exe
+  Version: 
+  Date   : 2023-06-06
+  Author : Hipp
+
+  обращается к минералам и газу при выделении
+}
+
+[ENABLE]
+
+aobscanmodule(minerals,StarCraft.exe,66 8B 88 D0 00 00 00 80) // should be unique
+alloc(newmem,$1000)
+
+label(code)
+label(return)
+label(minerals_ptr)
+
+newmem:
+  push edi
+  mov di,[minerals_ptr]
+  mov [eax+d0],di
+  pop edi
+code:
+  mov cx,[eax+000000D0]
+  jmp return
+minerals_ptr:
+  db d0 07
+
+minerals:
+  jmp newmem
+  nop 2
+return:
+registersymbol(minerals)
+registersymbol(minerals_ptr)
+
+[DISABLE]
+
+minerals:
+  db 66 8B 88 D0 00 00 00
+
+unregistersymbol(minerals)
+unregistersymbol(minerals_ptr)
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: 00426198
+
+00426189: CC                    - int 3 
+0042618A: CC                    - int 3 
+0042618B: CC                    - int 3 
+0042618C: CC                    - int 3 
+0042618D: CC                    - int 3 
+0042618E: CC                    - int 3 
+0042618F: CC                    - int 3 
+00426190: 53                    - push ebx
+00426191: 8B D8                 - mov ebx,eax
+00426193: A1 48 72 59 00        - mov eax,[00597248]
+// ---------- INJECTING HERE ----------
+00426198: 66 8B 88 D0 00 00 00  - mov cx,[eax+000000D0]
+// ---------- DONE INJECTING  ----------
+0042619F: 80 3D E5 C1 68 00 0F  - cmp byte ptr [0068C1E5],0F
+004261A6: 56                    - push esi
+004261A7: 66 89 0D 3C A9 6C 00  - mov [006CA93C],cx
+004261AE: 74 1C                 - je 004261CC
+004261B0: 8B C3                 - mov eax,ebx
+004261B2: E8 59 11 03 00        - call 00457310
+004261B7: 6A F3                 - push -0D
+004261B9: B9 F6 FF FF FF        - mov ecx,FFFFFFF6
+004261BE: 8B C3                 - mov eax,ebx
+004261C0: E8 8B 10 03 00        - call 00457250
+}
+</AssemblerScript>
+      <CheatEntries>
+        <CheatEntry>
+          <ID>38</ID>
+          <Description>"Нет описания"</Description>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>2 Bytes</VariableType>
+          <Address>minerals_ptr</Address>
+        </CheatEntry>
+      </CheatEntries>
     </CheatEntry>
     <CheatEntry>
-      <ID>19</ID>
+      <ID>39</ID>
       <Description>"Нет описания"</Description>
-      <VariableType>4 Bytes</VariableType>
-      <Address>0058D2E5</Address>
+      <VariableType>2 Bytes</VariableType>
+      <Address>00627A38</Address>
     </CheatEntry>
     <CheatEntry>
-      <ID>21</ID>
-      <Description>"Нет описания"</Description>
-      <VariableType>4 Bytes</VariableType>
-      <Address>0057F0FC</Address>
-    </CheatEntry>
-    <CheatEntry>
-      <ID>23</ID>
-      <Description>"Нет описания"</Description>
-      <ShowAsSigned>0</ShowAsSigned>
-      <VariableType>4 Bytes</VariableType>
-      <Address>57f12c</Address>
-    </CheatEntry>
-    <CheatEntry>
-      <ID>28</ID>
-      <Description>"Нет описания"</Description>
-      <ShowAsSigned>0</ShowAsSigned>
-      <VariableType>4 Bytes</VariableType>
-      <Address>006D5A6C</Address>
+      <ID>40</ID>
+      <Description>"set_res by zero"</Description>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>{ Game   : StarCraft.exe
+  Version: 
+  Date   : 2023-06-09
+  Author : Hipp
+
+  This script does blah blah blah
+}
+
+[ENABLE]
+
+aobscanmodule(set_zero_res,StarCraft.exe,66 8B 86 D0 00 00 00) // should be unique
+alloc(newmem,$1000)
+
+label(code)
+label(return)
+
+newmem:
+
+code:
+  mov ax,[esi+000000D0]
+  //inject
+  mov ax,08
+  jmp return
+
+set_zero_res:
+  jmp newmem
+  nop 2
+return:
+registersymbol(set_zero_res)
+
+[DISABLE]
+
+set_zero_res:
+  db 66 8B 86 D0 00 00 00
+
+unregistersymbol(set_zero_res)
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: 00469655
+
+00469649: 5F                    - pop edi
+0046964A: 5E                    - pop esi
+0046964B: C3                    - ret 
+0046964C: CC                    - int 3 
+0046964D: CC                    - int 3 
+0046964E: CC                    - int 3 
+0046964F: CC                    - int 3 
+00469650: 56                    - push esi
+00469651: 8B F0                 - mov esi,eax
+00469653: 33 C0                 - xor eax,eax
+// ---------- INJECTING HERE ----------
+00469655: 66 8B 86 D0 00 00 00  - mov ax,[esi+000000D0]
+// ---------- DONE INJECTING  ----------
+0046965C: 66 3D 08 00           - cmp ax,0008
+00469660: 72 4A                 - jb 004696AC
+00469662: 83 C0 F8              - add eax,-08
+00469665: 84 C9                 - test cl,cl
+00469667: 66 89 86 D0 00 00 00  - mov [esi+000000D0],ax
+0046966E: 74 1B                 - je 0046968B
+00469670: 66 85 C0              - test ax,ax
+00469673: 74 0B                 - je 00469680
+00469675: 8B CE                 - mov ecx,esi
+00469677: E8 B4 F1 FF FF        - call 00468830
+}
+</AssemblerScript>
     </CheatEntry>
   </CheatEntries>
-  <CheatCodes>
-    <CodeEntry>
-      <Description>Изменение mov [esi+08],ecx</Description>
-      <AddressString>StarCraft.exe+67347</AddressString>
-      <Before>
-        <Byte>F0</Byte>
-        <Byte>0F</Byte>
-        <Byte>B7</Byte>
-        <Byte>46</Byte>
-        <Byte>64</Byte>
-      </Before>
-      <Actual>
-        <Byte>89</Byte>
-        <Byte>4E</Byte>
-        <Byte>08</Byte>
-      </Actual>
-      <After>
-        <Byte>8B</Byte>
-        <Byte>04</Byte>
-        <Byte>85</Byte>
-        <Byte>50</Byte>
-        <Byte>23</Byte>
-      </After>
-    </CodeEntry>
-    <CodeEntry>
-      <Description>Изменение sub [esi+000000A2],ax</Description>
-      <AddressString>StarCraft.exe+64FB5</AddressString>
-      <Before>
-        <Byte>25</Byte>
-        <Byte>88</Byte>
-        <Byte>63</Byte>
-        <Byte>65</Byte>
-        <Byte>00</Byte>
-      </Before>
-      <Actual>
-        <Byte>66</Byte>
-        <Byte>29</Byte>
-        <Byte>86</Byte>
-        <Byte>A2</Byte>
-        <Byte>00</Byte>
-        <Byte>00</Byte>
-        <Byte>00</Byte>
-      </Actual>
-      <After>
-        <Byte>8B</Byte>
-        <Byte>CE</Byte>
-        <Byte>E8</Byte>
-        <Byte>DD</Byte>
-        <Byte>03</Byte>
-      </After>
-    </CodeEntry>
-    <CodeEntry>
-      <Description>Изменение je StarCraft.exe+E5121</Description>
-      <AddressString>StarCraft.exe+E5107</AddressString>
-      <Before>
-        <Byte>74</Byte>
-        <Byte>25</Byte>
-        <Byte>F6</Byte>
-        <Byte>C1</Byte>
-        <Byte>02</Byte>
-      </Before>
-      <Actual>
-        <Byte>74</Byte>
-        <Byte>18</Byte>
-      </Actual>
-      <After>
-        <Byte>83</Byte>
-        <Byte>C0</Byte>
-        <Byte>F0</Byte>
-        <Byte>66</Byte>
-        <Byte>3B</Byte>
-      </After>
-    </CodeEntry>
-    <CodeEntry>
-      <Description>Изменение je StarCraft.exe+E5129</Description>
-      <AddressString>StarCraft.exe+E5102</AddressString>
-      <Before>
-        <Byte>00</Byte>
-        <Byte>00</Byte>
-        <Byte>66</Byte>
-        <Byte>3B</Byte>
-        <Byte>C3</Byte>
-      </Before>
-      <Actual>
-        <Byte>74</Byte>
-        <Byte>25</Byte>
-      </Actual>
-      <After>
-        <Byte>F6</Byte>
-        <Byte>C1</Byte>
-        <Byte>02</Byte>
-        <Byte>74</Byte>
-        <Byte>18</Byte>
-      </After>
-    </CodeEntry>
-  </CheatCodes>
   <UserdefinedSymbols>
     <SymbolEntry>
       <Name>pRes</Name>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<CheatTable CheatEngineTableVersion="29">
+<CheatTable CheatEngineTableVersion="42">
   <CheatEntries>
     <CheatEntry>
       <ID>0</ID>
@@ -16,7 +16,6 @@
     <CheatEntry>
       <ID>1</ID>
       <Description>"курсор"</Description>
-      <LastState Activated="1"/>
       <VariableType>Auto Assembler Script</VariableType>
       <AssemblerScript>{ Game   : wcs2004.exe
   Version: 
@@ -85,8 +84,7 @@ dealloc(newmem)
     </CheatEntry>
     <CheatEntry>
       <ID>2</ID>
-      <Description>"miss"</Description>
-      <LastState/>
+      <Description>"Shift+[ miss"</Description>
       <VariableType>Auto Assembler Script</VariableType>
       <AssemblerScript>[ENABLE]
 wcs2004.exe+7C21C:
@@ -114,7 +112,7 @@ wcs2004.exe+7C21C:
     </CheatEntry>
     <CheatEntry>
       <ID>3</ID>
-      <Description>"hands play"</Description>
+      <Description>"[ hands play"</Description>
       <VariableType>4 Bytes</VariableType>
       <Address>wcs2004.exe+3BCFDC</Address>
       <Hotkeys>
